@@ -1,8 +1,8 @@
 {
   "name": "aaa-component-library",
   "version": "0.1.0",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/components/index.js",
+  "module": "dist/components/index.js",
   "files": [
     "dist"
   ],
