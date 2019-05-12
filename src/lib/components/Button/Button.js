@@ -19,10 +19,16 @@ class Button extends Component<propTypes> {
   }
 
   render() {
-    const {children, href, onClick} = this.props;
+    const {
+      children,
+      color,
+      href,
+      onClick
+    } = this.props;
     return (
       <MaterialButton
         className="Button"
+        color={color}
         variant="contained"
         href={href}
         onClick={onClick}
