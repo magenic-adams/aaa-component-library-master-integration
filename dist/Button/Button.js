@@ -25,10 +25,12 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           children = _this$props.children,
+          color = _this$props.color,
           href = _this$props.href,
           onClick = _this$props.onClick;
       return React.createElement(MaterialButton, {
         className: "Button",
+        color: color,
         variant: "contained",
         href: href,
         onClick: onClick
