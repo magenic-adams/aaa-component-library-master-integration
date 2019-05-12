@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Atomic|Button all buttons 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Atomic|Button dynamic button 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Button with text 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Components|Button with text 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Welcome to Storybook 1`] = `ReactWrapper {}`;

@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Button from './Button';
-// import { assert } from "chai";
+import { expect } from "chai";
+import { mount } from 'enzyme';
 
-function createButton(children){
-  const div = document.createElement('div');
-  return ReactDOM.render(<Button>{children}</Button>, div);
+function createButton(children) {
+  var div = document.createElement('div');
+  return mount(<Button>{children}</Button>)
 }
 
-describe("Button", () => {
-  let ButtonComponent = createButton('Default Button');
-
-  it('has rendered button text', () => {
-    console.log('ButtonComponent', ButtonComponent);
+describe("Button", function () {
+  var ButtonComponent = createButton('Here lies a button');
+  it('has rendered button text', function () {
+    expect(ButtonComponent.text()).to.equal('Here lies a button');
   });
-})
+});
