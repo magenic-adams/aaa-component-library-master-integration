@@ -6,12 +6,12 @@ import { mount } from 'enzyme';
 
 function createButton(children) {
   var div = document.createElement('div');
-  return mount(<Button>{children}</Button>)
+  return mount(React.createElement(Button, null, children));
 }
 
 describe("Button", function () {
   var ButtonComponent = createButton('Here lies a button');
   it('has rendered button text', function () {
-    expect(ButtonComponent.text()).to.be('Here lies a button');
+    expect(ButtonComponent.text()).to.equal('Here lies a button');
   });
 });
