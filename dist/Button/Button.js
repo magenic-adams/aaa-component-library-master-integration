@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import MUIButton from '@material-ui/core/Button';
+import cx from 'clsx';
 var styleClasses = {
   root: {
     border: 0,
@@ -67,7 +68,7 @@ function (_Component) {
           href = _this$props.href,
           onClick = _this$props.onClick;
       return React.createElement(MUIButton, {
-        className: className,
+        className: cx('Button', className),
         classes: classes,
         disabled: disabled,
         color: color,

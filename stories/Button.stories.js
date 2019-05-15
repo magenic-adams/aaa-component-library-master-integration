@@ -3,13 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
-// Internal
-import {Welcome} from '../src/lib/internal/Welcome';
-
 // Components
-import {Button} from '../src/lib/components';
-
-storiesOf('Welcome|Storybook', module).add('Welcome description', () => <Welcome />);
+import {AAAPrimaryTheme, Button} from '../src/lib/components';
 
 const stories = storiesOf('Atomic|Button', module);
 
@@ -24,7 +19,7 @@ stories
     )
   })
   .add('all buttons', () => (
-    <div>
+    <AAAPrimaryTheme>
       
       <div>
         <h2>Primary</h2>
@@ -68,6 +63,6 @@ stories
         <Button color="secondary" disabled onClick={action('clicked')}>Secondary disabled</Button>
       </div>
 
-    </div>
+    </AAAPrimaryTheme>
     )
   )

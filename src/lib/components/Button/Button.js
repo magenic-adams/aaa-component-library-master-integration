@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import MUIButton from '@material-ui/core/Button';
+import cx from 'clsx';
 
 type propTypes = {
   // MUI Decorator
@@ -70,7 +71,7 @@ class Button extends Component<propTypes> {
     } = this.props;
     return (
       <MUIButton
-        className={className}
+        className={cx('Button', className)}
         classes={classes}
         disabled={disabled}
         color={color}
