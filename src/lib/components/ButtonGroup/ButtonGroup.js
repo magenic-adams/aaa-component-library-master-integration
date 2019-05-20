@@ -17,7 +17,10 @@ const styleClasses = theme => ({
     '& .Button': {
       marginTop: '8px',
       marginBottom: '8px'
-    }
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 'inherit',
+    },
   }
 })
 
