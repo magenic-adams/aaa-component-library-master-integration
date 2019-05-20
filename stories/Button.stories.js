@@ -12,10 +12,12 @@ stories
   .addDecorator(withKnobs)
   .add('dynamic button', () => {
     return (
+      <AAAPrimaryTheme>
       <div>
         <h3>Tweak button settings below</h3>
         <Button onClick={action('clicked')}>{text('Button text', 'Change the text')}</Button>
       </div>
+      </AAAPrimaryTheme>
     )
   })
   .add('all buttons', () => (
