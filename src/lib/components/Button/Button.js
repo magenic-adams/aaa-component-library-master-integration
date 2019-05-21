@@ -19,9 +19,9 @@ type propTypes = {
 const styleClasses = theme => ({
   root: {
     border: 0,
+    height: '48px',
     boxShadow: 'none',
-    color: 'white',
-    height: 48,
+    color: theme.palette.common.white,
     padding: '0 16px',
     textTransform: 'none',
     width: '100%',
@@ -37,11 +37,11 @@ const styleClasses = theme => ({
   },
   containedPrimary: {
     '&:active,&:hover': {
-      background: "#395fa4"
+      background: theme.palette.primary.dark,
     },
     '&:disabled': {
-      background: '#cccbce',
-      color: 'white',
+      background: theme.palette.disabled.main,
+      color: theme.palette.common.white,
     }
   },
   containedSecondary: {
@@ -49,11 +49,11 @@ const styleClasses = theme => ({
     border: `1px solid ${theme.palette.primary.main}`,
     background: 'transparent',
     '&:active,&:hover': {
-      background: "rgba(68, 112, 191, 0.1)"
+      background: theme.palette.colorVariables.SECONDARY_HOVER,
     },
     '&:disabled': {
       background: 'transparent',
-      borderColor: '#cccbce'
+      borderColor: theme.palette.disabled.main,
     }
   },
 })
