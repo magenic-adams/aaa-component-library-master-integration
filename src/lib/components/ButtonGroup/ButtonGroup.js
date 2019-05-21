@@ -26,7 +26,6 @@ const styleClasses = theme => ({
 
 
 function ButtonGroup({children, classes = {}, className = '', theme}:propTypes){
-  console.log('TODO:NEXT analyze usage of theme for breakpoints', theme);
   return (
     <div className={cx('ButtonGroup', classes.root, className)}>
       {children}
