@@ -17,6 +17,7 @@ stories
           onChange={action('change')}
           labelName={text('Input label', 'Change the label')}
         />
+        <Input id="enabledId" name="enabledName" labelName={text('Input label', 'Change the label')} type="text" onChange={action('change')} value="Enabled"  onClear={()=> {}}/>
       </div>
     )
   })
@@ -24,11 +25,11 @@ stories
     <AAAPrimaryTheme>
       <div>
         <h2>ACTIVE STATE</h2>
-        <Input id="enabledId" name="enabledName" labelName="Enabled Label" />
+        <Input id="enabledId" name="enabledName" labelName="Enabled Label" type="text" onChange={() => { }} value="Enabled"  onClear={()=> {}}/>
         <h2>DISABLED STATE</h2>
-        <Input disabled id="disabledId" name="disabledName" helperText="Disabled" labelName="Disabled Label" />
+        <Input disabled id="disabledId" name="disabledName" type="text" onChange={() => { }} helperText="Disabled" labelName="Disabled Label" />
         <h2>ERROR STATE</h2>
-        <Input id="errorId" name="errorName" error helperText="Error" labelName="Error Label" errorText="Error text" />
+        <Input error id="errorId" name="errorName" type="text" onChange={() => { }} helperText="Error" labelName="Error Label" errorText="Error text" value="Error" />
       </div>
     </AAAPrimaryTheme>
   )
