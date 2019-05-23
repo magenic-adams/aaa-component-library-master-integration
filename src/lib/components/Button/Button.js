@@ -13,45 +13,50 @@ type propTypes = {
   color?: 'primary' | 'secondary',
   disabled: PropTypes.bool,
   href?: PropTypes.bool,
-  onClick: () => {}
+  onClick: () => {},
 };
 
-const styleClasses = {
+const styleClasses = theme => ({
   root: {
     border: 0,
+    height: '48px',
     boxShadow: 'none',
-    color: 'white',
-    height: 48,
+    color: theme.palette.common.white,
     padding: '0 16px',
     textTransform: 'none',
-    minWidth: '200px',
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '314px',
+    },
   },
   label: {
     fontSize: '18px',
+    [theme.breakpoints.up('md')]: {
+      fontSize: '20px',
+    },
   },
   containedPrimary: {
-    background: '#4470bf',
     '&:active,&:hover': {
-      background: "#395fa4"
+      background: theme.palette.primary.dark,
     },
     '&:disabled': {
-      background: '#cccbce',
-      color: 'white',
+      background: theme.palette.disabled.main,
+      color: theme.palette.common.white,
     }
   },
   containedSecondary: {
-    color: '#4470bf',
-    border: '1px solid #4470bf',
+    color: theme.palette.primary.main,
+    border: `1px solid ${theme.palette.primary.main}`,
     background: 'transparent',
     '&:active,&:hover': {
-      background: "rgba(68, 112, 191, 0.1)"
+      background: theme.palette.colorVariables.SECONDARY_HOVER,
     },
     '&:disabled': {
       background: 'transparent',
-      borderColor: '#cccbce'
+      borderColor: theme.palette.disabled.main,
     }
   },
-}
+})
 
 
 class Button extends Component<propTypes> {
@@ -69,6 +74,7 @@ class Button extends Component<propTypes> {
       href,
       onClick
     } = this.props;
+
     return (
       <MUIButton
         className={cx('Button', className)}
@@ -85,4 +91,4 @@ class Button extends Component<propTypes> {
   }
 }
 
-export default withStyles(styleClasses)(Button);
+export default withStyles(styleClasses, {withTheme: true})(Button);

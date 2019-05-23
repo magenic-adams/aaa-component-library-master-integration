@@ -6,16 +6,23 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 // Components
 import {AAAPrimaryTheme, Button} from '../src/lib/components';
 
+// Internal
+import {ElementContainer} from '../src/lib/internal/ElementContainer/ElementContainer';
+
 const stories = storiesOf('Atomic|Button', module);
 
 stories
   .addDecorator(withKnobs)
   .add('dynamic button', () => {
     return (
+      <AAAPrimaryTheme>
       <div>
         <h3>Tweak button settings below</h3>
-        <Button onClick={action('clicked')}>{text('Button text', 'Change the text')}</Button>
+        <ElementContainer>
+          <Button onClick={action('clicked')}>{text('Button text', 'Change the text')}</Button>
+        </ElementContainer>
       </div>
+      </AAAPrimaryTheme>
     )
   })
   .add('all buttons', () => (
@@ -36,14 +43,13 @@ stories
             <li>for a guidance or little descriptive link</li>
           </ul>
         </div>
-        <div>
-          <Button color="primary" onClick={action('clicked')}>Primary</Button>
-          <Button color="primary" disabled onClick={action('clicked')}>Primary disabled</Button>
-        </div>
-        
+        <ElementContainer>
+          <div>
+            <Button color="primary" onClick={action('clicked')}>Primary</Button>
+            <Button color="primary" disabled onClick={action('clicked')}>Primary disabled</Button>
+          </div>
+        </ElementContainer>
       </div>
-
-      
 
       <h2>Secondary</h2>
       <div>
@@ -58,10 +64,12 @@ stories
           <li>by itself. Always need to pair with primary button</li>
         </ul>
       </div>
-      <div>
-        <Button color="secondary" onClick={action('clicked')}>Secondary</Button>
-        <Button color="secondary" disabled onClick={action('clicked')}>Secondary disabled</Button>
-      </div>
+      <ElementContainer>
+        <div>
+          <Button color="secondary" onClick={action('clicked')}>Secondary</Button>
+          <Button color="secondary" disabled onClick={action('clicked')}>Secondary disabled</Button>
+        </div>
+      </ElementContainer>
 
     </AAAPrimaryTheme>
     )
