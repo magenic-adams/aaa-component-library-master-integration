@@ -11,6 +11,7 @@ type propTypes = {
   options: PropTypes.array,
   children: PropTypes.node,
   onClick: PropTypes.func,
+  defaultItem?: PropTypes.object;
   className?: PropTypes.string
 };
 
@@ -32,33 +33,55 @@ class ToggleButtonGroup extends React.Component<propTypes, any> {
   constructor(props) {
     super(props); 
     this.state = {
-      selectedValue: null,
+      selectedOption: null,
     };
+
+    this.getActiveItemIndex =  this.getActiveItemIndex.bind(this);
   }
 
   toggle(index) {
     const { options } = this.props;
-    console.log(index);
+    const selectedOption = options[index];
+    
     this.setState({
-      selectedIndex: index,
-      selectedValue: options[index]
+      selectedOption
     });
+    
+    return selectedOption;
   }
+
+  getActiveItemIndex(defaultItem){
+    const { options } = this.props;
+    const { selectedOption } = this.state;
+    let selectedIndex = -1;
+
+    if (defaultItem){
+      selectedIndex = options.findIndex(option => option.value === defaultItem.value);
+    }
+    if (selectedOption){
+      selectedIndex = options.findIndex(option => option.value === selectedOption.value);
+    }
+    return selectedIndex;
+  } 
   
   render() {
-    const { options, classes, className, disabled, theme} = this.props;
-    const { selectedIndex } = this.state;
-
+    const { options, defaultItem, onSelect, disabled, classes, className, theme} = this.props;
+    const selectedIndex = this.getActiveItemIndex(defaultItem); 
+    
     return (
       <ButtonGroup>
           {options && options.map((option, index) => (
             <Button 
               key={index} 
-              color={selectedIndex == index ? "primary" : "secondary"}
-              onClick={this.toggle.bind(this, index)}
+              color={selectedIndex === index ? "primary" : "secondary"}
+              onClick={() => {
+                onSelect();
+                return this.toggle(index);
+              }}
               disabled={disabled}
+              theme
             >
-              {option}
+              {option.text}
             </Button>
           ))}
       </ButtonGroup>
