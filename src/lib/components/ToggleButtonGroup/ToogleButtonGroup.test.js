@@ -45,8 +45,8 @@ describe("ToggleButtonGroup", function () {
         const props = getFakeProps({ options: [] });
         const wrappedComponent = createToggleButtonWithTheme(props)
         const buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
-
-        expect(buttonGroup.props.children.length).to.equal(0);
+        
+        expect(buttonGroup).to.be.undefined;
     });
 
     it('renders text', function () {
