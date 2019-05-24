@@ -30,7 +30,7 @@ const styleClasses = theme => ({
       borderTopLeftRadius: '0px',
       borderBottomLeftRadius: '0px'
     },
-    [theme.breakpoints.down('321px')]: {
+    [theme.breakpoints.between('xs', 'sm')]: {
       '& .Button': {
         width: '50%'
       }
