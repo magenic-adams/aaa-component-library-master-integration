@@ -76,7 +76,7 @@ class ToggleButtonGroup extends React.Component<propTypes, any> {
               color={selectedIndex === index ? "primary" : "secondary"}
               onClick={() => {
                 onSelect();
-                return this.toggle(index);
+                this.toggle(index);
               }}
               disabled={disabled}
               theme

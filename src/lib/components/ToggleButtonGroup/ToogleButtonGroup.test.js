@@ -1,90 +1,81 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { expect } from "chai";
 import { mount, shallow } from 'enzyme';
 import ToggleButtonGroup from './ToggleButtonGroup';
-import { createMount } from '@material-ui/core/test-utils';
-import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core';
-
-function createTheme() {
-    const AAA_COLOR_DISABLED = '#cccbce';
-    const AAA_COLOR_ERROR = '#da291c';
-    const AAA_COLOR_MAIN_BLUE = '#4470bf';
-    const AAA_COLOR_MAIN_DARK_BLUE = '#395fa4';
-    const AAA_COLOR_SECONDARY_HOVER = '#395fa4';
-
-    const theme = createMuiTheme({
-        breakpoints: {
-          values: {
-            xs: 0,
-            sm: 320,
-            md: 768,
-            lg: 1024,
-            xl: 1440,
-          },
-          up: jest.fn(v => v)
-        },
-        palette: {
-          primary: {
-            // NOTE: when not specifying other values like "light", they will
-            // be calculated from palette.primary.main,
-            main: AAA_COLOR_MAIN_BLUE,
-            dark: AAA_COLOR_MAIN_DARK_BLUE,
-          },
-          error: {
-            main: AAA_COLOR_ERROR,
-          },
-          disabled: {
-            main: AAA_COLOR_DISABLED,
-          },
-          colorVariables: {
-            SECONDARY_HOVER: AAA_COLOR_SECONDARY_HOVER,
-          },
-        },
-        typography: {
-          fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',
-        },
-    });
-
-    return theme;
-}
+import ButtonGroup from '../ButtonGroup/ButtonGroup';
+import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
+import Button from '../Button/Button';
 
 function getFakeProps(overrides) {
     return {
         options: [{value: 0, text: "Yes"}, {value: 1, text: "No"}], 
-        theme: createTheme(),
+        onSelect: jest.fn(v => v),
         ...overrides
     }
 }
 
-function createToggleButton(props) {
+function createToggleButtonWithTheme(props) {
     return mount(
-            <ThemeProvider theme={props.theme}>
+            <AAAThemeProvider theme={props.theme}>
               <ToggleButtonGroup {...props}></ToggleButtonGroup>
-            </ThemeProvider>
+            </AAAThemeProvider>
           )
   }
 
 describe("ToggleButtonGroup", function () {
+    let props;
+    let wrappedComponent;
+    let buttonGroup;
+
+    beforeAll(() => {
+      props = getFakeProps();
+      wrappedComponent = createToggleButtonWithTheme(props);
+      buttonGroup = wrappedComponent.find(ButtonGroup);
+    });
+
+    afterAll(() => {
+      wrappedComponent.unmount();
+    });
+
     it('contains button elements when it has options', function () {
-        const props = getFakeProps();
-        const ToggleButtonGroupComponent = createToggleButton(props);
-        console.log("ToggleButtonGroupComponent.children()", ToggleButtonGroupComponent.find('div').get(0).props.children);
-        expect(ToggleButtonGroupComponent.children().length).to.be.above(0);
+        expect(buttonGroup.get(0).props.children.length).to.be.above(0);
+    });
+
+    it('do NOT render button elements when it has NO options', function () {
+        const props = getFakeProps({ options: [] });
+        const wrappedComponent = createToggleButtonWithTheme(props)
+        const buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
+
+        expect(buttonGroup.props.children.length).to.equal(0);
     });
 
     it('renders text', function () {
-    
+        const button1Text = buttonGroup.get(0).props.children[0].props.children;
+        const button2Text = buttonGroup.get(0).props.children[1].props.children;
+
+        expect(button1Text).to.equal('Yes');
+        expect(button2Text).to.equal('No');
     });
 
-    it('sets element to active on click', function () {
-    
+    it('sets color to primary when button is clicked', function () {
+      const button1 = wrappedComponent.find(ButtonGroup).find(Button).at(0);
+      
+      button1.simulate("click");
+
+      const clickedButton = wrappedComponent.find(ButtonGroup).find(Button).at(0);
+
+      expect(clickedButton.props().color).to.be.equal("primary");
     });
 
-    it('changes element color on hover', function () {
-    
-    });
+    it('should set only one button to active', function () {
+      const button1 = wrappedComponent.find(ButtonGroup).find(Button).at(0);
+      const button2 = wrappedComponent.find(ButtonGroup).find(Button).at(1);
+      
+      button1.simulate("click");
 
-    
+      const clickedButton = wrappedComponent.find(ButtonGroup).find(Button).at(0);
+      
+      expect(clickedButton.props().color).to.be.equal("primary");
+      expect(button2.props().color).to.be.equal("secondary");     
+    });
 });
