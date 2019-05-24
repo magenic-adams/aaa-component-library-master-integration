@@ -8,4 +8,14 @@ exports[`Storyshots Button with text 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Components|Button with text 1`] = `ReactWrapper {}`;
 
+exports[`Storyshots Molecules|ButtonGroup primary and secondary 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Molecules|ToggleButtonGroup Enabled toggle button group 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Molecules|ToggleButtonGroup Usage and States 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Molecules|ToggleButtonGroup primary and secondary 1`] = `ReactWrapper {}`;
+
 exports[`Storyshots Welcome to Storybook 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Welcome|Storybook Welcome description 1`] = `ReactWrapper {}`;

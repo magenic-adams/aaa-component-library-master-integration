@@ -4,25 +4,11 @@ import _possibleConstructorReturn from "@babel/runtime/helpers/esm/possibleConst
 import _getPrototypeOf from "@babel/runtime/helpers/esm/getPrototypeOf";
 import _assertThisInitialized from "@babel/runtime/helpers/esm/assertThisInitialized";
 import _inherits from "@babel/runtime/helpers/esm/inherits";
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
+import cx from 'clsx';
 import { Button, ButtonGroup } from '../../components';
-
-var styleClasses = function styleClasses(theme) {
-  return {
-    root: _defineProperty({
-      width: '100%',
-      '& .Button': {
-        marginTop: '8px',
-        marginBottom: '8px'
-      }
-    }, theme.breakpoints.up('md'), {
-      width: 'inherit'
-    })
-  };
-};
 
 var ToggleButtonGroup =
 /*#__PURE__*/
@@ -83,21 +69,22 @@ function (_React$Component) {
           defaultItem = _this$props.defaultItem,
           onSelect = _this$props.onSelect,
           disabled = _this$props.disabled,
-          classes = _this$props.classes,
-          className = _this$props.className,
-          theme = _this$props.theme;
+          _this$props$classes = _this$props.classes,
+          classes = _this$props$classes === void 0 ? {} : _this$props$classes,
+          _this$props$className = _this$props.className,
+          className = _this$props$className === void 0 ? '' : _this$props$className,
+          themes = _this$props.themes;
       var selectedIndex = this.getActiveItemIndex(defaultItem);
       return React.createElement(ButtonGroup, null, options && options.map(function (option, index) {
         return React.createElement(Button, {
           key: index,
           color: selectedIndex === index ? "primary" : "secondary",
           onClick: function onClick() {
-            onSelect();
-
             _this2.toggle(index);
+
+            if (onSelect) onSelect();
           },
-          disabled: disabled,
-          theme: true
+          disabled: disabled
         }, option.text);
       }));
     }
@@ -106,6 +93,6 @@ function (_React$Component) {
   return ToggleButtonGroup;
 }(React.Component);
 
-export default withStyles(styleClasses, {
+export default withStyles({
   withTheme: true
 })(ToggleButtonGroup);
