@@ -10,60 +10,41 @@ type propTypes = {
   // Passed Props
   className: PropTypes.string,
   children?: PropTypes.string | PropTypes.node,
-  color?: 'primary' | 'secondary',
-  disabled: PropTypes.bool,
-  href?: PropTypes.bool,
-  onClick: () => {}
+  htmlFor?: PropTypes.string,
 };
 
-const styleClasses = {
-  // root: {
-  //   width: '343px',
-  //   height: '19px',
-  //   fontFamily: 'Roboto',
-  //   fontSize: '16px',
-  //   fontWeight: 'normal',
-  //   fontStyle: 'normal',
-  //   fontStretch: 'normal',
-  //   lineHeight: '1.5',
-  //   letterSpacing: 'normal',
-  // }
+const styleClasses = theme => ({
   formControl: {
     transform: 'unset',
-    'text-transform': 'capitalize',
     top: '-8px',
   },
   root: {
     color: '#2a282c',
     width: '343px',
     height: '19px',
-    transform: 'unset',
-    'text-transform': 'capitalize',
-    top: '-8px',
+    fontFamily: theme.typography.fontFamily,
     '&.Mui-focused,&.Mui-error,&.Mui-disabled': {
       color: '#2a282c',
     }
   }
-}
+})
 
 class Label extends Component<propTypes> {
   render() {
     const {
       htmlFor,
       classes,
-      disableAnimation,
-      shrink,
       className,
       children
     } = this.props;
 
     return (
       <InputLabel htmlFor={htmlFor} className={cx("InputLabel", className)} classes={classes}
-        shrink={shrink} disableAnimation={disableAnimation}>
-        {children || 'Label'}
+        shrink={false} disableAnimation={true}>
+        {children}
       </InputLabel>
     );
   }
 }
 
-export default withStyles(styleClasses)(Label);
+export default withStyles(styleClasses, {withTheme: true})(Label);

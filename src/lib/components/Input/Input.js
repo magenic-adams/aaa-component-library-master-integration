@@ -10,7 +10,7 @@ import Label from "../Label/Label";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 
-const styleClasses = {
+const styleClasses = theme => ({
   root: {
     'margin-top': '8px',
     'width': '343px',
@@ -19,56 +19,41 @@ const styleClasses = {
     background: '#ffffff',
     border: 'solid 1px #717174',
     '&:hover': {
-      backgroundColor: "#f3f3f3",
-      "&.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-        border: 'solid 1px #09216a',
-      },
+      backgroundColor: theme.palette.primary.main,
+      border: 'solid 1px #09216a',
     },
     "&.Mui-focused": {
       border: "solid 2px #09216a"
     },
     "&.Mui-error": {
-      border: "solid 2px #da291c"
-    },
+      border: `solid 2px ${theme.palette.error.main}`
+    }
   },
   disabled: {
-    background: '#f1f2f3',
+    background: theme.palette.disabled.main,
     border: "none",
+    '&:hover': {
+      backgroundColor: theme.palette.disabled.main,
+      border: "none",
+    },
   },
   error: {
-    border: "solid 2px #da291c",
+    '&:hover': {
+      backgroundColor: "#ffffff",
+    },
   },
   input: {
     padding: '10px 12px',
   },
   iconButton: {
     padding: '10px',
-    transition: 'none',
-    '&:hover': {
-      backgroundColor: "#f3f3f3"
-    }
+    transition: 'none'
   },
   iconStyle: {
     fontSize: '20px',
-    color: '#4470BF'
+    color: theme.palette.primary.main
   }
-}
-
-// type propTypes = {
-//   // MUI Decorator
-//   classes: PropTypes.object.isRequired,
-//   // Passed Props
-//   className: PropTypes.string,
-//   labelName: PropTypes.string,
-//   id: PropTypes.string.isRequired,
-//   type: PropTypes.string.isRequired,
-//   name: PropTypes.string,
-//   placeholder: PropTypes.string,
-//   value: PropTypes.string,
-//   disabled: PropTypes.bool,
-//   onChange: PropTypes.func.isRequired,
-//   onBlur: PropTypes.func
-// };
+});
 
 class Input extends Component {
   render() {
@@ -89,14 +74,11 @@ class Input extends Component {
       errorText,
       classes
     } = this.props;
-    console.log(classes.iconButton)
     return (
       <Fragment>
         <FormControl error={error} disabled={disabled}>
           {labelName && <Label
             htmlFor={id}
-            disableAnimation={true}
-            shrink={false}
           >{labelName || 'Label'}</Label>}
 
           {/* Insert logic here text/numeric */}
@@ -117,21 +99,22 @@ class Input extends Component {
               input: classes.input
             }}
             endAdornment={
-              <InputAdornment position="end" >
-                {(onClear && value) &&
-                  <IconButton
-                    disableRipple={true}
-                    aria-label="Clear text"
-                    onClick={onClear}
+              (onClear && value) && <InputAdornment position="end">
+                <IconButton
+                  disableRipple={true}
+                  aria-label="Clear text"
+                  onClick={onClear}
+                  disabled={disabled}
+                  color="inherit"
+                  classes={{
+                    root: classes.iconButton,
+                  }}
+                >
+                  <Clear
                     classes={{
-                      root: classes.iconButton,
-                    }}
-                  >
-                    <Clear
-                      classes={{
-                        root: classes.iconStyle,
-                      }} />
-                  </IconButton>}
+                      root: classes.iconStyle,
+                    }} />
+                </IconButton>
               </InputAdornment>
             }
           />}
@@ -156,7 +139,8 @@ Input.propTypes = {
   value: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
+  onClear: PropTypes.func
 };
 
-export default withStyles(styleClasses)(Input);
+export default withStyles(styleClasses, {withTheme: true})(Input);
