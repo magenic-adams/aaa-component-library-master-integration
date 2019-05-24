@@ -78,4 +78,15 @@ describe("ToggleButtonGroup", function () {
       expect(clickedButton.props().color).to.be.equal("primary");
       expect(button2.props().color).to.be.equal("secondary");     
     });
+
+    it('should set all elements to disabled', function () {
+      const props = getFakeProps({ disabled: true });
+      const wrappedComponent = createToggleButtonWithTheme(props)
+
+      const button1 = wrappedComponent.find(ButtonGroup).find(Button).at(0);
+      const button2 = wrappedComponent.find(ButtonGroup).find(Button).at(1);
+      
+      expect(button1.props().disabled).to.be.equal(true);
+      expect(button2.props().disabled).to.be.equal(true);     
+    });
 });
