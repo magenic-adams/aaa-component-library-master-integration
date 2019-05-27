@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
@@ -17,10 +17,6 @@ type propTypes = {
 
 const styleClasses = theme => ({
   root: {
-    '& .Button': {
-      width: '138px',
-      height: '48px'
-    },
     '& .Button:nth-child(1)': {
       borderTopRightRadius: '0px',
       borderBottomRightRadius: '0px',
@@ -29,15 +25,37 @@ const styleClasses = theme => ({
     '& .Button:nth-child(2)': {
       borderTopLeftRadius: '0px',
       borderBottomLeftRadius: '0px'
+    }
+  },
+  button: {
+    width: '138px',
+    height: '48px',
+    '& span': {
+      fontSize: '18px'
     },
     [theme.breakpoints.between('xs', 'sm')]: {
-      '& .Button': {
-        width: '50%'
+      width: '50%',
+      '& span': {
+        fontSize: '16px',
+        fontWeight: '700'
       }
+    }
+  }, 
+  active: {
+    background: theme.palette.primary.dark,
+    color: 'white',
+    '&:hover': {
+      background: theme.palette.primary.dark,
     },
+    [theme.breakpoints.between('xs', 'sm')]: {
+      background: theme.palette.colorVariables.SECONDARY_HOVER,
+      color: theme.palette.primary.main,
+      '&:hover': {
+        background: theme.palette.colorVariables.SECONDARY_HOVER,
+      }
+    }
   }
 })
-
 
 class ToggleButtonGroup extends React.Component<propTypes> {
 
@@ -46,8 +64,6 @@ class ToggleButtonGroup extends React.Component<propTypes> {
     this.state = {
       selectedOption: null,
     };
-
-    this.getActiveItemIndex =  this.getActiveItemIndex.bind(this);
   }
 
   toggle(index, callBack) {
@@ -77,28 +93,36 @@ class ToggleButtonGroup extends React.Component<propTypes> {
     }
     return selectedIndex;
   } 
+
+  getClassName(selectedIndex, elementIndex){
+    const { classes } = this.props;
+    return selectedIndex === elementIndex ? `${classes.button} ${classes.active}`: classes.button;
+  }
   
   render() {
-    const { options, defaultItem, onSelect, disabled, classes = {}, className = '', theme} = this.props;
+    const { classes = {}, className = '', defaultItem, disabled, onSelect, options, theme} = this.props;
     const selectedIndex = this.getActiveItemIndex(defaultItem); 
-
+    
     return (
       <div>
         { options && options.length
           ? <ButtonGroup className={cx('ButtonGroup', classes.root, className)}>
-               <Button tabIndex={0} color={selectedIndex === 0 ? "primary" : "secondary"} 
+               <Button className={cx('Button', this.getClassName(selectedIndex, 0), className)} 
+                       color="secondary"
+                       disabled={disabled}
+                       tabIndex={0} 
                         onClick={() => {
-                          this.toggle(0, onSelect);
+                          return this.toggle(0, onSelect);
                         }}
-                        disabled={disabled}
                     >
                     {options[0].text}
                 </Button>
-                <Button tabIndex={1} color={selectedIndex === 1 ? "primary" : "secondary"} 
-                        onClick={() => {
-                          this.toggle(1, onSelect);
-                        }}
+                <Button className={cx('Button', this.getClassName(selectedIndex, 1), className)} 
+                        color="secondary"
                         disabled={disabled}
+                        onClick={() => {
+                          return this.toggle(1, onSelect);
+                        }}
                     >
                     {options[1].text}
                 </Button>

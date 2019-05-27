@@ -57,16 +57,6 @@ describe("ToggleButtonGroup", function () {
         expect(button2Text).to.equal('No');
     });
 
-    it('sets color to primary when button is clicked', function () {
-      const button1 = wrappedComponent.find(ButtonGroup).find(Button).at(0);
-      
-      button1.simulate("click");
-
-      const clickedButton = wrappedComponent.find(ButtonGroup).find(Button).at(0);
-
-      expect(clickedButton.props().color).to.be.equal("primary");
-    });
-
     it('should set only one button to active', function () {
       const button1 = wrappedComponent.find(ButtonGroup).find(Button).at(0);
       const button2 = wrappedComponent.find(ButtonGroup).find(Button).at(1);
@@ -74,9 +64,9 @@ describe("ToggleButtonGroup", function () {
       button1.simulate("click");
 
       const clickedButton = wrappedComponent.find(ButtonGroup).find(Button).at(0);
-      
-      expect(clickedButton.props().color).to.be.equal("primary");
-      expect(button2.props().color).to.be.equal("secondary");     
+    
+      expect(clickedButton.props().className).to.contains("active");
+      expect(button2.props().className).to.not.contains("active");     
     });
 
     it('should set all elements to disabled', function () {
