@@ -66,7 +66,7 @@ class ToggleButtonGroup extends React.Component<propTypes> {
     };
   }
 
-  toggle(index, callBack) {
+  toggle(index, callback) {
     const { options } = this.props;
     const selectedOption = options[index];
     
@@ -74,10 +74,8 @@ class ToggleButtonGroup extends React.Component<propTypes> {
       selectedOption
     });
 
-    if(callBack)
-      callBack();
-    
-    return selectedOption;
+    if(callback)
+      callback(selectedOption);
   }
 
   getActiveItemIndex(defaultItem){
@@ -108,21 +106,17 @@ class ToggleButtonGroup extends React.Component<propTypes> {
         { options && options.length
           ? <ButtonGroup className={cx('ButtonGroup', classes.root, className)}>
                <Button className={cx('Button', this.getClassName(selectedIndex, 0), className)} 
-                       color="secondary"
-                       disabled={disabled}
-                       tabIndex={0} 
-                        onClick={() => {
-                          return this.toggle(0, onSelect);
-                        }}
+                        color="secondary"
+                        disabled={disabled}
+                        tabIndex={0} 
+                        onClick={() => this.toggle(0, onSelect)}
                     >
                     {options[0].text}
                 </Button>
                 <Button className={cx('Button', this.getClassName(selectedIndex, 1), className)} 
                         color="secondary"
                         disabled={disabled}
-                        onClick={() => {
-                          return this.toggle(1, onSelect);
-                        }}
+                        onClick={() => this.toggle(1, onSelect)}
                     >
                     {options[1].text}
                 </Button>

@@ -49,7 +49,7 @@ describe("ToggleButtonGroup", function () {
     });
     var wrappedComponent = createToggleButtonWithTheme(props);
     var buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
-    expect(buttonGroup.props.children.length).to.equal(0);
+    expect(buttonGroup).to.be.undefined;
   });
   it('renders text', function () {
     var button1Text = buttonGroup.get(0).props.children[0].props.children;
@@ -57,19 +57,13 @@ describe("ToggleButtonGroup", function () {
     expect(button1Text).to.equal('Yes');
     expect(button2Text).to.equal('No');
   });
-  it('sets color to primary when button is clicked', function () {
-    var button1 = wrappedComponent.find(ButtonGroup).find(Button).at(0);
-    button1.simulate("click");
-    var clickedButton = wrappedComponent.find(ButtonGroup).find(Button).at(0);
-    expect(clickedButton.props().color).to.be.equal("primary");
-  });
   it('should set only one button to active', function () {
     var button1 = wrappedComponent.find(ButtonGroup).find(Button).at(0);
     var button2 = wrappedComponent.find(ButtonGroup).find(Button).at(1);
     button1.simulate("click");
     var clickedButton = wrappedComponent.find(ButtonGroup).find(Button).at(0);
-    expect(clickedButton.props().color).to.be.equal("primary");
-    expect(button2.props().color).to.be.equal("secondary");
+    expect(clickedButton.props().className).to.contains("active");
+    expect(button2.props().className).to.not.contains("active");
   });
   it('should set all elements to disabled', function () {
     var props = getFakeProps({
