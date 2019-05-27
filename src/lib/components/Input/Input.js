@@ -12,22 +12,19 @@ import IconButton from '@material-ui/core/IconButton';
 
 const styleClasses = theme => ({
   root: {
-    'margin-top': '8px',
-    'width': '343px',
-    'height': '48px',
+    marginTop: '8px',
+    width: '343px',
+    height: '48px',
     borderRadius: '4px',
-    background: '#ffffff',
-    border: 'solid 1px #717174',
+    background: theme.palette.colorVariables.WHITE,
+    border: `solid 1px ${theme.palette.colorVariables.GRAY}`,
     '&:hover': {
       backgroundColor: theme.palette.primary.main,
-      border: 'solid 1px #09216a',
+      border: `solid 1px ${theme.palette.colorVariables.DARKER_BLUE}`,
     },
     "&.Mui-focused": {
-      border: "solid 2px #09216a"
+      border: `solid 2px ${theme.palette.colorVariables.DARKER_BLUE}`
     },
-    "&.Mui-error": {
-      border: `solid 2px ${theme.palette.error.main}`
-    }
   },
   disabled: {
     background: theme.palette.disabled.main,
@@ -38,8 +35,9 @@ const styleClasses = theme => ({
     },
   },
   error: {
+    border: `solid 2px ${theme.palette.error.main} !important`,
     '&:hover': {
-      backgroundColor: "#ffffff",
+      backgroundColor: theme.palette.colorVariables.WHITE,
     },
   },
   input: {
@@ -58,50 +56,43 @@ const styleClasses = theme => ({
 class Input extends Component {
   render() {
     const {
+      classes,
+      className,
+      disabled,
+      error,
+      errorText,
+      helperText,
       id,
+      labelName,
       name,
-      type,
       placeholder,
+      type,
       value,
+      onBlur,
       onChange,
       onClear,
-      onBlur,
-      labelName,
-      className,
-      error,
-      disabled,
-      helperText,
-      errorText,
-      classes
     } = this.props;
     return (
       <Fragment>
         <FormControl error={error} disabled={disabled}>
           {labelName && <Label
             htmlFor={id}
-          >{labelName || 'Label'}</Label>}
+          >{labelName}</Label>}
 
           {/* Insert logic here text/numeric */}
           {type === 'text' && <InputMUI
-            id={id}
-            name={name}
-            type='text'
-            onChange={onChange}
-            onBlur={onBlur}
-            placeholder={placeholder}
-            disableUnderline={true}
-            className={cx("Input", className)}
-            value={value}
             classes={{
               root: classes.root,
               disabled: classes.disabled,
               error: classes.error,
               input: classes.input
             }}
+            className={cx("Input", className)}
+            disableUnderline
             endAdornment={
               (onClear && value) && <InputAdornment position="end">
                 <IconButton
-                  disableRipple={true}
+                  disableRipple
                   aria-label="Clear text"
                   onClick={onClear}
                   disabled={disabled}
@@ -117,6 +108,13 @@ class Input extends Component {
                 </IconButton>
               </InputAdornment>
             }
+            id={id}
+            name={name}
+            placeholder={placeholder}
+            type='text'
+            value={value}
+            onChange={onChange}
+            onBlur={onBlur}
           />}
           {(errorText && error) && <FormHelperText id={id + "-component-error-text"}>{errorText}</FormHelperText>}
         </FormControl>
@@ -131,16 +129,16 @@ Input.propTypes = {
   classes: PropTypes.object.isRequired,
   // Passed Props
   className: PropTypes.string,
-  labelName: PropTypes.string,
+  disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  labelName: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,
+  type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  disabled: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
   onClear: PropTypes.func
 };
 
-export default withStyles(styleClasses, {withTheme: true})(Input);
+export default withStyles(styleClasses, { withTheme: true })(Input);

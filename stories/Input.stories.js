@@ -2,9 +2,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { text, withKnobs } from '@storybook/addon-knobs';
+import '../src/css/helpers.css';
 
 // Components
-import { AAAPrimaryTheme, Button, Input } from '../src/lib/components';
+import { AAAPrimaryTheme, Input } from '../src/lib/components';
 
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
 
@@ -29,7 +30,7 @@ stories
   })
   .add('states', () => (
     <AAAPrimaryTheme>
-      <h2 style={{ "text-align": "center" }}>ACTIVE STATE</h2>
+      <h2 className='text-align-center'>ACTIVE STATE</h2>
 
       <ElementContainer>
         <div>
@@ -37,7 +38,7 @@ stories
         </div>
       </ElementContainer>
 
-      <h2 style={{ "text-align": "center" }}>DISABLED STATE</h2>
+      <h2 className='text-align-center'>DISABLED STATE</h2>
 
       <ElementContainer>
         <div>
@@ -46,7 +47,7 @@ stories
 
       </ElementContainer>
 
-      <h2 style={{ "text-align": "center" }}>ERROR STATE</h2>
+      <h2 className='text-align-center'>ERROR STATE</h2>
 
       <ElementContainer>
         <div>

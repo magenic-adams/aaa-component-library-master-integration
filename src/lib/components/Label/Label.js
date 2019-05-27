@@ -19,32 +19,42 @@ const styleClasses = theme => ({
     top: '-8px',
   },
   root: {
-    color: '#2a282c',
+    color: theme.palette.colorVariables.BLACK,
     width: '343px',
     height: '19px',
-    fontFamily: theme.typography.fontFamily,
-    '&.Mui-focused,&.Mui-error,&.Mui-disabled': {
-      color: '#2a282c',
-    }
+    fontFamily: theme.typography.fontFamily
+  },
+  focused: {
+    color: `${theme.palette.colorVariables.BLACK} !important`,
+  },
+  error: {
+    color: `${theme.palette.colorVariables.BLACK} !important`,
+  },
+  disabled: {
+    color: `${theme.palette.colorVariables.BLACK} !important`,
   }
 })
 
 class Label extends Component<propTypes> {
   render() {
     const {
-      htmlFor,
       classes,
       className,
-      children
+      children,
+      htmlFor,
     } = this.props;
 
     return (
-      <InputLabel htmlFor={htmlFor} className={cx("InputLabel", className)} classes={classes}
-        shrink={false} disableAnimation={true}>
+      <InputLabel
+        className={cx("InputLabel", className)}
+        classes={classes}
+        disableAnimation
+        htmlFor={htmlFor}
+        shrink={false}>
         {children}
       </InputLabel>
     );
   }
 }
 
-export default withStyles(styleClasses, {withTheme: true})(Label);
+export default withStyles(styleClasses, { withTheme: true })(Label);
