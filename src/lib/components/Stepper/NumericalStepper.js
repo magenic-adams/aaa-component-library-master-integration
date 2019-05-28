@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
@@ -5,6 +7,7 @@ import MUIStep from '@material-ui/core/Step';
 
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import ReportProblem from '@material-ui/icons/ReportProblem';
 import MUIStepLabel from '@material-ui/core/StepLabel';
 import StepperButton from '../Button/IconButton';
 
@@ -13,19 +16,21 @@ type propTypes = {
   classes: PropTypes.object,
   // Passed Props
   className: PropTypes.string,
-  children?: PropTypes.string | PropTypes.node,
-  color?: 'primary' | 'secondary',
   disabled: PropTypes.bool,
   labelText: PropTypes.string,
   errorText: PropTypes.string,
-  onClick: () => {}
+  onIncrease: () => {},
+  onDecrease: () => {}
 };
 
 const styleClasses = theme => ({
   stepperIcon: {
     color: '#4470BF',
     width: '24px',
-    height: '24px'
+    height: '24px',
+    '&:active,&:hover': {
+      color: '#FFFFFF'
+    }
   },
   stepperInput: {
     height: '48px',
@@ -61,23 +66,38 @@ const styleClasses = theme => ({
     fontSize: '14px',
     [theme.breakpoints.up('md')]: {
       fontSize: '16px'
+    },
+    '& svg': {
+      display: 'inline',
+      float: 'right',
+      fontSize: '20px',
+      marginRight: '8px'
     }
   }
 });
 
 class NumericalStepper extends Component<propTypes> {
   render() {
-    const { classes, error } = this.props;
+    const {
+      classes,
+      error,
+      labelText,
+      helpText,
+      onIncrease,
+      onDecrease,
+      disabled
+    } = this.props;
+
     return (
-      <MUIStep>
+      <MUIStep disabled={disabled}>
         <MUIStepLabel classes={{ label: classes.stepperLabel }}>
-          {this.props.labelText}
+          {labelText}
         </MUIStepLabel>
-        <StepperButton>
+        <StepperButton onClick={onDecrease}>
           <RemoveIcon className={classes.stepperIcon} />
         </StepperButton>
-        <input className={classes.stepperInput} type='text' />
-        <StepperButton>
+        <input className={classes.stepperInput} type="text" />
+        <StepperButton onClick={onIncrease}>
           <AddIcon className={classes.stepperIcon} />
         </StepperButton>
         <MUIStepLabel
@@ -85,7 +105,8 @@ class NumericalStepper extends Component<propTypes> {
           className={classes.helpText}
           error={error}
         >
-          {this.props.errorText}
+          {helpText}
+          {error && <ReportProblem />}
         </MUIStepLabel>
       </MUIStep>
     );

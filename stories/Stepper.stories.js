@@ -8,13 +8,21 @@ import NumericalStepper from '../src/lib/components/Stepper/NumericalStepper';
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
 
 const stories = storiesOf('Molecules|Stepper', module);
-stories.add('Numerical Stepper', () => {
+stories.add('numerical ', () => {
   return (
     <AAAPrimaryTheme>
+      <h2>Numerical Stepper with Helper Text</h2>
       <ElementContainer>
         <NumericalStepper
-          labelText='This is a numerical stepper'
-          errorText='This is an error message'
+          labelText="This is a numerical stepper"
+          helpText="This is a helper message"
+        />
+      </ElementContainer>
+      <h2>Numerical Stepper with Error Text</h2>
+      <ElementContainer>
+        <NumericalStepper
+          labelText="This is a numerical stepper"
+          helpText="This is an error text"
           error
         />
       </ElementContainer>
