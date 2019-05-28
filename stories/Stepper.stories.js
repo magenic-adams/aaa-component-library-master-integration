@@ -15,6 +15,7 @@ stories.add('Numerical Stepper', () => {
         <NumericalStepper
           labelText='This is a numerical stepper'
           errorText='This is an error message'
+          error
         />
       </ElementContainer>
     </AAAPrimaryTheme>

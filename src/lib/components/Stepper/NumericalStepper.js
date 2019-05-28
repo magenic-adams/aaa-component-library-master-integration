@@ -6,7 +6,6 @@ import MUIStep from '@material-ui/core/Step';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import MUIStepLabel from '@material-ui/core/StepLabel';
-
 import StepperButton from '../Button/IconButton';
 
 type propTypes = {
@@ -55,13 +54,13 @@ const styleClasses = theme => ({
     fontSize: '14px',
     [theme.breakpoints.up('md')]: {
       fontSize: '16px'
-    },
-    '& error': {
-      color: '#DA291C',
-      fontSize: '14px',
-      [theme.breakpoints.up('md')]: {
-        fontSize: '16px'
-      }
+    }
+  },
+  error: {
+    color: '#DA291C !important',
+    fontSize: '14px',
+    [theme.breakpoints.up('md')]: {
+      fontSize: '16px'
     }
   }
 });
@@ -71,7 +70,7 @@ class NumericalStepper extends Component<propTypes> {
     const { classes, error } = this.props;
     return (
       <MUIStep>
-        <MUIStepLabel className={classes.stepperLabel}>
+        <MUIStepLabel classes={{ label: classes.stepperLabel }}>
           {this.props.labelText}
         </MUIStepLabel>
         <StepperButton>
@@ -81,7 +80,11 @@ class NumericalStepper extends Component<propTypes> {
         <StepperButton>
           <AddIcon className={classes.stepperIcon} />
         </StepperButton>
-        <MUIStepLabel className={classes.helpText} error={error}>
+        <MUIStepLabel
+          classes={{ label: classes.helpText, error: classes.error }}
+          className={classes.helpText}
+          error={error}
+        >
           {this.props.errorText}
         </MUIStepLabel>
       </MUIStep>
