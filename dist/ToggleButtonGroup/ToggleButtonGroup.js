@@ -24,7 +24,7 @@ var styleClasses = function styleClasses(theme) {
       }
     },
     button: _defineProperty({
-      width: '138px',
+      width: '157px',
       height: '48px',
       '& span': {
         fontSize: '18px'
@@ -38,7 +38,7 @@ var styleClasses = function styleClasses(theme) {
     }),
     active: _defineProperty({
       background: theme.palette.primary.dark,
-      color: 'white',
+      color: theme.palette.common.white,
       '&:hover': {
         background: theme.palette.primary.dark
       }

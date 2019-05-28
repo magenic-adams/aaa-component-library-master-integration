@@ -28,7 +28,7 @@ const styleClasses = theme => ({
     }
   },
   button: {
-    width: '138px',
+    width: '157px',
     height: '48px',
     '& span': {
       fontSize: '18px'
@@ -43,7 +43,7 @@ const styleClasses = theme => ({
   }, 
   active: {
     background: theme.palette.primary.dark,
-    color: 'white',
+    color: theme.palette.common.white,
     '&:hover': {
       background: theme.palette.primary.dark,
     },

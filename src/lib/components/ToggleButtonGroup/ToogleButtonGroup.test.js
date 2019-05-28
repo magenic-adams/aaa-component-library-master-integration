@@ -27,13 +27,13 @@ describe("ToggleButtonGroup", function () {
     let wrappedComponent;
     let buttonGroup;
 
-    beforeAll(() => {
+    beforeEach(() => {
       props = getFakeProps();
       wrappedComponent = createToggleButtonWithTheme(props);
       buttonGroup = wrappedComponent.find(ButtonGroup);
     });
 
-    afterAll(() => {
+    afterEach(() => {
       wrappedComponent.unmount();
     });
 

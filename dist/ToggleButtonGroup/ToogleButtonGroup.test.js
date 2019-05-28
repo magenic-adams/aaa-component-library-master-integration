@@ -32,12 +32,12 @@ describe("ToggleButtonGroup", function () {
   var props;
   var wrappedComponent;
   var buttonGroup;
-  beforeAll(function () {
+  beforeEach(function () {
     props = getFakeProps();
     wrappedComponent = createToggleButtonWithTheme(props);
     buttonGroup = wrappedComponent.find(ButtonGroup);
   });
-  afterAll(function () {
+  afterEach(function () {
     wrappedComponent.unmount();
   });
   it('contains button elements when it has options', function () {

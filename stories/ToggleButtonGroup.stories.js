@@ -1,4 +1,5 @@
 import React from 'react';
+import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
 // Components
@@ -6,7 +7,7 @@ import {AAAPrimaryTheme, Button, ButtonGroup, ToggleButtonGroup} from '../src/li
 import {ElementContainer} from '../src/lib/internal/ElementContainer/ElementContainer';
 
 const stories = storiesOf('Molecules|ToggleButtonGroup', module);
-const sampleItems = [{value: 0, text: "Yes"}, {value: 1, text: "No"}];
+const selectedOptions = [{value: 1, text: "Yes"}, {value: 0, text: "No"}];
 
 stories
   .add('Usage and States', () => {
@@ -30,17 +31,17 @@ stories
           <h2>States</h2>
           <h3>Enabled state</h3>
           <ElementContainer>
-            <ToggleButtonGroup options={sampleItems}>
+            <ToggleButtonGroup options={selectedOptions} onSelect={action('clicked')}>
             </ToggleButtonGroup>
           </ElementContainer>
           <h3>Disabled state</h3>
           <ElementContainer>
-            <ToggleButtonGroup options={sampleItems} disabled>
+            <ToggleButtonGroup options={selectedOptions} disabled>
             </ToggleButtonGroup>
           </ElementContainer>
           <h3>Selected state</h3>
           <ElementContainer>
-            <ToggleButtonGroup options={sampleItems} defaultItem={sampleItems[0]}>
+            <ToggleButtonGroup options={selectedOptions} defaultItem={selectedOptions[0]} onSelect={action('clicked')}>
             </ToggleButtonGroup>
           </ElementContainer>
         </div>
