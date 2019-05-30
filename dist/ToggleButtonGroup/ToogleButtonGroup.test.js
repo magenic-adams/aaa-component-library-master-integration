@@ -1,20 +1,25 @@
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
+
+/* eslint-disable no-unused-expressions */
+
+/* eslint-disable func-names */
+
+/* eslint-disable no-undef */
 import React from 'react';
-import { expect } from "chai";
-import { mount, shallow } from 'enzyme';
+import { expect } from 'chai';
+import { mount } from 'enzyme';
 import ToggleButtonGroup from './ToggleButtonGroup';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
-import Button from '../Button/Button';
 
 function getFakeProps(overrides) {
   return _objectSpread({
     options: [{
-      value: 0,
-      text: "Yes"
+      id: 1,
+      text: 'Yes'
     }, {
-      value: 1,
-      text: "No"
+      id: 2,
+      text: 'No'
     }],
     onSelect: jest.fn(function (v) {
       return v;
@@ -28,51 +33,84 @@ function createToggleButtonWithTheme(props) {
   }, React.createElement(ToggleButtonGroup, props)));
 }
 
-describe("ToggleButtonGroup", function () {
+describe('ToggleButtonGroup', function () {
   var props;
   var wrappedComponent;
   var buttonGroup;
   beforeEach(function () {
     props = getFakeProps();
     wrappedComponent = createToggleButtonWithTheme(props);
-    buttonGroup = wrappedComponent.find(ButtonGroup);
+    buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
   });
   afterEach(function () {
     wrappedComponent.unmount();
   });
-  it('contains button elements when it has options', function () {
-    expect(buttonGroup.get(0).props.children.length).to.be.above(0);
+  it('contains button elements when it has valid options', function () {
+    expect(buttonGroup.props.children.length).to.be.above(0);
   });
   it('do NOT render button elements when it has NO options', function () {
-    var props = getFakeProps({
+    props = getFakeProps({
       options: []
     });
-    var wrappedComponent = createToggleButtonWithTheme(props);
-    var buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
+    wrappedComponent = createToggleButtonWithTheme(props);
+    buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
+    expect(buttonGroup).to.be.undefined;
+  });
+  it('do NOT render button elements when has Invalid options', function () {
+    props = getFakeProps({
+      options: [{
+        idx: 1,
+        display: 'Invalid'
+      }, {
+        idx: 2,
+        display: 'Invalid 2'
+      }]
+    });
+    wrappedComponent = createToggleButtonWithTheme(props);
+    buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
+    expect(buttonGroup).to.be.undefined;
+    props = getFakeProps({
+      options: null
+    });
+    wrappedComponent = createToggleButtonWithTheme(props);
+    buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
+    expect(buttonGroup).to.be.undefined;
+    props = getFakeProps({
+      options: undefined
+    });
+    wrappedComponent = createToggleButtonWithTheme(props);
+    buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
     expect(buttonGroup).to.be.undefined;
   });
   it('renders text', function () {
-    var button1Text = buttonGroup.get(0).props.children[0].props.children;
-    var button2Text = buttonGroup.get(0).props.children[1].props.children;
+    var button1Text = buttonGroup.props.children[0].props.children;
+    var button2Text = buttonGroup.props.children[1].props.children;
     expect(button1Text).to.equal('Yes');
     expect(button2Text).to.equal('No');
   });
-  it('should set only one button to active', function () {
-    var button1 = wrappedComponent.find(ButtonGroup).find(Button).at(0);
-    var button2 = wrappedComponent.find(ButtonGroup).find(Button).at(1);
-    button1.simulate("click");
-    var clickedButton = wrappedComponent.find(ButtonGroup).find(Button).at(0);
-    expect(clickedButton.props().className).to.contains("active");
-    expect(button2.props().className).to.not.contains("active");
+  it('should set button to active when has value', function () {
+    props = getFakeProps({
+      value: {
+        id: 1,
+        text: 'Yes'
+      }
+    });
+    wrappedComponent = createToggleButtonWithTheme(props);
+    buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
+    var button1 = buttonGroup.props.children[0];
+    var button2 = buttonGroup.props.children[1];
+    expect(button1.props.className).to.contains('active');
+    expect(button2.props.className).to.not.contains('active');
   });
   it('should set all elements to disabled', function () {
-    var props = getFakeProps({
+    props = getFakeProps({
       disabled: true
     });
-    var wrappedComponent = createToggleButtonWithTheme(props);
-    var button1 = wrappedComponent.find(ButtonGroup).find(Button).at(0);
-    var button2 = wrappedComponent.find(ButtonGroup).find(Button).at(1);
-    expect(button1.props().disabled).to.be.equal(true);
-    expect(button2.props().disabled).to.be.equal(true);
+    wrappedComponent = createToggleButtonWithTheme(props);
+    buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
+    var button1 = buttonGroup.props.children[0];
+    var button2 = buttonGroup.props.children[1];
+    expect(button1.props.disabled).to.be.equal(true);
+    expect(button2.props.disabled).to.be.equal(true);
   });
 });

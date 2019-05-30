@@ -1,28 +1,18 @@
-import _classCallCheck from "@babel/runtime/helpers/esm/classCallCheck";
-import _createClass from "@babel/runtime/helpers/esm/createClass";
-import _possibleConstructorReturn from "@babel/runtime/helpers/esm/possibleConstructorReturn";
-import _getPrototypeOf from "@babel/runtime/helpers/esm/getPrototypeOf";
-import _inherits from "@babel/runtime/helpers/esm/inherits";
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
+
+/* eslint-disable no-console */
+
+/* eslint-disable no-plusplus */
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'; // eslint-disable-next-line import/no-extraneous-dependencies
+
 import { withStyles } from '@material-ui/styles';
-import cx from 'clsx';
-import { Button, ButtonGroup } from '../../components';
+import cx from 'clsx'; // eslint-disable-next-line import/no-cycle
+
+import { Button, ButtonGroup } from '..';
 
 var styleClasses = function styleClasses(theme) {
   return {
-    root: {
-      '& .Button:nth-child(1)': {
-        borderTopRightRadius: '0px',
-        borderBottomRightRadius: '0px',
-        borderRightStyle: 'none'
-      },
-      '& .Button:nth-child(2)': {
-        borderTopLeftRadius: '0px',
-        borderBottomLeftRadius: '0px'
-      }
-    },
     button: _defineProperty({
       width: '157px',
       height: '48px',
@@ -36,6 +26,15 @@ var styleClasses = function styleClasses(theme) {
         fontWeight: '700'
       }
     }),
+    left: {
+      borderTopRightRadius: '0px',
+      borderBottomRightRadius: '0px',
+      borderRightStyle: 'none'
+    },
+    right: {
+      borderTopLeftRadius: '0px',
+      borderBottomLeftRadius: '0px'
+    },
     active: _defineProperty({
       background: theme.palette.primary.dark,
       color: theme.palette.common.white,
@@ -52,100 +51,78 @@ var styleClasses = function styleClasses(theme) {
   };
 };
 
-var ToggleButtonGroup =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(ToggleButtonGroup, _React$Component);
+function handleClick(value, callback) {
+  if (callback) callback(value);
+}
 
-  function ToggleButtonGroup(props) {
-    var _this;
+function isOptionsKeysPresent(options) {
+  var acceptedKeys = ['id', 'text'];
 
-    _classCallCheck(this, ToggleButtonGroup);
+  for (var i = 0; i < options.length; i++) {
+    var keys = Object.keys(options[i]);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ToggleButtonGroup).call(this, props));
-    _this.state = {
-      selectedOption: null
-    };
-    return _this;
+    for (var k = 0; k < keys.length; k++) {
+      if (!acceptedKeys.includes(keys[k])) return false;
+    }
   }
 
-  _createClass(ToggleButtonGroup, [{
-    key: "toggle",
-    value: function toggle(index, callback) {
-      var options = this.props.options;
-      var selectedOption = options[index];
-      this.setState({
-        selectedOption: selectedOption
-      });
-      if (callback) callback(selectedOption);
+  return true;
+}
+
+function getClassName(value, id, classes) {
+  var button = classes.button,
+      active = classes.active;
+  var isIdMatched = value && value.id !== undefined && value.id === id;
+  return isIdMatched ? "".concat(button, " ").concat(active) : button;
+}
+
+function isOptionsValid(options) {
+  if (!Array.isArray(options) || options.length < 2) {
+    console.error('Invalid length of options. You must passed maximum number of two options');
+    return false;
+  }
+
+  if (!isOptionsKeysPresent(options)) {
+    console.error('Invalid object keys are present. Keys should contain id and text');
+    return false;
+  }
+
+  return true;
+}
+
+function ToggleButtonGroup(_ref) {
+  var classes = _ref.classes,
+      className = _ref.className,
+      value = _ref.value,
+      disabled = _ref.disabled,
+      onSelect = _ref.onSelect,
+      options = _ref.options;
+  return React.createElement("div", null, isOptionsValid(options) ? React.createElement(ButtonGroup, {
+    className: cx('ButtonGroup', classes.root, className)
+  }, React.createElement(Button, {
+    className: cx('Button', "".concat(getClassName(value, options[0].id, classes), " ").concat(classes.left), className),
+    color: "secondary",
+    disabled: disabled,
+    onClick: function onClick() {
+      return handleClick(options[0], onSelect);
     }
-  }, {
-    key: "getActiveItemIndex",
-    value: function getActiveItemIndex(defaultItem) {
-      var options = this.props.options;
-      var selectedOption = this.state.selectedOption;
-      var selectedIndex = -1;
-
-      if (defaultItem) {
-        selectedIndex = options.findIndex(function (option) {
-          return option.value === defaultItem.value;
-        });
-      }
-
-      if (selectedOption) {
-        selectedIndex = options.findIndex(function (option) {
-          return option.value === selectedOption.value;
-        });
-      }
-
-      return selectedIndex;
+  }, options[0].text), React.createElement(Button, {
+    className: cx('Button', "".concat(getClassName(value, options[1].id, classes), " ").concat(classes.right), className),
+    color: "secondary",
+    disabled: disabled,
+    onClick: function onClick() {
+      return handleClick(options[1], onSelect);
     }
-  }, {
-    key: "getClassName",
-    value: function getClassName(selectedIndex, elementIndex) {
-      var classes = this.props.classes;
-      return selectedIndex === elementIndex ? "".concat(classes.button, " ").concat(classes.active) : classes.button;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
+  }, options[1].text)) : null);
+}
 
-      var _this$props = this.props,
-          _this$props$classes = _this$props.classes,
-          classes = _this$props$classes === void 0 ? {} : _this$props$classes,
-          _this$props$className = _this$props.className,
-          className = _this$props$className === void 0 ? '' : _this$props$className,
-          defaultItem = _this$props.defaultItem,
-          disabled = _this$props.disabled,
-          onSelect = _this$props.onSelect,
-          options = _this$props.options,
-          theme = _this$props.theme;
-      var selectedIndex = this.getActiveItemIndex(defaultItem);
-      return React.createElement("div", null, options && options.length ? React.createElement(ButtonGroup, {
-        className: cx('ButtonGroup', classes.root, className)
-      }, React.createElement(Button, {
-        className: cx('Button', this.getClassName(selectedIndex, 0), className),
-        color: "secondary",
-        disabled: disabled,
-        tabIndex: 0,
-        onClick: function onClick() {
-          return _this2.toggle(0, onSelect);
-        }
-      }, options[0].text), React.createElement(Button, {
-        className: cx('Button', this.getClassName(selectedIndex, 1), className),
-        color: "secondary",
-        disabled: disabled,
-        onClick: function onClick() {
-          return _this2.toggle(1, onSelect);
-        }
-      }, options[1].text)) : null);
-    }
-  }]);
-
-  return ToggleButtonGroup;
-}(React.Component);
-
+ToggleButtonGroup.defaultProps = {
+  className: '',
+  value: {
+    id: '',
+    text: ''
+  }
+};
 export default withStyles(styleClasses, {
   withTheme: true
 })(ToggleButtonGroup);
