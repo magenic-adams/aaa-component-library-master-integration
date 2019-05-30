@@ -11,22 +11,11 @@ type propTypes = {
   options: PropTypes.array,
   children: PropTypes.node,
   onClick: PropTypes.func,
-  defaultItem?: PropTypes.object;
+  value?:  {id: PropTypes.string | PropTypes.number,  text: PropTypes.string},
   className?: PropTypes.string
 };
 
 const styleClasses = theme => ({
-  root: {
-    '& .Button:nth-child(1)': {
-      borderTopRightRadius: '0px',
-      borderBottomRightRadius: '0px',
-      borderRightStyle: 'none'
-    },
-    '& .Button:nth-child(2)': {
-      borderTopLeftRadius: '0px',
-      borderBottomLeftRadius: '0px'
-    }
-  },
   button: {
     width: '157px',
     height: '48px',
@@ -41,6 +30,15 @@ const styleClasses = theme => ({
       }
     }
   }, 
+  left : {
+    borderTopRightRadius: '0px',
+    borderBottomRightRadius: '0px',
+    borderRightStyle: 'none'
+  },
+  right : {
+    borderTopLeftRadius: '0px',
+    borderBottomLeftRadius: '0px'
+  },
   active: {
     background: theme.palette.primary.dark,
     color: theme.palette.common.white,
@@ -57,76 +55,89 @@ const styleClasses = theme => ({
   }
 })
 
-class ToggleButtonGroup extends React.Component<propTypes> {
-
-  constructor(props) {
-    super(props); 
-    this.state = {
-      selectedOption: null,
-    };
-  }
-
-  toggle(index, callback) {
-    const { options } = this.props;
-    const selectedOption = options[index];
-    
-    this.setState({
-      selectedOption
-    });
-
-    if(callback)
-      callback(selectedOption);
-  }
-
-  getActiveItemIndex(defaultItem){
-    const { options } = this.props;
-    const { selectedOption } = this.state;
-    let selectedIndex = -1;
-
-    if (defaultItem){
-      selectedIndex = options.findIndex(option => option.value === defaultItem.value);
-    }
-    if (selectedOption){
-      selectedIndex = options.findIndex(option => option.value === selectedOption.value);
-    }
-    return selectedIndex;
-  } 
-
-  getClassName(selectedIndex, elementIndex){
-    const { classes } = this.props;
-    return selectedIndex === elementIndex ? `${classes.button} ${classes.active}`: classes.button;
-  }
-  
-  render() {
-    const { classes = {}, className = '', defaultItem, disabled, onSelect, options, theme} = this.props;
-    const selectedIndex = this.getActiveItemIndex(defaultItem); 
-    
-    return (
-      <div>
-        { options && options.length
-          ? <ButtonGroup className={cx('ButtonGroup', classes.root, className)}>
-               <Button className={cx('Button', this.getClassName(selectedIndex, 0), className)} 
-                        color="secondary"
-                        disabled={disabled}
-                        tabIndex={0} 
-                        onClick={() => this.toggle(0, onSelect)}
-                    >
-                    {options[0].text}
-                </Button>
-                <Button className={cx('Button', this.getClassName(selectedIndex, 1), className)} 
-                        color="secondary"
-                        disabled={disabled}
-                        onClick={() => this.toggle(1, onSelect)}
-                    >
-                    {options[1].text}
-                </Button>
-            </ButtonGroup>
-          : null
-        }
-      </div>
-    );
-  }  
+ToggleButtonGroup.defaultProps = {
+  classes: {},
+  className: ''
 }
+
+function handleClick(value, callback) {
+  if(callback)
+    callback(value);
+}
+
+function getClassName(value, id, classes) {
+  const { button, active } = classes;
+  const isIdMatched = value && value.id !== undefined && (value.id  === id);
+  return isIdMatched ? `${button} ${active}`: button;
+} 
+
+function getSelectedOption(options, value) {
+  return value && options ? options.find(option => option.id === value.id) : {};
+}
+
+function isOptionsValid (options) {
+  if (!Array.isArray(options) || options.length < 2) {
+    console.error('Invalid length of options. You must passed maximum number of two options');
+    return false;
+  }
+  if (!isOptionsKeysPresent(options)) {
+    console.error('Invalid object keys are present. Keys should contain id and text');
+    return false;
+  }
+    
+  return true;
+}
+
+function isOptionsKeysPresent(options) {
+    const acceptedKeys = ['id', 'text'];
+    for (var i = 0; i < options.length; i++) {
+      const keys = Object.keys(options[i]);
+      for (var k = 0; k < keys.length; k++) {
+        if (!acceptedKeys.includes(keys[k]))
+          return false;
+      }
+    }
+    return true;
+}
+
+function ToggleButtonGroup({
+  classes, 
+  className, 
+  value, 
+  disabled, 
+  onSelect, 
+  options, 
+  theme
+  } : propTypes) {
+  
+  return (
+    <div>
+      { isOptionsValid(options) ?
+        <ButtonGroup className={cx('ButtonGroup', classes.root, className)}>
+          <Button className={cx('Button', `${getClassName(value, options[0].id, classes)} ${classes.left}`, className)} 
+                  color="secondary"
+                  disabled={disabled}
+                  tabIndex={0} 
+                  onClick={() => handleClick(options[0], onSelect)}
+              >
+              {options[0].text}
+          </Button>
+          <Button className={cx('Button', `${getClassName(value, options[1].id, classes)} ${classes.right}`, className)} 
+                  color="secondary"
+                  disabled={disabled}
+                  tabIndex={1}
+                  onClick={() => handleClick(options[1], onSelect)}
+              >
+              {options[1].text}
+          </Button>
+        </ButtonGroup>
+        : 
+        null
+      }
+    </div>
+  );
+}
+
 export default withStyles(styleClasses, {withTheme: true})(ToggleButtonGroup);
 
 

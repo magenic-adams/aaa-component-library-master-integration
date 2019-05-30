@@ -4,10 +4,13 @@ import { storiesOf } from '@storybook/react';
 
 // Components
 import {AAAPrimaryTheme, Button, ButtonGroup, ToggleButtonGroup} from '../src/lib/components';
+
+// Internal
 import {ElementContainer} from '../src/lib/internal/ElementContainer/ElementContainer';
+import {ToggleButtonGroupContainer} from '../src/lib/internal/ToggleButtonGroupContainer/ToggleButtonGroupContainer';
 
 const stories = storiesOf('Molecules|ToggleButtonGroup', module);
-const selectedOptions = [{value: 1, text: "Yes"}, {value: 0, text: "No"}];
+const options = [{id: 1, text: "Yes"}, {id: 2, text: "No"}];
 
 stories
   .add('Usage and States', () => {
@@ -31,18 +34,18 @@ stories
           <h2>States</h2>
           <h3>Enabled state</h3>
           <ElementContainer>
-            <ToggleButtonGroup options={selectedOptions} onSelect={action('clicked')}>
-            </ToggleButtonGroup>
+            <ToggleButtonGroupContainer options={options} onSelect={action('clicked')}>
+            </ToggleButtonGroupContainer>
           </ElementContainer>
           <h3>Disabled state</h3>
           <ElementContainer>
-            <ToggleButtonGroup options={selectedOptions} disabled>
-            </ToggleButtonGroup>
+            <ToggleButtonGroupContainer options={options} disabled>
+            </ToggleButtonGroupContainer>
           </ElementContainer>
           <h3>Selected state</h3>
           <ElementContainer>
-            <ToggleButtonGroup options={selectedOptions} defaultItem={selectedOptions[0]} onSelect={action('clicked')}>
-            </ToggleButtonGroup>
+            <ToggleButtonGroupContainer options={options} value={options[0]} onSelect={action('clicked')}>
+            </ToggleButtonGroupContainer>
           </ElementContainer>
         </div>
       </AAAPrimaryTheme>
