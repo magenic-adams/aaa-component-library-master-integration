@@ -14,7 +14,7 @@ type propTypes = {
   items: {
     id: PropTypes.string | PropTypes.number,
     value: PropTypes.string | PropTypes.number,
-    display: PropTypes.string | PropTypes.number | PropTypes.element
+    display: PropTypes.string | PropTypes.number | PropTypes.node
   }
 };
 

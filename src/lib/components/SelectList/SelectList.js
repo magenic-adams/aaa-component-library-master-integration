@@ -15,8 +15,9 @@ type propTypes = {
   items: {
     id: PropTypes.string | PropTypes.number,
     value: PropTypes.string | PropTypes.number,
-    display: PropTypes.string | PropTypes.number | PropTypes.element
+    display: PropTypes.string | PropTypes.number | PropTypes.node
   },
+  type?: PropTypes.string,
   onSelect: PropTypes.func
 };
 
@@ -34,27 +35,37 @@ function handleSelect(value, callback) {
   if (callback) callback(value);
 }
 
-function SelectList({ classes, className, items, onSelect }: propTypes) {
+function SelectList({ classes, className, items, type, onSelect }: propTypes) {
   return (
     <Fragment>
-      {items && items.length ? (
-        <List dense className={cx('List', classes.root, className)}>
-          {items.map(item => (
-            <SelectListItemText
-              key={item.id}
-              item={item}
-              selected
-              onSelect={() => handleSelect(item, onSelect)}
-            />
-          ))}
-        </List>
-      ) : null}
+      {items && items.length
+        ? (() => {
+            switch (type) {
+              case 'primary':
+                return (
+                  <List dense className={cx('List', classes.root, className)}>
+                    {items.map(item => (
+                      <SelectListItemText
+                        key={item.id}
+                        item={item}
+                        selected
+                        onSelect={() => handleSelect(item, onSelect)}
+                      />
+                    ))}
+                  </List>
+                );
+              default:
+                return null;
+            }
+          })()
+        : null}
     </Fragment>
   );
 }
 
 SelectList.defaultProps = {
-  className: ''
+  className: '',
+  type: 'primary'
 };
 
 export default withStyles(styleClasses, { withTheme: true })(SelectList);
