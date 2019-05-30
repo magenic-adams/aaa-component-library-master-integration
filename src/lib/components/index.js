@@ -1,9 +1,8 @@
-import AAAPrimaryTheme from './AAAPrimaryTheme/AAAPrimaryTheme.js';
-import Button from './Button/Button.js';
-import ButtonGroup from './ButtonGroup/ButtonGroup.js';
+/* eslint-disable import/no-cycle */
+import AAAPrimaryTheme from './AAAPrimaryTheme/AAAPrimaryTheme';
+import Button from './Button/Button';
+import ButtonGroup from './ButtonGroup/ButtonGroup';
+import SelectList from './SelectList/SelectList';
+import SelectListItemText from './SelectListItemText/SelectListItemText';
 
-export {
-  AAAPrimaryTheme,
-  Button,
-  ButtonGroup
-};
+export { AAAPrimaryTheme, Button, ButtonGroup, SelectList, SelectListItemText };
