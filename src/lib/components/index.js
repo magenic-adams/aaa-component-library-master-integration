@@ -4,7 +4,7 @@ import Button from './Button/Button';
 import ButtonGroup from './ButtonGroup/ButtonGroup';
 import Input from './Input/Input';
 import Label from './Label/Label';
-import TextLink from './TextLink/TextLink';
+import Link from './Link/Link';
 
 export {
   AAAPrimaryTheme,
@@ -12,5 +12,5 @@ export {
   ButtonGroup,
   Input,
   Label,
-  TextLink
+  Link
 };

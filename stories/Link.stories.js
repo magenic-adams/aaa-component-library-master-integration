@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs } from '@storybook/addon-knobs';
 
 // Components
-import {AAAPrimaryTheme, TextLink } from '../src/lib/components';
+import {AAAPrimaryTheme, Link as TextLink } from '../src/lib/components';
 
 // Internal
 import {ElementContainer} from '../src/lib/internal/ElementContainer/ElementContainer';

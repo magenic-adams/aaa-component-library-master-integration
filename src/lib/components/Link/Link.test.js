@@ -3,13 +3,12 @@
 /* eslint-disable func-names */
 /* eslint-disable no-undef */
 import React from 'react';
-import TextLink from './TextLink';
+import { Link as TextLink } from './Link';
 import { expect } from "chai";
 import { mount } from 'enzyme';
 
 describe.only("TextLink", function () {
-
-
+  
     function createLink(children) {
         return mount(<TextLink>{children}</TextLink>)
       }
@@ -17,7 +16,7 @@ describe.only("TextLink", function () {
   it('has rendered link text', function () {
     const createLinkComponent = createLink('Create a link');
 
-    expect(createLinkComponent.find("textLink").exists().equal.to(true));
+    expect(createLinkComponent.text()).to.equal('Create a link');
   });
 
 });

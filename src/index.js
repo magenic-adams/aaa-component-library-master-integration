@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render } from "react-dom";
-import { AAAPrimaryTheme, Button, Input, TextLink } from "./lib/components";
+import { AAAPrimaryTheme, Button, Input, Link as TextLink } from "./lib/components";
 
 const App = () => (
   <AAAPrimaryTheme>
