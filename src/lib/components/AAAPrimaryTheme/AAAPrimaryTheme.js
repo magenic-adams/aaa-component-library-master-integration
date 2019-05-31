@@ -1,13 +1,18 @@
 // https://next.material-ui.com/customization/themes
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const AAA_COLOR_DISABLED = '#cccbce';
-const AAA_COLOR_ERROR = '#da291c';
-const AAA_COLOR_MAIN_BLUE = '#4470bf';
-const AAA_COLOR_MAIN_DARK_BLUE = '#395fa4';
-const AAA_COLOR_SECONDARY_HOVER = 'rgba(68, 112, 191, 0.1)';
+// Colors
+import {
+  AAA_COLOR_DISABLED,
+  AAA_COLOR_ERROR,
+  AAA_COLOR_MAIN_BLUE,
+  AAA_COLOR_MAIN_DARK_BLUE,
+  AAA_COLOR_SECONDARY_HOVER,
+  AAA_COLOR_TRANSPARENT,
+} from '../../constants/colors';
 
 const theme = createMuiTheme({
   breakpoints: {
@@ -32,8 +37,10 @@ const theme = createMuiTheme({
     disabled: {
       main: AAA_COLOR_DISABLED,
     },
+    // These are use defined variables we can use
     colorVariables: {
       SECONDARY_HOVER: AAA_COLOR_SECONDARY_HOVER,
+      TRANSPARENT: AAA_COLOR_TRANSPARENT,
     },
   },
   typography: {
