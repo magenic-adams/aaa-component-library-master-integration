@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/styles';
 import MUIButton from '@material-ui/core/Button';
-import cx from 'clsx';
+import { withStyles } from '@material-ui/styles';
+// import cx from 'clsx';
 
 type propTypes = {
   // MUI Decorator
   classes: PropTypes.object,
   // Passed Props
-  className: PropTypes.string,
+  // className: PropTypes.string,
   children: PropTypes.string | PropTypes.node,
   color?: 'primary' | 'secondary',
   disabled: PropTypes.bool,
@@ -25,7 +25,10 @@ const styleClasses = theme => {
       height: '48px',
       boxShadow: 'none',
       color: theme.palette.common.white,
-      padding: '0 16px',
+      paddingTop: '0',
+      paddingRight: '16px',
+      paddingBottom: '0',
+      paddingLeft: '16px',
       textTransform: 'none',
       width: '100%',
       [theme.breakpoints.up('md')]: {
@@ -39,24 +42,25 @@ const styleClasses = theme => {
       },
     },
     containedPrimary: {
-      background: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary.main,
       '&:active,&:hover': {
-        background: theme.palette.primary.dark,
+        backgroundColor: theme.palette.primary.dark,
       },
       '&:disabled': {
-        background: theme.palette.disabled.main,
+        backgroundColor: theme.palette.disabled.main,
         color: theme.palette.common.white,
       }
     },
     containedSecondary: {
       color: theme.palette.primary.main,
-      border: `1px solid ${theme.palette.primary.main}`,
-      background: theme.palette.colorVariables.TRANSPARENT,
+      border: '1px solid',
+      borderColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.colorVariables.TRANSPARENT,
       '&:active,&:hover': {
-        background: theme.palette.colorVariables.SECONDARY_HOVER,
+        backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER,
       },
       '&:disabled': {
-        background: theme.palette.colorVariables.TRANSPARENT,
+        backgroundColor: theme.palette.colorVariables.TRANSPARENT,
         borderColor: theme.palette.disabled.main,
       }
     }
@@ -66,7 +70,6 @@ const styleClasses = theme => {
 
 function Button({
   children,
-  className,
   classes,
   disabled,
   id,
@@ -75,11 +78,13 @@ function Button({
   forwardedRef,
   onClick
 }:propTypes){
+  // eslint-disable-next-line
+  console.log(arguments, 'arguments');
   return (
     <MUIButton
-      className={cx('Button', className)}
       classes={classes}
       disabled={disabled}
+      disableRipple
       data-quid={id}
       color={color}
       variant="contained"
@@ -98,4 +103,4 @@ Button.defaultProps = {
   forwardedRef: React.createRef(),
 }
 
-export default withStyles(styleClasses, {withTheme: true})(Button);
+export default withStyles(styleClasses, {index: 0, withTheme: true})(Button);

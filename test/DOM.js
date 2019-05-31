@@ -9,13 +9,13 @@ export function getDOMNodeComputedStyle(domNode, cssRule){
     let strCssRule = cssRule;
     let strValue = "";
       if (document.defaultView && document.defaultView.getComputedStyle) {
-        // Comment out line below to see all computed styles on a current DOMNode element
-        // console.log(document.defaultView.getComputedStyle(domNode, "", '--> all computed styles');
-          strValue = document.defaultView.getComputedStyle(domNode, "").getPropertyValue(cssRule);
+        // Un-Comment line below to see all computed styles on a current DOMNode element
+        // console.log(document.defaultView.getComputedStyle(domNode, ""), '--> all computed styles');
+        strValue = document.defaultView.getComputedStyle(domNode, "").getPropertyValue(cssRule);
       } else if (domNode.currentStyle) { // Checks inlie styles
           strCssRule = strCssRule.replace(/-\(\w)/g, (strMatch, p1) => {
               return p1.toUpperCase();
-            });
+          });
           strValue = domNode.currentStyle[strCssRule];
       }
       return strValue;
