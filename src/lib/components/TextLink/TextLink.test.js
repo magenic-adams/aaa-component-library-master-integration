@@ -7,19 +7,17 @@ import TextLink from './TextLink';
 import { expect } from "chai";
 import { mount } from 'enzyme';
 
+describe.only("TextLink", function () {
 
 
-function createLink(children) {
-  return mount(<TextLink>{children}</TextLink>)
-}
+    function createLink(children) {
+        return mount(<TextLink>{children}</TextLink>)
+      }
 
-describe("TextLink", function () {
-  const createLinkComponent = createLink('Here lies a link');
   it('has rendered link text', function () {
-    expect(createLinkComponent.text()).to.equal('Here lies a link');
+    const createLinkComponent = createLink('Create a link');
+
+    expect(createLinkComponent.find("textLink").exists().equal.to(true));
   });
 
-//   it('hould invoke onClick event', function () {
-//     createLinkComponent.simulate('click',)
-//   });
 });
