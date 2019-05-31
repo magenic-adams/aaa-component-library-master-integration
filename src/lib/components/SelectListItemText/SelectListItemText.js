@@ -20,7 +20,6 @@ type propTypes = {
 
 const styleClasses = theme => ({
   root: {
-    width: '338px',
     height: '48px'
   },
   gutters: {
@@ -37,25 +36,33 @@ const styleClasses = theme => ({
       background: theme.palette.colorVariables.SECONDARY_HOVER
     }
   },
+  primary: {
+    fontSize: '18px',
+    letterSpacing: 'normal',
+    lineHeight: 1.5,
+    [theme.breakpoints.between('xs', 'sm')]: {
+      fontSize: '16px'
+    }
+  },
   disabled: {
     background: theme.palette.disabled.main,
     color: theme.palette.common.white
   }
 });
 
-function SelectListItemText({ item, classes, className }: propTypes) {
-  const { display, isSelected, onSelect } = item;
+function SelectListItemText({ item, classes, className, onSelect }: propTypes) {
+  const { display, isSelected } = item;
 
   return (
     <ListItem
+      button
       className={cx('ListItem', className)}
       classes={classes}
-      button
       divider
       selected={isSelected}
-      onClick={onSelect}
+      onClick={() => onSelect(item)}
     >
-      <ListItemText primary={display} />
+      <ListItemText classes={{ primary: classes.primary }} primary={display} />
     </ListItem>
   );
 }
