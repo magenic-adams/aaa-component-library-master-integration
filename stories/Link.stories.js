@@ -36,7 +36,6 @@ stories
       <ElementContainer>
         <div>
           <TextLink className="primary" onClick={action('clicked')}>Primary</TextLink>
-          <TextLink className="primary" disabled onClick={action('clicked')}>Primary disabled</TextLink>
         </div>
       </ElementContainer>
     </div>
@@ -57,7 +56,6 @@ stories
     <ElementContainer>
       <div>
         <TextLink className="secondary" onClick={action('clicked')}>Secondary</TextLink>
-        <TextLink className="secondary" disabled onClick={action('clicked')}>Secondary disabled</TextLink>
       </div>
     </ElementContainer>
 
