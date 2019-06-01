@@ -42,12 +42,12 @@ const styleClasses = theme => {
       },
     },
     containedPrimary: {
-      backgroundColor: theme.palette.primary.main,
+      background: theme.palette.primary.main,
       '&:active,&:hover': {
-        backgroundColor: theme.palette.primary.dark,
+        background: theme.palette.primary.dark,
       },
       '&:disabled': {
-        backgroundColor: theme.palette.disabled.main,
+        background: theme.palette.disabled.main,
         color: theme.palette.common.white,
       }
     },
@@ -55,12 +55,12 @@ const styleClasses = theme => {
       color: theme.palette.primary.main,
       border: '1px solid',
       borderColor: theme.palette.primary.main,
-      backgroundColor: theme.palette.colorVariables.TRANSPARENT,
+      background: theme.palette.colorVariables.TRANSPARENT,
       '&:active,&:hover': {
-        backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER,
+        background: theme.palette.colorVariables.SECONDARY_HOVER,
       },
       '&:disabled': {
-        backgroundColor: theme.palette.colorVariables.TRANSPARENT,
+        background: theme.palette.colorVariables.TRANSPARENT,
         borderColor: theme.palette.disabled.main,
       }
     }
@@ -78,8 +78,6 @@ function Button({
   forwardedRef,
   onClick
 }:propTypes){
-  // eslint-disable-next-line
-  console.log(arguments, 'arguments');
   return (
     <MUIButton
       classes={classes}

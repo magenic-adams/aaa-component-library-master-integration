@@ -16,7 +16,7 @@ import {
   AAA_COLOR_DISABLED,
   AAA_COLOR_MAIN_BLUE,
   // AAA_COLOR_MAIN_DARK_BLUE,
-  // AAA_COLOR_TRANSPARENT,
+  AAA_COLOR_TRANSPARENT,
 } from '../../constants/colors'
 
 // Test Utilities
@@ -80,9 +80,10 @@ describe("Button", () => {
   });
   
   describe("event handlers", () => {
-    it('will call it\'s click event handler, propogating a React event', () => {
+    it.only('will call it\'s click event handler, propogating a React event', () => {
       ButtonWrapper.simulate('click');
       expect(spy.calledOnce).to.equal(true);
+      expect(spy.getCall(0).args[0]).to.have.property('target');
     });
   });
 });
@@ -98,16 +99,16 @@ describe("Button States", () => {
       expect(backgroundStyle).to.equal('rgb(255, 255, 255)');
     });
 
-    // it('has a background color of AAA_COLOR_MAIN_BLUE', () => {
-    //   const backgroundStyle = getDOMNodeComputedStyle(PrimaryButtonWrapper.getDOMNode(), 'background-color');
-    //   expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_BLUE);
-    // });
+    it('has a background color of AAA_COLOR_MAIN_BLUE', () => {
+      const backgroundStyle = getDOMNodeComputedStyle(PrimaryButtonWrapper.getDOMNode(), 'background');
+      expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_BLUE);
+    });
 
-    // it('has a background color of AAA_COLOR_DISABLED when disabled', () => {
-    //   const PrimaryDisabledButtonWrapper = createButtonWithTheme('Here lies a disabled button', getFakeProps({disabled: true}));
-    //   const backgroundStyle = getDOMNodeComputedStyle(PrimaryDisabledButtonWrapper.getDOMNode(), 'background-color');
-    //   expect(backgroundStyle).to.equal(AAA_COLOR_DISABLED);
-    // });
+    it('has a background color of AAA_COLOR_DISABLED when disabled', () => {
+      const PrimaryDisabledButtonWrapper = createButtonWithTheme('Here lies a disabled button', getFakeProps({disabled: true}));
+      const backgroundStyle = getDOMNodeComputedStyle(PrimaryDisabledButtonWrapper.getDOMNode(), 'background');
+      expect(backgroundStyle).to.equal(AAA_COLOR_DISABLED);
+    });
     
   });
 
@@ -115,15 +116,10 @@ describe("Button States", () => {
     const props = getFakeProps({color: 'secondary'});
     const ButtonWrapper = createButtonWithTheme('Here lies a secondary button', props);
 
-    // it('has a background color of AAA_COLOR_TRANSPARENT', () => {
-    //   const backgroundStyle = getDOMNodeComputedStyle(ButtonWrapper.getDOMNode(), 'background-color');
-    //   expect(backgroundStyle).to.equal(AAA_COLOR_TRANSPARENT);
-    // });
-
-    // it('has text color of AAA_COLOR_MAIN_BLUE', () => {
-    //   const colorStyle = getDOMNodeComputedStyle(ButtonWrapper.getDOMNode(), 'color');
-    //   expect(colorStyle).to.equal(AAA_COLOR_MAIN_BLUE);
-    // });
+    it('has a background color of AAA_COLOR_TRANSPARENT', () => {
+      const backgroundStyle = getDOMNodeComputedStyle(ButtonWrapper.getDOMNode(), 'background');
+      expect(backgroundStyle).to.equal(AAA_COLOR_TRANSPARENT);
+    });
 
     it('has a border color of AAA_COLOR_MAIN_BLUE', () => {
       const borderColorStyle = getDOMNodeComputedStyle(ButtonWrapper.getDOMNode(), 'border-top-color');
