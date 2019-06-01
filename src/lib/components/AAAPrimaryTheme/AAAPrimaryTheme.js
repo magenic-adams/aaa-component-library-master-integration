@@ -8,8 +8,12 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import {
   AAA_COLOR_DISABLED,
   AAA_COLOR_ERROR,
+  AAA_COLOR_MAIN_BLACK,
   AAA_COLOR_MAIN_BLUE,
   AAA_COLOR_MAIN_DARK_BLUE,
+  AAA_COLOR_MAIN_DARKER_BLUE,
+  AAA_COLOR_MAIN_GRAY,
+  AAA_COLOR_MAIN_WHITE,
   AAA_COLOR_SECONDARY_HOVER,
   AAA_COLOR_TRANSPARENT,
 } from '../../constants/colors';
@@ -41,6 +45,10 @@ const theme = createMuiTheme({
     colorVariables: {
       SECONDARY_HOVER: AAA_COLOR_SECONDARY_HOVER,
       TRANSPARENT: AAA_COLOR_TRANSPARENT,
+      BLACK: AAA_COLOR_MAIN_BLACK,
+      DARKER_BLUE: AAA_COLOR_MAIN_DARKER_BLUE,
+      GRAY: AAA_COLOR_MAIN_GRAY,
+      WHITE: AAA_COLOR_MAIN_WHITE
     },
   },
   typography: {
