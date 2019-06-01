@@ -5,7 +5,6 @@
   it,
   jest,
 */
-/* eslint-disable no-param-reassign */
 import React from 'react';
 import { expect } from "chai";
 import { mount } from 'enzyme';
@@ -51,7 +50,7 @@ describe("Button", () => {
   
   beforeEach(() => {
     spy = sinon.spy();
-    props = getFakeProps({onClick: spy});
+    props = getFakeProps({onClick: spy, forwardedRef: React.createRef()});
     ButtonWrapper = createButtonWithTheme('Here lies a button', props);
     ButtonNode = ButtonWrapper.getDOMNode();
   });
@@ -77,10 +76,15 @@ describe("Button", () => {
     it('has rendered button text', () => {
       expect(ButtonWrapper.text()).to.equal('Here lies a button');
     });
+
+    it ('forwards a reference to the underlying button', () => {
+      const ReactButton = ButtonWrapper.find(Button);
+      expect(ReactButton.props().forwardedRef.current).to.equal(ButtonWrapper.getDOMNode());
+    })
   });
   
   describe("event handlers", () => {
-    it.only('will call it\'s click event handler, propogating a React event', () => {
+    it('will call it\'s click event handler, propogating a React event', () => {
       ButtonWrapper.simulate('click');
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.have.property('target');
