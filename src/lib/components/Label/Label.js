@@ -35,7 +35,7 @@ const styleClasses = theme => ({
   }
 })
 
-class Label extends Component<propTypes> {
+class Label extends Component {
   render() {
     const {
       classes,
@@ -56,5 +56,18 @@ class Label extends Component<propTypes> {
     );
   }
 }
+
+Label.defaultProps = {
+  className: ""
+}
+
+Label.propTypes = {
+  // MUI Decorator
+  classes: PropTypes.object.isRequired,
+  // Passed Props
+  className: PropTypes.string,
+  children: PropTypes.string.isRequired,
+  htmlFor: PropTypes.string.isRequired,
+};
 
 export default withStyles(styleClasses, { withTheme: true })(Label);
