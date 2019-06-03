@@ -5,20 +5,22 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 import List from '@material-ui/core/List';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import { SelectListItemText } from '..';
 
 type propTypes = {
   // Decorator Props
   classes: PropTypes.object,
   // Passed Props
+  // name?: PropTypes.string,
   items: {
     id: PropTypes.string | PropTypes.number,
     value: PropTypes.string | PropTypes.number,
-    display: PropTypes.string | PropTypes.number | PropTypes.node.primary,
+    display: PropTypes.string | PropTypes.number | PropTypes.node,
     isSelected?: PropTypes.bool,
     disabled?: PropTypes.bool
   },
-  type?: PropTypes.string,
+  type: PropTypes.string,
   onSelect: PropTypes.func
 };
 
@@ -34,6 +36,11 @@ const styleClasses = theme => ({
       border: `1px solid ${theme.palette.primary.main}`,
       boxShadow: 'none',
       borderRadius: '0px'
+    }
+  },
+  radioGroup: {
+    '& label:last-child': {
+      marginBottom: '24px'
     }
   },
   fullOverlay: {
@@ -70,6 +77,15 @@ function SelectList({ classes, items, type, onSelect }: propTypes) {
                     ))}
                   </List>
                 );
+              case 'radioGroup':
+                return (
+                  <RadioGroup
+                    name="radioGroupTest"
+                    className={cx('RadioGroup', classes.radioGroup)}
+                  >
+                    {items.map(item => item.display)}
+                  </RadioGroup>
+                );
               default:
                 return null;
             }
@@ -80,7 +96,7 @@ function SelectList({ classes, items, type, onSelect }: propTypes) {
 }
 
 SelectList.defaultProps = {
-  type: 'primary'
+  // name: ''
 };
 
 export default withStyles(styleClasses, { withTheme: true })(SelectList);

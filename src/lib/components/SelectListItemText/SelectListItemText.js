@@ -50,7 +50,7 @@ const styleClasses = theme => ({
   }
 });
 
-function SelectListItemText({ item, classes, className, onSelect }: propTypes) {
+function SelectListItemText({ item, className, classes , onSelect }: propTypes) {
   const { display, isSelected } = item;
 
   return (
