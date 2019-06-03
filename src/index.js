@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from "react-dom";
-import { AAAPrimaryTheme, Button, Input } from "./lib/components";
+import { AAAPrimaryTheme, Button, TextInput } from "./lib/components";
 
 const App = () => (
   <AAAPrimaryTheme>
@@ -9,11 +9,11 @@ const App = () => (
       Here lies a button
     </Button>
     <br></br><br></br>
-    <Input disabled id="disabledId" name="disabledName" type="text" onChange={() => { }} helperText="Disabled" labelName="Disabled Label" value="Disabled" onClear={()=> {}} />
+    <TextInput disabled id="disabledId" name="disabledName" type="text" onChange={() => { }} helperText="Disabled" labelName="Disabled Label" value="Disabled" onClear={()=> {}} />
     <br></br>
-    <Input id="enabledId" name="enabledName" labelName="Enabled Label" type="text" onChange={() => { }} value="Enabled"  onClear={()=> {}}/>
+    <TextInput id="enabledId" name="enabledName" labelName="Enabled Label" type="text" onChange={() => { }} value="Enabled"  onClear={()=> {}}/>
     <br></br><br></br>
-    <Input error id="errorId" name="errorName" type="text" onChange={() => { }} helperText="Error" labelName="Error Label" errorText="Error text" value="Error" />
+    <TextInput error id="errorId" name="errorName" type="text" onChange={() => { }} helperText="Error" labelName="Error Label" errorText="Error text" value="Error" />
   </AAAPrimaryTheme>
 );
 

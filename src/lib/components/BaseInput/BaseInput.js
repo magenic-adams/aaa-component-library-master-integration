@@ -9,12 +9,13 @@ import Clear from '@material-ui/icons/Clear';
 import Label from "../Label/Label";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import ReportProblem from '@material-ui/icons/ReportProblem';
 
 const styleClasses = theme => ({
   root: {
     marginTop: '8px',
-    width: '343px',
     height: '48px',
+    width: '100%',
     borderRadius: '4px',
     background: theme.palette.colorVariables.WHITE,
     border: `solid 1px ${theme.palette.colorVariables.GRAY}`,
@@ -22,9 +23,9 @@ const styleClasses = theme => ({
       backgroundColor: theme.palette.primary.main,
       border: `solid 1px ${theme.palette.colorVariables.DARKER_BLUE}`,
     },
-    "&.Mui-focused": {
-      border: `solid 2px ${theme.palette.colorVariables.DARKER_BLUE}`
-    },
+  },
+  focused: {
+    border: `solid 2px ${theme.palette.colorVariables.DARKER_BLUE}`,
   },
   disabled: {
     background: theme.palette.disabled.main,
@@ -42,6 +43,12 @@ const styleClasses = theme => ({
   },
   input: {
     padding: '10px 12px',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '16px'
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '18px'
+    }
   },
   iconButton: {
     padding: '10px',
@@ -50,6 +57,41 @@ const styleClasses = theme => ({
   iconStyle: {
     fontSize: '20px',
     color: theme.palette.primary.main
+  },
+  formControlStyle: {
+    [theme.breakpoints.up('sm')]: {
+      width: '100%',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '534px',
+    },
+  },
+  helperTextStyle: {
+    color: `${theme.palette.colorVariables.GRAY} !important`,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '14px'
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '16px'
+    }
+  },
+  errorTextStyle: {
+    marginTop: '8px',
+    '& p': {
+      display: 'inline',
+      [theme.breakpoints.up('sm')]: {
+        fontSize: '14px'
+      },
+      [theme.breakpoints.up('md')]: {
+        fontSize: '16px'
+      }
+    },
+    '& svg': {
+      display: 'inline',
+      float: 'right',
+      fontSize: '20px',
+      marginRight: '8px'
+    }
   }
 });
 
@@ -58,32 +100,33 @@ class Input extends Component {
     const {
       classes,
       className,
+      formControlClass,
       disabled,
       error,
       errorText,
       helperText,
       id,
+      inputComponent,
       labelName,
       name,
       placeholder,
-      type,
       value,
       onBlur,
       onChange,
-      onClear,
+      onClear
     } = this.props;
     return (
       <Fragment>
-        <FormControl error={error} disabled={disabled}>
+        <FormControl className={cx(classes.formControlStyle, formControlClass)} error={error} disabled={disabled} >
           {labelName && <Label
             htmlFor={id}
           >{labelName}</Label>}
-
-          {/* Insert logic here text/numeric */}
-          {type === 'text' && <InputMUI
+          <InputMUI
+            autoComplete="off"
             classes={{
               root: classes.root,
               disabled: classes.disabled,
+              focused: classes.focused,
               error: classes.error,
               input: classes.input
             }}
@@ -97,28 +140,30 @@ class Input extends Component {
                   onClick={onClear}
                   disabled={disabled}
                   color="inherit"
-                  classes={{
-                    root: classes.iconButton,
-                  }}
+                  className={classes.iconButton}
                 >
                   <Clear
-                    classes={{
-                      root: classes.iconStyle,
-                    }} />
+                    className={classes.iconStyle}
+                  />
                 </IconButton>
               </InputAdornment>
             }
             id={id}
+            inputComponent={inputComponent}
             name={name}
             placeholder={placeholder}
-            type='text'
+            type="text"
             value={value}
             onChange={onChange}
             onBlur={onBlur}
-          />}
-          {(errorText && error) && <FormHelperText id={id + "-component-error-text"}>{errorText}</FormHelperText>}
+          />
+          {(errorText && error) &&
+            <div className={classes.errorTextStyle}>
+              <FormHelperText id={id + "-component-error-text"}>{errorText}</FormHelperText>
+              <ReportProblem color="error" />
+            </div>}
+          {helperText && <FormHelperText id={id + "-component-helper-text"} className={classes.helperTextStyle}>{helperText}</FormHelperText>}
         </FormControl>
-        {helperText && <FormHelperText id={id + "-component-helper-text"}>{helperText}</FormHelperText>}
       </Fragment>
     );
   }
@@ -131,10 +176,10 @@ Input.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
+  inputComponent: PropTypes.func,
   labelName: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,
-  type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,

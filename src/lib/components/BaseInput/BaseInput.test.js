@@ -1,11 +1,11 @@
 import React from 'react';
-import Input from './Input';
+import BaseInput from './BaseInput';
 import { expect } from "chai";
 import { mount } from 'enzyme';
 import { AAAPrimaryTheme } from '..';
 
 function createInput(props) {
-  return mount(<AAAPrimaryTheme><Input {...props} /></AAAPrimaryTheme>)
+  return mount(<AAAPrimaryTheme><BaseInput {...props} /></AAAPrimaryTheme>)
 }
 
 function getProps(override) {
@@ -24,7 +24,7 @@ function getProps(override) {
 describe("Input", function () {
   it('has rendered an input with value', function () {
     const wrapper = createInput(getProps());
-
+    console.log(wrapper.find("input").get(0).props.value)
     expect(wrapper.find("label").text()).to.equal("Enabled Label");
     expect(wrapper.find("input").get(0).props.value).to.equal("Enabled");
 
