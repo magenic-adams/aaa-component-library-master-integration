@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import BaseInput from '../BaseInput/BaseInput';
 import MaskedInput from "react-text-mask";
+import BaseInput from '../BaseInput/BaseInput';
 
 
 function TextMaskCustom(mask) {
@@ -21,32 +21,22 @@ function TextMaskCustom(mask) {
   }
 }
 
-class NumericInput extends Component {
-  render() {
-    const { mask } = this.props;
-    return (
-      <Fragment>
-        <BaseInput
-          inputComponent={TextMaskCustom(mask)}
-          {...this.props}
-        />
-      </Fragment>
-    );
-  }
+type protoTypes = {
+  mask?: PropTypes.array
 }
 
-NumericInput.propTypes = {
-  // Passed Props
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  id: PropTypes.string.isRequired,
-  labelName: PropTypes.string,
-  name: PropTypes.string,
-  placeholder: PropTypes.string,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
-  onClear: PropTypes.func
-};
+function NumericInput(props): protoTypes {
+    const { mask } = props;
+    return (
+        <BaseInput
+          inputComponent={TextMaskCustom(mask)}
+          {...props}
+        />
+    );
+  }
+
+NumericInput.defaultProps = {
+  mask: []
+}
 
 export default NumericInput;

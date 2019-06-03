@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
@@ -6,10 +6,10 @@ import InputMUI from '@material-ui/core/Input';
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Clear from '@material-ui/icons/Clear';
-import Label from "../Label/Label";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import ReportProblem from '@material-ui/icons/ReportProblem';
+import Label from "../Label/Label";
 
 const styleClasses = theme => ({
   root: {
@@ -95,95 +95,92 @@ const styleClasses = theme => ({
   }
 });
 
-class Input extends Component {
-  render() {
-    const {
-      classes,
-      className,
-      formControlClass,
-      disabled,
-      error,
-      errorText,
-      helperText,
-      id,
-      inputComponent,
-      labelName,
-      name,
-      placeholder,
-      value,
-      onBlur,
-      onChange,
-      onClear
-    } = this.props;
-    return (
-      <Fragment>
-        <FormControl className={cx(classes.formControlStyle, formControlClass)} error={error} disabled={disabled} >
-          {labelName && <Label
-            htmlFor={id}
-          >{labelName}</Label>}
-          <InputMUI
-            autoComplete="off"
-            classes={{
-              root: classes.root,
-              disabled: classes.disabled,
-              focused: classes.focused,
-              error: classes.error,
-              input: classes.input
-            }}
-            className={cx("Input", className)}
-            disableUnderline
-            endAdornment={
-              (onClear && value) && <InputAdornment position="end">
-                <IconButton
-                  disableRipple
-                  aria-label="Clear text"
-                  onClick={onClear}
-                  disabled={disabled}
-                  color="inherit"
-                  className={classes.iconButton}
-                >
-                  <Clear
-                    className={classes.iconStyle}
-                  />
-                </IconButton>
-              </InputAdornment>
-            }
-            id={id}
-            inputComponent={inputComponent}
-            name={name}
-            placeholder={placeholder}
-            type="text"
-            value={value}
-            onChange={onChange}
-            onBlur={onBlur}
-          />
-          {(errorText && error) &&
-            <div className={classes.errorTextStyle}>
-              <FormHelperText id={id + "-component-error-text"}>{errorText}</FormHelperText>
-              <ReportProblem color="error" />
-            </div>}
-          {helperText && <FormHelperText id={id + "-component-helper-text"} className={classes.helperTextStyle}>{helperText}</FormHelperText>}
-        </FormControl>
-      </Fragment>
-    );
-  }
-}
-
-Input.propTypes = {
+type propTypes = {
   // MUI Decorator
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object,
   // Passed Props
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
+  className?: PropTypes.string,
+  disabled?: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  inputComponent: PropTypes.func,
-  labelName: PropTypes.string,
-  name: PropTypes.string,
-  placeholder: PropTypes.string,
+  inputComponent?: PropTypes.func,
+  labelName?: PropTypes.string,
+  name?: PropTypes.string,
+  placeholder?: PropTypes.string,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
-  onClear: PropTypes.func
+  onBlur?: PropTypes.func,
+  onClear?: PropTypes.func
 };
+
+
+function Input({
+  classes,
+  className,
+  formControlClass,
+  disabled,
+  error,
+  errorText,
+  helperText,
+  id,
+  inputComponent,
+  labelName,
+  name,
+  placeholder,
+  value,
+  onBlur,
+  onChange,
+  onClear
+}): propTypes {
+  return (
+    <FormControl className={cx(classes.formControlStyle, formControlClass)} error={error} disabled={disabled} >
+      {labelName && <Label
+        htmlFor={id}
+      >{labelName}</Label>}
+      <InputMUI
+        autoComplete="off"
+        classes={{
+          root: classes.root,
+          disabled: classes.disabled,
+          focused: classes.focused,
+          error: classes.error,
+          input: classes.input
+        }}
+        className={cx("Input", className)}
+        disableUnderline
+        endAdornment={
+          (onClear && value) && <InputAdornment position="end">
+            <IconButton
+              disableRipple
+              aria-label="Clear text"
+              onClick={onClear}
+              disabled={disabled}
+              color="inherit"
+              className={classes.iconButton}
+            >
+              <Clear
+                className={classes.iconStyle}
+              />
+            </IconButton>
+          </InputAdornment>
+        }
+        id={id}
+        inputComponent={inputComponent}
+        name={name}
+        placeholder={placeholder}
+        type="text"
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+      />
+      {(errorText && error) &&
+        <div className={classes.errorTextStyle}>
+          <FormHelperText id={`${id}-component-error-text`}>{errorText}</FormHelperText>
+          <ReportProblem color="error" />
+        </div>}
+      {helperText && <FormHelperText id={`${id}-component-helper-text`} className={classes.helperTextStyle}>{helperText}</FormHelperText>}
+    </FormControl>
+  );
+}
+
 
 export default withStyles(styleClasses, { withTheme: true })(Input);
