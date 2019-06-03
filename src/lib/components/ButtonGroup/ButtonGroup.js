@@ -1,3 +1,5 @@
+/* eslint-disable react/require-default-props */
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
@@ -25,7 +27,8 @@ const styleClasses = theme => ({
 })
 
 
-function ButtonGroup({children, classes = {}, className = ''}:propTypes){
+// eslint-disable-next-line no-unused-vars
+function ButtonGroup({children, classes = {}, className = '', theme}:propTypes){
   return (
     <div className={cx('ButtonGroup', classes.root, className)}>
       {children}
