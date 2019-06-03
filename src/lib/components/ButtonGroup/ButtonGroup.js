@@ -25,12 +25,16 @@ const styleClasses = theme => ({
 })
 
 
-function ButtonGroup({children, classes = {}, className = '', theme}:propTypes){
+function ButtonGroup({children, classes = {}, className = ''}:propTypes){
   return (
     <div className={cx('ButtonGroup', classes.root, className)}>
       {children}
     </div>
   );
+}
+
+ButtonGroup.defaultProps = {
+  className: ''
 }
 
 export default withStyles(styleClasses, {withTheme: true})(ButtonGroup);
