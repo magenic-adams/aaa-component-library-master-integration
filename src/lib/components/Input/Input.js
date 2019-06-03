@@ -6,12 +6,13 @@ import InputMUI from '@material-ui/core/Input';
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Clear from '@material-ui/icons/Clear';
-import Label from "../Label/Label";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import Label from "../Label/Label";
 
 const styleClasses = theme => ({
   root: {
+    display: 'block',
     marginTop: '8px',
     width: '343px',
     height: '48px',
@@ -19,7 +20,6 @@ const styleClasses = theme => ({
     background: theme.palette.colorVariables.WHITE,
     border: `solid 1px ${theme.palette.colorVariables.GRAY}`,
     '&:hover': {
-      backgroundColor: theme.palette.primary.main,
       border: `solid 1px ${theme.palette.colorVariables.DARKER_BLUE}`,
     },
     "&.Mui-focused": {
@@ -72,7 +72,9 @@ class Input extends Component {
       onChange,
       onClear,
     } = this.props;
+    console.log('this.props of Input.js', this.props);
     return (
+
       <Fragment>
         <FormControl error={error} disabled={disabled}>
           {labelName && <Label
@@ -89,6 +91,13 @@ class Input extends Component {
             }}
             className={cx("Input", className)}
             disableUnderline
+            id={id}
+            name={name}
+            placeholder={placeholder}
+            type='text'
+            value={value}
+            onChange={onChange}
+            onBlur={onBlur}
             endAdornment={
               (onClear && value) && <InputAdornment position="end">
                 <IconButton
@@ -108,17 +117,17 @@ class Input extends Component {
                 </IconButton>
               </InputAdornment>
             }
-            id={id}
-            name={name}
-            placeholder={placeholder}
-            type='text'
-            value={value}
-            onChange={onChange}
-            onBlur={onBlur}
           />}
-          {(errorText && error) && <FormHelperText id={id + "-component-error-text"}>{errorText}</FormHelperText>}
+
+          {errorText && error && (
+            <FormHelperText
+              id={`${id  }-component-error-text`}
+            >
+              {errorText}
+            </FormHelperText>
+          )}
         </FormControl>
-        {helperText && <FormHelperText id={id + "-component-helper-text"}>{helperText}</FormHelperText>}
+        {helperText && <FormHelperText id={`${id  }-component-helper-text`}>{helperText}</FormHelperText>}
       </Fragment>
     );
   }
