@@ -1,8 +1,7 @@
 import React from 'react';
 import { ToggleButtonGroup } from '../../components';
 
-// eslint-disable-next-line import/prefer-default-export
-export function ToggleButtonGroupContainer({
+export default function ToggleButtonGroupContainer({
   options,
   value,
   disabled,
@@ -18,7 +17,7 @@ export function ToggleButtonGroupContainer({
   return (
     <ToggleButtonGroup
       options={options}
-      value={option}
+      value={option && option.id}
       disabled={disabled}
       onSelect={selectedOption => handleOptions(selectedOption)}
     />

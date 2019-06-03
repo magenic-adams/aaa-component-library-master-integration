@@ -1,6 +1,10 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable func-names */
-/* eslint-disable no-undef */
+/* global
+  afterEach
+  describe,
+  beforeEach,
+  it,
+  jest,
+*/
 import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
@@ -24,7 +28,7 @@ function createToggleButtonWithTheme(props) {
   );
 }
 
-describe('ToggleButtonGroup', function() {
+describe('ToggleButtonGroup', () => {
   let props;
   let wrappedComponent;
   let buttonGroup;
@@ -39,19 +43,19 @@ describe('ToggleButtonGroup', function() {
     wrappedComponent.unmount();
   });
 
-  it('contains button elements when it has valid options', function() {
+  it('contains button elements when it has valid options', () => {
     expect(buttonGroup.props.children.length).to.be.above(0);
   });
 
-  it('do NOT render button elements when it has NO options', function() {
+  it('do NOT render button elements when it has NO options', () => {
     props = getFakeProps({ options: [] });
     wrappedComponent = createToggleButtonWithTheme(props);
     buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
 
-    expect(buttonGroup).to.be.undefined;
+    expect(buttonGroup).not.to.equal(undefined);
   });
 
-  it('do NOT render button elements when has Invalid options', function() {
+  it('do NOT render button elements when has Invalid options', () => {
     props = getFakeProps({
       options: [
         { idx: 1, display: 'Invalid' },
@@ -61,22 +65,22 @@ describe('ToggleButtonGroup', function() {
     wrappedComponent = createToggleButtonWithTheme(props);
     buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
 
-    expect(buttonGroup).to.be.undefined;
+    expect(buttonGroup).not.to.equal(undefined);
 
     props = getFakeProps({ options: null });
     wrappedComponent = createToggleButtonWithTheme(props);
     buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
 
-    expect(buttonGroup).to.be.undefined;
+    expect(buttonGroup).not.to.equal(undefined);
 
     props = getFakeProps({ options: undefined });
     wrappedComponent = createToggleButtonWithTheme(props);
     buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
 
-    expect(buttonGroup).to.be.undefined;
+    expect(buttonGroup).not.to.equal(undefined);
   });
 
-  it('renders text', function() {
+  it('renders text', () => {
     const button1Text = buttonGroup.props.children[0].props.children;
     const button2Text = buttonGroup.props.children[1].props.children;
 
@@ -84,7 +88,7 @@ describe('ToggleButtonGroup', function() {
     expect(button2Text).to.equal('No');
   });
 
-  it('should set button to active when has value', function() {
+  it('should set button to active when has value', () => {
     props = getFakeProps({ value: { id: 1, text: 'Yes' } });
     wrappedComponent = createToggleButtonWithTheme(props);
     buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
@@ -96,7 +100,7 @@ describe('ToggleButtonGroup', function() {
     expect(button2.props.className).to.not.contains('active');
   });
 
-  it('should set all elements to disabled', function() {
+  it('should set all elements to disabled', () => {
     props = getFakeProps({ disabled: true });
     wrappedComponent = createToggleButtonWithTheme(props);
     buttonGroup = wrappedComponent.find(ButtonGroup).get(0);

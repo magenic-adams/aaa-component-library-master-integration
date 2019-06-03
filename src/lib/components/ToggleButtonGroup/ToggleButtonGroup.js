@@ -1,21 +1,21 @@
-/* eslint-disable no-console */
-/* eslint-disable no-plusplus */
 import React from 'react';
 import PropTypes from 'prop-types';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { withStyles } from '@material-ui/styles';
+import invariant from 'tiny-invariant';
 import cx from 'clsx';
-// eslint-disable-next-line import/no-cycle
-import { Button, ButtonGroup } from '..';
+import Button from '../Button/Button';
+import ButtonGroup from '../ButtonGroup/ButtonGroup';
 
 type propTypes = {
   // Decorator Props
   classes: PropTypes.object,
   className?: PropTypes.string,
   // Passed Props
-  options: PropTypes.array,
+  options: [
+    { id: PropTypes.number | PropTypes.string, text: PropTypes.string }
+  ],
   onSelect: PropTypes.func,
-  value?: { id: PropTypes.string | PropTypes.number, text: PropTypes.string }
+  value?: PropTypes.string | PropTypes.number
 };
 
 const styleClasses = theme => ({
@@ -25,7 +25,7 @@ const styleClasses = theme => ({
     '& span': {
       fontSize: '18px'
     },
-    [theme.breakpoints.between('xs', 'sm')]: {
+    [theme.breakpoints.between('sm', 'md')]: {
       width: '50%',
       '& span': {
         fontSize: '16px',
@@ -41,20 +41,6 @@ const styleClasses = theme => ({
   right: {
     borderTopLeftRadius: '0px',
     borderBottomLeftRadius: '0px'
-  },
-  active: {
-    background: theme.palette.primary.dark,
-    color: theme.palette.common.white,
-    '&:hover': {
-      background: theme.palette.primary.dark
-    },
-    [theme.breakpoints.between('xs', 'sm')]: {
-      background: theme.palette.colorVariables.SECONDARY_HOVER,
-      color: theme.palette.primary.main,
-      '&:hover': {
-        background: theme.palette.colorVariables.SECONDARY_HOVER
-      }
-    }
   }
 });
 
@@ -63,33 +49,35 @@ function handleClick(value, callback) {
 }
 
 function isOptionsKeysPresent(options) {
-  const acceptedKeys = ['id', 'text'];
-  for (let i = 0; i < options.length; i++) {
-    const keys = Object.keys(options[i]);
-    for (let k = 0; k < keys.length; k++) {
-      if (!acceptedKeys.includes(keys[k])) return false;
-    }
-  }
-  return true;
+  return options.every(op => op.id && op.text);
 }
 
-function getClassName(value, id, classes) {
-  const { button, active } = classes;
-  const isIdMatched = value && value.id !== undefined && value.id === id;
-  return isIdMatched ? `${button} ${active}` : button;
+function getColor(value, id) {
+  return value === id ? 'primary' : 'secondary';
 }
 
 function isOptionsValid(options) {
+  console.log(process.env.NODE_ENV, 'ENV');
   if (!Array.isArray(options) || options.length < 2) {
-    console.error(
-      'Invalid length of options. You must passed maximum number of two options'
-    );
+    if (process.env.NODE_ENV !== 'production') {
+      invariant(
+        false,
+        'Invalid length of options. You must passed maximum number of two options'
+      );
+    } else {
+      invariant(false);
+    }
     return false;
   }
   if (!isOptionsKeysPresent(options)) {
-    console.error(
-      'Invalid object keys are present. Keys should contain id and text'
-    );
+    if (process.env.NODE_ENV !== 'production') {
+      invariant(
+        false,
+        'Invalid object keys are present. Keys should contain id and text'
+      );
+    } else {
+      invariant(false);
+    }
     return false;
   }
 
@@ -107,26 +95,18 @@ function ToggleButtonGroup({
   return (
     <div>
       {isOptionsValid(options) ? (
-        <ButtonGroup className={cx('ButtonGroup', classes.root, className)}>
+        <ButtonGroup className={cx(classes.root, className)}>
           <Button
-            className={cx(
-              'Button',
-              `${getClassName(value, options[0].id, classes)} ${classes.left}`,
-              className
-            )}
-            color="secondary"
+            className={cx(`${classes.button} ${classes.left}`, className)}
+            color={getColor(value, options[0].id)}
             disabled={disabled}
             onClick={() => handleClick(options[0], onSelect)}
           >
             {options[0].text}
           </Button>
           <Button
-            className={cx(
-              'Button',
-              `${getClassName(value, options[1].id, classes)} ${classes.right}`,
-              className
-            )}
-            color="secondary"
+            className={cx(`${classes.button} ${classes.right}`, className)}
+            color={getColor(value, options[1].id)}
             disabled={disabled}
             onClick={() => handleClick(options[1], onSelect)}
           >
@@ -140,7 +120,7 @@ function ToggleButtonGroup({
 
 ToggleButtonGroup.defaultProps = {
   className: '',
-  value: { id: '', text: '' }
+  value: ''
 };
 
 export default withStyles(styleClasses, { withTheme: true })(ToggleButtonGroup);
