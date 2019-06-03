@@ -2,6 +2,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+
 // Components
 import {
   AAAPrimaryTheme,
@@ -10,14 +11,19 @@ import {
   FormInput
 } from '../../src/lib/components';
 
-const stories = storiesOf('Molecules|Form', module);
+// Utilities
+import Validate from '../../src/lib/utilities/validate';
+
+const VALIDATIONS = {
+  firstName: {
+    required: 'First name is required',
+    'max_length[24]': 'Too long. Do you have a nickname?',
+    alpha_dash_dot_space: 'Name can only contain letters, dashes, periods, and spaces',
+  },
+};
 
 function handleValidate(values){
-  const errors = {};
-  if (!values.firstName) {
-    errors.firstName = 'Required';
-  }
-  return errors;
+  return Validate.validateForm(values, VALIDATIONS);
 }
 
 function onSubmit(vals){
@@ -25,6 +31,7 @@ function onSubmit(vals){
   action(vals);
 }
 
+const stories = storiesOf('Molecules|Form', module);
 stories
   .add('basic form', () => {
     return (
