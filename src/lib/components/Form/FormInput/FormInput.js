@@ -9,9 +9,8 @@ type propTypes = {
   name: PropTypes.string,
 };
 
-class FormInput extends PureComponent {
+class FormInput extends PureComponent<propTypes> {
   render(){
-    console.log('this.props', this.props);
     const { name } = this.props;
     return (
       <Field

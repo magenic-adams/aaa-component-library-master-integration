@@ -1,8 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { text, withKnobs } from '@storybook/addon-knobs';
-
 // Components
 import {
   AAAPrimaryTheme,
@@ -21,8 +20,9 @@ function handleValidate(values){
   return errors;
 }
 
-function handleSubmit(vals){
+function onSubmit(vals){
   console.log('vals', vals);
+  action(vals);
 }
 
 stories
@@ -32,14 +32,14 @@ stories
         <div>
           <Form
             validate={handleValidate}
-            onSubmit={handleSubmit}
-            render={({ handleSubmit, reset, submitting, pristine, values }) => (
+            onSubmit={onSubmit}
+            render={({ handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <FormInput 
                   name="firstName"
                   type="text"
                 />
-                <Button>Submit</Button>
+                <Button onClick={handleSubmit}>Submit</Button>
               </form>
             )}
           />

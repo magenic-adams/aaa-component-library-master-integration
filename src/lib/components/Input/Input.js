@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, {Fragment } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
@@ -53,52 +53,69 @@ const styleClasses = theme => ({
   }
 });
 
-class Input extends Component {
-  render() {
-    const {
-      classes,
-      className,
-      disabled,
-      error,
-      helperText,
-      id,
-      labelName,
-      name,
-      placeholder,
-      type,
-      value,
-      onBlur,
-      onChange,
-      onClear,
-    } = this.props;
-    console.log('this.props of Input.js', this.props);
-    return (
+type propTypes = {
+  // MUI Decorator
+  classes: PropTypes.object.isRequired,
+  // Passed Props
+  className?: PropTypes.string,
+  disabled?: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  labelName?: PropTypes.string,
+  name: PropTypes.string,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.string,
+  onChange: () => {},
+  onBlur: () => {},
+  onClear: () => {}
+};
 
-      <Fragment>
-        <FormControl error={error} disabled={disabled}>
-          {labelName && <Label
-            htmlFor={id}
-          >{labelName}</Label>}
+function Input({
+    classes,
+    className,
+    disabled,
+    error,
+    helperText,
+    id,
+    labelName,
+    name,
+    placeholder,
+    type,
+    value,
+    onBlur,
+    onChange,
+    onClear,
+  }:propTypes){
+  
+  return (
+    <Fragment>
+      <FormControl error={error} disabled={disabled}>
+        {labelName && (
+          <Label htmlFor={id}>
+            {labelName}
+          </Label>
+        )}
 
-          {/* Insert logic here text/numeric */}
-          {type === 'text' && <InputMUI
-            classes={{
-              root: classes.root,
-              disabled: classes.disabled,
-              error: classes.error,
-              input: classes.input
-            }}
-            className={cx("Input", className)}
-            disableUnderline
-            id={id}
-            name={name}
-            placeholder={placeholder}
-            type='text'
-            value={value}
-            onChange={onChange}
-            onBlur={onBlur}
-            endAdornment={
-              (onClear && value) && <InputAdornment position="end">
+        {/* Insert logic here text/numeric */}
+        {type === 'text' && <InputMUI
+          classes={{
+            root: classes.root,
+            disabled: classes.disabled,
+            error: classes.error,
+            input: classes.input
+          }}
+          className={cx("Input", className)}
+          disableUnderline
+          id={id}
+          name={name}
+          placeholder={placeholder}
+          type='text'
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          endAdornment={
+            onClear && value && (
+              <InputAdornment position="end">
                 <IconButton
                   disableRipple
                   aria-label="Clear text"
@@ -115,38 +132,27 @@ class Input extends Component {
                     }} />
                 </IconButton>
               </InputAdornment>
-            }
-          />}
+            )
+          }
+        />}
 
-          {error && (
-            <FormHelperText
-              id={`${id  }-component-error-text`}
-            >
-              {error}
-            </FormHelperText>
-          )}
-        </FormControl>
-        {helperText && <FormHelperText id={`${id  }-component-helper-text`}>{helperText}</FormHelperText>}
-      </Fragment>
-    );
-  }
+        {error && (
+          <FormHelperText
+            id={`${id  }-component-error-text`}
+          >
+            {error}
+          </FormHelperText>
+        )}
+      </FormControl>
+      {helperText && <FormHelperText id={`${id  }-component-helper-text`}>{helperText}</FormHelperText>}
+    </Fragment>
+  );
 }
 
-Input.propTypes = {
-  // MUI Decorator
-  classes: PropTypes.object.isRequired,
-  // Passed Props
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  id: PropTypes.string.isRequired,
-  labelName: PropTypes.string,
-  name: PropTypes.string,
-  placeholder: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
-  onClear: PropTypes.func
-};
+Input.defaultProps = {
+  className: '',
+  disabled: false,
+  labelName: null,
+}
 
 export default withStyles(styleClasses, { withTheme: true })(Input);
