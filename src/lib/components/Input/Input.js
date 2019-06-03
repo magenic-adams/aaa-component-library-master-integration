@@ -12,7 +12,6 @@ import Label from "../Label/Label";
 
 const styleClasses = theme => ({
   root: {
-    display: 'block',
     marginTop: '8px',
     width: '343px',
     height: '48px',
