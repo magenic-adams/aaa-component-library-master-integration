@@ -60,7 +60,6 @@ class Input extends Component {
       className,
       disabled,
       error,
-      errorText,
       helperText,
       id,
       labelName,
@@ -119,11 +118,11 @@ class Input extends Component {
             }
           />}
 
-          {errorText && error && (
+          {error && (
             <FormHelperText
               id={`${id  }-component-error-text`}
             >
-              {errorText}
+              {error}
             </FormHelperText>
           )}
         </FormControl>

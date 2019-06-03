@@ -13,12 +13,16 @@ import {
 
 const stories = storiesOf('Molecules|Form', module);
 
-function handleValidate(){
-  console.log('calling to validate');
+function handleValidate(values){
+  const errors = {};
+  if (!values.firstName) {
+    errors.firstName = 'Required';
+  }
+  return errors;
 }
 
 function handleSubmit(vals){
-  console.log('calling to submit', vals);
+  console.log('vals', vals);
 }
 
 stories
@@ -30,12 +34,12 @@ stories
             validate={handleValidate}
             onSubmit={handleSubmit}
             render={({ handleSubmit, reset, submitting, pristine, values }) => (
-              <form>
+              <form onSubmit={handleSubmit}>
                 <FormInput 
                   name="firstName"
                   type="text"
                 />
-                <Button onClick={action('clicked')}>Submit</Button>
+                <Button>Submit</Button>
               </form>
             )}
           />

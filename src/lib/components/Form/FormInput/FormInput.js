@@ -1,8 +1,13 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 
 // Components
 import Input from '../../Input/Input';
+
+type propTypes = {
+  name: PropTypes.string,
+};
 
 class FormInput extends PureComponent {
   render(){
@@ -12,8 +17,12 @@ class FormInput extends PureComponent {
       <Field
         name={name}
         component={(fieldProps) => {
+          const { meta } = fieldProps;
           return (
-            <Input {...fieldProps.input} {...this.props} />
+            <Input
+              error={meta.touched && meta.error}
+              {...fieldProps.input}
+              {...this.props} />
           );
         }}
       />
