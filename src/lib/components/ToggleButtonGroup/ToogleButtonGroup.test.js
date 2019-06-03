@@ -47,39 +47,6 @@ describe('ToggleButtonGroup', () => {
     expect(buttonGroup.props.children.length).to.be.above(0);
   });
 
-  it('do NOT render button elements when it has NO options', () => {
-    props = getFakeProps({ options: [] });
-    wrappedComponent = createToggleButtonWithTheme(props);
-    buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
-
-    expect(buttonGroup).not.to.equal(undefined);
-  });
-
-  it('do NOT render button elements when has Invalid options', () => {
-    props = getFakeProps({
-      options: [
-        { idx: 1, display: 'Invalid' },
-        { idx: 2, display: 'Invalid 2' }
-      ]
-    });
-    wrappedComponent = createToggleButtonWithTheme(props);
-    buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
-
-    expect(buttonGroup).not.to.equal(undefined);
-
-    props = getFakeProps({ options: null });
-    wrappedComponent = createToggleButtonWithTheme(props);
-    buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
-
-    expect(buttonGroup).not.to.equal(undefined);
-
-    props = getFakeProps({ options: undefined });
-    wrappedComponent = createToggleButtonWithTheme(props);
-    buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
-
-    expect(buttonGroup).not.to.equal(undefined);
-  });
-
   it('renders text', () => {
     const button1Text = buttonGroup.props.children[0].props.children;
     const button2Text = buttonGroup.props.children[1].props.children;
@@ -89,7 +56,7 @@ describe('ToggleButtonGroup', () => {
   });
 
   it('should set button to active when has value', () => {
-    props = getFakeProps({ value: { id: 1, text: 'Yes' } });
+    props = getFakeProps({ value: 1 });
     wrappedComponent = createToggleButtonWithTheme(props);
     buttonGroup = wrappedComponent.find(ButtonGroup).get(0);
 

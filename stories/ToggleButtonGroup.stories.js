@@ -8,7 +8,7 @@ import { AAAPrimaryTheme } from '../src/lib/components';
 
 // Internal
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
-import { ToggleButtonGroupContainer } from '../src/lib/internal/ToggleButtonGroupContainer/ToggleButtonGroupContainer';
+import ToggleButtonGroupContainer from '../src/lib/internal/ToggleButtonGroupContainer/ToggleButtonGroupContainer';
 
 const stories = storiesOf('Molecules|ToggleButtonGroup', module);
 const options = [{ id: 1, text: 'Yes' }, { id: 2, text: 'No' }];

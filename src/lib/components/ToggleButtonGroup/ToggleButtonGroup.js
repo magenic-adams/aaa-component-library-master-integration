@@ -19,28 +19,49 @@ type propTypes = {
 };
 
 const styleClasses = theme => ({
-  button: {
-    width: '157px',
-    height: '48px',
-    '& span': {
-      fontSize: '18px'
-    },
-    [theme.breakpoints.between('sm', 'md')]: {
-      width: '50%',
+  root: {
+    '& .Button': {
+      width: '157px',
+      height: '48px',
       '& span': {
-        fontSize: '16px',
-        fontWeight: '700'
+        fontSize: '18px'
+      }
+    },
+    [theme.breakpoints.down('sm')]: {
+      '& .Button': {
+        width: '50%',
+        '& span': {
+          fontSize: '16px !important',
+          fontWeight: '700 !important'
+        },
+        '&:hover': {
+          background: theme.palette.colorVariables.SECONDARY_HOVER
+        }
       }
     }
   },
   left: {
     borderTopRightRadius: '0px',
     borderBottomRightRadius: '0px',
-    borderRightStyle: 'none'
+    borderRightStyle: 'none !important'
   },
   right: {
     borderTopLeftRadius: '0px',
     borderBottomLeftRadius: '0px'
+  },
+  active: {
+    background: `${theme.palette.primary.dark} !important`,
+    color: `${theme.palette.common.white} !important`,
+    '&:hover': {
+      background: theme.palette.primary.dark
+    },
+    [theme.breakpoints.down('sm')]: {
+      background: `${theme.palette.colorVariables.SECONDARY_HOVER} !important`,
+      color: `${theme.palette.primary.main} !important`,
+      '&:hover': {
+        background: theme.palette.colorVariables.SECONDARY_HOVER
+      }
+    }
   }
 });
 
@@ -52,32 +73,24 @@ function isOptionsKeysPresent(options) {
   return options.every(op => op.id && op.text);
 }
 
-function getColor(value, id) {
-  return value === id ? 'primary' : 'secondary';
+function getActiveClass(value, id, classes) {
+  const { active } = classes;
+  return value === id ? `${active}` : '';
 }
 
 function isOptionsValid(options) {
-  console.log(process.env.NODE_ENV, 'ENV');
   if (!Array.isArray(options) || options.length < 2) {
-    if (process.env.NODE_ENV !== 'production') {
-      invariant(
-        false,
-        'Invalid length of options. You must passed maximum number of two options'
-      );
-    } else {
-      invariant(false);
-    }
+    invariant(
+      false,
+      'Invalid length of options. You must passed maximum number of two options'
+    );
     return false;
   }
   if (!isOptionsKeysPresent(options)) {
-    if (process.env.NODE_ENV !== 'production') {
-      invariant(
-        false,
-        'Invalid object keys are present. Keys should contain id and text'
-      );
-    } else {
-      invariant(false);
-    }
+    invariant(
+      false,
+      'Invalid object keys are present. Keys should contain id and text'
+    );
     return false;
   }
 
@@ -97,16 +110,26 @@ function ToggleButtonGroup({
       {isOptionsValid(options) ? (
         <ButtonGroup className={cx(classes.root, className)}>
           <Button
-            className={cx(`${classes.button} ${classes.left}`, className)}
-            color={getColor(value, options[0].id)}
+            className={cx(
+              `${getActiveClass(value, options[0].id, classes)} ${
+                classes.left
+              }`,
+              className
+            )}
+            color="secondary"
             disabled={disabled}
             onClick={() => handleClick(options[0], onSelect)}
           >
             {options[0].text}
           </Button>
           <Button
-            className={cx(`${classes.button} ${classes.right}`, className)}
-            color={getColor(value, options[1].id)}
+            className={cx(
+              `${getActiveClass(value, options[1].id, classes)} ${
+                classes.right
+              }`,
+              className
+            )}
+            color="secondary"
             disabled={disabled}
             onClick={() => handleClick(options[1], onSelect)}
           >
