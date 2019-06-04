@@ -6,6 +6,7 @@ import { AAAPrimaryTheme } from '../../src/lib/components';
 import Headline from '../../src/lib/components/Headline/Headline'
 import Subheadline from '../../src/lib/components/Subheadline/Subheadline'
 import Subtitle from '../../src/lib/components/Subtitle/Subtitle'
+import Body from '../../src/lib/components/Body/Body'
 
 // Internal
 // import {ElementContainer} from '../src/lib/internal/ElementContainer/ElementContainer';
@@ -33,6 +34,18 @@ stories
           and three rows of news story headlines.  There is a picture and headline text
           for each item.
         </Subtitle>
+
+        <Body>
+          The screen shot below shows a section of a news page containing two columns
+          and three rows of news story headlines.  There is a picture and headline text
+          for each item.
+        </Body>
+
+        <Body secondary>
+          The screen shot below shows a section of a news page containing two columns
+          and three rows of news story headlines.  There is a picture and headline text
+          for each item.
+        </Body>
       </div>
     </AAAPrimaryTheme>
   ))
