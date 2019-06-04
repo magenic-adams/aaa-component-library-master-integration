@@ -20,9 +20,9 @@ stories
           <TextInput 
           id="enabledId" 
           name="enabledName" 
-          helperText="Helper Text" 
-          labelName={text('Input label', 'Change the label')} 
-          value="Enabled" 
+          helperText={text('Input Helper Text', 'Change the Helper Text')} 
+          labelName={text('Text Label', 'Change the Label')} 
+          value={text('Text Value', 'Change the Value')}
           onBlur={action('blur')} 
           onChange={action('change')} 
           onClear={action('clear')} />
@@ -32,8 +32,9 @@ stories
           <NumericInput 
           id="numericId" 
           name="numericName" 
-          helperText="Numeric Helper Text" 
-          labelName={text('Input label', 'Change the label')} 
+          helperText={text('Numeric Helper Text', 'Change the Helper Text')} 
+          labelName={text('Numeric Label', 'Change the label')} 
+          value={text('Numeric Value', '1')}
           mask={[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/]}
           onBlur={action('blur')} 
           onChange={action('change')} 
@@ -53,7 +54,7 @@ stories
         name="enabledName" 
         helperText="Enabled Helper Text" 
         labelName="Enabled Label" 
-        value={"Enabled"} 
+        value="Enabled"
         onBlur={action('blur')} 
         onClear={action('clear')} 
         onChange={action('change')} />
@@ -68,7 +69,7 @@ stories
         helperText="Disabled Helper Text" 
         labelName="Disabled Label" 
         name="disabledName" 
-        value={"Disabled"} 
+        value="Disabled"
         onChange={action('change')} 
         onClear={action('clear')} 
         onBlur={action('blur')} />
@@ -84,7 +85,7 @@ stories
         helperText="Error Helper Text" 
         labelName="Error Label" 
         name="errorName" 
-        value={"Error"} 
+        value="Error" 
         onBlur={action('blur')} 
         onChange={action('change')} 
         onClear={action('clear')} />

@@ -107,7 +107,7 @@ type propTypes = {
   name?: PropTypes.string,
   placeholder?: PropTypes.string,
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   onBlur?: PropTypes.func,
   onClear?: PropTypes.func
 };

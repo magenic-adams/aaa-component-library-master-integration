@@ -23,8 +23,8 @@ function getProps(override) {
   };
 }
 
-describe("Input", function () {
-  it('has rendered an input with value', function () {
+describe("NumericInput", function () {
+  it('has rendered a numeric input', function () {
     const wrapper = createInput(getProps());
 
     expect(wrapper.find("label").text()).to.equal("Enabled Label");
