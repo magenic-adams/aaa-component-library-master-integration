@@ -60,9 +60,9 @@ const theme = createMuiTheme({
 
 // ** Typography ** //
 theme.typography.h1 = { // Headline
-  fontWeight: 500,
   fontSize: 20,
   lineHeight: 1.5,
+  fontWeight: 500,
   [theme.breakpoints.up('lg')]: {
     fontSize: 28,
     lineHeight: 1.57,
@@ -77,9 +77,10 @@ theme.typography.h2 = { // Subheadline
   },
 };
 
-theme.typography.subtitle1 = { // Sub-Title 1 / Table Header
+theme.typography.subtitle1 = { // Subtitle 1 / Table Header
   fontSize: 16,
   lineHeight: 1.5,
+  fontWeight: 500,
   [theme.breakpoints.up('lg')]: {
     fontSize: 18,
     lineHeight: 1.45,
@@ -95,7 +96,7 @@ theme.typography.body1 = { // Body 1 / Primary Copy
   },
 };
 
-theme.typography.body2 = { // Body 1 / Primary Copy
+theme.typography.body2 = { // Body 2 / Primary Copy
   fontSize: 14,
   lineHeight: 1.45,
   [theme.breakpoints.up('lg')]: {

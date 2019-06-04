@@ -17,7 +17,6 @@ import {getDOMNodeComputedStyle} from "../../../../test/DOM";
 import AAAPrimaryTheme from '../AAAPrimaryTheme/AAAPrimaryTheme';
 import Headline from './Headline';
 
-
 function createHeadlineWithTheme(children, props = {}) {
   const ThemeHeadline = mount(
     <AAAPrimaryTheme>
@@ -29,7 +28,7 @@ function createHeadlineWithTheme(children, props = {}) {
 }
 
 describe.only("Headline", () => {
-  const props = { id: 'unique-identifier' };
+  const props = { id: 'unique-identifier', className: 'client-headline-class' };
   const HeadlineWrapper = createHeadlineWithTheme('Here lies a headline', props);
   const HeadlineNode = HeadlineWrapper.getDOMNode();
   
@@ -50,6 +49,10 @@ describe.only("Headline", () => {
       expect(robotoIndex).to.equal(0);
     });
 
+    it ('is using a <h1> tag', () => {
+      expect(HeadlineNode.tagName).to.equal('H1');
+    });
+
     it ('has font-size of 20px', () => {
       const fontSizeStyle = getDOMNodeComputedStyle(HeadlineNode, 'font-size');
       expect(fontSizeStyle).to.equal('20px');
@@ -64,7 +67,6 @@ describe.only("Headline", () => {
       const fontWeightStyle = getDOMNodeComputedStyle(HeadlineNode, 'font-weight');
       expect(fontWeightStyle).to.equal('500');
     });
-
   });
   
   describe("html rendering", () => {
@@ -74,6 +76,14 @@ describe.only("Headline", () => {
 
     it('has a data attribute of data-quid passed to underlying html element', () => {
       expect(HeadlineNode.dataset.quid).to.equal(props.id);
-    })
+    });
+
+    it('has a className of Headline', () => {
+      expect(HeadlineNode.className).to.include('Headline');
+    });
+
+    it('has a className prop attached to the DOM Node', () => {
+      expect(HeadlineNode.className).to.include(props.className);
+    });
   });
 });

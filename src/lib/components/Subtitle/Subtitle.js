@@ -18,25 +18,25 @@ const styleClasses = theme => {
       color: theme.typography.color,
       fontFamily: theme.typography.fontFamily,
       fontWeight: theme.typography.fontWeight,
-      ...theme.typography.h2
+      ...theme.typography.subtitle1
     }
   }
 };
 
-function Subheadline({
+function Subtitle({
   id,
   children,
   className,
   classes
 }:propTypes){
   return (
-    <h2
-      className={cx('Subheadline', classes.root, className)}
+    <div
+      className={cx('Subtitle', classes.root, className)}
       data-quid={id}
     >
       {children}
-    </h2>
+    </div>
   )
 }
 
-export default withStyles(styleClasses, {index: 0, withTheme: true})(Subheadline);
+export default withStyles(styleClasses, {index: 0, withTheme: true})(Subtitle);

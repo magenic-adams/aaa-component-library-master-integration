@@ -29,7 +29,7 @@ function createSubheadlineWithTheme(children, props = {}) {
 }
 
 describe.only("Subheadline", () => {
-  const props = { id: 'unique-identifier' };
+  const props = { id: 'unique-identifier', className: 'client-subheadline-class' };
   const SubheadlineWrapper = createSubheadlineWithTheme('Here lies a subheadline', props);
   const SubheadlineNode = SubheadlineWrapper.getDOMNode();
   
@@ -48,6 +48,10 @@ describe.only("Subheadline", () => {
       const robotoIndex = fontFamilyStyle.indexOf('Roboto');
       expect(fontFamilyStyle).to.include('Roboto');
       expect(robotoIndex).to.equal(0);
+    });
+
+    it ('is using a <h2> tag', () => {
+      expect(SubheadlineNode.tagName).to.equal('H2');
     });
 
     it ('has font-size of 18px', () => {
@@ -74,6 +78,14 @@ describe.only("Subheadline", () => {
 
     it('has a data attribute of data-quid passed to underlying html element', () => {
       expect(SubheadlineNode.dataset.quid).to.equal(props.id);
-    })
+    });
+
+    it('has a className of Subheadline', () => {
+      expect(SubheadlineNode.className).to.include('Subheadline');
+    });
+
+    it('has a className prop attached to the DOM Node', () => {
+      expect(SubheadlineNode.className).to.include(props.className);
+    });
   });
 });
