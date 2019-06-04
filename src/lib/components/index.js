@@ -3,7 +3,9 @@
 import AAAPrimaryTheme from './AAAPrimaryTheme/AAAPrimaryTheme';
 import Button from './Button/Button';
 import ButtonGroup from './ButtonGroup/ButtonGroup';
-import Input from './Input/Input';
+import TextInput from './TextInput/TextInput';
+import NumericInput from './NumericInput/NumericInput';
+import BaseInput from './BaseInput/BaseInput';
 import Label from './Label/Label';
 import Link from './Link/Link';
 
@@ -12,7 +14,9 @@ export {
   AAAPrimaryTheme,
   Button,
   ButtonGroup,
-  Input,
+  TextInput,
+  NumericInput,
+  BaseInput,
   Label,
   Link
 };

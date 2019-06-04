@@ -1,24 +1,17 @@
 import React from 'react';
-import Input from './Input';
+import Label from './Label';
 import { expect } from "chai";
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { AAAPrimaryTheme } from '..';
 
-function createInput(props) {
-  return mount(<Input {...props} />)
+function createLabel(children) {
+  return mount(<AAAPrimaryTheme><Label>{children}</Label></AAAPrimaryTheme>)
 }
 
-describe("Input", function () {
-  it('has rendered input with default value', function () {
-    const wrapper = createInput({ labelName: "Name", inputValue: "Juan Dela Cruz" });
+describe("Label", function () {
+  it('has rendered label without crashing', function () {
+    const wrapper = createLabel("TEST");
 
-    expect(wrapper.find("label").text()).to.equal("Name");
-    expect(wrapper.find("input").get(0).props.defaultValue).to.equal("Juan Dela Cruz");
-  });
-
-  it('has rendered input with value', function () {
-    const wrapper = createInput({ labelName: "Name", value: "Juan Dela Cruz" });
-    
-    expect(wrapper.find("label").text()).to.equal("Name");
-    expect(wrapper.find("input").get(0).props.value).to.equal("Juan Dela Cruz");
+    expect(wrapper.find("label").text()).to.equal("TEST");
   });
 });
