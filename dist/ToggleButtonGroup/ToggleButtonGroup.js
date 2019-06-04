@@ -72,12 +72,10 @@ function getActiveClass(value, id, classes) {
 function isOptionsValid(options) {
   if (!Array.isArray(options) || options.length < 2) {
     invariant(false, 'Invalid length of options. You must passed maximum number of two options');
-    return false;
   }
 
   if (!isOptionsKeysPresent(options)) {
     invariant(false, 'Invalid object keys are present. Keys should contain id and text');
-    return false;
   }
 
   return true;
@@ -95,6 +93,7 @@ function ToggleButtonGroup(_ref) {
   }, React.createElement(Button, {
     className: cx("".concat(getActiveClass(value, options[0].id, classes), " ").concat(classes.left), className),
     color: "secondary",
+    "data-quid": "toggleBtn-".concat(options[0].id),
     disabled: disabled,
     onClick: function onClick() {
       return handleClick(options[0], onSelect);
@@ -102,6 +101,7 @@ function ToggleButtonGroup(_ref) {
   }, options[0].text), React.createElement(Button, {
     className: cx("".concat(getActiveClass(value, options[1].id, classes), " ").concat(classes.right), className),
     color: "secondary",
+    "data-quid": "toggleBtn-".concat(options[1].id),
     disabled: disabled,
     onClick: function onClick() {
       return handleClick(options[1], onSelect);
