@@ -18,12 +18,12 @@ const styleClasses = theme => {
       color: theme.typography.color,
       fontFamily: theme.typography.fontFamily,
       fontWeight: theme.typography.fontWeight,
-      ...theme.typography.h1
+      ...theme.typography.h2
     }
   }
 };
 
-function Headline({
+function Subheadline({
   id,
   children,
   className,
@@ -31,7 +31,7 @@ function Headline({
 }:propTypes){
   return (
     <h1
-      className={cx('Headline', classes.root, className)}
+      className={cx('Subheadline', classes.root, className)}
       data-quid={id}
     >
       {children}
@@ -39,4 +39,4 @@ function Headline({
   )
 }
 
-export default withStyles(styleClasses, {index: 0, withTheme: true})(Headline);
+export default withStyles(styleClasses, {index: 0, withTheme: true})(Subheadline);

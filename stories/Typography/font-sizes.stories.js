@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react';
 // Components
 import { AAAPrimaryTheme } from '../../src/lib/components';
 import Headline from '../../src/lib/components/Headline/Headline'
+import Subheadline from '../../src/lib/components/Subheadline/Subheadline'
 
 // Internal
 // import {ElementContainer} from '../src/lib/internal/ElementContainer/ElementContainer';
@@ -19,6 +20,12 @@ stories
           was moving across the sand in their direction. When it came near enough
           he perceived that it was not grass; there were no blades, but only purple roots.
         </Headline>
+
+        <Subheadline>
+          The screen shot below shows a section of a news page containing two columns
+          and three rows of news story headlines.  There is a picture and headline text
+          for each item.
+        </Subheadline>
       </div>
     </AAAPrimaryTheme>
   ))

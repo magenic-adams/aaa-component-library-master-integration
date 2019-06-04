@@ -53,13 +53,14 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',
-    fontWeight: 400,
+    fontWeight: 400, // Medium
     color: AAA_COLOR_MAIN_BLACK,
   },
 });
 
 // ** Typography ** //
 theme.typography.h1 = { // Headline
+  fontWeight: 500,
   fontSize: 20,
   lineHeight: 1.5,
   [theme.breakpoints.up('lg')]: {
@@ -68,7 +69,7 @@ theme.typography.h1 = { // Headline
   },
 };
 
-theme.typography.h2 = { // Sub-Headline
+theme.typography.h2 = { // Subheadline
   fontSize: 18,
   lineHeight: 1.45,
   [theme.breakpoints.up('lg')]: {

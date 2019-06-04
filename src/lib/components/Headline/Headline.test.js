@@ -43,6 +43,13 @@ describe.only("Headline", () => {
       expect(colorStyle).to.equal(AAA_COLOR_MAIN_BLACK);
     });
 
+    it ('has a font family of Roboto applied first', () => {
+      const fontFamilyStyle = getDOMNodeComputedStyle(HeadlineNode, 'font-family');
+      const robotoIndex = fontFamilyStyle.indexOf('Roboto');
+      expect(fontFamilyStyle).to.include('Roboto');
+      expect(robotoIndex).to.equal(0);
+    });
+
     it ('has font-size of 20px', () => {
       const fontSizeStyle = getDOMNodeComputedStyle(HeadlineNode, 'font-size');
       expect(fontSizeStyle).to.equal('20px');
@@ -52,6 +59,12 @@ describe.only("Headline", () => {
       const lineHeightStyle = getDOMNodeComputedStyle(HeadlineNode, 'line-height');
       expect(lineHeightStyle).to.equal('1.5');
     });
+
+    it ('has a font-weight of 500 (medium)', () => {
+      const fontWeightStyle = getDOMNodeComputedStyle(HeadlineNode, 'font-weight');
+      expect(fontWeightStyle).to.equal('500');
+    });
+
   });
   
   describe("html rendering", () => {
@@ -60,7 +73,6 @@ describe.only("Headline", () => {
     });
 
     it('has a data attribute of data-quid passed to underlying html element', () => {
-      console.log('HeadlineNode', HeadlineNode.dataset);
       expect(HeadlineNode.dataset.quid).to.equal(props.id);
     })
   });
