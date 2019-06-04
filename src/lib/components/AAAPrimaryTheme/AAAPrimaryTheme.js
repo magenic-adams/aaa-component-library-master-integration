@@ -1,8 +1,11 @@
+/* eslint-disable no-undef */
+/* eslint-disable import/no-extraneous-dependencies */
 // https://next.material-ui.com/customization/themes
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
+
 
 // Colors
 import {
@@ -16,7 +19,9 @@ import {
   AAA_COLOR_MAIN_WHITE,
   AAA_COLOR_SECONDARY_HOVER,
   AAA_COLOR_TRANSPARENT,
+  AAA_COLOR_MAIN_VERY_DARK_BLUE
 } from '../../constants/colors';
+
 
 const theme = createMuiTheme({
   breakpoints: {
@@ -47,8 +52,9 @@ const theme = createMuiTheme({
       TRANSPARENT: AAA_COLOR_TRANSPARENT,
       BLACK: AAA_COLOR_MAIN_BLACK,
       DARKER_BLUE: AAA_COLOR_MAIN_DARKER_BLUE,
+      VERY_DARK_BLUE: AAA_COLOR_MAIN_VERY_DARK_BLUE,
       GRAY: AAA_COLOR_MAIN_GRAY,
-      WHITE: AAA_COLOR_MAIN_WHITE
+      WHITE: AAA_COLOR_MAIN_WHITE,
     },
   },
   typography: {
