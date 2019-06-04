@@ -1,10 +1,12 @@
+/* eslint-disable import/named */
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { withKnobs } from '@storybook/addon-knobs';
 
 // Components
-import {AAAPrimaryTheme, TextLink } from '../src/lib/components';
+import {AAAPrimaryTheme, Link as TextLink } from '../src/lib/components';
 
 // Internal
 import {ElementContainer} from '../src/lib/internal/ElementContainer/ElementContainer';
@@ -34,7 +36,6 @@ stories
       <ElementContainer>
         <div>
           <TextLink className="primary" onClick={action('clicked')}>Primary</TextLink>
-          <TextLink className="primary" disabled onClick={action('clicked')}>Primary disabled</TextLink>
         </div>
       </ElementContainer>
     </div>
@@ -55,7 +56,6 @@ stories
     <ElementContainer>
       <div>
         <TextLink className="secondary" onClick={action('clicked')}>Secondary</TextLink>
-        <TextLink className="secondary" disabled onClick={action('clicked')}>Secondary disabled</TextLink>
       </div>
     </ElementContainer>
 

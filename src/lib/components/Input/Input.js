@@ -1,3 +1,9 @@
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable prefer-template */
+/* eslint-disable import/imports-first */
+/* eslint-disable import/order */
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'clsx';
