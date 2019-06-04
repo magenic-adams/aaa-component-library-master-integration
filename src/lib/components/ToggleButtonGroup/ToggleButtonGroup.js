@@ -84,16 +84,13 @@ function isOptionsValid(options) {
       false,
       'Invalid length of options. You must passed maximum number of two options'
     );
-    return false;
   }
   if (!isOptionsKeysPresent(options)) {
     invariant(
       false,
       'Invalid object keys are present. Keys should contain id and text'
     );
-    return false;
   }
-
   return true;
 }
 
@@ -117,6 +114,7 @@ function ToggleButtonGroup({
               className
             )}
             color="secondary"
+            data-quid={`toggleBtn-${options[0].id}`}
             disabled={disabled}
             onClick={() => handleClick(options[0], onSelect)}
           >
@@ -130,6 +128,7 @@ function ToggleButtonGroup({
               className
             )}
             color="secondary"
+            data-quid={`toggleBtn-${options[1].id}`}
             disabled={disabled}
             onClick={() => handleClick(options[1], onSelect)}
           >
