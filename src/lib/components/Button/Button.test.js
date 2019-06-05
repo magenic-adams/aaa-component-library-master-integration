@@ -14,7 +14,7 @@ import sinon from 'sinon';
 import {
   AAA_COLOR_DISABLED,
   AAA_COLOR_MAIN_BLUE,
-  // AAA_COLOR_MAIN_DARK_BLUE,
+  AAA_COLOR_MAIN_WHITE,
   AAA_COLOR_TRANSPARENT,
 } from '../../constants/colors'
 
@@ -50,7 +50,11 @@ describe("Button", () => {
   
   beforeEach(() => {
     spy = sinon.spy();
-    props = getFakeProps({onClick: spy, forwardedRef: React.createRef()});
+    props = getFakeProps({
+      className: 'user-defined-button-class',
+      onClick: spy,
+      forwardedRef: React.createRef()
+    });
     ButtonWrapper = createButtonWithTheme('Here lies a button', props);
     ButtonNode = ButtonWrapper.getDOMNode();
   });
@@ -72,12 +76,20 @@ describe("Button", () => {
     });
   });
   
-  describe("rendering", () => {
+  describe("rendering HTML element", () => {
+    it('includes a class name of "Button" on the HTML element', () => {
+      expect(ButtonNode.className).to.include('Button');
+    });
+
+    it('includes a passed prop of className to the HTML element', () => {
+      expect(ButtonNode.className).to.include(props.className);
+    });
+
     it('has rendered button text', () => {
       expect(ButtonWrapper.text()).to.equal('Here lies a button');
     });
 
-    it ('forwards a reference to the underlying button', () => {
+    it ('forwards a reference to the underlying button with forwardedRef prop', () => {
       const ReactButton = ButtonWrapper.find(Button);
       expect(ReactButton.props().forwardedRef.current).to.equal(ButtonWrapper.getDOMNode());
     })
@@ -94,13 +106,12 @@ describe("Button", () => {
 
 describe("Button States", () => {
   describe("primary state", () => {
-    const ref = React.createRef();
-    const props = getFakeProps({color: 'primary', forwardedRef: ref});
+    const props = getFakeProps({color: 'primary'});
     const PrimaryButtonWrapper = createButtonWithTheme('Here lies a primary button', props);
 
-    it('has text color of white', () => {
+    it('has text color of AAA_COLOR_MAIN_WHITE', () => {
       const backgroundStyle = getDOMNodeComputedStyle(PrimaryButtonWrapper.getDOMNode(), 'color');
-      expect(backgroundStyle).to.equal('rgb(255, 255, 255)');
+      expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_WHITE);
     });
 
     it('has a background color of AAA_COLOR_MAIN_BLUE', () => {
