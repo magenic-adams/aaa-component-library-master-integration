@@ -42,7 +42,7 @@ stories
           />
         </ElementContainer>
       </AAAPrimaryTheme>
-    )
+    );
   })
   .add('states', () => (
     <AAAPrimaryTheme>
@@ -50,46 +50,46 @@ stories
 
       <ElementContainer>
         <TextInput 
-        id="enabledId" 
-        name="enabledName" 
-        helperText="Enabled Helper Text" 
-        labelName="Enabled Label" 
-        value="Enabled"
-        onBlur={action('blur')} 
-        onClear={action('clear')} 
-        onChange={action('change')} />
+          id="enabledId" 
+          name="enabledName" 
+          helperText="Enabled Helper Text" 
+          labelName="Enabled Label" 
+          value="Enabled"
+          onBlur={action('blur')} 
+          onClear={action('clear')} 
+          onChange={action('change')}
+        />
       </ElementContainer>
 
       <h2 className='text-align-center'>DISABLED STATE</h2>
 
       <ElementContainer>
         <TextInput 
-        disabled 
-        id="disabledId" 
-        helperText="Disabled Helper Text" 
-        labelName="Disabled Label" 
-        name="disabledName" 
-        value="Disabled"
-        onChange={action('change')} 
-        onClear={action('clear')} 
-        onBlur={action('blur')} />
+          disabled 
+          id="disabledId" 
+          helperText="Disabled Helper Text" 
+          labelName="Disabled Label" 
+          name="disabledName" 
+          value="Disabled"
+          onChange={action('change')} 
+          onClear={action('clear')} 
+          onBlur={action('blur')}
+        />
       </ElementContainer>
 
       <h2 className='text-align-center'>ERROR STATE</h2>
 
       <ElementContainer>
         <TextInput 
-        error 
-        errorText="Error text" 
-        id="errorId" 
-        helperText="Error Helper Text" 
-        labelName="Error Label" 
-        name="errorName" 
-        value="Error" 
-        onBlur={action('blur')} 
-        onChange={action('change')} 
-        onClear={action('clear')} />
+          id="errorId" 
+          helperText="Error Helper Text" 
+          name="errorName"
+          onBlur={action('blur')} 
+          onChange={action('change')} 
+          onClear={action('clear')}
+        />
       </ElementContainer>
+
     </AAAPrimaryTheme>
   )
-  )
+  );

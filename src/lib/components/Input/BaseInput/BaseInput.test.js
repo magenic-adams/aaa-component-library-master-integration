@@ -1,6 +1,7 @@
 /* global
   afterAll,
   describe,
+  document,
   beforeEach,
   it
 */
@@ -13,7 +14,6 @@ import sinon from 'sinon';
 // MUIComponents
 import MUIInput from '@material-ui/core/Input';
 import MUIIconButton from '@material-ui/core/IconButton';
-import MUIReportProblem from '@material-ui/icons/ReportProblem';
 
 // Components
 import BaseInput from './BaseInput';
@@ -36,8 +36,6 @@ function getFakeProps(override) {
     ...override
   };
 }
-// Has a placeholder
-// Triggers lifecycle events
 // Styling tests
 
 describe('Input', () => {
@@ -55,21 +53,21 @@ describe('Input', () => {
     });
 
     it('attaches a data-quid attribute to the input base element', () => {
-      expect(BaseInputNode.dataset.quid).to.equal(`BaseInput-${props.id}`);
+      expect(InputWrapper.find('input').getDOMNode().dataset.quid).to.equal(`BaseInput-${props.id}`);
     });
 
     it('has a default rendering of an input without a label', () => {
       expect(InputWrapper.find(`label[htmlFor="${props.id}"]`).exists()).to.equal(false);
-      expect(InputWrapper.find(`input[id="${props.id}"]`).exists()).to.equal(true);
+      expect(InputWrapper.find(`input#${props.id}`).exists()).to.equal(true);
     });
 
     it('has a default rendering of an input without helper text', () => {
-      expect(InputWrapper.find(`input[id="${props.id}"]`).exists()).to.equal(true);
+      expect(InputWrapper.find(`input#${props.id}`).exists()).to.equal(true);
       expect(InputWrapper.find(`p[id="${props.id}-component-helper-text"]`).exists()).to.equal(false);
     });
 
     it('has a default rendering of an input without helper text', () => {
-      expect(InputWrapper.find(`input[id="${props.id}"]`).exists()).to.equal(true);
+      expect(InputWrapper.find(`input#${props.id}`).exists()).to.equal(true);
       expect(InputWrapper.find(`p[id="${props.id}-component-helper-text"]`).exists()).to.equal(false);
     });
 
@@ -77,14 +75,14 @@ describe('Input', () => {
       props = getFakeProps({ value: 'Jerry Seinfeld' });
       InputWrapper = createInput(props);
 
-      expect(InputWrapper.find(`input[id="${props.id}"]`).get(0).props.value).to.equal("Jerry Seinfeld");
+      expect(InputWrapper.find(`input#${props.id}`).get(0).props.value).to.equal("Jerry Seinfeld");
     });
 
     it('renders the prop "helperText" as helper text within the component', () => {
       props = getFakeProps({ helperText: 'This field is required' });
       InputWrapper = createInput(props);
 
-      expect(InputWrapper.find(`input[id="${props.id}"]`).exists()).to.equal(true);
+      expect(InputWrapper.find(`input#${props.id}`).exists()).to.equal(true);
       expect(InputWrapper.find(`p[id="${props.id}-component-helper-text"]`).exists()).to.equal(true);
       expect(InputWrapper.find(`p[id="${props.id}-component-helper-text"]`).text()).to.equal('This field is required');
     });
@@ -95,7 +93,14 @@ describe('Input', () => {
 
       expect(InputWrapper.find(`label[htmlFor="${props.id}"]`).exists()).to.equal(true);
       expect(InputWrapper.find(`label[htmlFor="${props.id}"]`).text()).to.equal("Favorite comedian name?");
-      expect(InputWrapper.find(`input[id="${props.id}"]`).exists()).to.equal(true);
+      expect(InputWrapper.find(`input#${props.id}`).exists()).to.equal(true);
+    });
+
+    it('renders the prop "placeholder" as a placeholder', () => {
+      props = getFakeProps({placeholder: 'First name?'});
+      InputWrapper = createInput(props);
+
+      expect(InputWrapper.find('input').getDOMNode().placeholder).to.equal('First name?');
     });
   });
 
@@ -103,10 +108,19 @@ describe('Input', () => {
     let spy;
     beforeEach(() => {spy = sinon.spy();});
 
+    it('triggers prop "onFocus" event on focus', () => {
+      props = getFakeProps({ onFocus: spy });
+      InputWrapper = createInput(props);
+      InputWrapper.find(`input#${props.id}`).simulate("focus");
+
+      expect(spy.calledOnce).to.equal(true);
+      expect(spy.getCall(0).args[0]).to.have.property('target');
+    });
+
     it('triggers prop "onChange" event on change', () => {
       props = getFakeProps({ onChange: spy });
       InputWrapper = createInput(props);
-      InputWrapper.find(`input[id="${props.id}"]`).simulate("change");
+      InputWrapper.find(`input#${props.id}`).simulate("change");
 
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.have.property('target');
@@ -115,14 +129,35 @@ describe('Input', () => {
     it('triggers prop "onBlur" event on blur', () => {
       props = getFakeProps({ onBlur: spy });
       InputWrapper = createInput(props);
-      InputWrapper.find(`input[id="${props.id}"]`).simulate("blur");
+      InputWrapper.find(`input#${props.id}`).simulate("blur");
 
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.have.property('target');
     });
   });
 
-  describe("Clear Icon", () => {
+  describe("prop functionality", () => {
+    it ('forwards a reference to the underlying button with forwardedRef prop', () => {
+      const forwardedRef = React.createRef();
+      props = getFakeProps({ forwardedRef });
+      InputWrapper = createInput(props);
+      const InputWrapperComponent = InputWrapper.find(BaseInput);
+      const InputNode = InputWrapper.find('input').getDOMNode();
+
+      expect(InputWrapperComponent.props().forwardedRef.current).to.equal(InputNode);
+    });
+
+    it('focuses the input on mount when prop "autoFocus" is set to true', () => {
+      props = getFakeProps({ autoFocus: true });
+      InputWrapper = createInput(props);
+      const InputElementNode = InputWrapper.find('input');
+
+      expect(InputElementNode.getDOMNode()).to.equal(document.activeElement);
+    });
+  });
+
+  describe("clearing input", () => {
+
     it('displays a clear icon if it has prop "value" and "onClear"', () => {
       props = getFakeProps({value: 'A value on input', onClear: () => {} });
       InputWrapper = createInput(props);
@@ -161,7 +196,7 @@ describe('Input', () => {
         props = getFakeProps({ disabled: true });
         InputWrapper = createInput(props);
 
-        expect(InputWrapper.find(`input[id="${props.id}"]`).get(0).props.disabled).to.equal(true);
+        expect(InputWrapper.find(`input#${props.id}`).get(0).props.disabled).to.equal(true);
       });
 
       // it('will not trigger an "onFocus" event when disabled', () => {
@@ -188,7 +223,7 @@ describe('Input', () => {
         props = getFakeProps({ error: "Show this error message to user" });
         InputWrapper = createInput(props);
 
-        expect(InputWrapper.find("ForwardRef(SvgIcon)[color='error']").exists()).to.equal(true);
+        expect(InputWrapper.find(`#${props.id}-component-error-text`).exists()).to.equal(true);
       });
 
       it('should not show an error text message if it has no error', () => {
@@ -199,10 +234,10 @@ describe('Input', () => {
       });
 
       it('should not show an error icon if it has no error', () => {
-        props = getFakeProps({ error: "Show this error message to user" });
+        props = getFakeProps({ error: undefined });
         InputWrapper = createInput(props);
 
-        expect(InputWrapper.find(MUIReportProblem).exists()).to.equal(false);
+        expect(InputWrapper.find(`#${props.id}-component-error-text`).exists()).to.equal(false);
       });
     });
   });

@@ -25,7 +25,7 @@ const styleClasses = theme => ({
     background: theme.palette.colorVariables.WHITE,
     boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.GRAY}`,
     '&:hover': {
-      borderColor: theme.palette.colorVariables.DARKER_BLUE,
+      boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.DARKER_BLUE}`,
     },
   },
   focused: {
@@ -39,7 +39,6 @@ const styleClasses = theme => ({
     boxShadow: "initial",
     '&:hover': {
       backgroundColor: theme.palette.disabled.main,
-      border: "none",
     },
   },
   error: {
@@ -119,13 +118,16 @@ type propTypes = {
   value: PropTypes.string,
   onBlur?: PropTypes.func,
   onChange?: PropTypes.func,
-  onClear?: PropTypes.func
+  onClear?: PropTypes.func,
+  onFocus?: PropTypes.func,
 };
 
 
 function Input({
+  autoFocus,
   classes,
   className,
+  forwardedRef,
   formControlClass,
   disabled,
   error,
@@ -138,7 +140,8 @@ function Input({
   value,
   onBlur,
   onChange,
-  onClear
+  onClear,
+  onFocus,
 }): propTypes {
   return (
     <MUIFormControl
@@ -153,6 +156,7 @@ function Input({
       )}
       
       <MUIInput
+        autoFocus={autoFocus}
         autoComplete="off"
         classes={{
           root: classes.root,
@@ -162,7 +166,6 @@ function Input({
           input: classes.input
         }}
         className={cx("BaseInput", className)}
-        data-quid={`BaseInput-${id}`}
         disableUnderline
         endAdornment={
           (onClear && value) && (
@@ -181,14 +184,19 @@ function Input({
           )
         }
         id={id}
+        inputProps={{
+          'data-quid': `BaseInput-${id}`,
+          ref: forwardedRef,
+        }}
         name={name}
-        placeholder={placeholder}
+        placeholder={labelName ? null : placeholder}
         type={type}
         value={value}
-        onChange={onChange}
         onBlur={onBlur}
+        onChange={onChange}
+        onFocus={onFocus}
       />
-      
+
       {error && (
         <div>
           <MUIFormHelperText
@@ -214,8 +222,10 @@ function Input({
 }
 
 Input.defaultProps = {
+  autoFocus: false,
   className: '',
   formControlClass: '',
+  forwardedRef: React.createRef(),
   disabled: false,
   helperText: null,
   labelName: null,
@@ -223,7 +233,8 @@ Input.defaultProps = {
   type: 'text',
   onBlur: () => {},
   onChange: () => {},
-  onClear: null
+  onClear: null,
+  onFocus: () => {},
 };
 
 
