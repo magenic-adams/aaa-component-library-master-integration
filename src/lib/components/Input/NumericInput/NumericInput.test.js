@@ -1,12 +1,17 @@
+/*
+  global jest
+ */
 import React from 'react';
-import NumericInput from './NumericInput';
-import BaseInput from '../BaseInput/BaseInput';
 import { expect } from "chai";
 import { mount } from 'enzyme';
-import { AAAPrimaryTheme } from '..';
+
+// Components
+import NumericInput from './NumericInput';
+// import BaseInput from '../BaseInput/BaseInput';
+import AAAPrimaryTheme from '../../AAAPrimaryTheme/AAAPrimaryTheme';
 
 function createInput(props) {
-  return mount(<AAAPrimaryTheme><NumericInput {...props} /></AAAPrimaryTheme>)
+  return mount(<AAAPrimaryTheme><NumericInput {...props} /></AAAPrimaryTheme>);
 }
 
 function getProps(override) {
@@ -23,8 +28,8 @@ function getProps(override) {
   };
 }
 
-describe("NumericInput", function () {
-  it('has rendered a numeric input', function () {
+describe("NumericInput", () => {
+  it('has rendered a numeric input', () => {
     const wrapper = createInput(getProps());
 
     expect(wrapper.find("label").text()).to.equal("Enabled Label");
