@@ -26,10 +26,10 @@ const styleClasses = theme => {
 };
 
 function Body({
-  id,
   children,
   className,
   classes,
+  id,
   secondary,
 }:propTypes){
   return (

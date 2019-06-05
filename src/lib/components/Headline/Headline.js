@@ -24,10 +24,10 @@ const styleClasses = theme => {
 };
 
 function Headline({
-  id,
   children,
   className,
   classes
+  id,
 }:propTypes){
   return (
     <h1

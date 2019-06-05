@@ -24,10 +24,10 @@ const styleClasses = theme => {
 };
 
 function Subtitle({
-  id,
   children,
   className,
-  classes
+  classes,
+  id,
 }:propTypes){
   return (
     <div
