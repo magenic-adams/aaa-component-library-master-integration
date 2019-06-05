@@ -81,7 +81,7 @@ describe("Button", () => {
       expect(ButtonNode.className).to.include('Button');
     });
 
-    it('includes a passed prop of className to the HTML element', () => {
+    it('includes an HTML class property when passed a React className prop', () => {
       expect(ButtonNode.className).to.include(props.className);
     });
 
