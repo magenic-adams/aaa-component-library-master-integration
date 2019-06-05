@@ -26,7 +26,7 @@ const styleClasses = theme => {
 function Headline({
   children,
   className,
-  classes
+  classes,
   id,
 }:propTypes){
   return (
