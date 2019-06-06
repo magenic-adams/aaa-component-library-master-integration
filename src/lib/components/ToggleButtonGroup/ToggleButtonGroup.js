@@ -145,4 +145,6 @@ ToggleButtonGroup.defaultProps = {
   value: ''
 };
 
-export default withStyles(styleClasses, { withTheme: true })(ToggleButtonGroup);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(
+  ToggleButtonGroup
+);

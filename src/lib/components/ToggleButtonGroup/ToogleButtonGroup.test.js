@@ -139,6 +139,26 @@ describe('ToggleButtonGroup', () => {
     });
   });
 
+  describe('base styles', () => {
+    it('has 48px height', () => {
+      const heightStyle = getDOMNodeComputedStyle(
+        ToggleButtonWrapper.find(Button)
+          .at(0)
+          .getDOMNode(),
+        'height'
+      );
+      expect(heightStyle).to.equal('48px');
+    });
+
+    it('has 18px label', () => {
+      const label = ToggleButtonWrapper.find('.MuiButton-label')
+        .at(0)
+        .getDOMNode();
+      const heightStyle = getDOMNodeComputedStyle(label, 'font-size');
+      expect(heightStyle).to.equal('18px');
+    });
+  });
+
   describe('button states', () => {
     it('has a background color of AAA_COLOR_TRANSPARENT', () => {
       const backgroundStyle = getDOMNodeComputedStyle(
@@ -159,6 +179,16 @@ describe('ToggleButtonGroup', () => {
         'border-top-color'
       );
       expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_BLUE);
+    });
+
+    it('has text color of white', () => {
+      const textColor = getDOMNodeComputedStyle(
+        ToggleButtonWrapper.find(Button)
+          .at(0)
+          .getDOMNode(),
+        'color'
+      );
+      expect(textColor).to.equal('rgb(255, 255, 255)');
     });
 
     it('should set button to active when has matched value in options', () => {
