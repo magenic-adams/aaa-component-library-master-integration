@@ -4,8 +4,20 @@ exports[`Storyshots Atomic|Button all buttons 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Atomic|Button dynamic button 1`] = `ReactWrapper {}`;
 
+exports[`Storyshots Atomic|Input input 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Atomic|Input states 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Atomic|Link text link 1`] = `ReactWrapper {}`;
+
 exports[`Storyshots Button with text 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Components|Button with text 1`] = `ReactWrapper {}`;
 
+exports[`Storyshots Molecules|ButtonGroup primary and secondary 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Molecules|Stepper Numerical Stepper 1`] = `ReactWrapper {}`;
+
 exports[`Storyshots Welcome to Storybook 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Welcome|Storybook Welcome description 1`] = `ReactWrapper {}`;

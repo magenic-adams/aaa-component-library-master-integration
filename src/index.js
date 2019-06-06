@@ -1,12 +1,13 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+/* global document */
+
 import React from 'react';
 import { render } from 'react-dom';
-// import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
 import {
   AAAPrimaryTheme,
-  RadioGroup,
-  RadioItem,
+  Button,
+  TextInput,
+  Link as TextLink,
   SelectList
 } from './lib/components';
 
@@ -15,61 +16,87 @@ const handleSelectItem = selectedItem => {
 };
 
 const items = [
-  { id: 1, value: 1, text: 'First Item', isSelected: true },
-  { id: 2, value: 2, text: 'Second Item' },
+  { id: 1, value: 1, display: 'First Item' },
+  { id: 2, value: 2, display: 'Second Item' },
   {
     id: 3,
     value: 3,
-    text: 'Third Item '
+    display: 'Third Item '
   },
-  { id: 4, value: 4, text: '4th Item' },
-  { id: 5, value: 5, text: '5th Item' },
-  { id: 6, value: 6, text: '6th Item' }
-  // { id: 7, value: 7, display: '7th Item' }
-];
-
-// eslint-disable-next-line no-unused-vars
-const radioItems = [
+  { id: 4, value: 4, display: '4th Item' },
+  { id: 5, value: 5, display: '5th Item' },
   {
-    id: 1,
-    value: 1,
-    display: (
-      <RadioItem
-        value="a"
-        name="radio-button-demo"
-        aria-label="A"
-        text="AAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAA AAAAAAAA"
-        onSelect={selectedOption => handleSelectItem(selectedOption)}
-      />
-    )
+    id: 6,
+    value: 6,
+    display: '6th item'
   },
-  {
-    id: 2,
-    value: 1,
-    display: (
-      <RadioItem
-        value="ab"
-        name="radio-button-demo"
-        aria-label="b"
-        text="ABAAAAAAAAAAAAAAAAAAA"
-        onSelect={selectedOption => handleSelectItem(selectedOption)}
-      />
-    )
-  }
+  { id: 7, value: 7, display: '7th Item' }
 ];
 
 const App = () => (
   <AAAPrimaryTheme>
     <h1>AAA Component Library</h1>
-    <RadioGroup
-      name="radioGroup"
+    <Button color="primary">Here lies a button</Button>
+    <br />
+    <br />
+    <Button id="lie-button" color="primary">
+      Here lies a button
+    </Button>
+    <Button id="lie-secondary-button" color="secondary">
+      Here lies a secondary button
+    </Button>
+    <br />
+    <br />
+    <TextInput
+      disabled
+      id="disabledId"
+      name="disabledName"
+      type="text"
+      onChange={() => {}}
+      helperText="Disabled"
+      labelName="Disabled Label"
+      value="Disabled"
+      onClear={() => {}}
+    />
+    <br />
+    <TextInput
+      id="enabledId"
+      name="enabledName"
+      labelName="Enabled Label"
+      type="text"
+      onChange={() => {}}
+      value="Enabled"
+      onClear={() => {}}
+    />
+    <br />
+    <br />
+    <TextInput
+      error
+      id="errorId"
+      name="errorName"
+      type="text"
+      onChange={() => {}}
+      helperText="Error"
+      labelName="Error Label"
+      errorText="Error text"
+      value="Error"
+    />
+    <br />
+    <br />
+    <TextLink className="primary" onClick={() => {}}>
+      Primary enabled Link
+    </TextLink>
+    <br />
+    <br />
+    <TextLink className="secondary" onClick={() => {}}>
+      Secondary enabled Link
+    </TextLink>
+
+    <SelectList
+      type="primary"
       items={items}
       onSelect={selectedOption => handleSelectItem(selectedOption)}
     />
-    {/* // <RadioGroup aria-label="Gender">
-  //   <Radio value="a" name="radio-button-demo" aria-label="A" />
-  //   <Radio value="ab" name="radio-button-demo" aria-label="b" />
-  // </RadioGroup> */}
   </AAAPrimaryTheme>
 );
 
