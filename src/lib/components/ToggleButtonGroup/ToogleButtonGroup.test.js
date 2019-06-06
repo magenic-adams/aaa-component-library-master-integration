@@ -21,7 +21,7 @@ import Button from '../Button/Button';
 import {
   AAA_COLOR_TRANSPARENT,
   AAA_COLOR_MAIN_BLUE,
-  AAA_COLOR_DISABLED
+  AAA_COLOR_MAIN_DISABLED
 } from '../../constants/colors';
 
 function getFakeProps(overrides) {
@@ -202,7 +202,7 @@ describe('ToggleButtonGroup', () => {
       expect(rightButton.props().className).to.not.contains('active');
     });
 
-    it('should set all elements to disabled', () => {
+    it('should set toggle buttons color AAA_COLOR_MAIN_DISABLED when disabled', () => {
       props = getFakeProps({ disabled: true });
       ToggleButtonWrapper = createToggleButtonWithTheme(props);
 
@@ -219,8 +219,8 @@ describe('ToggleButtonGroup', () => {
         'border-top-color'
       );
 
-      expect(leftButtonBorderColorStyle).to.equal(AAA_COLOR_DISABLED);
-      expect(rightButtonBorderColorStyle).to.equal(AAA_COLOR_DISABLED);
+      expect(leftButtonBorderColorStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
+      expect(rightButtonBorderColorStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
     });
   });
 });

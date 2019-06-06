@@ -114,7 +114,7 @@ function ToggleButtonGroup({
               className
             )}
             color="secondary"
-            data-quid={`toggleBtn-${options[0].id}`}
+            data-quid={options[0].id}
             disabled={disabled}
             onClick={() => handleClick(options[0], onSelect)}
           >
@@ -128,7 +128,7 @@ function ToggleButtonGroup({
               className
             )}
             color="secondary"
-            data-quid={`toggleBtn-${options[1].id}`}
+            id={options[1].id}
             disabled={disabled}
             onClick={() => handleClick(options[1], onSelect)}
           >
