@@ -25,6 +25,15 @@ const VALIDATIONS = {
     'max_length[24]': 'Too long. Do you have a nickname?',
     alpha_dash_dot_space: 'Name can only contain letters, dashes, periods, and spaces',
   },
+  password: {
+    required: 'Password is required',
+    'greater_than[5]': 'Password must be at least 6 characters',
+    'max_length[24]': 'Password should be under 24 characters.',
+  },
+  passwordConfirm: {
+    required: 'Password confirmation is required',
+    'matches[password]': 'This does not match',
+  },
 };
 
 function handleValidate(values){
@@ -53,6 +62,20 @@ stories
                         labelName="First name"
                         name="firstName"
                         type="text"
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <FormInput 
+                        labelName="Password"
+                        name="password"
+                        type="password"
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <FormInput 
+                        labelName="Password Confirm"
+                        name="passwordConfirm"
+                        type="password"
                       />
                     </FormGroup>
                     <ButtonGroup>

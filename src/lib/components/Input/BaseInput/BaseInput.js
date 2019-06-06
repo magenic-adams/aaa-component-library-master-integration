@@ -112,6 +112,7 @@ type propTypes = {
   formControlClass?: PropTypes.string,
   disabled?: PropTypes.bool,
   error?: PropTypes.string,
+  disableErrorWarning?: PropTypes.bool,
   helperText?: PropTypes.string,
   id: PropTypes.string,
   labelName?: PropTypes.string,
