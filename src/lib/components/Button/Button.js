@@ -63,7 +63,7 @@ const styleClasses = theme => {
       }
     }
   };
-}
+};
 
 
 function Button({
@@ -99,6 +99,6 @@ Button.defaultProps = {
   color: 'primary',
   href: null,
   forwardedRef: React.createRef(),
-}
+};
 
 export default withStyles(styleClasses, {index: 0, withTheme: true})(Button);

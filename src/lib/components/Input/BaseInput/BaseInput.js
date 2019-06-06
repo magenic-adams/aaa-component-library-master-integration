@@ -39,6 +39,7 @@ const styleClasses = theme => ({
     background: theme.palette.disabled.main,
     boxShadow: "initial",
     '&:hover': {
+      boxShadow: "initial",
       backgroundColor: theme.palette.disabled.main,
     },
   },
@@ -160,11 +161,11 @@ function BaseInput({
       disabled={disabled}
     >
       {labelName && (
-        <Label htmlFor={id}>
+        <Label id={id}>
           {labelName}
         </Label>
       )}
-      
+
       <MUIInput
         autoFocus={autoFocus}
         autoComplete="off"
@@ -188,7 +189,7 @@ function BaseInput({
                 color="inherit"
                 className={classes.iconButton}
               >
-                <MUIClear className={classes.iconStyle}/>
+                <MUIClear className={classes.iconStyle} />
               </MUIIconButton>
             </MUIInputAdornment>
           )
@@ -222,7 +223,7 @@ function BaseInput({
           </MUIFormHelperText>
         </div>
       )}
-      
+
       {helperText && (
         <MUIFormHelperText
           id={`${id}-component-helper-text`}
@@ -248,10 +249,10 @@ BaseInput.defaultProps = {
   placeholder: '',
   type: 'text',
   value: undefined,
-  onBlur: () => {},
-  onChange: () => {},
+  onBlur: () => { },
+  onChange: () => { },
   onClear: null,
-  onFocus: () => {},
+  onFocus: () => { },
 };
 
 
