@@ -1,30 +1,49 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import AAAButton from './Button';
+import {
+  AAA_CSS_IMPORTANT,
+  AAA_CSS_SOLID,
+  AAA_CSS_BOTTOM
+} from '../../constants/cssConstants';
 
 const styleClasses = theme => ({
   iconButton: {
-    width: '48px !important',
-    height: '48px !important',
+    'vertical-align': `${AAA_CSS_BOTTOM}`,
+    width: `48px ${AAA_CSS_IMPORTANT}`,
+    height: `48px ${AAA_CSS_IMPORTANT}`,
     'margin-left': '8px',
     'margin-right': '8px',
-    border: 'solid 1px #717174 !important',
+    border: `${AAA_CSS_SOLID} 1px ${
+      theme.palette.colorVariables.GRAY
+    } ${AAA_CSS_IMPORTANT}`,
     'border-radius': '4px',
-    'background-color': '#FFFFFF !important',
+    'background-color': `${
+      theme.palette.colorVariables.WHITE
+    } ${AAA_CSS_IMPORTANT}`,
     '&:active,&:hover': {
       'background-color': `${
         theme.palette.colorVariables.SECONDARY_HOVER
-      } !important`,
+      } ${AAA_CSS_IMPORTANT}`,
+      'border-color': `${
+        theme.palette.colorVariables.DARKER_BLUE
+      } 1px ${AAA_CSS_IMPORTANT}`,
       '& svg': {
-        color: `${theme.palette.primary.main} !important`
+        color: `${theme.palette.primary.main} ${AAA_CSS_IMPORTANT}`
+      }
+    },
+    '&:disabled': {
+      background: `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`,
+      border: `none ${AAA_CSS_IMPORTANT}`,
+      '&:hover': {
+        backgroundColor: `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`
+      },
+      '& svg': {
+        color: `${theme.palette.colorVariables.GRAY} ${AAA_CSS_IMPORTANT}`
       }
     }
-  },
-  root: {
-    'vertical-align': 'bottom'
   }
 });
 class IconButton extends Component {
@@ -32,7 +51,6 @@ class IconButton extends Component {
     const { classes, children, disabled, onClick, id } = this.props;
     return (
       <AAAButton
-        classes={{ root: classes.root }}
         onClick={onClick}
         disabled={disabled}
         className={classes.iconButton}

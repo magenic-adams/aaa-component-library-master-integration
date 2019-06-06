@@ -19,6 +19,7 @@ stories.add('numerical ', () => {
       <br />
       <ElementContainer>
         <NumericalStepper
+          id="1"
           labelText="This is a numerical stepper"
           helpText="This is a helper message"
           inputText="10"
@@ -32,8 +33,10 @@ stories.add('numerical ', () => {
       </div>
       <ElementContainer>
         <NumericalStepper
+          id="2"
           labelText="This is a numerical stepper"
-          helpText="This is an error text"
+          errorText="This is an error text"
+          helpText="This is a helper text"
           inputText="SDFSdss"
           error
         />
@@ -44,6 +47,7 @@ stories.add('numerical ', () => {
       </div>
       <ElementContainer>
         <NumericalStepper
+          id="3"
           labelText="This is a numerical stepper"
           helpText="This is a helper message"
           disabled

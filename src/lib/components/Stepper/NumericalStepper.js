@@ -4,48 +4,41 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import MUIStep from '@material-ui/core/Step';
-
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import ReportProblem from '@material-ui/icons/ReportProblem';
 import MUIStepLabel from '@material-ui/core/StepLabel';
+
 import StepperButton from '../Button/IconButton';
 import NumericInput from '../NumericInput/NumericInput';
 // import TextInput from '../TextInput/TextInput';
 import {
   AAA_CSS_IMPORTANT,
-  AAA_CSS_SOLID,
   AAA_CSS_CENTER,
   AAA_CSS_INLINE,
-  AAA_CSS_RIGHT
+  AAA_CSS_MIDDLE,
+  AAA_CSS_BASELINE,
+  AAA_CSS_NONE
 } from '../../constants/cssConstants';
 
 const styleClasses = theme => ({
   stepperIcon: {
-    color: theme.palette.colorVariables.DARKER_BLUE,
+    color: theme.palette.primary.main,
     width: '24px',
-    height: '24px',
-    '&:active,&:hover': {
-      color: `${theme.palette.primary.main} ${AAA_CSS_IMPORTANT}`
-    }
+    height: '24px'
   },
   stepperInput: {
     height: '48px',
-    'vertical-align': 'baseline !important',
-    border: `solid 1px ${theme.palette.colorVariables.GRAY}`,
+    'vertical-align': `${AAA_CSS_BASELINE} ${AAA_CSS_IMPORTANT}`,
     'border-radius': '4px',
     'text-align': `${AAA_CSS_CENTER}`,
-    '&:active,&:hover': {
-      background: theme.palette.colorVariables.SECONDARY_HOVER,
-      opacity: '10%',
-      border: `${AAA_CSS_SOLID} 1px ${theme.palette.colorVariables.DARKER_BLUE}`
-    },
-    '&:focus': {
-      border: `${AAA_CSS_SOLID} 2px ${theme.palette.colorVariables.DARKER_BLUE}`
+    '& input': {
+      'text-align': `${AAA_CSS_CENTER} ${AAA_CSS_IMPORTANT}`
     }
   },
   stepperLabel: {
     color: theme.palette.colorVariables.BLACK,
+    'margin-top': '8px',
     fontSize: '16px',
     [theme.breakpoints.up('md')]: {
       fontSize: '18px'
@@ -53,9 +46,12 @@ const styleClasses = theme => ({
   },
   helpText: {
     color: theme.palette.colorVariables.GRAY,
-    fontSize: '14px',
-    [theme.breakpoints.up('md')]: {
-      fontSize: '16px'
+    'margin-top': '8px',
+    '& span': {
+      fontSize: '14px',
+      [theme.breakpoints.up('md')]: {
+        fontSize: `16px  ${AAA_CSS_IMPORTANT}`
+      }
     }
   },
   formControl: {
@@ -70,18 +66,18 @@ const styleClasses = theme => ({
     },
     '& svg': {
       display: `${AAA_CSS_INLINE}`,
-      float: `${AAA_CSS_RIGHT}`,
       fontSize: '20px',
-      marginRight: '8px'
+      marginLeft: '8px',
+      marginRight: '8px',
+      'vertical-align': `${AAA_CSS_MIDDLE}`
     }
   },
   disabled: {
-    background: theme.palette.colorVariables.TRANSPARENT,
-    borderColor: `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`
-  },
-  root: {
-    '& input': {
-      'text-align': 'center !important'
+    'background-color': `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`,
+    borderColor: `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`,
+    border: `${AAA_CSS_NONE}`,
+    '&:hover': {
+      border: `${AAA_CSS_NONE}`
     }
   }
 });
@@ -102,7 +98,11 @@ class NumericalStepper extends Component {
     } = this.props;
 
     return (
-      <MUIStep data-quid={id} disabled={disabled} classes={classes.root}>
+      <MUIStep
+        data-quid={`numericalStepper-${id}`}
+        disabled={disabled}
+        classes={classes.root}
+      >
         <MUIStepLabel
           data-quid="stepLabel"
           classes={{ label: classes.stepperLabel }}
@@ -122,12 +122,13 @@ class NumericalStepper extends Component {
         </StepperButton>
 
         <NumericInput
-          classes={{ root: classes.root }}
+          id="1"
           className={classes.stepperInput}
           formControlClass={classes.formControl}
           type="text"
           value={inputText}
           error={error}
+          disabled={disabled}
         />
         <StepperButton
           id="increaseStepper"
@@ -137,13 +138,15 @@ class NumericalStepper extends Component {
           <AddIcon data-quid="addIcon" className={classes.stepperIcon} />
         </StepperButton>
         <MUIStepLabel
-          data-quid="helpTextLabel"
-          classes={{ label: classes.helpText, error: classes.error }}
+          data-quid="errorTextLabel"
+          classes={{ error: classes.error }}
           className={classes.helpText}
-          error={!disabled ? error : false}
+          error={error}
         >
+          {error && <ReportProblem />}
           {errorText}
-          {error && !disabled && <ReportProblem />}
+        </MUIStepLabel>
+        <MUIStepLabel data-quid="helpTextLabel" className={classes.helpText}>
           {helpText}
         </MUIStepLabel>
       </MUIStep>
