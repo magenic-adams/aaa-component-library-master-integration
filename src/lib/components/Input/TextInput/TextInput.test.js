@@ -2,7 +2,7 @@ import React from 'react';
 import TextInput from './TextInput';
 import { expect } from "chai";
 import { mount } from 'enzyme';
-import { AAAPrimaryTheme } from '..';
+import { AAAPrimaryTheme } from '../..';
 
 function createInput(props) {
   return mount(<AAAPrimaryTheme><TextInput {...props} /></AAAPrimaryTheme>)

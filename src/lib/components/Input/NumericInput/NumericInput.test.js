@@ -20,7 +20,7 @@ function getProps(override) {
     name: "enabledName",
     labelName: "Enabled Label",
     type: "text",
-    value:"",
+    value: "12301991",
     onChange: jest.fn(v => v),
     onClear: jest.fn(v => v),
     mask: [/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/],
@@ -29,10 +29,24 @@ function getProps(override) {
 }
 
 describe("NumericInput", () => {
-  it('has rendered a numeric input', () => {
-    const wrapper = createInput(getProps());
+  it('formats the given numeric value based on mask (dd / dd / dddd', () => {
+    const props = getProps();
+    const wrapper = createInput(props);
 
-    expect(wrapper.find("label").text()).to.equal("Enabled Label");
-    expect(wrapper.find("Input").get(0).props.value).to.equal("");
+    expect(wrapper.find("input").getDOMNode().value).to.equal("12 / 30 / 1991");
+  });
+
+  it('formats the given numeric value based on mask (dd - dd - dddd', () => {
+    const props = getProps({ mask: [/\d/, /\d/, ' ', '-', ' ', /\d/, /\d/, ' ', '-', ' ', /\d/, /\d/, /\d/, /\d/] });
+    const wrapper = createInput(props);
+
+    expect(wrapper.find("input").getDOMNode().value).to.equal("12 - 30 - 1991");
+  });
+
+  it('will not accept non numeric values', () => {
+    const props = getProps({ value: "t*/1" });
+    const wrapper = createInput(props);
+
+    expect(wrapper.find("input").getDOMNode().value).to.equal("1");
   });
 });

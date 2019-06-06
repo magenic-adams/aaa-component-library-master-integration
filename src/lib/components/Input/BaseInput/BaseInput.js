@@ -136,6 +136,7 @@ function Input({
   error,
   helperText,
   id,
+  inputComponent,
   labelName,
   name,
   placeholder,
@@ -191,6 +192,7 @@ function Input({
           'data-quid': `BaseInput-${id}`,
           ref: forwardedRef,
         }}
+        inputComponent={inputComponent}
         name={name}
         placeholder={labelName ? null : placeholder}
         type={type}
@@ -234,6 +236,7 @@ Input.defaultProps = {
   forwardedRef: React.createRef(),
   disabled: false,
   helperText: null,
+  inputComponent: undefined,
   labelName: null,
   placeholder: '',
   type: 'text',

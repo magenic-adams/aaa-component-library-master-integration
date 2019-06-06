@@ -34,7 +34,7 @@ stories
           name="numericName" 
           helperText={text('Numeric Helper Text', 'Change the Helper Text')} 
           labelName={text('Numeric Label', 'Change the label')} 
-          value={text('Numeric Value', '1')}
+          value={text('Numeric Value', 12301991)}
           mask={[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/]}
           onBlur={action('blur')} 
           onChange={action('change')} 
