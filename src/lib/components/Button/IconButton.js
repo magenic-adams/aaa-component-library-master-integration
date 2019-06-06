@@ -7,23 +7,40 @@ import AAAButton from './Button';
 
 const styleClasses = theme => ({
   iconButton: {
-    width: '48px',
-    height: '48px',
-    margin: '8px 8px',
-    border: 'solid 1px #717174',
+    width: '48px !important',
+    height: '48px !important',
+    'margin-left': '8px',
+    'margin-right': '8px',
+    border: 'solid 1px #717174 !important',
     'border-radius': '4px',
-    'background-color': '#FFFFFF',
+    'background-color': '#FFFFFF !important',
     '&:active,&:hover': {
+      'background-color': `${
+        theme.palette.colorVariables.SECONDARY_HOVER
+      } !important`,
       '& svg': {
-        color: '#FFFFFF'
+        color: `${theme.palette.primary.main} !important`
       }
     }
+  },
+  root: {
+    'vertical-align': 'bottom'
   }
 });
 class IconButton extends Component {
   render() {
-    const { classes, children } = this.props;
-    return <AAAButton className={classes.iconButton}>{children}</AAAButton>;
+    const { classes, children, disabled, onClick, id } = this.props;
+    return (
+      <AAAButton
+        classes={{ root: classes.root }}
+        onClick={onClick}
+        disabled={disabled}
+        className={classes.iconButton}
+        id={id}
+      >
+        {children}
+      </AAAButton>
+    );
   }
 }
 
