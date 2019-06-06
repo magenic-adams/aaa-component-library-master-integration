@@ -1,19 +1,8 @@
-/* eslint-disable react/require-default-props */
-/* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import cx from 'clsx';
-
-type propTypes = {
-  // MUI Decorator
-  classes: PropTypes.object,
-  // Passed Props
-  className: PropTypes.string,
-  children?: PropTypes.string | PropTypes.node,
-  htmlFor?: PropTypes.string,
-};
 
 const styleClasses = theme => ({
   formControl: {
@@ -37,26 +26,30 @@ const styleClasses = theme => ({
   }
 })
 
-class Label extends Component<propTypes> {
-  render() {
-    const {
-      classes,
-      className,
-      children,
-      htmlFor,
-    } = this.props;
+type propTypes = {
+  // Decorator Props
+  classes: PropTypes.object,
+  // Passed Props
+  children: PropTypes.string,
+  className?: PropTypes.string,
+  htmlFor: PropTypes.string,
+};
 
-    return (
-      <InputLabel
-        className={cx("InputLabel", className)}
-        classes={classes}
-        disableAnimation
-        htmlFor={htmlFor}
-        shrink={false}>
-        {children}
-      </InputLabel>
-    );
-  }
+function Label({ classes, className, children, htmlFor }): propTypes {
+  return (
+    <InputLabel
+      className={cx("InputLabel", className)}
+      classes={classes}
+      disableAnimation
+      htmlFor={htmlFor}
+      shrink={false}>
+      {children}
+    </InputLabel>
+  );
+}
+
+Label.defaultProps = {
+  className: ""
 }
 
 export default withStyles(styleClasses, { withTheme: true })(Label);

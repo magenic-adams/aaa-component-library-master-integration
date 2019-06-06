@@ -12,11 +12,11 @@ import sinon from 'sinon';
 
 // Constants
 import {
-  AAA_COLOR_DISABLED,
+  AAA_COLOR_MAIN_DISABLED,
   AAA_COLOR_MAIN_BLUE,
-  // AAA_COLOR_MAIN_DARK_BLUE,
+  AAA_COLOR_MAIN_WHITE,
   AAA_COLOR_TRANSPARENT,
-} from '../../constants/colors'
+} from '../../constants/colors';
 
 // Test Utilities
 import {getDOMNodeComputedStyle} from "../../../../test/DOM";
@@ -50,7 +50,11 @@ describe("Button", () => {
   
   beforeEach(() => {
     spy = sinon.spy();
-    props = getFakeProps({onClick: spy, forwardedRef: React.createRef()});
+    props = getFakeProps({
+      className: 'user-defined-button-class',
+      onClick: spy,
+      forwardedRef: React.createRef()
+    });
     ButtonWrapper = createButtonWithTheme('Here lies a button', props);
     ButtonNode = ButtonWrapper.getDOMNode();
   });
@@ -72,15 +76,23 @@ describe("Button", () => {
     });
   });
   
-  describe("rendering", () => {
+  describe("rendering HTML element", () => {
+    it('includes a class name of "Button" on the HTML element', () => {
+      expect(ButtonNode.className).to.include('Button');
+    });
+
+    it('includes an HTML class property when passed a React className prop', () => {
+      expect(ButtonNode.className).to.include(props.className);
+    });
+
     it('has rendered button text', () => {
       expect(ButtonWrapper.text()).to.equal('Here lies a button');
     });
 
-    it ('forwards a reference to the underlying button', () => {
+    it ('forwards a reference to the underlying button with forwardedRef prop', () => {
       const ReactButton = ButtonWrapper.find(Button);
       expect(ReactButton.props().forwardedRef.current).to.equal(ButtonWrapper.getDOMNode());
-    })
+    });
   });
   
   describe("event handlers", () => {
@@ -94,13 +106,12 @@ describe("Button", () => {
 
 describe("Button States", () => {
   describe("primary state", () => {
-    const ref = React.createRef();
-    const props = getFakeProps({color: 'primary', forwardedRef: ref});
+    const props = getFakeProps({color: 'primary'});
     const PrimaryButtonWrapper = createButtonWithTheme('Here lies a primary button', props);
 
-    it('has text color of white', () => {
+    it('has text color of AAA_COLOR_MAIN_WHITE', () => {
       const backgroundStyle = getDOMNodeComputedStyle(PrimaryButtonWrapper.getDOMNode(), 'color');
-      expect(backgroundStyle).to.equal('rgb(255, 255, 255)');
+      expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_WHITE);
     });
 
     it('has a background color of AAA_COLOR_MAIN_BLUE', () => {
@@ -108,10 +119,10 @@ describe("Button States", () => {
       expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_BLUE);
     });
 
-    it('has a background color of AAA_COLOR_DISABLED when disabled', () => {
+    it('has a background color of AAA_COLOR_MAIN_DISABLED when disabled', () => {
       const PrimaryDisabledButtonWrapper = createButtonWithTheme('Here lies a disabled button', getFakeProps({disabled: true}));
       const backgroundStyle = getDOMNodeComputedStyle(PrimaryDisabledButtonWrapper.getDOMNode(), 'background');
-      expect(backgroundStyle).to.equal(AAA_COLOR_DISABLED);
+      expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
     });
     
   });
@@ -130,10 +141,10 @@ describe("Button States", () => {
       expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_BLUE);
     });
 
-    it('has a border color of AAA_COLOR_DISABLED when disabled', () => {
+    it('has a border color of AAA_COLOR_MAIN_DISABLED when disabled', () => {
       const SecondaryDisabledButtonWrapper = createButtonWithTheme('Here lies a disabled button', getFakeProps({color: 'secondary', disabled: true}));
       const borderColorStyle = getDOMNodeComputedStyle(SecondaryDisabledButtonWrapper.getDOMNode(), 'border-top-color');
-      expect(borderColorStyle).to.equal(AAA_COLOR_DISABLED);
+      expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
     });
   });
 });
