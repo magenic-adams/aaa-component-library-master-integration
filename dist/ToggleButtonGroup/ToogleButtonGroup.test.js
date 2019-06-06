@@ -18,7 +18,7 @@ import ToggleButtonGroup from './ToggleButtonGroup'; // Test Utilities
 import { getDOMNodeComputedStyle } from '../../../../test/DOM';
 import Button from '../Button/Button'; // Constants
 
-import { AAA_COLOR_TRANSPARENT, AAA_COLOR_MAIN_BLUE, AAA_COLOR_DISABLED } from '../../constants/colors';
+import { AAA_COLOR_TRANSPARENT, AAA_COLOR_MAIN_BLUE, AAA_COLOR_MAIN_DISABLED } from '../../constants/colors';
 
 function getFakeProps(overrides) {
   return _objectSpread({
@@ -116,9 +116,12 @@ describe('ToggleButtonGroup', function () {
         ToggleButtonWrapper.find(ButtonGroup).get(0);
       }).to.throw('Invalid object keys are present. Keys should contain id and text');
     });
+    it('attaches a data-quid attribute to the input base element', function () {
+      expect(ToggleButtonWrapper.find('button').at(0).getDOMNode().dataset.quid).to.equal("ToggleButton-".concat(props.options[0].id));
+    });
   });
   describe('event handlers', function () {
-    it("will call it's click event handler", function () {
+    it("will call it's click event handler and return selected button value", function () {
       var leftButton = ToggleButtonWrapper.find(Button).at(0);
       leftButton.simulate('click');
       expect(spy.calledOnce).to.equal(true);
@@ -126,6 +129,17 @@ describe('ToggleButtonGroup', function () {
         id: 1,
         text: 'Yes'
       });
+    });
+  });
+  describe('base styles', function () {
+    it('has 48px height', function () {
+      var heightStyle = getDOMNodeComputedStyle(ToggleButtonWrapper.find(Button).at(0).getDOMNode(), 'height');
+      expect(heightStyle).to.equal('48px');
+    });
+    it('has 18px label', function () {
+      var label = ToggleButtonWrapper.find('.MuiButton-label').at(0).getDOMNode();
+      var heightStyle = getDOMNodeComputedStyle(label, 'font-size');
+      expect(heightStyle).to.equal('18px');
     });
   });
   describe('button states', function () {
@@ -137,6 +151,10 @@ describe('ToggleButtonGroup', function () {
       var borderColorStyle = getDOMNodeComputedStyle(ToggleButtonWrapper.find(Button).at(0).getDOMNode(), 'border-top-color');
       expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_BLUE);
     });
+    it('has text color of white', function () {
+      var textColor = getDOMNodeComputedStyle(ToggleButtonWrapper.find(Button).at(0).getDOMNode(), 'color');
+      expect(textColor).to.equal('rgb(255, 255, 255)');
+    });
     it('should set button to active when has matched value in options', function () {
       props = getFakeProps({
         value: 1
@@ -147,7 +165,7 @@ describe('ToggleButtonGroup', function () {
       expect(leftButton.props().className).to.contains('active');
       expect(rightButton.props().className).to.not.contains('active');
     });
-    it('should set all elements to disabled', function () {
+    it('should set toggle buttons color AAA_COLOR_MAIN_DISABLED when disabled', function () {
       props = getFakeProps({
         disabled: true
       });
@@ -156,8 +174,8 @@ describe('ToggleButtonGroup', function () {
       var rightButton = ToggleButtonWrapper.find(Button).at(1);
       var leftButtonBorderColorStyle = getDOMNodeComputedStyle(leftButton.getDOMNode(), 'border-top-color');
       var rightButtonBorderColorStyle = getDOMNodeComputedStyle(rightButton.getDOMNode(), 'border-top-color');
-      expect(leftButtonBorderColorStyle).to.equal(AAA_COLOR_DISABLED);
-      expect(rightButtonBorderColorStyle).to.equal(AAA_COLOR_DISABLED);
+      expect(leftButtonBorderColorStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
+      expect(rightButtonBorderColorStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
     });
   });
 });

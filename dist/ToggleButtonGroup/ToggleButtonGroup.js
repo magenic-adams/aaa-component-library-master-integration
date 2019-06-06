@@ -93,7 +93,7 @@ function ToggleButtonGroup(_ref) {
   }, React.createElement(Button, {
     className: cx("".concat(getActiveClass(value, options[0].id, classes), " ").concat(classes.left), className),
     color: "secondary",
-    "data-quid": "toggleBtn-".concat(options[0].id),
+    id: "ToggleButton-".concat(options[0].id),
     disabled: disabled,
     onClick: function onClick() {
       return handleClick(options[0], onSelect);
@@ -101,7 +101,7 @@ function ToggleButtonGroup(_ref) {
   }, options[0].text), React.createElement(Button, {
     className: cx("".concat(getActiveClass(value, options[1].id, classes), " ").concat(classes.right), className),
     color: "secondary",
-    "data-quid": "toggleBtn-".concat(options[1].id),
+    id: "ToggleButton-".concat(options[1].id),
     disabled: disabled,
     onClick: function onClick() {
       return handleClick(options[1], onSelect);
@@ -114,5 +114,6 @@ ToggleButtonGroup.defaultProps = {
   value: ''
 };
 export default withStyles(styleClasses, {
+  index: 0,
   withTheme: true
 })(ToggleButtonGroup);

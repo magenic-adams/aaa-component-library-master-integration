@@ -126,10 +126,18 @@ describe('ToggleButtonGroup', () => {
         'Invalid object keys are present. Keys should contain id and text'
       );
     });
+
+    it('attaches a data-quid attribute to the input base element', () => {
+      expect(
+        ToggleButtonWrapper.find('button')
+          .at(0)
+          .getDOMNode().dataset.quid
+      ).to.equal(`ToggleButton-${props.options[0].id}`);
+    });
   });
 
   describe('event handlers', () => {
-    it("will call it's click event handler", () => {
+    it("will call it's click event handler and return selected button value", () => {
       const leftButton = ToggleButtonWrapper.find(Button).at(0);
 
       leftButton.simulate('click');
