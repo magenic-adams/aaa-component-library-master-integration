@@ -9,16 +9,14 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import ReportProblem from '@material-ui/icons/ReportProblem';
 import MUIStepLabel from '@material-ui/core/StepLabel';
 
-import StepperButton from '../Button/IconButton';
-import NumericInput from '../NumericInput/NumericInput';
-// import TextInput from '../TextInput/TextInput';
+import StepperButton from '../Button/StepperIconButton';
+import NumericInput from '../Input/NumericInput/NumericInput';
 import {
   AAA_CSS_IMPORTANT,
   AAA_CSS_CENTER,
   AAA_CSS_INLINE,
   AAA_CSS_MIDDLE,
-  AAA_CSS_BASELINE,
-  AAA_CSS_NONE
+  AAA_CSS_BASELINE
 } from '../../constants/cssConstants';
 
 const styleClasses = theme => ({
@@ -29,16 +27,16 @@ const styleClasses = theme => ({
   },
   stepperInput: {
     height: '48px',
-    'vertical-align': `${AAA_CSS_BASELINE} ${AAA_CSS_IMPORTANT}`,
-    'border-radius': '4px',
-    'text-align': `${AAA_CSS_CENTER}`,
+    verticalAlign: `${AAA_CSS_BASELINE} ${AAA_CSS_IMPORTANT}`,
+    borderRadius: '4px',
+    textAlign: `${AAA_CSS_CENTER}`,
     '& input': {
-      'text-align': `${AAA_CSS_CENTER} ${AAA_CSS_IMPORTANT}`
+      textAlign: `${AAA_CSS_CENTER} ${AAA_CSS_IMPORTANT}`
     }
   },
   stepperLabel: {
     color: theme.palette.colorVariables.BLACK,
-    'margin-top': '8px',
+    marginTop: '8px',
     fontSize: '16px',
     [theme.breakpoints.up('md')]: {
       fontSize: '18px'
@@ -46,7 +44,7 @@ const styleClasses = theme => ({
   },
   helpText: {
     color: theme.palette.colorVariables.GRAY,
-    'margin-top': '8px',
+    marginTop: '8px',
     '& span': {
       fontSize: '14px',
       [theme.breakpoints.up('md')]: {
@@ -55,8 +53,8 @@ const styleClasses = theme => ({
     }
   },
   formControl: {
-    width: '100px',
-    'margin-top': '0'
+    width: `25% ${AAA_CSS_IMPORTANT}`,
+    marginTop: '0'
   },
   error: {
     color: theme.palette.error.main,
@@ -69,15 +67,7 @@ const styleClasses = theme => ({
       fontSize: '20px',
       marginLeft: '8px',
       marginRight: '8px',
-      'vertical-align': `${AAA_CSS_MIDDLE}`
-    }
-  },
-  disabled: {
-    'background-color': `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`,
-    borderColor: `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`,
-    border: `${AAA_CSS_NONE}`,
-    '&:hover': {
-      border: `${AAA_CSS_NONE}`
+      verticalAlign: `${AAA_CSS_MIDDLE}`
     }
   }
 });
@@ -98,31 +88,27 @@ class NumericalStepper extends Component {
     } = this.props;
 
     return (
-      <MUIStep
-        data-quid={`numericalStepper-${id}`}
-        disabled={disabled}
-        classes={classes.root}
-      >
+      <MUIStep id={id} disabled={disabled} classes={classes.root}>
         <MUIStepLabel
-          data-quid="stepLabel"
+          id={`${id}-stepLabel`}
           classes={{ label: classes.stepperLabel }}
         >
           {labelText}
         </MUIStepLabel>
         <StepperButton
-          id="decreaseStepper"
+          id={`${id}-decreaseStepper`}
           disabled={disabled}
           onClick={onDecrease}
         >
           <RemoveIcon
-            data-quid="removeIcon"
+            id={`${id}-removeIcon`}
             disabled={disabled}
             className={classes.stepperIcon}
           />
         </StepperButton>
 
         <NumericInput
-          id="1"
+          id={`${id}-numericInput`}
           className={classes.stepperInput}
           formControlClass={classes.formControl}
           type="text"
@@ -131,14 +117,14 @@ class NumericalStepper extends Component {
           disabled={disabled}
         />
         <StepperButton
-          id="increaseStepper"
+          id={`${id}-increaseStepper`}
           disabled={disabled}
           onClick={onIncrease}
         >
-          <AddIcon data-quid="addIcon" className={classes.stepperIcon} />
+          <AddIcon id={`${id}-addIcon`} className={classes.stepperIcon} />
         </StepperButton>
         <MUIStepLabel
-          data-quid="errorTextLabel"
+          id={`${id}-component-error-text`}
           classes={{ error: classes.error }}
           className={classes.helpText}
           error={error}
@@ -146,7 +132,10 @@ class NumericalStepper extends Component {
           {error && <ReportProblem />}
           {errorText}
         </MUIStepLabel>
-        <MUIStepLabel data-quid="helpTextLabel" className={classes.helpText}>
+        <MUIStepLabel
+          id={`${id}-component-helper-text`}
+          className={classes.helpText}
+        >
           {helpText}
         </MUIStepLabel>
       </MUIStep>
