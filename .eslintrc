@@ -10,6 +10,7 @@
     ],
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
+    "semi": [1, "always"],
     "import/imports-first": ["error", "absolute-first"]
   },
   "parser": "babel-eslint",

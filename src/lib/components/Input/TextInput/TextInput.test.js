@@ -1,12 +1,11 @@
 import React from 'react';
-import NumericInput from './NumericInput';
-import BaseInput from '../BaseInput/BaseInput';
+import TextInput from './TextInput';
 import { expect } from "chai";
 import { mount } from 'enzyme';
 import { AAAPrimaryTheme } from '..';
 
 function createInput(props) {
-  return mount(<AAAPrimaryTheme><NumericInput {...props} /></AAAPrimaryTheme>)
+  return mount(<AAAPrimaryTheme><TextInput {...props} /></AAAPrimaryTheme>)
 }
 
 function getProps(override) {
@@ -15,10 +14,9 @@ function getProps(override) {
     name: "enabledName",
     labelName: "Enabled Label",
     type: "text",
-    value:"",
+    value: "Enabled",
     onChange: jest.fn(v => v),
     onClear: jest.fn(v => v),
-    mask: [/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/],
     ...override
   };
 }
@@ -28,6 +26,6 @@ describe("Input", function () {
     const wrapper = createInput(getProps());
 
     expect(wrapper.find("label").text()).to.equal("Enabled Label");
-    expect(wrapper.find("Input").get(0).props.value).to.equal("");
+    expect(wrapper.find("input").get(0).props.value).to.equal("Enabled");
   });
 });
