@@ -17,7 +17,8 @@ type propTypes = {
 
 const styleClasses = theme => ({
   root: {
-    height: '48px'
+    height: '48px',
+    background: theme.palette.colorVariables.TRANSPARENT
   },
   gutters: {
     padding: '0 13px 0 13px'
@@ -50,7 +51,7 @@ const styleClasses = theme => ({
 });
 
 function SelectListItemText({ classes, item, onSelect }: propTypes) {
-  const { id, display, isSelected } = item;
+  const { display, id, isSelected } = item;
 
   return (
     item && (
@@ -77,6 +78,6 @@ function SelectListItemText({ classes, item, onSelect }: propTypes) {
   );
 }
 
-export default withStyles(styleClasses, { withTheme: true })(
+export default withStyles(styleClasses, { index: 0, withTheme: true })(
   SelectListItemText
 );
