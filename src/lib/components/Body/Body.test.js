@@ -28,7 +28,7 @@ function createBodyTextWithTheme(children, props = {}) {
   return ThemeBody;
 }
 
-describe.only("Body", () => {
+describe("Body", () => {
   const props = { id: 'unique-identifier', className: 'client-body-class' };
   const BodyWrapper = createBodyTextWithTheme('Here lies body text', props);
   const BodyNode = BodyWrapper.getDOMNode();
@@ -100,7 +100,7 @@ describe.only("Body", () => {
     });
 
     it('has a data attribute of data-quid passed to underlying html element', () => {
-      expect(BodyNode.dataset.quid).to.equal(props.id);
+      expect(BodyNode.dataset.quid).to.equal(`Body-${props.id}`);
     });
 
     it('has a className of Body', () => {

@@ -32,7 +32,7 @@ function Headline({
   return (
     <h1
       className={cx('Headline', classes.root, className)}
-      data-quid={id}
+      data-quid={`Headline-${id}`}
     >
       {children}
     </h1>

@@ -73,7 +73,7 @@ describe.only("Subtitle", () => {
     });
 
     it('has a data attribute of data-quid passed to underlying html element', () => {
-      expect(SubtitleNode.dataset.quid).to.equal(props.id);
+      expect(SubtitleNode.dataset.quid).to.equal(`Subtitle-${props.id}`);
     });
 
     it('has a className of Subtitle', () => {

@@ -28,7 +28,7 @@ function createSubheadlineWithTheme(children, props = {}) {
   return ThemeSubheadline;
 }
 
-describe.only("Subheadline", () => {
+describe("Subheadline", () => {
   const props = { id: 'unique-identifier', className: 'client-subheadline-class' };
   const SubheadlineWrapper = createSubheadlineWithTheme('Here lies a subheadline', props);
   const SubheadlineNode = SubheadlineWrapper.getDOMNode();
@@ -77,7 +77,7 @@ describe.only("Subheadline", () => {
     });
 
     it('has a data attribute of data-quid passed to underlying html element', () => {
-      expect(SubheadlineNode.dataset.quid).to.equal(props.id);
+      expect(SubheadlineNode.dataset.quid).to.equal(`Subheadline-${props.id}`);
     });
 
     it('has a className of Subheadline', () => {

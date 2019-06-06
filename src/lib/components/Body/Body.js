@@ -40,7 +40,7 @@ function Body({
         {[classes.secondary]: secondary},
         className,
       )}
-      data-quid={id}
+      data-quid={`Body-${id}`}
     >
       {children}
     </p>

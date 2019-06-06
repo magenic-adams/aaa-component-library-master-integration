@@ -32,7 +32,7 @@ function Subtitle({
   return (
     <div
       className={cx('Subtitle', classes.root, className)}
-      data-quid={id}
+      data-quid={`Subtitle-${id}`}
     >
       {children}
     </div>

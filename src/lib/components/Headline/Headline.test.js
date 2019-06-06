@@ -27,7 +27,7 @@ function createHeadlineWithTheme(children, props = {}) {
   return ThemeHeadline;
 }
 
-describe.only("Headline", () => {
+describe("Headline", () => {
   const props = { id: 'unique-identifier', className: 'client-headline-class' };
   const HeadlineWrapper = createHeadlineWithTheme('Here lies a headline', props);
   const HeadlineNode = HeadlineWrapper.getDOMNode();
@@ -75,7 +75,7 @@ describe.only("Headline", () => {
     });
 
     it('has a data attribute of data-quid passed to underlying html element', () => {
-      expect(HeadlineNode.dataset.quid).to.equal(props.id);
+      expect(HeadlineNode.dataset.quid).to.equal(`Headline-${props.id}`);
     });
 
     it('has a className of Headline', () => {
