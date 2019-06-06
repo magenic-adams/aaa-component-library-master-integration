@@ -81,6 +81,9 @@ const styleClasses = theme => ({
     '&:focus': {
       boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
     },
+    '&:hover': {
+      background: theme.palette.error.ERROR_HOVER
+    },
   },
   errorTextWrapper: {
     marginTop: 8,
@@ -111,9 +114,11 @@ type propTypes = {
   className?: PropTypes.string,
   formControlClass?: PropTypes.string,
   disabled?: PropTypes.bool,
+  disableWarning?: PropTypes.bool,
   error?: PropTypes.string,
   helperText?: PropTypes.string,
   id: PropTypes.string,
+  inputComponent?: PropTypes.element,
   labelName?: PropTypes.string,
   name: PropTypes.string,
   placeholder?: PropTypes.string,
@@ -126,13 +131,14 @@ type propTypes = {
 };
 
 
-function Input({
+function BaseInput({
   autoFocus,
   classes,
   className,
   forwardedRef,
   formControlClass,
   disabled,
+  disableWarning,
   error,
   helperText,
   id,
@@ -202,7 +208,7 @@ function Input({
         onFocus={onFocus}
       />
 
-      {error && (
+      {(error && !disableWarning) && (
         <div className={classes.errorTextWrapper}>
           <MUIReportProblem
             color="error"
@@ -229,12 +235,13 @@ function Input({
   );
 }
 
-Input.defaultProps = {
+BaseInput.defaultProps = {
   autoFocus: false,
   className: '',
   formControlClass: '',
   forwardedRef: React.createRef(),
   disabled: false,
+  disableWarning: false,
   helperText: null,
   inputComponent: undefined,
   labelName: null,
@@ -248,4 +255,4 @@ Input.defaultProps = {
 };
 
 
-export default withStyles(styleClasses, { index: 0, withTheme: true })(Input);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(BaseInput);
