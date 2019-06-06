@@ -10,8 +10,11 @@
     ],
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
-    "import/imports-first": ["error", "absolute-first"],
-    "import/newline-after-import": "error"
+    "semi": [1, "always"],
+    "import/imports-first": ["error", "absolute-first"]
   },
-  "parser": "babel-eslint"
+  "parser": "babel-eslint",
+  "env": {
+    "jasmine": true
+  }
 }
