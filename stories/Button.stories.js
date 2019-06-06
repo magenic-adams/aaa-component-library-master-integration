@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
 // Components
-import {AAAPrimaryTheme, Button} from '../src/lib/components';
+import {AAAPrimaryTheme, Button, ButtonGroup} from '../src/lib/components';
 
 // Internal
 import {ElementContainer} from '../src/lib/internal/ElementContainer/ElementContainer';
@@ -23,7 +23,7 @@ stories
         </ElementContainer>
       </div>
       </AAAPrimaryTheme>
-    )
+    );
   })
   .add('all buttons', () => (
     <AAAPrimaryTheme>
@@ -44,9 +44,11 @@ stories
           </ul>
         </div>
         <ElementContainer>
-          <div>
-            <Button color="primary" onClick={action('clicked')}>Primary</Button>
-            <Button color="primary" disabled onClick={action('clicked')}>Primary disabled</Button>
+          <div className="u-flex--center">
+            <ButtonGroup>
+              <Button color="primary" onClick={action('clicked')}>Primary</Button>
+              <Button color="primary" disabled onClick={action('clicked')}>Primary disabled</Button>
+            </ButtonGroup>
           </div>
         </ElementContainer>
       </div>
@@ -65,12 +67,14 @@ stories
         </ul>
       </div>
       <ElementContainer>
-        <div>
-          <Button color="secondary" onClick={action('clicked')}>Secondary</Button>
-          <Button color="secondary" disabled onClick={action('clicked')}>Secondary disabled</Button>
+        <div className="u-flex--center">
+          <ButtonGroup>
+            <Button color="secondary" onClick={action('clicked')}>Secondary</Button>
+            <Button color="secondary" disabled onClick={action('clicked')}>Secondary disabled</Button>
+          </ButtonGroup>
         </div>
       </ElementContainer>
 
     </AAAPrimaryTheme>
     )
-  )
+  );

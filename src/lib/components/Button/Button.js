@@ -22,6 +22,7 @@ type propTypes = {
 const styleClasses = theme => {
   return {
     root: {
+      display: 'block',
       border: 0,
       height: '48px',
       boxShadow: 'none',
@@ -63,7 +64,7 @@ const styleClasses = theme => {
       }
     }
   };
-}
+};
 
 
 function Button({
@@ -99,6 +100,6 @@ Button.defaultProps = {
   color: 'primary',
   href: null,
   forwardedRef: React.createRef(),
-}
+};
 
 export default withStyles(styleClasses, {index: 0, withTheme: true})(Button);

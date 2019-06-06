@@ -8,19 +8,20 @@ import Label from './Label/Label';
 import Link from './Link/Link';
 
 // Form Specific
-import Form from './Form/Form.js';
+import Form from './Form/Form';
+import FormGroup from './Form/FormGroup/FormGroup';
 import FormInput from './Form/FormInput/FormInput';
 
 export {
   AAAPrimaryTheme,
+  BaseInput,
   Button,
   ButtonGroup,
   Form,
+  FormGroup,
   FormInput,
-  Label
-  TextInput,
-  NumericInput,
-  BaseInput,
   Label,
-  Link
+  Link,
+  NumericInput,
+  TextInput,
 };

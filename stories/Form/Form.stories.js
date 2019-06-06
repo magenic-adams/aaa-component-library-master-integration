@@ -3,11 +3,16 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
+// MUI Components
+import Paper from '@material-ui/core/Paper';
+
 // Components
 import {
   AAAPrimaryTheme,
   Button,
+  ButtonGroup,
   Form,
+  FormGroup,
   FormInput
 } from '../../src/lib/components';
 
@@ -36,21 +41,29 @@ stories
   .add('basic form', () => {
     return (
       <AAAPrimaryTheme>
-        <div>
-          <Form
-            validate={handleValidate}
-            onSubmit={onSubmit}
-            render={({ handleSubmit }) => (
-              <form onSubmit={handleSubmit}>
-                <FormInput 
-                  name="firstName"
-                  type="text"
-                />
-                <Button onClick={handleSubmit}>Submit</Button>
-              </form>
-            )}
-          />
+        <div className="u-background--gray">
+          <Paper className="u-padding--50">
+              <Form
+                validate={handleValidate}
+                onSubmit={onSubmit}
+                render={({ handleSubmit }) => (
+                  <form onSubmit={handleSubmit}>
+                    <FormGroup>
+                      <FormInput 
+                        labelName="First name"
+                        name="firstName"
+                        type="text"
+                      />
+                    </FormGroup>
+                    <ButtonGroup>
+                      <Button onClick={handleSubmit}>Submit</Button>
+                      <Button color="secondary" onClick={handleSubmit}>Skip</Button>
+                    </ButtonGroup>
+                  </form>
+                )}
+              />
+          </Paper>
         </div>
       </AAAPrimaryTheme>
-    )
-  })
+    );
+  });

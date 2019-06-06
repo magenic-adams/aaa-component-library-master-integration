@@ -13,22 +13,29 @@ type propTypes = {
   className?: PropTypes.string
 };
 
-const styleClasses = theme => ({
+const styleClasses = () => ({
   root: {
     width: '100%',
-    '& .Button': {
-      marginTop: '8px',
-      marginBottom: '8px'
+    marginTop: 24,
+    marginBottom: 24,
+    '& .Button:nth-child(n+1)': {
+      marginTop: 8,
     },
-    [theme.breakpoints.up('md')]: {
-      width: 'inherit',
-    },
+    // [theme.breakpoints.up('md')]: {
+    //   width: 'inherit',
+    //   '& .Button:nth-child(n+1)': {
+    //     marginTop: 0,
+    //   },
+    // },
   }
-})
+});
 
 
-// eslint-disable-next-line no-unused-vars
-function ButtonGroup({children, classes = {}, className = '', theme}:propTypes){
+function ButtonGroup({
+  children,
+  classes,
+  className,
+}:propTypes){
   return (
     <div className={cx('ButtonGroup', classes.root, className)}>
       {children}
@@ -38,6 +45,6 @@ function ButtonGroup({children, classes = {}, className = '', theme}:propTypes){
 
 ButtonGroup.defaultProps = {
   className: ''
-}
+};
 
 export default withStyles(styleClasses, {withTheme: true})(ButtonGroup);
