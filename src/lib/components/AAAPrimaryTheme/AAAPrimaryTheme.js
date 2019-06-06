@@ -9,10 +9,10 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 // Colors
 import {
-  AAA_COLOR_DISABLED,
-  AAA_COLOR_ERROR,
+  AAA_COLOR_MAIN_ERROR,
   AAA_COLOR_MAIN_BLACK,
   AAA_COLOR_MAIN_BLUE,
+  AAA_COLOR_MAIN_DISABLED,
   AAA_COLOR_MAIN_DARK_BLUE,
   AAA_COLOR_MAIN_DARKER_BLUE,
   AAA_COLOR_MAIN_GRAY,
@@ -41,10 +41,10 @@ const theme = createMuiTheme({
       dark: AAA_COLOR_MAIN_DARK_BLUE,
     },
     error: {
-      main: AAA_COLOR_ERROR,
+      main: AAA_COLOR_MAIN_ERROR,
     },
     disabled: {
-      main: AAA_COLOR_DISABLED,
+      main: AAA_COLOR_MAIN_DISABLED,
     },
     // These are use defined variables we can use
     colorVariables: {
@@ -71,5 +71,5 @@ export default function AAAThemeProvider({children}:propTypes){
     <ThemeProvider theme={theme}>
       {children}
     </ThemeProvider>
-  )
+  );
 }

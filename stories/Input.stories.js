@@ -5,7 +5,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import '../src/css/helpers.css';
 
 // Components
-import { AAAPrimaryTheme, Input } from '../src/lib/components';
+import { AAAPrimaryTheme, TextInput, NumericInput } from '../src/lib/components';
 
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
 
@@ -17,44 +17,81 @@ stories
     return (
       <AAAPrimaryTheme>
         <ElementContainer>
-          <div>
-            <Input
-              onChange={action('change')}
-              labelName={text('Input label', 'Change the label')}
-            />
-            <Input id="enabledId" name="enabledName" labelName={text('Input label', 'Change the label')} type="text" onChange={action('change')} value="Enabled" onClear={() => { }} />
-          </div>
+          <TextInput 
+          id="enabledId" 
+          name="enabledName" 
+          helperText={text('Input Helper Text', 'Change the Helper Text')} 
+          labelName={text('Text Label', 'Change the Label')} 
+          value={text('Text Value', 'Change the Value')}
+          onBlur={action('blur')} 
+          onChange={action('change')} 
+          onClear={action('clear')} />
+        </ElementContainer>
+
+        <ElementContainer>
+          <NumericInput 
+          id="numericId" 
+          name="numericName" 
+          helperText={text('Numeric Helper Text', 'Change the Helper Text')} 
+          labelName={text('Numeric Label', 'Change the label')} 
+          value={text('Numeric Value', '1')}
+          mask={[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/]}
+          onBlur={action('blur')} 
+          onChange={action('change')} 
+          onClear={action('clear')}  
+          />
         </ElementContainer>
       </AAAPrimaryTheme>
-    )
+    );
   })
   .add('states', () => (
     <AAAPrimaryTheme>
       <h2 className='text-align-center'>ACTIVE STATE</h2>
 
       <ElementContainer>
-        <div>
-          <Input id="enabledId" name="enabledName" labelName="Enabled Label" type="text" onChange={() => { }} value="Enabled" onClear={() => { }} />
-        </div>
+        <TextInput 
+          id="enabledId" 
+          name="enabledName" 
+          helperText="Enabled Helper Text" 
+          labelName="Enabled Label" 
+          value="Enabled"
+          onBlur={action('blur')} 
+          onClear={action('clear')} 
+          onChange={action('change')}
+        />
       </ElementContainer>
 
       <h2 className='text-align-center'>DISABLED STATE</h2>
 
       <ElementContainer>
-        <div>
-        <Input disabled id="disabledId" name="disabledName" type="text" onChange={() => { }} helperText="Disabled" labelName="Disabled Label" value="Disabled" onClear={()=> {}} />
-        </div>
-
+        <TextInput 
+          disabled 
+          id="disabledId" 
+          helperText="Disabled Helper Text" 
+          labelName="Disabled Label" 
+          name="disabledName" 
+          value="Disabled"
+          onChange={action('change')} 
+          onClear={action('clear')} 
+          onBlur={action('blur')}
+        />
       </ElementContainer>
 
       <h2 className='text-align-center'>ERROR STATE</h2>
 
       <ElementContainer>
-        <div>
-          <Input error id="errorId" name="errorName" type="text" onChange={() => { }} helperText="Error" labelName="Error Label" errorText="Error text" value="Error" onClear={() => { }} />
-        </div>
-
+        <TextInput 
+          id="errorId" 
+          helperText="Error Helper Text" 
+          name="errorName"
+          error="This is an error"
+          value="(@20"
+          onBlur={action('blur')} 
+          onChange={action('change')} 
+          onClear={action('clear')}
+        />
       </ElementContainer>
+
     </AAAPrimaryTheme>
   )
-  )
+  );

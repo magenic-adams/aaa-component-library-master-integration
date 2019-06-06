@@ -23,4 +23,4 @@ export function getDOMNodeComputedStyle(domNode, cssRule){
 
 export default {
     getDOMNodeComputedStyle
-}
+};
