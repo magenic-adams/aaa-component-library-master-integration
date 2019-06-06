@@ -1,20 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { withStyles } from '@material-ui/styles';
-import cx from 'clsx';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 type propTypes = {
   // Decorator Props
-  className?: PropTypes.string,
   classes: PropTypes.object,
   // Passed Props
-  items: {
+  item: {
     id: PropTypes.string | PropTypes.number,
     value: PropTypes.string | PropTypes.number,
-    display: PropTypes.string | PropTypes.number | PropTypes.node
+    display: PropTypes.string | PropTypes.number
   }
 };
 
@@ -32,13 +29,15 @@ const styleClasses = theme => ({
     }
   },
   button: {
-    '&:active,&:hover': {
-      background: theme.palette.colorVariables.SECONDARY_HOVER
-    }
+    '&:hover': {
+      background: `${theme.palette.colorVariables.SECONDARY_HOVER} !important`
+    },
+    transition: 'none'
   },
   primary: {
     fontSize: '18px',
     letterSpacing: 'normal',
+    fontStretch: 'normal',
     lineHeight: 1.5,
     [theme.breakpoints.between('xs', 'sm')]: {
       fontSize: '16px'
@@ -50,26 +49,33 @@ const styleClasses = theme => ({
   }
 });
 
-function SelectListItemText({ item, className, classes , onSelect }: propTypes) {
-  const { display, isSelected } = item;
+function SelectListItemText({ classes, item, onSelect }: propTypes) {
+  const { id, display, isSelected } = item;
 
   return (
-    <ListItem
-      button
-      className={cx('ListItem', className)}
-      classes={classes}
-      divider
-      selected={isSelected}
-      onClick={() => onSelect(item)}
-    >
-      <ListItemText classes={{ primary: classes.primary }} primary={display} />
-    </ListItem>
+    item && (
+      <ListItem
+        button
+        data-quid={`SelectListItem-${id}`}
+        classes={{
+          root: classes.root,
+          divider: classes.divider,
+          button: classes.button,
+          disabled: classes.disabled,
+          gutters: classes.gutters
+        }}
+        divider
+        selected={isSelected}
+        onClick={() => onSelect(item)}
+      >
+        <ListItemText
+          classes={{ primary: classes.primary }}
+          primary={display}
+        />
+      </ListItem>
+    )
   );
 }
-
-SelectListItemText.defaultProps = {
-  className: ''
-};
 
 export default withStyles(styleClasses, { withTheme: true })(
   SelectListItemText
