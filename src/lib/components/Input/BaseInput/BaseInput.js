@@ -42,15 +42,6 @@ const styleClasses = theme => ({
       backgroundColor: theme.palette.disabled.main,
     },
   },
-  error: {
-    boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
-    '&:focus': {
-      boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
-    },
-    '&:hover': {
-      backgroundColor: theme.palette.colorVariables.WHITE,
-    },
-  },
   input: {
     padding: '10px 12px',
     [theme.breakpoints.up('sm')]: {
@@ -84,6 +75,12 @@ const styleClasses = theme => ({
     [theme.breakpoints.up('md')]: {
       fontSize: '16px'
     }
+  },
+  error: {
+    boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
+    '&:focus': {
+      boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
+    },
   },
   errorTextWrapper: {
     marginTop: 8,
