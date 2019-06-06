@@ -84,6 +84,7 @@ stories
           id="errorId" 
           helperText="Error Helper Text" 
           name="errorName"
+          error="This is an error"
           onBlur={action('blur')} 
           onChange={action('change')} 
           onClear={action('clear')}

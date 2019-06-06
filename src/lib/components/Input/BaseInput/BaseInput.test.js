@@ -5,7 +5,6 @@
   beforeEach,
   it
 */
-
 import React from 'react';
 import { expect } from "chai";
 import { mount } from 'enzyme';
@@ -19,20 +18,26 @@ import MUIIconButton from '@material-ui/core/IconButton';
 import BaseInput from './BaseInput';
 import AAAPrimaryTheme from '../../AAAPrimaryTheme/AAAPrimaryTheme';
 
+// Test Utilities
+import {getDOMNodeComputedStyle} from "../../../../../test/DOM";
+
+// Constants
+import {
+  AAA_COLOR_MAIN_DISABLED,
+  AAA_COLOR_MAIN_ERROR,
+  AAA_COLOR_MAIN_GRAY,
+  AAA_COLOR_MAIN_WHITE,
+  // AAA_COLOR_TRANSPARENT,
+} from '../../../constants/colors';
+
 function createInput(props) {
   return mount(<AAAPrimaryTheme><BaseInput {...props} /></AAAPrimaryTheme>);
 }
 
 function getFakeProps(override) {
-  return {
+  return { // Required
     id: "input-unique-identifier", // used for unique identifier and data tracking
     name: "input-unique-name", // used for form value
-    // labelName: "Enabled Label",
-    // type: "text",
-    // value: "Enabled",
-    // placeholder: "Placeholder",
-    // onChange: jest.fn(v => v),
-    // onClear: jest.fn(v => v),
     ...override
   };
 }
@@ -41,7 +46,7 @@ function getFakeProps(override) {
 describe('Input', () => {
   let props = getFakeProps();
   let InputWrapper = createInput(props);
-  const BaseInputNode = InputWrapper.find(MUIInput).getDOMNode();
+  const MUIInputNode = InputWrapper.find(MUIInput).getDOMNode();
 
   afterAll(() => {
     InputWrapper.unmount();
@@ -49,7 +54,7 @@ describe('Input', () => {
 
   describe('rendering of HTML elements', () => {
     it('has a class property passed from className prop', () => {
-      expect(BaseInputNode.className).to.include('BaseInput');
+      expect(MUIInputNode.className).to.include('BaseInput');
     });
 
     it('attaches a data-quid attribute to the input base element', () => {
@@ -59,11 +64,6 @@ describe('Input', () => {
     it('has a default rendering of an input without a label', () => {
       expect(InputWrapper.find(`label[htmlFor="${props.id}"]`).exists()).to.equal(false);
       expect(InputWrapper.find(`input#${props.id}`).exists()).to.equal(true);
-    });
-
-    it('has a default rendering of an input without helper text', () => {
-      expect(InputWrapper.find(`input#${props.id}`).exists()).to.equal(true);
-      expect(InputWrapper.find(`p[id="${props.id}-component-helper-text"]`).exists()).to.equal(false);
     });
 
     it('has a default rendering of an input without helper text', () => {
@@ -137,7 +137,7 @@ describe('Input', () => {
   });
 
   describe("prop functionality", () => {
-    it ('forwards a reference to the underlying button with forwardedRef prop', () => {
+    it ('forwards a reference to the underlying button with "forwardedRef" prop', () => {
       const forwardedRef = React.createRef();
       props = getFakeProps({ forwardedRef });
       InputWrapper = createInput(props);
@@ -191,53 +191,114 @@ describe('Input', () => {
   });
 
   describe("states", () => {
-    describe("disabled", () => {
-      it('should disable the input if disabled', () => {
-        props = getFakeProps({ disabled: true });
-        InputWrapper = createInput(props);
+    // TODO: Can't seem to get focused state css working
+    // describe('focused', () => {
+    //   const focusProps = getFakeProps({ autoFocus: true });
+    //   const FocusedInputWrapper = createInput(focusProps);
+    //   const FocusedBaseInputWrapper = FocusedInputWrapper.find(MUIInput);
 
-        expect(InputWrapper.find(`input#${props.id}`).get(0).props.disabled).to.equal(true);
+    //   it ('should have 2px AAA_COLOR_MAIN_DARKER_BLUE inset box-shadow', () => {
+    //     const boxShadowStyle = getDOMNodeComputedStyle(FocusedBaseInputWrapper.getDOMNode(), 'box-shadow');
+    //     expect(boxShadowStyle).to.equal(`inset 0 0 0 2px ${AAA_COLOR_MAIN_DARKER_BLUE}`);
+    //   });
+    // });
+
+    describe('disabled', () => {
+      let disabledProps = getFakeProps({ disabled: true });
+      let DisabledInputWrapper = createInput(disabledProps);
+      const DisabledMUIInputNode = DisabledInputWrapper.find(MUIInput).getDOMNode();
+
+      it('should disable the input HTML element if disabled', () => {
+        expect(DisabledInputWrapper.find(`input#${props.id}`).get(0).props.disabled).to.equal(true);
       });
 
-      // it('will not trigger an "onFocus" event when disabled', () => {
-      //   const onClickSpy = sinon.spy();
-      //   props = getFakeProps({ onClear: onClickSpy });
-      //   InputWrapper = createInput(props);
-      //   InputWrapper.find("ForwardRef(SvgIcon)").simulate("click");
+      it ('should have AAA_COLOR_MAIN_DISABLED background-color', () => {
+        const backgroundColorStyle = getDOMNodeComputedStyle(DisabledMUIInputNode, 'background-color');
+        expect(backgroundColorStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
+      });
 
-      //   expect(spy.calledOnce).to.equal(true);
-      //   expect(spy.getCall(0).args[0]).to.have.property('target');
-      // });
+      it ('should have initial box-shadow property', () => {
+        const boxShadowStyle = getDOMNodeComputedStyle(DisabledMUIInputNode, 'box-shadow');
+        expect(boxShadowStyle).to.equal('initial');
+      });
+
+      it('should not allow "onFocus" prop event to be triggered when disabled', () => {
+        const onFocusSpy = sinon.spy();
+        disabledProps = getFakeProps({ disabled: true, onFocus: onFocusSpy });
+        DisabledInputWrapper = createInput(props);
+        DisabledInputWrapper.find('input').simulate("focus");
+
+        expect(onFocusSpy.calledOnce).to.equal(false);
+      });
     });
 
-    describe("error", () => {
-      it('should show an error text message if it has an error', () => {
-        props = getFakeProps({ error: "Show this error message to user" });
-        InputWrapper = createInput(props);
+    describe('error', () => {
+      const errorProps = getFakeProps({error: 'Show this error message to the user'});
+      const ErrorInputWrapper = createInput(errorProps);
+      const ErrorMUIInputNode = ErrorInputWrapper.find(MUIInput).getDOMNode();
 
-        expect(InputWrapper.find(`#${props.id}-component-error-text p`).exists()).to.equal(true);
-        expect(InputWrapper.find(`#${props.id}-component-error-text p`).text()).to.equal("Show this error message to user");
+      describe('error elements', () => {
+        it('should show an error text message if it has an error', () => {
+          expect(ErrorInputWrapper.find(`#${props.id}-component-error-text p`).exists()).to.equal(true);
+          expect(ErrorInputWrapper.find(`#${props.id}-component-error-text p`).text()).to.equal('Show this error message to the user');
+        });
+
+        it('should show an error icon if it has an error', () => {
+          expect(ErrorInputWrapper.find(`#${props.id}-component-error-text`).exists()).to.equal(true);
+        });
+
+        it('should not show an error text message if it has no error', () => {
+          const noErrorProps = getFakeProps({ error: undefined });
+          InputWrapper = createInput(noErrorProps);
+
+          expect(InputWrapper.find(`#${noErrorProps.id}-component-error-text`).exists()).to.equal(false);
+        });
+
+        it('should not show an error icon if it has no error', () => {
+          const noErrorProps = getFakeProps({ error: undefined });
+          InputWrapper = createInput(noErrorProps);
+
+          expect(InputWrapper.find(`#${noErrorProps.id}-component-error-text`).exists()).to.equal(false);
+        });
       });
 
-      it('should show an error icon if it has an error', () => {
-        props = getFakeProps({ error: "Show this error message to user" });
-        InputWrapper = createInput(props);
+      describe('error styles', () => {
+        it ('should have an 1px inset AAA_COLOR_MAIN_ERROR box-shadow property', () => {
+          const boxShadowStyle = getDOMNodeComputedStyle(ErrorMUIInputNode, 'box-shadow');
+          expect(boxShadowStyle).to.equal(`inset 0 0 0 2px ${AAA_COLOR_MAIN_ERROR}`);
+        });
+      });
+    });
 
-        expect(InputWrapper.find(`#${props.id}-component-error-text`).exists()).to.equal(true);
+    describe("base styles", () => {
+      it ('should have 48px height', () => {
+        const heightStyle = getDOMNodeComputedStyle(MUIInputNode, 'height');
+        expect(heightStyle).to.equal('48px');
       });
 
-      it('should not show an error text message if it has no error', () => {
-        props = getFakeProps({ error: undefined });
-        InputWrapper = createInput(props);
-
-        expect(InputWrapper.find(`#${props.id}-component-error-text`).exists()).to.equal(false);
+      it ('should have 100% width', () => {
+        const widthStyle = getDOMNodeComputedStyle(MUIInputNode, 'width');
+        expect(widthStyle).to.equal('100%');
       });
 
-      it('should not show an error icon if it has no error', () => {
-        props = getFakeProps({ error: undefined });
-        InputWrapper = createInput(props);
+      it ('should have 0 border', () => {
+        const borderStyle = getDOMNodeComputedStyle(MUIInputNode, 'border');
+        expect(borderStyle).to.equal('0px');
+      });
 
-        expect(InputWrapper.find(`#${props.id}-component-error-text`).exists()).to.equal(false);
+      it ('should have 4px border-radius', () => {
+        const borderRadiusStyle = getDOMNodeComputedStyle(MUIInputNode, 'border-radius');
+        expect(borderRadiusStyle).to.equal('4px');
+      });
+
+      it ('should have AAA_COLOR_MAIN_WHITE background color', () => {
+        const backgroundColorStyle = getDOMNodeComputedStyle(MUIInputNode, 'background-color');
+        expect(backgroundColorStyle).to.equal(AAA_COLOR_MAIN_WHITE);
+      });
+
+      it ('should have 1px inset AAA_COLOR_MAIN_GRAY box-shadow', () => {
+        const boxShadowStyle = getDOMNodeComputedStyle(MUIInputNode, 'box-shadow');
+        expect(boxShadowStyle).to.equal(`inset 0 0 0 1px ${AAA_COLOR_MAIN_GRAY}`);
       });
     });
   });

@@ -18,14 +18,15 @@ import Label from "../../Label/Label";
 const styleClasses = theme => ({
   root: {
     marginTop: '8px',
-    height: '48px',
+    height: 48,
     width: '100%',
     border: 0,
-    borderRadius: '4px',
+    borderRadius: 4,
     background: theme.palette.colorVariables.WHITE,
     boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.GRAY}`,
-    '&:hover': {
+    '&:hover,&:active': {
       boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.DARKER_BLUE}`,
+      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER,
     },
   },
   focused: {
@@ -42,7 +43,10 @@ const styleClasses = theme => ({
     },
   },
   error: {
-    boxShadow: `inset 0 0 0 1px ${theme.palette.error.main}`,
+    boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
+    '&:focus': {
+      boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
+    },
     '&:hover': {
       backgroundColor: theme.palette.colorVariables.WHITE,
     },
@@ -81,23 +85,25 @@ const styleClasses = theme => ({
       fontSize: '16px'
     }
   },
-  errorTextStyle: {
-    marginTop: '8px',
-    '& p': {
-      display: 'inline',
-      [theme.breakpoints.up('sm')]: {
-        fontSize: '14px'
-      },
-      [theme.breakpoints.up('md')]: {
-        fontSize: '16px'
-      }
+  errorTextWrapper: {
+    marginTop: 8,
+  },
+  errorText: {
+    display: 'inline',
+    paddingTop: 10,
+    marginTop: 8,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '14px'
     },
-    '& svg': {
-      display: 'inline',
-      float: 'right',
-      fontSize: '20px',
-      marginRight: '8px'
-    }
+    [theme.breakpoints.up('md')]: {
+      fontSize: '16px'
+    },
+  },
+  errorIcon: {
+    display: 'inline',
+    verticalAlign: 'text-bottom',
+    fontSize: 20,
+    marginRight: 8,
   }
 });
 
@@ -108,14 +114,14 @@ type propTypes = {
   className?: PropTypes.string,
   formControlClass?: PropTypes.string,
   disabled?: PropTypes.bool,
-  error: PropTypes.string,
+  error?: PropTypes.string,
   helperText?: PropTypes.string,
   id: PropTypes.string,
   labelName?: PropTypes.string,
   name: PropTypes.string,
   placeholder?: PropTypes.string,
   type?: PropTypes.string,
-  value: PropTypes.string,
+  value?: PropTypes.string,
   onBlur?: PropTypes.func,
   onChange?: PropTypes.func,
   onClear?: PropTypes.func,
@@ -198,14 +204,17 @@ function Input({
       />
 
       {error && (
-        <div>
+        <div className={classes.errorTextWrapper}>
+          <MUIReportProblem
+            color="error"
+            className={classes.errorIcon}
+          />
           <MUIFormHelperText
             id={`${id}-component-error-text`}
-            className={classes.errorTextStyle}
+            className={classes.errorText}
           >
             {error}
           </MUIFormHelperText>
-          <MUIReportProblem color="error" />
         </div>
       )}
       
@@ -231,6 +240,7 @@ Input.defaultProps = {
   labelName: null,
   placeholder: '',
   type: 'text',
+  value: undefined,
   onBlur: () => {},
   onChange: () => {},
   onClear: null,
