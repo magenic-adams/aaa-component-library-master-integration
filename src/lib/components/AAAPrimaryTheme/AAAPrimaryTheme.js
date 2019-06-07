@@ -61,8 +61,57 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',
+    fontWeight: 400, // Medium
+    color: AAA_COLOR_MAIN_BLACK,
   },
 });
+
+// ** Typography ** //
+theme.typography.h1 = { // Headline
+  fontSize: 20,
+  lineHeight: 1.5,
+  fontWeight: 500,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 28,
+    lineHeight: 1.57,
+  },
+};
+
+theme.typography.h2 = { // Subheadline
+  fontSize: 18,
+  lineHeight: 1.45,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 22,
+  },
+};
+
+theme.typography.subtitle1 = { // Subtitle 1 / Table Header
+  fontSize: 16,
+  lineHeight: 1.5,
+  fontWeight: 500,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 18,
+    lineHeight: 1.45,
+  },
+};
+
+theme.typography.body1 = { // Body 1 / Primary Copy
+  fontSize: 16,
+  lineHeight: 1.5,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 18,
+    lineHeight: 1.45,
+  },
+};
+
+theme.typography.body2 = { // Body 2 / Primary Copy
+  fontSize: 14,
+  lineHeight: 1.45,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 16,
+    lineHeight: 1.5,
+  },
+};
 
 type propTypes = {
   children: PropTypes.node,
