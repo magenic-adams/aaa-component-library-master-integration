@@ -33,7 +33,7 @@ const styleClasses = theme => ({
     boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.35)'
   },
   fullOverlay: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down(375)]: {
       width: '100%',
       border: `1px solid ${theme.palette.primary.main}`,
       boxShadow: 'none',
