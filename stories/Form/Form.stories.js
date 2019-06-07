@@ -27,7 +27,7 @@ const VALIDATIONS = {
   },
   password: {
     required: 'Password is required',
-    'greater_than[5]': 'Password must be at least 6 characters',
+    'min_length[6]': 'Password must be at least 6 characters',
     'max_length[24]': 'Password should be under 24 characters.',
   },
   passwordConfirm: {
@@ -55,39 +55,44 @@ stories
               <Form
                 validate={handleValidate}
                 onSubmit={onSubmit}
-                render={({ handleSubmit, valid }) => (
-                  <form onSubmit={handleSubmit}>
-                    <FormGroup>
-                      <FormInput 
-                        autoFocus
-                        labelName="First name"
-                        name="firstName"
-                        type="text"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <FormInput 
-                        labelName="Password"
-                        name="password"
-                        type="password"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <FormInput 
-                        labelName="Password Confirm"
-                        name="passwordConfirm"
-                        type="password"
-                      />
-                    </FormGroup>
-                    <ButtonGroup>
-                      <Button
-                        disabled={!valid}
-                        fadeUp={valid}
-                        onClick={handleSubmit}
-                      >Submit</Button>
-                    </ButtonGroup>
-                  </form>
-                )}
+                render={({ allFieldsHaveValues, handleSubmit, valid }) => {
+                  console.log('allFieldsHaveValues', allFieldsHaveValues);
+                  
+                  return (
+                    <form onSubmit={handleSubmit}>
+                      <FormGroup>
+                        <FormInput 
+                          autoFocus
+                          labelName="First name"
+                          name="firstName"
+                          type="text"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <FormInput 
+                          labelName="Password"
+                          name="password"
+                          type="password"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <FormInput 
+                          labelName="Password Confirm"
+                          name="passwordConfirm"
+                          type="password"
+                        />
+                      </FormGroup>
+                      <ButtonGroup>
+                        <Button
+                          disabled={!allFieldsHaveValues}
+                          fadeUp={allFieldsHaveValues}
+                          onClick={handleSubmit}
+                        >Submit</Button>
+                      </ButtonGroup>
+                    </form>
+                  );
+                }
+              }
               />
           </Paper>
         </div>

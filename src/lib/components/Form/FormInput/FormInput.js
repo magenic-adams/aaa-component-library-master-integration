@@ -19,7 +19,7 @@ class FormInput extends PureComponent<propTypes> {
           const { meta } = fieldProps;
           return (
             <BaseInput
-              error={meta.touched && meta.error}
+              error={!meta.active && meta.touched && meta.error}
               {...fieldProps.input}
               {...this.props} />
           );

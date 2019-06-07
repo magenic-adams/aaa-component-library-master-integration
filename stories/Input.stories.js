@@ -16,6 +16,7 @@ stories
   .add('input', () => {
     return (
       <AAAPrimaryTheme>
+        <img className="u-width--full" src="https://www.dropbox.com/s/z63xbp8dmurch8v/01whentouse.png?dl=1" alt="rules"/>
         <ElementContainer>
           <TextInput 
           id="enabledId" 
