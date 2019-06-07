@@ -90,25 +90,25 @@ class NumericalStepper extends Component {
     return (
       <MUIStep id={id} disabled={disabled} classes={classes.root}>
         <MUIStepLabel
-          id={`${id}-stepLabel`}
+          data-quid={`StepLabel-${id}`}
           classes={{ label: classes.stepperLabel }}
         >
           {labelText}
         </MUIStepLabel>
         <StepperButton
-          id={`${id}-decreaseStepper`}
+          id={`DecreaseStepper-${id}`}
           disabled={disabled}
           onClick={onDecrease}
         >
           <RemoveIcon
-            id={`${id}-removeIcon`}
+            data-quid={`RemoveIcon-${id}`}
             disabled={disabled}
             className={classes.stepperIcon}
           />
         </StepperButton>
 
         <NumericInput
-          id={`${id}-numericInput`}
+          id={`NumericInput-${id}`}
           className={classes.stepperInput}
           formControlClass={classes.formControl}
           type="text"
@@ -117,14 +117,17 @@ class NumericalStepper extends Component {
           disabled={disabled}
         />
         <StepperButton
-          id={`${id}-increaseStepper`}
+          id={`IncreaseStepper-${id}`}
           disabled={disabled}
           onClick={onIncrease}
         >
-          <AddIcon id={`${id}-addIcon`} className={classes.stepperIcon} />
+          <AddIcon
+            data-quid={`AddIcon-${id}`}
+            className={classes.stepperIcon}
+          />
         </StepperButton>
         <MUIStepLabel
-          id={`${id}-component-error-text`}
+          data-quid={`Component-error-text-${id}`}
           classes={{ error: classes.error }}
           className={classes.helpText}
           error={error}
@@ -133,7 +136,7 @@ class NumericalStepper extends Component {
           {errorText}
         </MUIStepLabel>
         <MUIStepLabel
-          id={`${id}-component-helper-text`}
+          data-quid={`Component-helper-text-${id}`}
           className={classes.helpText}
         >
           {helpText}
@@ -159,4 +162,6 @@ NumericalStepper.defaultProps = {
   helpText: ''
 };
 
-export default withStyles(styleClasses, { withTheme: true })(NumericalStepper);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(
+  NumericalStepper
+);

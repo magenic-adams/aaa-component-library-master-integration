@@ -5,6 +5,9 @@ import { mount } from 'enzyme';
 import { AAAPrimaryTheme } from '..';
 import NumericalStepper from './NumericalStepper';
 
+// Test Utilities
+import { getDOMNodeComputedStyle } from '../../../../test/DOM';
+
 const createNumericalStepper = props => {
   return mount(
     <AAAPrimaryTheme>
@@ -15,8 +18,10 @@ const createNumericalStepper = props => {
 
 const getProps = override => {
   return {
+    id: '1',
     labelText: 'This is a numerical stepper',
     helpText: 'This is a helper message',
+    errorText: 'This is an error text',
     inputText: '10',
     onIncrease: jest.fn(v => v),
     onDecrease: jest.fn(v => v),
@@ -25,20 +30,34 @@ const getProps = override => {
 };
 
 describe('Numerical Stepper', () => {
+  let wrapper;
+  let stepperNode;
+  beforeEach(() => {
+    wrapper = createNumericalStepper(getProps());
+    stepperNode = wrapper.getDOMNode();
+  });
+  afterEach(() => {
+    wrapper.unmount();
+  });
+
   it('has rendered the icon buttons for increase and decrease', () => {
-    const wrapper = createNumericalStepper(getProps());
-
-    expect(wrapper.find('span[data-quid="stepLabel"]')).to.have.lengthOf(1);
-
+    expect(wrapper.find('span[data-quid="StepLabel-1"]')).to.have.lengthOf(1);
     expect(
-      wrapper.find('button[data-quid="decreaseStepper"]')
+      wrapper.find('button[data-quid="DecreaseStepper-1"]')
     ).to.have.lengthOf(1);
-
+    expect(wrapper.find('svg[data-quid="RemoveIcon-1"]')).to.have.lengthOf(1);
     expect(
-      wrapper.find('button[data-quid="increaseStepper"]')
+      wrapper.find('input[data-quid="BaseInput-NumericInput-1"]')
     ).to.have.lengthOf(1);
-
-    expect(wrapper.find('svg[data-quid="removeIcon"]')).to.have.lengthOf(1);
-    expect(wrapper.find('svg[data-quid="addIcon"]')).to.have.lengthOf(1);
+    expect(
+      wrapper.find('button[data-quid="IncreaseStepper-1"]')
+    ).to.have.lengthOf(1);
+    expect(wrapper.find('svg[data-quid="AddIcon-1"]')).to.have.lengthOf(1);
+    expect(
+      wrapper.find('span[data-quid="Component-helper-text-1"]')
+    ).to.have.lengthOf(1);
+    expect(
+      wrapper.find('span[data-quid="Component-error-text-1"]')
+    ).to.have.lengthOf(1);
   });
 });
