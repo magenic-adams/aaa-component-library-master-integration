@@ -47,4 +47,4 @@ ButtonGroup.defaultProps = {
   className: ''
 };
 
-export default withStyles(styleClasses, {withTheme: true})(ButtonGroup);
+export default withStyles(styleClasses, {index: 0, withTheme: true})(ButtonGroup);

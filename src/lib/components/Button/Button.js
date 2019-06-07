@@ -29,10 +29,16 @@ const styleClasses = theme => {
       color: theme.palette.common.white,
       padding: '0 16px',
       textTransform: 'none',
+      marginTop: 0,
+      transition: '300ms transform ease-in-out',
+      transform: 'translateY(0)',
       width: '100%',
       [theme.breakpoints.up('md')]: {
         width: '314px',
       },
+    },
+    fadeUp: {
+      transform: 'translateY(-8px)',
     },
     label: {
       fontSize: '18px',
@@ -72,6 +78,7 @@ function Button({
   className,
   classes,
   disabled,
+  fadeUp,
   id,
   color,
   href,
@@ -80,7 +87,12 @@ function Button({
 }:propTypes){
   return (
     <MUIButton
-      className={cx('Button', classes.root, className)}
+      className={cx(
+        'Button',
+        classes.root,
+        {[classes.fadeUp]: fadeUp},
+        className,
+      )}
       classes={classes}
       disabled={disabled}
       disableRipple
@@ -98,6 +110,7 @@ function Button({
 
 Button.defaultProps = {
   color: 'primary',
+  fadeUp: false,
   href: null,
   forwardedRef: React.createRef(),
 };

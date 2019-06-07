@@ -26,7 +26,6 @@ const styleClasses = theme => ({
     boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.GRAY}`,
     '&:hover,&:active': {
       boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.DARKER_BLUE}`,
-      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER,
     },
   },
   focused: {
@@ -38,9 +37,6 @@ const styleClasses = theme => ({
   disabled: {
     background: theme.palette.disabled.main,
     boxShadow: "initial",
-    '&:hover': {
-      backgroundColor: theme.palette.disabled.main,
-    },
   },
   input: {
     padding: '10px 12px',

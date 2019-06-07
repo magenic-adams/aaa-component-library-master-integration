@@ -55,10 +55,11 @@ stories
               <Form
                 validate={handleValidate}
                 onSubmit={onSubmit}
-                render={({ handleSubmit }) => (
+                render={({ handleSubmit, valid }) => (
                   <form onSubmit={handleSubmit}>
                     <FormGroup>
                       <FormInput 
+                        autoFocus
                         labelName="First name"
                         name="firstName"
                         type="text"
@@ -79,8 +80,11 @@ stories
                       />
                     </FormGroup>
                     <ButtonGroup>
-                      <Button onClick={handleSubmit}>Submit</Button>
-                      <Button color="secondary" onClick={handleSubmit}>Skip</Button>
+                      <Button
+                        disabled={!valid}
+                        fadeUp={valid}
+                        onClick={handleSubmit}
+                      >Submit</Button>
                     </ButtonGroup>
                   </form>
                 )}

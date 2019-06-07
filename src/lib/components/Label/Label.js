@@ -6,13 +6,13 @@ import cx from 'clsx';
 
 const styleClasses = theme => ({
   formControl: {
+    position: 'relative',
     transform: 'unset',
-    top: '-8px',
   },
   root: {
+    display: 'block',
+    marginBottom: -8,
     color: theme.palette.colorVariables.BLACK,
-    width: '343px',
-    height: '19px',
     fontFamily: theme.typography.fontFamily
   },
   focused: {
@@ -24,7 +24,7 @@ const styleClasses = theme => ({
   disabled: {
     color: `${theme.palette.colorVariables.BLACK} !important`,
   }
-})
+});
 
 type propTypes = {
   // Decorator Props
@@ -50,6 +50,6 @@ function Label({ classes, className, children, htmlFor }): propTypes {
 
 Label.defaultProps = {
   className: ""
-}
+};
 
 export default withStyles(styleClasses, { withTheme: true })(Label);
