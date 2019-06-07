@@ -23,6 +23,7 @@ const getProps = override => {
     helpText: 'This is a helper message',
     errorText: 'This is an error text',
     inputText: '10',
+    error: true,
     onIncrease: jest.fn(v => v),
     onDecrease: jest.fn(v => v),
     ...override
@@ -31,10 +32,8 @@ const getProps = override => {
 
 describe('Numerical Stepper', () => {
   let wrapper;
-  let stepperNode;
   beforeEach(() => {
     wrapper = createNumericalStepper(getProps());
-    stepperNode = wrapper.getDOMNode();
   });
   afterEach(() => {
     wrapper.unmount();
@@ -59,5 +58,8 @@ describe('Numerical Stepper', () => {
     expect(
       wrapper.find('span[data-quid="Component-error-text-1"]')
     ).to.have.lengthOf(1);
+    expect(wrapper.find('svg[data-quid="ReportProblem-1"]')).to.have.lengthOf(
+      1
+    );
   });
 });

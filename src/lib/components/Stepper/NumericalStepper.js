@@ -80,11 +80,12 @@ class NumericalStepper extends Component {
       labelText,
       helpText,
       errorText,
-      inputText,
+      value,
       onIncrease,
       onDecrease,
       disabled,
-      id
+      id,
+      mask
     } = this.props;
 
     return (
@@ -112,9 +113,11 @@ class NumericalStepper extends Component {
           className={classes.stepperInput}
           formControlClass={classes.formControl}
           type="text"
-          value={inputText}
+          value={value}
           error={error}
           disabled={disabled}
+          mask={mask}
+          disableWarning
         />
         <StepperButton
           id={`IncreaseStepper-${id}`}
@@ -132,7 +135,7 @@ class NumericalStepper extends Component {
           className={classes.helpText}
           error={error}
         >
-          {error && <ReportProblem />}
+          {error && <ReportProblem data-quid={`ReportProblem-${id}`} />}
           {errorText}
         </MUIStepLabel>
         <MUIStepLabel
@@ -153,13 +156,18 @@ NumericalStepper.propTypes = {
   labelText: PropTypes.string.isRequired,
   helpText: PropTypes.string,
   onIncrease: PropTypes.func.isRequired,
-  onDecrease: PropTypes.func.isRequired
+  value: PropTypes.number,
+  onDecrease: PropTypes.func.isRequired,
+  mask: PropTypes.array,
+  error: PropTypes.bool
 };
 
 NumericalStepper.defaultProps = {
   classes: {},
   disabled: false,
-  helpText: ''
+  helpText: '',
+  mask: [],
+  error: false
 };
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(

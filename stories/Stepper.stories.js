@@ -3,6 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import { action } from '@storybook/addon-actions';
+import { text, withKnobs } from '@storybook/addon-knobs';
 import { AAAPrimaryTheme } from '../src/lib/components';
 import NumericalStepper from '../src/lib/components/Stepper/NumericalStepper';
 // Internal
@@ -10,7 +11,7 @@ import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementCo
 
 const stories = storiesOf('Molecules|Stepper', module);
 
-stories.add('numerical ', () => {
+stories.addDecorator(withKnobs).add('numerical ', () => {
   return (
     <AAAPrimaryTheme>
       <div style={{ textAlign: 'center' }}>
@@ -22,7 +23,8 @@ stories.add('numerical ', () => {
           id="1"
           labelText="This is a numerical stepper"
           helpText="This is a helper message"
-          inputText="10"
+          value={text('Numeric Value', 99)}
+          mask={[/\d/, /\d/]}
           onIncrease={action('Button increase responded.')}
           onDecrease={action('Button decrease responded.')}
         />
@@ -37,7 +39,8 @@ stories.add('numerical ', () => {
           labelText="This is a numerical stepper"
           errorText="This is an error text"
           helpText="This is a helper text"
-          inputText="SDFSdss"
+          value={text('Error Value', 'sadas')}
+          mask={[/\d/, /\d/, /\d/]}
           error
         />
       </ElementContainer>
