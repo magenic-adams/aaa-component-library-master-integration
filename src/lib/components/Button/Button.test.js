@@ -12,11 +12,11 @@ import sinon from 'sinon';
 
 // Constants
 import {
-  AAA_COLOR_DISABLED,
+  AAA_COLOR_MAIN_DISABLED,
   AAA_COLOR_MAIN_BLUE,
   AAA_COLOR_MAIN_WHITE,
   AAA_COLOR_TRANSPARENT,
-} from '../../constants/colors'
+} from '../../constants/colors';
 
 // Test Utilities
 import {getDOMNodeComputedStyle} from "../../../../test/DOM";
@@ -92,7 +92,7 @@ describe("Button", () => {
     it ('forwards a reference to the underlying button with forwardedRef prop', () => {
       const ReactButton = ButtonWrapper.find(Button);
       expect(ReactButton.props().forwardedRef.current).to.equal(ButtonWrapper.getDOMNode());
-    })
+    });
   });
   
   describe("event handlers", () => {
@@ -119,10 +119,10 @@ describe("Button States", () => {
       expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_BLUE);
     });
 
-    it('has a background color of AAA_COLOR_DISABLED when disabled', () => {
+    it('has a background color of AAA_COLOR_MAIN_DISABLED when disabled', () => {
       const PrimaryDisabledButtonWrapper = createButtonWithTheme('Here lies a disabled button', getFakeProps({disabled: true}));
       const backgroundStyle = getDOMNodeComputedStyle(PrimaryDisabledButtonWrapper.getDOMNode(), 'background');
-      expect(backgroundStyle).to.equal(AAA_COLOR_DISABLED);
+      expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
     });
     
   });
@@ -141,10 +141,10 @@ describe("Button States", () => {
       expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_BLUE);
     });
 
-    it('has a border color of AAA_COLOR_DISABLED when disabled', () => {
+    it('has a border color of AAA_COLOR_MAIN_DISABLED when disabled', () => {
       const SecondaryDisabledButtonWrapper = createButtonWithTheme('Here lies a disabled button', getFakeProps({color: 'secondary', disabled: true}));
       const borderColorStyle = getDOMNodeComputedStyle(SecondaryDisabledButtonWrapper.getDOMNode(), 'border-top-color');
-      expect(borderColorStyle).to.equal(AAA_COLOR_DISABLED);
+      expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
     });
   });
 });
