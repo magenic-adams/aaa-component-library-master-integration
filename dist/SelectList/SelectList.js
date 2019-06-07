@@ -9,15 +9,26 @@ import SelectListItemText from '../SelectListItemText/SelectListItemText';
 
 var styleClasses = function styleClasses(theme) {
   return {
-    root: {
+    root: _defineProperty({
       width: '341px',
       background: theme.palette.common.white,
       border: "2px solid ".concat(theme.palette.primary.main),
       borderRadius: '4px',
       padding: '0px',
-      boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.35)'
-    },
-    fullOverlay: _defineProperty({}, theme.breakpoints.down(375), {
+      boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.35)',
+      '& span': {
+        fontFamily: theme.typography.fontFamily
+      }
+    }, theme.breakpoints.down(321), {
+      width: '100%',
+      border: "1px solid ".concat(theme.palette.primary.main),
+      boxShadow: 'none',
+      borderRadius: '0px',
+      '& span': {
+        fontSize: '16px'
+      }
+    }),
+    fullOverlay: _defineProperty({}, theme.breakpoints.down(415), {
       width: '100%',
       border: "1px solid ".concat(theme.palette.primary.main),
       boxShadow: 'none',
