@@ -24,7 +24,7 @@ const styleClasses = theme => ({
       width: 'inherit',
     },
   }
-})
+});
 
 
 // eslint-disable-next-line no-unused-vars
@@ -38,6 +38,6 @@ function ButtonGroup({children, classes = {}, className = '', theme}:propTypes){
 
 ButtonGroup.defaultProps = {
   className: ''
-}
+};
 
 export default withStyles(styleClasses, {withTheme: true})(ButtonGroup);

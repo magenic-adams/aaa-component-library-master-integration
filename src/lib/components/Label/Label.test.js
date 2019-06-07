@@ -1,17 +1,26 @@
 import React from 'react';
-import Label from './Label';
 import { expect } from "chai";
 import { mount } from 'enzyme';
 import { AAAPrimaryTheme } from '..';
+import Label from './Label';
 
-function createLabel(children) {
-  return mount(<AAAPrimaryTheme><Label>{children}</Label></AAAPrimaryTheme>)
+function createLabel(props, children) {
+  return mount(<AAAPrimaryTheme><Label {...props}>{children}</Label></AAAPrimaryTheme>)
 }
 
-describe("Label", function () {
-  it('has rendered label without crashing', function () {
-    const wrapper = createLabel("TEST");
+function getFakeProps(props) {
+  return { id: "labelId", className: "labelClass", ...props }
+}
 
-    expect(wrapper.find("label").text()).to.equal("TEST");
+describe("Label", () => {
+  const props = getFakeProps();
+  const LabelWrapper = createLabel(getFakeProps(), "TEST");
+
+  it('has rendered label without crashing', () => {
+    expect(LabelWrapper.find("label").text()).to.equal("TEST");
+  });
+
+  it('attaches a data-quid attribute to the label element', () => {
+    expect(LabelWrapper.find('label').getDOMNode().dataset.quid).to.equal(`Label-${props.id}`);
   });
 });
