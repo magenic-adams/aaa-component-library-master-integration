@@ -61,5 +61,14 @@ describe('Numerical Stepper', () => {
     expect(wrapper.find('svg[data-quid="ReportProblem-1"]')).to.have.lengthOf(
       1
     );
+    expect(
+      wrapper.find('span[data-quid="Component-error-text-1"]').text()
+    ).to.equal('This is an error text');
+    expect(
+      wrapper.find('span[data-quid="Component-helper-text-1"]').text()
+    ).to.equal('This is a helper message');
+    expect(wrapper.find('span[data-quid="StepLabel-1"]').text()).to.equal(
+      'This is a numerical stepper'
+    );
   });
 });
