@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import invariant from 'tiny-invariant';
@@ -103,7 +103,7 @@ function ToggleButtonGroup({
   options
 }: propTypes) {
   return (
-    <div>
+    <Fragment>
       {isOptionsValid(options) ? (
         <ButtonGroup className={cx(classes.root, className)}>
           <Button
@@ -136,7 +136,7 @@ function ToggleButtonGroup({
           </Button>
         </ButtonGroup>
       ) : null}
-    </div>
+    </Fragment>
   );
 }
 

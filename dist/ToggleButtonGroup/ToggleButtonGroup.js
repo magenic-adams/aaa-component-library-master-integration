@@ -1,5 +1,5 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import invariant from 'tiny-invariant';
@@ -88,7 +88,7 @@ function ToggleButtonGroup(_ref) {
       disabled = _ref.disabled,
       onSelect = _ref.onSelect,
       options = _ref.options;
-  return React.createElement("div", null, isOptionsValid(options) ? React.createElement(ButtonGroup, {
+  return React.createElement(Fragment, null, isOptionsValid(options) ? React.createElement(ButtonGroup, {
     className: cx(classes.root, className)
   }, React.createElement(Button, {
     className: cx("".concat(getActiveClass(value, options[0].id, classes), " ").concat(classes.left), className),
