@@ -72,12 +72,10 @@ function getActiveClass(value, id, classes) {
 function isOptionsValid(options) {
   if (!Array.isArray(options) || options.length < 2) {
     invariant(false, 'Invalid length of options. You must passed maximum number of two options');
-    return false;
   }
 
   if (!isOptionsKeysPresent(options)) {
     invariant(false, 'Invalid object keys are present. Keys should contain id and text');
-    return false;
   }
 
   return true;
@@ -86,15 +84,16 @@ function isOptionsValid(options) {
 function ToggleButtonGroup(_ref) {
   var classes = _ref.classes,
       className = _ref.className,
-      value = _ref.value,
       disabled = _ref.disabled,
-      onSelect = _ref.onSelect,
-      options = _ref.options;
+      options = _ref.options,
+      value = _ref.value,
+      onSelect = _ref.onSelect;
   return React.createElement(Fragment, null, isOptionsValid(options) ? React.createElement(ButtonGroup, {
     className: cx(classes.root, className)
   }, React.createElement(Button, {
     className: cx("".concat(getActiveClass(value, options[0].id, classes), " ").concat(classes.left), className),
     color: "secondary",
+    id: "ToggleButton-".concat(options[0].id),
     disabled: disabled,
     onClick: function onClick() {
       return handleClick(options[0], onSelect);
@@ -102,6 +101,7 @@ function ToggleButtonGroup(_ref) {
   }, options[0].text), React.createElement(Button, {
     className: cx("".concat(getActiveClass(value, options[1].id, classes), " ").concat(classes.right), className),
     color: "secondary",
+    id: "ToggleButton-".concat(options[1].id),
     disabled: disabled,
     onClick: function onClick() {
       return handleClick(options[1], onSelect);
@@ -114,5 +114,6 @@ ToggleButtonGroup.defaultProps = {
   value: ''
 };
 export default withStyles(styleClasses, {
+  index: 0,
   withTheme: true
 })(ToggleButtonGroup);
