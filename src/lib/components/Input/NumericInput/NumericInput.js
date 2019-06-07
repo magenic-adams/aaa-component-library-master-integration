@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MaskedInput from "react-text-mask";
+
+// Components
 import BaseInput from '../BaseInput/BaseInput';
 
 
@@ -18,12 +20,12 @@ function TextMaskCustom(mask) {
         {...other}
       />
     );
-  }
+  };
 }
 
 type protoTypes = {
   mask?: PropTypes.array
-}
+};
 
 function NumericInput(props): protoTypes {
     const { mask } = props;
@@ -37,6 +39,6 @@ function NumericInput(props): protoTypes {
 
 NumericInput.defaultProps = {
   mask: []
-}
+};
 
 export default NumericInput;

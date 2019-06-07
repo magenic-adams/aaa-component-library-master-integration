@@ -24,7 +24,7 @@ const styleClasses = theme => ({
   disabled: {
     color: `${theme.palette.colorVariables.BLACK} !important`,
   }
-})
+});
 
 type propTypes = {
   // Decorator Props
@@ -32,16 +32,17 @@ type propTypes = {
   // Passed Props
   children: PropTypes.string,
   className?: PropTypes.string,
-  htmlFor: PropTypes.string,
+  id: PropTypes.string,
 };
 
-function Label({ classes, className, children, htmlFor }): propTypes {
+function Label({ classes, className, children, id }): propTypes {
   return (
     <InputLabel
       className={cx("InputLabel", className)}
       classes={classes}
       disableAnimation
-      htmlFor={htmlFor}
+      htmlFor={id}
+      data-quid={`Label-${id}`}
       shrink={false}>
       {children}
     </InputLabel>
@@ -50,6 +51,6 @@ function Label({ classes, className, children, htmlFor }): propTypes {
 
 Label.defaultProps = {
   className: ""
-}
+};
 
 export default withStyles(styleClasses, { withTheme: true })(Label);
