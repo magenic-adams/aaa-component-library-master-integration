@@ -39,9 +39,8 @@ const styleClasses = theme => ({
     background: theme.palette.disabled.main,
     boxShadow: 'initial',
     '&:hover': {
-      boxShadow: "initial",
-      backgroundColor: theme.palette.disabled.main,
-      boxShadow: 'initial'
+      boxShadow: 'initial',
+      backgroundColor: theme.palette.disabled.main
     }
   },
   input: {
@@ -81,11 +80,16 @@ const styleClasses = theme => ({
   error: {
     boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
     '&:focus': {
+      boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`
     },
+    '&:hover': {
+      background: theme.palette.error.ERROR_HOVER
+    }
   },
   errorTextWrapper: {
     marginTop: 8
   },
+  errorText: {
     display: 'inline',
     paddingTop: 10,
     marginTop: 8,
@@ -127,7 +131,6 @@ type propTypes = {
   onFocus?: PropTypes.func
 };
 
-
 function BaseInput({
   autoFocus,
   classes,
@@ -156,11 +159,7 @@ function BaseInput({
       error={!!error}
       disabled={disabled}
     >
-      {labelName && (
-        <Label id={id}>
-          {labelName}
-        </Label>
-      )}
+      {labelName && <Label id={id}>{labelName}</Label>}
 
       <MUIInput
         autoFocus={autoFocus}
@@ -206,7 +205,7 @@ function BaseInput({
         onFocus={onFocus}
       />
 
-      {(error && !disableWarning) && (
+      {error && !disableWarning && (
         <div className={classes.errorTextWrapper}>
           <MUIReportProblem color="error" className={classes.errorIcon} />
           <MUIFormHelperText
@@ -243,11 +242,12 @@ BaseInput.defaultProps = {
   placeholder: '',
   type: 'text',
   value: undefined,
-  onBlur: () => { },
-  onChange: () => { },
+  onBlur: () => {},
+  onChange: () => {},
   onClear: null,
-  onFocus: () => { },
+  onFocus: () => {}
 };
 
-
-export default withStyles(styleClasses, { index: 0, withTheme: true })(BaseInput);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(
+  BaseInput
+);
