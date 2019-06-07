@@ -7,7 +7,7 @@ import NumericInput from './Input/NumericInput/NumericInput';
 import BaseInput from './Input/BaseInput/BaseInput';
 import Label from './Label/Label';
 import Link from './Link/Link';
-
+import ToggleButtonGroup from './ToggleButtonGroup/ToggleButtonGroup';
 
 export {
   AAAPrimaryTheme,
@@ -16,5 +16,6 @@ export {
   NumericInput,
   BaseInput,
   Label,
-  Link
+  Link,
+  ToggleButtonGroup
 };
