@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
+import invariant from 'tiny-invariant';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
@@ -47,11 +48,21 @@ const styleClasses = theme => ({
   selected: {}
 });
 
+function isValid(id, display) {
+  if (!id && !display) {
+    invariant(false, 'id and display should have value.');
+  }
+  if (!(typeof display === 'string' || typeof display === 'number')) {
+    invariant(false, 'Invalid display type. It must be string or number');
+  }
+  return true;
+}
+
 function SelectListItemText({ classes, item, onSelect }: propTypes) {
   const { display, id } = item || {};
   const { divider, gutters, primary, root, selected } = classes;
 
-  return id && display ? (
+  return isValid(id, display) ? (
     <ListItem
       data-quid={`SelectListItem-${id}`}
       classes={{ root, divider, gutters, selected }}

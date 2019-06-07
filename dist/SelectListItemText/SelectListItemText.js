@@ -2,6 +2,7 @@ import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
+import invariant from 'tiny-invariant';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
@@ -38,6 +39,18 @@ var styleClasses = function styleClasses(theme) {
   };
 };
 
+function isValid(id, display) {
+  if (!id && !display) {
+    invariant(false, 'id and display should have value.');
+  }
+
+  if (!(typeof display === 'string' || typeof display === 'number')) {
+    invariant(false, 'Invalid display type. It must be string or number');
+  }
+
+  return true;
+}
+
 function SelectListItemText(_ref) {
   var classes = _ref.classes,
       item = _ref.item,
@@ -52,7 +65,7 @@ function SelectListItemText(_ref) {
       primary = classes.primary,
       root = classes.root,
       selected = classes.selected;
-  return id && display ? React.createElement(ListItem, {
+  return isValid(id, display) ? React.createElement(ListItem, {
     "data-quid": "SelectListItem-".concat(id),
     classes: {
       root: root,
