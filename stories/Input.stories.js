@@ -5,7 +5,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import '../src/css/helpers.css';
 
 // Components
-import { AAAPrimaryTheme, TextInput, NumericInput } from '../src/lib/components';
+import { AAAPrimaryTheme, BaseInput, NumericInput } from '../src/lib/components';
 
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
 
@@ -17,7 +17,7 @@ stories
     return (
       <AAAPrimaryTheme>
         <ElementContainer>
-          <TextInput 
+          <BaseInput 
           id="enabledId" 
           name="enabledName" 
           helperText={text('Input Helper Text', 'Change the Helper Text')} 
@@ -34,7 +34,7 @@ stories
           name="numericName" 
           helperText={text('Numeric Helper Text', 'Change the Helper Text')} 
           labelName={text('Numeric Label', 'Change the label')} 
-          value={text('Numeric Value', '1')}
+          value={text('Numeric Value', 12301991)}
           mask={[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/]}
           onBlur={action('blur')} 
           onChange={action('change')} 
@@ -49,7 +49,7 @@ stories
       <h2 className='text-align-center'>ACTIVE STATE</h2>
 
       <ElementContainer>
-        <TextInput 
+        <BaseInput 
           id="enabledId" 
           name="enabledName" 
           helperText="Enabled Helper Text" 
@@ -64,7 +64,7 @@ stories
       <h2 className='text-align-center'>DISABLED STATE</h2>
 
       <ElementContainer>
-        <TextInput 
+        <BaseInput 
           disabled 
           id="disabledId" 
           helperText="Disabled Helper Text" 
@@ -80,7 +80,7 @@ stories
       <h2 className='text-align-center'>ERROR STATE</h2>
 
       <ElementContainer>
-        <TextInput 
+        <BaseInput 
           id="errorId" 
           helperText="Error Helper Text" 
           name="errorName"

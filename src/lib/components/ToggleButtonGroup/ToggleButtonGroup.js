@@ -97,10 +97,10 @@ function isOptionsValid(options) {
 function ToggleButtonGroup({
   classes,
   className,
-  value,
   disabled,
-  onSelect,
-  options
+  options,
+  value,
+  onSelect
 }: propTypes) {
   return (
     <Fragment>

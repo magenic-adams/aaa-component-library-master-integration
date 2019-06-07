@@ -84,10 +84,10 @@ function isOptionsValid(options) {
 function ToggleButtonGroup(_ref) {
   var classes = _ref.classes,
       className = _ref.className,
-      value = _ref.value,
       disabled = _ref.disabled,
-      onSelect = _ref.onSelect,
-      options = _ref.options;
+      options = _ref.options,
+      value = _ref.value,
+      onSelect = _ref.onSelect;
   return React.createElement(Fragment, null, isOptionsValid(options) ? React.createElement(ButtonGroup, {
     className: cx(classes.root, className)
   }, React.createElement(Button, {

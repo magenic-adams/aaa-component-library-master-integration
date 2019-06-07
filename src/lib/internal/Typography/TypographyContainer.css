@@ -1,0 +1,8 @@
+.TypographyContainer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.TypographyContainer__name {
+  min-width: 300px;
+}
