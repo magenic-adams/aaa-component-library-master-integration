@@ -20,7 +20,7 @@ function TextMaskCustom(mask) {
         {...other}
       />
     );
-  }
+  };
 }
 
 type protoTypes = {
@@ -39,6 +39,6 @@ function NumericInput(props): protoTypes {
 
 NumericInput.defaultProps = {
   mask: []
-}
+};
 
 export default NumericInput;

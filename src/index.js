@@ -6,7 +6,7 @@ import { render } from 'react-dom';
 import {
   AAAPrimaryTheme,
   Button,
-  TextInput,
+  BaseInput,
   Link as TextLink,
   SelectList
 } from './lib/components';
@@ -47,7 +47,7 @@ const App = () => (
     </Button>
     <br />
     <br />
-    <TextInput
+    <BaseInput
       disabled
       id="disabledId"
       name="disabledName"
@@ -59,7 +59,7 @@ const App = () => (
       onClear={() => {}}
     />
     <br />
-    <TextInput
+    <BaseInput
       id="enabledId"
       name="enabledName"
       labelName="Enabled Label"
@@ -70,15 +70,14 @@ const App = () => (
     />
     <br />
     <br />
-    <TextInput
-      error
+    <BaseInput
       id="errorId"
       name="errorName"
       type="text"
       onChange={() => {}}
       helperText="Error"
       labelName="Error Label"
-      errorText="Error text"
+      error="This is an error"
       value="Error"
     />
     <br />

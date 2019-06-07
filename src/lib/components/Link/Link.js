@@ -44,7 +44,7 @@ const styleClasses = theme => ({
                 color:theme.palette.colorVariables.VERY_DARK_BLUE,
             },
         }, 
-  })
+  });
 
     const Link = ({ id, className, onClick, classes, href, children, onBlur }) =>
         <MuiLink 
@@ -55,6 +55,6 @@ const styleClasses = theme => ({
             onClick={onClick}
         >
             {children}
-        </MuiLink>
+        </MuiLink>;
 
 export default withStyles(styleClasses, {withTheme: true})(Link);

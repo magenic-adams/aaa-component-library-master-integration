@@ -39,6 +39,7 @@ const styleClasses = theme => ({
     background: theme.palette.disabled.main,
     boxShadow: "initial",
     '&:hover': {
+      boxShadow: "initial",
       backgroundColor: theme.palette.disabled.main,
     },
   },
@@ -81,6 +82,9 @@ const styleClasses = theme => ({
     '&:focus': {
       boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
     },
+    '&:hover': {
+      background: theme.palette.error.ERROR_HOVER
+    },
   },
   errorTextWrapper: {
     marginTop: 8,
@@ -111,9 +115,11 @@ type propTypes = {
   className?: PropTypes.string,
   formControlClass?: PropTypes.string,
   disabled?: PropTypes.bool,
+  disableWarning?: PropTypes.bool,
   error?: PropTypes.string,
   helperText?: PropTypes.string,
   id: PropTypes.string,
+  inputComponent?: PropTypes.element,
   labelName?: PropTypes.string,
   name: PropTypes.string,
   placeholder?: PropTypes.string,
@@ -126,16 +132,18 @@ type propTypes = {
 };
 
 
-function Input({
+function BaseInput({
   autoFocus,
   classes,
   className,
   forwardedRef,
   formControlClass,
   disabled,
+  disableWarning,
   error,
   helperText,
   id,
+  inputComponent,
   labelName,
   name,
   placeholder,
@@ -153,11 +161,11 @@ function Input({
       disabled={disabled}
     >
       {labelName && (
-        <Label htmlFor={id}>
+        <Label id={id}>
           {labelName}
         </Label>
       )}
-      
+
       <MUIInput
         autoFocus={autoFocus}
         autoComplete="off"
@@ -181,7 +189,7 @@ function Input({
                 color="inherit"
                 className={classes.iconButton}
               >
-                <MUIClear className={classes.iconStyle}/>
+                <MUIClear className={classes.iconStyle} />
               </MUIIconButton>
             </MUIInputAdornment>
           )
@@ -191,6 +199,7 @@ function Input({
           'data-quid': `BaseInput-${id}`,
           ref: forwardedRef,
         }}
+        inputComponent={inputComponent}
         name={name}
         placeholder={labelName ? null : placeholder}
         type={type}
@@ -200,7 +209,7 @@ function Input({
         onFocus={onFocus}
       />
 
-      {error && (
+      {(error && !disableWarning) && (
         <div className={classes.errorTextWrapper}>
           <MUIReportProblem
             color="error"
@@ -214,7 +223,7 @@ function Input({
           </MUIFormHelperText>
         </div>
       )}
-      
+
       {helperText && (
         <MUIFormHelperText
           id={`${id}-component-helper-text`}
@@ -227,22 +236,24 @@ function Input({
   );
 }
 
-Input.defaultProps = {
+BaseInput.defaultProps = {
   autoFocus: false,
   className: '',
   formControlClass: '',
   forwardedRef: React.createRef(),
   disabled: false,
+  disableWarning: false,
   helperText: null,
+  inputComponent: undefined,
   labelName: null,
   placeholder: '',
   type: 'text',
   value: undefined,
-  onBlur: () => {},
-  onChange: () => {},
+  onBlur: () => { },
+  onChange: () => { },
   onClear: null,
-  onFocus: () => {},
+  onFocus: () => { },
 };
 
 
-export default withStyles(styleClasses, { index: 0, withTheme: true })(Input);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(BaseInput);
