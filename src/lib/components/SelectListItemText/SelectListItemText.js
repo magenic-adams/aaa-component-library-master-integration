@@ -18,7 +18,13 @@ type propTypes = {
 const styleClasses = theme => ({
   root: {
     height: '48px',
-    background: theme.palette.colorVariables.TRANSPARENT
+    background: theme.palette.colorVariables.TRANSPARENT,
+    '&$selected, &$selected:hover': {
+      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER
+    },
+    '&:hover': {
+      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER
+    }
   },
   gutters: {
     padding: '0 13px 0 13px'
@@ -29,12 +35,6 @@ const styleClasses = theme => ({
       borderBottom: 'none'
     }
   },
-  button: {
-    '&:hover': {
-      background: `${theme.palette.colorVariables.SECONDARY_HOVER} !important`
-    },
-    transition: 'none'
-  },
   primary: {
     fontSize: '18px',
     letterSpacing: 'normal',
@@ -44,40 +44,26 @@ const styleClasses = theme => ({
       fontSize: '16px'
     }
   },
-  disabled: {
-    background: theme.palette.disabled.main,
-    color: theme.palette.common.white
-  }
+  selected: {}
 });
 
 function SelectListItemText({ classes, item, onSelect }: propTypes) {
-  const { display, id, isSelected } = item;
+  const { display, id } = item || {};
+  const { divider, gutters, primary, root, selected } = classes;
 
-  return (
-    item && (
-      <ListItem
-        button
-        data-quid={`SelectListItem-${id}`}
-        classes={{
-          root: classes.root,
-          divider: classes.divider,
-          button: classes.button,
-          disabled: classes.disabled,
-          gutters: classes.gutters
-        }}
-        divider
-        selected={isSelected}
-        onClick={() => onSelect(item)}
-      >
-        <ListItemText
-          classes={{ primary: classes.primary }}
-          primary={display}
-        />
-      </ListItem>
-    )
-  );
+  return id && display ? (
+    <ListItem
+      data-quid={`SelectListItem-${id}`}
+      classes={{ root, divider, gutters, selected }}
+      divider
+      selected={item.selected}
+      onClick={() => onSelect(item)}
+    >
+      <ListItemText classes={{ primary }} primary={display} />
+    </ListItem>
+  ) : null;
 }
 
-export default withStyles(styleClasses, { index: 0, withTheme: true })(
+export default withStyles(styleClasses, { withTheme: true })(
   SelectListItemText
 );

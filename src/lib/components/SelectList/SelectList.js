@@ -30,7 +30,7 @@ const styleClasses = theme => ({
     border: `2px solid ${theme.palette.primary.main}`,
     borderRadius: '4px',
     padding: '0px',
-    boxShadow: '0 2px 8px 0'
+    boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.35)'
   },
   fullOverlay: {
     [theme.breakpoints.down('sm')]: {

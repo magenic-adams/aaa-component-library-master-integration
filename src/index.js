@@ -16,7 +16,7 @@ const handleSelectItem = selectedItem => {
 };
 
 const items = [
-  { id: 1, value: 1, display: 'First Item' },
+  { id: 1, value: 1, display: 'First Item', selected: true },
   { id: 2, value: 2, display: 'Second Item' },
   {
     id: 3,
