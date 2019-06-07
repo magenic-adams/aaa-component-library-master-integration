@@ -14,7 +14,7 @@ function createInput(props) {
   return mount(<AAAPrimaryTheme><NumericInput {...props} /></AAAPrimaryTheme>);
 }
 
-function getProps(override) {
+function getFakeProps(override) {
   return {
     id: "enabledId",
     name: "enabledName",
@@ -29,24 +29,24 @@ function getProps(override) {
 }
 
 describe("NumericInput", () => {
-  it('formats the given numeric value based on mask (dd / dd / dddd', () => {
-    const props = getProps();
-    const wrapper = createInput(props);
+  let props = getFakeProps();
+  let NumericInputWrapper = createInput(props);
 
-    expect(wrapper.find("input").getDOMNode().value).to.equal("12 / 30 / 1991");
+  it('formats the given numeric value based on mask (dd / dd / dddd', () => {
+    expect(NumericInputWrapper.find("input").getDOMNode().value).to.equal("12 / 30 / 1991");
   });
 
   it('formats the given numeric value based on mask (dd - dd - dddd', () => {
-    const props = getProps({ mask: [/\d/, /\d/, ' ', '-', ' ', /\d/, /\d/, ' ', '-', ' ', /\d/, /\d/, /\d/, /\d/] });
-    const wrapper = createInput(props);
+    props = getFakeProps({ mask: [/\d/, /\d/, ' ', '-', ' ', /\d/, /\d/, ' ', '-', ' ', /\d/, /\d/, /\d/, /\d/] });
+    NumericInputWrapper = createInput(props);
 
-    expect(wrapper.find("input").getDOMNode().value).to.equal("12 - 30 - 1991");
+    expect(NumericInputWrapper.find("input").getDOMNode().value).to.equal("12 - 30 - 1991");
   });
 
   it('will not accept non numeric values', () => {
-    const props = getProps({ value: "t*/1" });
-    const wrapper = createInput(props);
+    props = getFakeProps({ value: "t*/1" });
+    NumericInputWrapper = createInput(props);
 
-    expect(wrapper.find("input").getDOMNode().value).to.equal("1");
+    expect(NumericInputWrapper.find("input").getDOMNode().value).to.equal("1");
   });
 });
