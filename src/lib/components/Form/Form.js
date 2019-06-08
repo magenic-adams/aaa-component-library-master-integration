@@ -1,6 +1,9 @@
 import React from 'react';
 import { Form } from 'react-final-form';
 
+// Mutators
+// https://github.com/final-form/final-form-set-field-touched
+import setFieldTouched from 'final-form-set-field-touched';
 
 class FormDecorator extends React.Component {
   /**
@@ -26,7 +29,7 @@ class FormDecorator extends React.Component {
     });
   }
 
-  static decorateRenderMethod(renderFn){
+  static decorateRender(renderFn){
     return (formRenderProps) => {
       // Form Render Props are passed to the render method of the Form
       // Values include [handleSubmit, form, and ...formState]
@@ -40,12 +43,13 @@ class FormDecorator extends React.Component {
   
   render(){
     // This component acts as mainly a pass through to react-final-form,
-    // but we augment functionality when necessary
+    // but we augment functionality and encapsulate certain form behaviors
     const { render } = this.props;
     return (
       <Form
         {...this.props}
-        render={FormDecorator.decorateRenderMethod(render)}
+        mutators={{setFieldTouched}}
+        render={FormDecorator.decorateRender(render)}
       />
     );
   }

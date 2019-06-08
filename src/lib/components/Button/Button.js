@@ -13,6 +13,7 @@ type propTypes = {
   children: PropTypes.string | PropTypes.node,
   color?: 'primary' | 'secondary',
   disabled: PropTypes.bool,
+  fadeUp?: PropTypes.bool,
   id: PropTypes.string,
   href?: PropTypes.bool,
   forwardedRef?: PropTypes.object,

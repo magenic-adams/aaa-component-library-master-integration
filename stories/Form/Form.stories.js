@@ -40,8 +40,7 @@ function handleValidate(values){
   return Validate.validateForm(values, VALIDATIONS);
 }
 
-function onSubmit(vals){
-  console.log('vals', vals);
+function handleFormValueSubmission(vals){
   action(vals);
 }
 
@@ -54,31 +53,29 @@ stories
           <Paper className="u-padding--50">
               <Form
                 validate={handleValidate}
-                onSubmit={onSubmit}
-                render={({ allFieldsHaveValues, handleSubmit, valid }) => {
-                  console.log('allFieldsHaveValues', allFieldsHaveValues);
-                  
+                onSubmit={handleFormValueSubmission}
+                render={({ allFieldsHaveValues, handleSubmit }) => {
                   return (
                     <form onSubmit={handleSubmit}>
                       <FormGroup>
                         <FormInput 
+                          name="firstName"
                           autoFocus
                           labelName="First name"
-                          name="firstName"
                           type="text"
                         />
                       </FormGroup>
                       <FormGroup>
                         <FormInput 
-                          labelName="Password"
                           name="password"
+                          labelName="Password"
                           type="password"
                         />
                       </FormGroup>
                       <FormGroup>
                         <FormInput 
-                          labelName="Password Confirm"
                           name="passwordConfirm"
+                          labelName="Password Confirm"
                           type="password"
                         />
                       </FormGroup>
@@ -86,8 +83,10 @@ stories
                         <Button
                           disabled={!allFieldsHaveValues}
                           fadeUp={allFieldsHaveValues}
-                          onClick={handleSubmit}
-                        >Submit</Button>
+                          type="submit"
+                        >
+                          Submit
+                        </Button>
                       </ButtonGroup>
                     </form>
                   );
