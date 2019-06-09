@@ -1,3 +1,8 @@
+// NOTE FOR REVIEW:
+// ************
+// PLEASE IGNORE THIS FILE, WE WILL HAVE ANOTHER TICKET TO UNIT TEST
+// THIS VALIDATION LIBRARY
+// 
 // /* eslint-disable no-useless-escape */
 // This is a modified, lean version of the library validate.js
 // Check documentation for validate.js to see validation values

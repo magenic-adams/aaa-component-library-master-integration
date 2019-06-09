@@ -41,18 +41,18 @@ const styleClasses = theme => ({
   input: {
     padding: '10px 12px',
     [theme.breakpoints.up('sm')]: {
-      fontSize: '16px',
+      fontSize: 16,
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '18px',
+      fontSize: 18,
     },
   },
   iconButton: {
-    padding: '10px',
+    padding: 10,
     transition: 'none',
   },
   iconStyle: {
-    fontSize: '20px',
+    fontSize: 20,
     color: theme.palette.primary.main,
   },
   formControlStyle: {
@@ -60,16 +60,16 @@ const styleClasses = theme => ({
       width: '100%',
     },
     [theme.breakpoints.up('md')]: {
-      width: '534px',
+      width: 534,
     },
   },
   helperTextStyle: {
     color: `${theme.palette.colorVariables.GRAY} !important`,
     [theme.breakpoints.up('sm')]: {
-      fontSize: '14px',
+      fontSize: 14,
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '16px',
+      fontSize: 16,
     },
   },
   error: {
@@ -89,10 +89,10 @@ const styleClasses = theme => ({
     paddingTop: 10,
     marginTop: 8,
     [theme.breakpoints.up('sm')]: {
-      fontSize: '14px',
+      fontSize: 14,
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '16px',
+      fontSize: 16,
     },
   },
   errorIcon: {

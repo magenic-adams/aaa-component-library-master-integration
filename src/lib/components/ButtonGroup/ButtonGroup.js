@@ -21,13 +21,7 @@ const styleClasses = () => ({
     '& .Button:nth-child(n+1)': {
       marginTop: 8,
     },
-    // [theme.breakpoints.up('md')]: {
-    //   width: 'inherit',
-    //   '& .Button:nth-child(n+1)': {
-    //     marginTop: 0,
-    //   },
-    // },
-  }
+  },
 });
 
 
@@ -44,7 +38,7 @@ function ButtonGroup({
 }
 
 ButtonGroup.defaultProps = {
-  className: ''
+  className: '',
 };
 
-export default withStyles(styleClasses, {index: 0, withTheme: true})(ButtonGroup);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(ButtonGroup);

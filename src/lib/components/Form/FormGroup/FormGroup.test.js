@@ -1,10 +1,7 @@
 /* global describe, it */
 import React from 'react';
-import { expect } from "chai";
+import { expect } from 'chai';
 import { mount } from 'enzyme';
-
-// Test Utilities
-// import {getDOMNodeComputedStyle} from "../../../../../test/DOM";
 
 // Components
 import AAAPrimaryTheme from '../../AAAPrimaryTheme/AAAPrimaryTheme';
@@ -19,7 +16,7 @@ function createFormGroupWithTheme(props) {
   );
 }
 
-describe("FormGroup", () => {
+describe('FormGroup', () => {
   const props = {
     className: 'my-form-group-class',
     children: <BaseInput id="primary-id" name="primary-name">Primary</BaseInput>,
@@ -27,7 +24,7 @@ describe("FormGroup", () => {
   const FormGroupComponent = createFormGroupWithTheme(props);
   const FormGroupNode = FormGroupComponent.getDOMNode();
   
-  describe("rendering HTML element", () => {
+  describe('rendering HTML element', () => {
     it('includes a class name of "FormGroup" on the HTML element', () => {
       expect(FormGroupNode.className).to.include('FormGroup');
     });
