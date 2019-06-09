@@ -1,5 +1,4 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 import MUIButton from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
@@ -16,7 +15,7 @@ type propTypes = {
   fadeUp?: PropTypes.bool,
   id: PropTypes.string,
   href?: PropTypes.bool,
-  forwardedRef?: PropTypes.object,
+  forwardedRef?: {current: {}},
   onClick: () => {},
 };
 
@@ -37,9 +36,6 @@ const styleClasses = theme => {
       [theme.breakpoints.up('md')]: {
         width: '314px',
       },
-    },
-    fadeUp: {
-      transform: 'translateY(-8px)',
     },
     label: {
       fontSize: '18px',
@@ -69,7 +65,10 @@ const styleClasses = theme => {
         background: theme.palette.colorVariables.TRANSPARENT,
         borderColor: theme.palette.disabled.main,
       }
-    }
+    },
+    fadeUp: {
+      transform: 'translateY(-8px)',
+    },
   };
 };
 
@@ -91,10 +90,15 @@ function Button({
       className={cx(
         'Button',
         classes.root,
-        {[classes.fadeUp]: fadeUp},
+        { [classes.fadeUp]: fadeUp },
         className,
       )}
-      classes={classes}
+      classes={{
+        root: classes.root,
+        label: classes.label,
+        containedPrimary: classes.containedPrimary,
+        containedSecondary: classes.containedSecondary,
+      }}
       disabled={disabled}
       disableRipple
       data-quid={id}
@@ -112,8 +116,8 @@ function Button({
 Button.defaultProps = {
   color: 'primary',
   fadeUp: false,
+  forwardedRef: {},
   href: null,
-  forwardedRef: React.createRef(),
 };
 
-export default withStyles(styleClasses, {index: 0, withTheme: true})(Button);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(Button);

@@ -60,6 +60,7 @@ stories
                       <FormGroup>
                         <FormInput 
                           name="firstName"
+                          id="firstName"
                           autoFocus
                           labelName="First name"
                           type="text"
@@ -68,6 +69,7 @@ stories
                       <FormGroup>
                         <FormInput 
                           name="password"
+                          id="password"
                           labelName="Password"
                           type="password"
                         />
@@ -75,6 +77,7 @@ stories
                       <FormGroup>
                         <FormInput 
                           name="passwordConfirm"
+                          id="passwordConfirm"
                           labelName="Password Confirm"
                           type="password"
                         />

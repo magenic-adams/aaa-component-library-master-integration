@@ -123,7 +123,7 @@ type propTypes = {
 };
 
 
-function Input({
+function BaseInput({
   autoFocus,
   classes,
   className,
@@ -184,10 +184,8 @@ function Input({
           )
         }
         id={id}
-        inputProps={{
-          'data-quid': `BaseInput-${id}`,
-          ref: forwardedRef,
-        }}
+        inputProps={{ 'data-quid': `BaseInput-${id}` }}
+        inputRef={forwardedRef}
         name={name}
         placeholder={labelName ? null : placeholder}
         type={type}
@@ -224,11 +222,10 @@ function Input({
   );
 }
 
-Input.defaultProps = {
+BaseInput.defaultProps = {
   autoFocus: false,
   className: '',
   formControlClass: '',
-  forwardedRef: React.createRef(),
   disabled: false,
   helperText: null,
   labelName: null,
@@ -242,4 +239,4 @@ Input.defaultProps = {
 };
 
 
-export default withStyles(styleClasses, { index: 0, withTheme: true })(Input);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(BaseInput);

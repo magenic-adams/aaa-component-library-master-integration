@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Field, useForm } from 'react-final-form';
 
@@ -6,8 +6,8 @@ import { Field, useForm } from 'react-final-form';
 import BaseInput from '../../Input/BaseInput/BaseInput';
 
 type propTypes = {
-  name: PropTypes.string,
   id: PropTypes.string,
+  name: PropTypes.string,
 };
 
 /**
@@ -19,9 +19,27 @@ type propTypes = {
 function handleFormFieldChange({ input }, formState){
   return (val) => {
     const { name, onChange } = input;
-    const { mutators: {setFieldTouched}} = formState;
+    const { mutators: { setFieldTouched }} = formState;
     setFieldTouched(name, false);
     onChange(val);
+  };
+}
+
+
+/**
+ * Handles clearing of input value
+ * @param  {Object} options.input - fieldProps.input
+ * @param  {Object} formState - global form state
+ * @param  {Object} inputRef - reference to the underlying input
+ * @return {Function} onClear handler
+ */
+function handleFieldClear({ input }, formState, inputRef ){
+  return () => {
+    const { name, onChange } = input;
+    const { mutators: { setFieldTouched }} = formState;
+    setFieldTouched(name, false);
+    onChange('');
+    inputRef.current.focus();
   };
 }
 
@@ -35,24 +53,28 @@ function handleFormFieldChange({ input }, formState){
  * defined on our top-level <Form> component and plucked from context
  */
 function FormInput(props:propTypes) {
-    const formState = useForm();
-    const { name } = props;
-    return (
-      <Field
-        name={name}
-        component={(fieldProps) => {
-          const { meta } = fieldProps;
-          return (
-            <BaseInput
-              {...fieldProps.input}
-              {...props}
-              error={meta.touched && meta.error}
-              onChange={handleFormFieldChange(fieldProps, formState)}
-            />
-          );
-        }}
-      />
-    );
+  const { forwardedRef } = props;
+  const inputRef = forwardedRef || useRef(null);
+  const formState = useForm();
+  const { name } = props;
+  return (
+    <Field
+      name={name}
+      component={(fieldProps) => {
+        const { meta } = fieldProps;
+        return (
+          <BaseInput
+            {...fieldProps.input}
+            error={meta.touched && meta.error}
+            onChange={handleFormFieldChange(fieldProps, formState)}
+            onClear={handleFieldClear(fieldProps, formState, inputRef)}
+            forwardedRef={inputRef}
+            {...props} // Passed props take highest priority
+          />
+        );
+      }}
+    />
+  );
 }
 
 
