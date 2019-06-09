@@ -14,13 +14,13 @@ function createInput(props) {
   return mount(<AAAPrimaryTheme><NumericInput {...props} /></AAAPrimaryTheme>);
 }
 
-function getProps(override) {
+function getFakeProps(override) {
   return {
     id: "enabledId",
     name: "enabledName",
     labelName: "Enabled Label",
     type: "text",
-    value:"",
+    value: "12301991",
     onChange: jest.fn(v => v),
     onClear: jest.fn(v => v),
     mask: [/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/],
@@ -29,10 +29,24 @@ function getProps(override) {
 }
 
 describe("NumericInput", () => {
-  it('has rendered a numeric input', () => {
-    const wrapper = createInput(getProps());
+  let props = getFakeProps();
+  let NumericInputWrapper = createInput(props);
 
-    expect(wrapper.find("label").text()).to.equal("Enabled Label");
-    expect(wrapper.find("Input").get(0).props.value).to.equal("");
+  it('formats the given numeric value based on mask (dd / dd / dddd', () => {
+    expect(NumericInputWrapper.find("input").getDOMNode().value).to.equal("12 / 30 / 1991");
+  });
+
+  it('formats the given numeric value based on mask (dd - dd - dddd', () => {
+    props = getFakeProps({ mask: [/\d/, /\d/, ' ', '-', ' ', /\d/, /\d/, ' ', '-', ' ', /\d/, /\d/, /\d/, /\d/] });
+    NumericInputWrapper = createInput(props);
+
+    expect(NumericInputWrapper.find("input").getDOMNode().value).to.equal("12 - 30 - 1991");
+  });
+
+  it('will not accept non numeric values', () => {
+    props = getFakeProps({ value: "t*/1" });
+    NumericInputWrapper = createInput(props);
+
+    expect(NumericInputWrapper.find("input").getDOMNode().value).to.equal("1");
   });
 });

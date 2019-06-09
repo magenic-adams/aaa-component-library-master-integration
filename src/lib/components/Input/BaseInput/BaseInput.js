@@ -5,15 +5,15 @@ import { withStyles } from '@material-ui/core/styles';
 
 // Material UI components
 import MUIInput from '@material-ui/core/Input';
-import MUIFormControl from "@material-ui/core/FormControl";
-import MUIFormHelperText from "@material-ui/core/FormHelperText";
+import MUIFormControl from '@material-ui/core/FormControl';
+import MUIFormHelperText from '@material-ui/core/FormHelperText';
 import MUIClear from '@material-ui/icons/Clear';
 import MUIInputAdornment from '@material-ui/core/InputAdornment';
 import MUIIconButton from '@material-ui/core/IconButton';
 import MUIReportProblem from '@material-ui/icons/ReportProblem';
 
 // Components
-import Label from "../../Label/Label";
+import Label from '../../Label/Label';
 
 const styleClasses = theme => ({
   root: {
@@ -36,24 +36,24 @@ const styleClasses = theme => ({
   },
   disabled: {
     background: theme.palette.disabled.main,
-    boxShadow: "initial",
+    boxShadow: 'initial',
   },
   input: {
     padding: '10px 12px',
     [theme.breakpoints.up('sm')]: {
-      fontSize: '16px'
+      fontSize: '16px',
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '18px'
-    }
+      fontSize: '18px',
+    },
   },
   iconButton: {
     padding: '10px',
-    transition: 'none'
+    transition: 'none',
   },
   iconStyle: {
     fontSize: '20px',
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
   },
   formControlStyle: {
     [theme.breakpoints.up('sm')]: {
@@ -66,16 +66,19 @@ const styleClasses = theme => ({
   helperTextStyle: {
     color: `${theme.palette.colorVariables.GRAY} !important`,
     [theme.breakpoints.up('sm')]: {
-      fontSize: '14px'
+      fontSize: '14px',
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '16px'
-    }
+      fontSize: '16px',
+    },
   },
   error: {
     boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
     '&:focus': {
       boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
+    },
+    '&:hover': {
+      background: theme.palette.error.ERROR_HOVER,
     },
   },
   errorTextWrapper: {
@@ -86,10 +89,10 @@ const styleClasses = theme => ({
     paddingTop: 10,
     marginTop: 8,
     [theme.breakpoints.up('sm')]: {
-      fontSize: '14px'
+      fontSize: '14px',
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '16px'
+      fontSize: '16px',
     },
   },
   errorIcon: {
@@ -97,7 +100,7 @@ const styleClasses = theme => ({
     verticalAlign: 'text-bottom',
     fontSize: 20,
     marginRight: 8,
-  }
+  },
 });
 
 type propTypes = {
@@ -107,10 +110,12 @@ type propTypes = {
   className?: PropTypes.string,
   formControlClass?: PropTypes.string,
   disabled?: PropTypes.bool,
+  disableWarning?: PropTypes.bool,
   error?: PropTypes.string,
   disableErrorWarning?: PropTypes.bool,
   helperText?: PropTypes.string,
   id: PropTypes.string,
+  inputComponent?: PropTypes.element,
   labelName?: PropTypes.string,
   name: PropTypes.string,
   placeholder?: PropTypes.string,
@@ -130,9 +135,11 @@ function BaseInput({
   forwardedRef,
   formControlClass,
   disabled,
+  disableWarning,
   error,
   helperText,
   id,
+  inputComponent,
   labelName,
   name,
   placeholder,
@@ -150,11 +157,11 @@ function BaseInput({
       disabled={disabled}
     >
       {labelName && (
-        <Label htmlFor={id}>
+        <Label id={id}>
           {labelName}
         </Label>
       )}
-      
+
       <MUIInput
         autoFocus={autoFocus}
         autoComplete="off"
@@ -163,9 +170,9 @@ function BaseInput({
           disabled: classes.disabled,
           focused: classes.focused,
           error: classes.error,
-          input: classes.input
+          input: classes.input,
         }}
-        className={cx("BaseInput", className)}
+        className={cx('BaseInput', className)}
         disableUnderline
         endAdornment={
           (onClear && value) && (
@@ -178,7 +185,7 @@ function BaseInput({
                 color="inherit"
                 className={classes.iconButton}
               >
-                <MUIClear className={classes.iconStyle}/>
+                <MUIClear className={classes.iconStyle} />
               </MUIIconButton>
             </MUIInputAdornment>
           )
@@ -186,6 +193,7 @@ function BaseInput({
         id={id}
         inputProps={{ 'data-quid': `BaseInput-${id}` }}
         inputRef={forwardedRef}
+        inputComponent={inputComponent}
         name={name}
         placeholder={labelName ? null : placeholder}
         type={type}
@@ -195,7 +203,7 @@ function BaseInput({
         onFocus={onFocus}
       />
 
-      {error && (
+      {(error && !disableWarning) && (
         <div className={classes.errorTextWrapper}>
           <MUIReportProblem
             color="error"
@@ -209,7 +217,7 @@ function BaseInput({
           </MUIFormHelperText>
         </div>
       )}
-      
+
       {helperText && (
         <MUIFormHelperText
           id={`${id}-component-helper-text`}
@@ -227,15 +235,17 @@ BaseInput.defaultProps = {
   className: '',
   formControlClass: '',
   disabled: false,
+  disableWarning: false,
   helperText: null,
+  inputComponent: undefined,
   labelName: null,
   placeholder: '',
   type: 'text',
   value: undefined,
-  onBlur: () => {},
-  onChange: () => {},
+  onBlur: () => { },
+  onChange: () => { },
   onClear: null,
-  onFocus: () => {},
+  onFocus: () => { },
 };
 
 

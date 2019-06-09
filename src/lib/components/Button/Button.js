@@ -51,7 +51,7 @@ const styleClasses = theme => {
       '&:disabled': {
         background: theme.palette.disabled.main,
         color: theme.palette.common.white,
-      }
+      },
     },
     containedSecondary: {
       color: theme.palette.primary.main,
@@ -64,7 +64,7 @@ const styleClasses = theme => {
       '&:disabled': {
         background: theme.palette.colorVariables.TRANSPARENT,
         borderColor: theme.palette.disabled.main,
-      }
+      },
     },
     fadeUp: {
       transform: 'translateY(-8px)',
@@ -83,7 +83,7 @@ function Button({
   color,
   href,
   forwardedRef,
-  onClick
+  onClick,
 }:propTypes){
   return (
     <MUIButton
