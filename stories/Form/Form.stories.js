@@ -13,7 +13,8 @@ import {
   ButtonGroup,
   Form,
   FormGroup,
-  FormInput
+  FormInput,
+  FormNumericInput,
 } from '../../src/lib/components';
 
 // Utilities
@@ -24,6 +25,9 @@ const VALIDATIONS = {
     required: 'First name is required',
     'max_length[24]': 'Too long. Do you have a nickname?',
     alpha_dash_dot_space: 'Name can only contain letters, dashes, periods, and spaces',
+  },
+  dob: {
+    required: 'Date of birth required',
   },
   password: {
     required: 'Password is required',
@@ -63,6 +67,16 @@ stories
                           id="firstName"
                           autoFocus
                           labelName="First name"
+                          type="text"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <FormNumericInput 
+                          name="dob"
+                          id="dob"
+                          mask={[/[0-1]/, /\d/, '/', /[0-3]/, /\d/, '/', /[1-2]/, /\d/, /\d/, /\d/]}
+                          labelName="Date of Birth"
+                          helperText="mm/dd/yyyy"
                           type="text"
                         />
                       </FormGroup>

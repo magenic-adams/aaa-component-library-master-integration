@@ -11,6 +11,7 @@ import Link from './Link/Link';
 import Form from './Form/Form';
 import FormGroup from './Form/FormGroup/FormGroup';
 import FormInput from './Form/FormInput/FormInput';
+import FormNumericInput from './Form/FormNumericInput/FormNumericInput';
 
 export {
   AAAPrimaryTheme,
@@ -20,6 +21,7 @@ export {
   Form,
   FormGroup,
   FormInput,
+  FormNumericInput,
   Label,
   Link,
   NumericInput,
