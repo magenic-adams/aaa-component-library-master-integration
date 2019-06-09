@@ -37,7 +37,7 @@ function NumericInput(props): propTypes {
   }
 
 NumericInput.defaultProps = {
-  mask: []
+  mask: [],
 };
 
 export default NumericInput;
