@@ -48,7 +48,7 @@ class FormDecorator extends React.Component {
     return (
       <Form
         {...this.props}
-        mutators={{setFieldTouched}}
+        mutators={{ setFieldTouched }}
         render={FormDecorator.decorateRender(render)}
       />
     );

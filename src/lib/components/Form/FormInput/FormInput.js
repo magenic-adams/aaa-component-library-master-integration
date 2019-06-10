@@ -43,6 +43,14 @@ function handleFieldClear({ input }, formState, inputRef ){
   };
 }
 
+function handleBlur({ input }){
+  return () => {
+    console.log('calling blur');
+    const { onBlur } = input;
+    onBlur();
+  };
+}
+
 /**
  * FormInput is a functional <Field> Wrapper around <BaseInput />
  * FormInput's responsibility is to 
@@ -66,6 +74,7 @@ function FormInput(props:propTypes) {
           <BaseInput
             {...fieldProps.input}
             error={meta.touched && meta.error}
+            onBlur={handleBlur(fieldProps)}
             onChange={handleFormFieldChange(fieldProps, formState)}
             onClear={handleFieldClear(fieldProps, formState, inputRef)}
             forwardedRef={inputRef}
