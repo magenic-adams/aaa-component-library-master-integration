@@ -20,9 +20,6 @@ export const demo = `class FormDemo extends React.Component {
         'max_length[24]': 'Too long. Do you have a nickname?',
         alpha_dash_dot_space: 'Name can only contain letters, dashes, periods, and spaces',
       },
-      dob: {
-        required: 'Date of birth required',
-      },
       password: {
         required: 'Password is required',
         'min_length[6]': 'Password must be at least 6 characters',
@@ -45,7 +42,7 @@ export const demo = `class FormDemo extends React.Component {
       <div>
         <AAAPrimaryTheme>
           <Form
-            validations={FormDemo.validations}
+            validations={FormDemo.validations()}
             onSubmit={FormDemo.handleFormValueSubmission}
             render={({ allFieldsHaveValues, handleSubmit }) => {
               return (

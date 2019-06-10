@@ -66,7 +66,6 @@ stories
                         <FormInput 
                           name="lastName"
                           id="lastName"
-                          autoFocus
                           labelName="Last name"
                           helperText="Not required"
                           type="text"

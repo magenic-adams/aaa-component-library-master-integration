@@ -81,7 +81,7 @@ const styleClasses = theme => ({
   },
   error: {
     boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
-    '&:focus': {
+    '&$focused': {
       boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
     },
   },
