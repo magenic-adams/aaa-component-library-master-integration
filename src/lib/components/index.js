@@ -27,7 +27,7 @@ export {
   Label,
   Link,
   NumericInput,
-  ToggleButtonGroup,
   SelectList,
   SelectListItemText,
+  ToggleButtonGroup,
 };
