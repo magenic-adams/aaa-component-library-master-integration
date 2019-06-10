@@ -6,13 +6,13 @@ import cx from 'clsx';
 
 const styleClasses = theme => ({
   formControl: {
+    position: 'relative',
     transform: 'unset',
-    top: '-8px',
   },
   root: {
+    display: 'block',
+    marginBottom: -8,
     color: theme.palette.colorVariables.BLACK,
-    width: '343px',
-    height: '19px',
     fontFamily: theme.typography.fontFamily
   },
   focused: {
