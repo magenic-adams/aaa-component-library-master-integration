@@ -12,11 +12,13 @@ stories
       <AAAPrimaryTheme>
         <h2>Use of button groups</h2>
         <ElementContainer>
-          <ButtonGroup>
-            <Button>Primary</Button>
-            <Button color="secondary">Secondary</Button>
-          </ButtonGroup>
+          <div className="u-flex--center">
+            <ButtonGroup>
+              <Button>Primary</Button>
+              <Button color="secondary">Secondary</Button>
+            </ButtonGroup>
+          </div>
         </ElementContainer>
       </AAAPrimaryTheme>
-    )
-  })
+    );
+  });
