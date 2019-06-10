@@ -1,10 +1,10 @@
 /* global describe, it */
 import React from 'react';
-import { expect } from "chai";
+import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 // Test Utilities
-import {getDOMNodeComputedStyle} from "../../../../test/DOM";
+import { getDOMNodeComputedStyle } from '../../../../test/DOM';
 
 // Components
 import AAAPrimaryTheme from '../AAAPrimaryTheme/AAAPrimaryTheme';
@@ -19,7 +19,7 @@ function createButtonGroupWithTheme(props) {
   );
 }
 
-describe("ButtonGroup", () => {
+describe('ButtonGroup', () => {
   const props = {
     className: 'my-button-group-class',
     children: [
@@ -30,7 +30,7 @@ describe("ButtonGroup", () => {
   const ButtonGroupComponent = createButtonGroupWithTheme(props);
   const ButtonGroupNode = ButtonGroupComponent.getDOMNode();
 
-  describe("rendering HTML element", () => {
+  describe('rendering HTML element', () => {
     it('includes a class name of "ButtonGroup" on the HTML element', () => {
       expect(ButtonGroupNode.className).to.include('ButtonGroup');
     });
@@ -43,16 +43,12 @@ describe("ButtonGroup", () => {
       expect(ButtonGroupComponent.find(Button).length).to.equal(2);
     });
 
-    it('has base width of 100%', () => {
-      const backgroundStyle = getDOMNodeComputedStyle(ButtonGroupComponent.getDOMNode(), 'width');
-      expect(backgroundStyle).to.equal('100%');
-    });
   });
 
-  describe("base styles", () => {
-    it ('has 48px height', () => {
-      const heightStyle = getDOMNodeComputedStyle(ButtonGroupNode, 'width');
-      expect(heightStyle).to.equal('100%');
+  describe('base styles', () => {
+    it('has width of 100%', () => {
+      const backgroundStyle = getDOMNodeComputedStyle(ButtonGroupComponent.getDOMNode(), 'width');
+      expect(backgroundStyle).to.equal('100%');
     });
 
     it ('has 24px margin-top and margin-bottom', () => {

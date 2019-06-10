@@ -89,7 +89,6 @@ function Button({
     <MUIButton
       className={cx(
         'Button',
-        classes.root,
         { [classes.fadeUp]: fadeUp },
         className,
       )}
