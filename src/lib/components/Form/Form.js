@@ -28,17 +28,13 @@ class FormDecorator extends React.Component {
    * @param  {Object} options.values - current key/values of form state
    * @return {Boolean}
    */
-  static allRequiredFieldsHaveBeenVisited({ validations }){
-    console.log('validations', validations);
+  static allRequiredFieldsHaveBeenVisited({ formRenderProps, validations }){
+    const { visited } = formRenderProps;
     const validationFields = Object.keys(validations);
     const requiredFields = validationFields.filter(fieldKey => {
       return Object.prototype.hasOwnProperty.call(validations[fieldKey], 'required');
     });
-    console.log('requiredFields', requiredFields);
-
-    // const { form, values } = formRenderProps;
-    // const registeredFields = form.getRegisteredFields();
-    // return registeredFields.every(fieldKey => !!values[fieldKey]);
+    return requiredFields.every(fieldKey => !!visited[fieldKey]);
   }
 
   /**

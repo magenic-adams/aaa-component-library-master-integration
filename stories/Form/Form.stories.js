@@ -50,7 +50,7 @@ stories
               <Form
                 validations={VALIDATIONS}
                 onSubmit={handleFormValueSubmission}
-                render={({ allFieldsHaveValues, handleSubmit }) => {
+                render={({ allRequiredFieldsHaveBeenVisited, handleSubmit }) => {
                   return (
                     <form onSubmit={handleSubmit}>
                       <FormGroup>
@@ -90,8 +90,8 @@ stories
                       </FormGroup>
                       <ButtonGroup>
                         <Button
-                          disabled={!allFieldsHaveValues}
-                          fadeUp={allFieldsHaveValues}
+                          disabled={!allRequiredFieldsHaveBeenVisited}
+                          fadeUp={allRequiredFieldsHaveBeenVisited}
                           type="submit"
                         >
                           Submit
