@@ -17,6 +17,9 @@ stories
     return (
       <AAAPrimaryTheme>
         <div className="u-center u-max-width--1024">
+          <img className="u-width--full" src="https://www.dropbox.com/s/z1pbb8angqpq4mq/00inputheader.png?dl=1" alt="rules"/>
+        </div>
+        <div className="u-center u-max-width--1024">
           <img className="u-width--full" src="https://www.dropbox.com/s/z63xbp8dmurch8v/01whentouse.png?dl=1" alt="rules"/>
         </div>
         <ElementContainer>
