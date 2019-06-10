@@ -22,7 +22,7 @@ function getFakeProps(overrides) {
   return {
     item: { id: 1, value: 1, display: 'Yes' },
     onSelect: jest.fn(v => v),
-    ...overrides
+    ...overrides,
   };
 }
 
@@ -54,14 +54,12 @@ describe('SelectListItemText', () => {
   describe('html rendering', () => {
     it('rendered text should match passed options text', () => {
       props = getFakeProps({
-        item: { id: 1, value: 1, display: 'I am Iron Man' }
+        item: { id: 1, value: 1, display: 'I am Iron Man' },
       });
 
       listItemTextWrapper = createSelectListItemTextWithTheme(props);
 
-      const listItem = listItemTextWrapper
-        .find('.MuiListItemText-primary')
-        .at(0);
+      const listItem = listItemTextWrapper.find('span').at(0);
 
       expect(listItem.props().children).to.equal(props.item.display);
     });
@@ -78,7 +76,7 @@ describe('SelectListItemText', () => {
     it('should not render list item if invalid item is passed', () => {
       let listItem;
       props = getFakeProps({
-        item: null
+        item: null,
       });
 
       listItemTextWrapper = createSelectListItemTextWithTheme(props);
@@ -87,7 +85,7 @@ describe('SelectListItemText', () => {
       expect(listItem).to.equal(undefined);
 
       props = getFakeProps({
-        item: undefined
+        item: undefined,
       });
       listItemTextWrapper = createSelectListItemTextWithTheme(props);
       listItem = listItemTextWrapper.find('li').get(0);
@@ -95,7 +93,7 @@ describe('SelectListItemText', () => {
       expect(listItem).to.equal(undefined);
 
       props = getFakeProps({
-        item: {}
+        item: {},
       });
       listItemTextWrapper = createSelectListItemTextWithTheme(props);
       listItem = listItemTextWrapper.find('li').get(0);
@@ -103,7 +101,7 @@ describe('SelectListItemText', () => {
       expect(listItem).to.equal(undefined);
 
       props = getFakeProps({
-        item: ''
+        item: '',
       });
       listItemTextWrapper = createSelectListItemTextWithTheme(props);
       listItem = listItemTextWrapper.find('li').get(0);
@@ -113,14 +111,14 @@ describe('SelectListItemText', () => {
   });
 
   describe('event handlers', () => {
-    it("listItemTextWrapper call it's click event handler", () => {
+    it('listItemTextWrapper call it\'s click event handler', () => {
       listItemTextWrapper.simulate('click');
 
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.deep.equal({
         id: 1,
         value: 1,
-        display: 'Yes'
+        display: 'Yes',
       });
     });
   });
@@ -143,7 +141,7 @@ describe('SelectListItemText', () => {
   describe('list item states', () => {
     it('has selected className if selected', () => {
       props = getFakeProps({
-        item: { id: 1, value: 1, display: 'I am Iron Man', selected: true }
+        item: { id: 1, value: 1, display: 'I am Iron Man', selected: true },
       });
 
       listItemTextWrapper = createSelectListItemTextWithTheme(props);

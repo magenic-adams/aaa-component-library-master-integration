@@ -63,7 +63,7 @@ describe('SelectListItemText', function () {
         }
       });
       listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      var listItem = listItemTextWrapper.find('.MuiListItemText-primary').at(0);
+      var listItem = listItemTextWrapper.find('span').at(0);
       expect(listItem.props().children).to.equal(props.item.display);
     });
     it('attaches a data-quid attribute to the input base element', function () {
@@ -98,7 +98,7 @@ describe('SelectListItemText', function () {
     });
   });
   describe('event handlers', function () {
-    it("listItemTextWrapper call it's click event handler", function () {
+    it('listItemTextWrapper call it\'s click event handler', function () {
       listItemTextWrapper.simulate('click');
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.deep.equal({

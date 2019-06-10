@@ -18,34 +18,33 @@ type propTypes = {
 
 const styleClasses = theme => ({
   root: {
-    height: '48px',
+    height: 48,
     background: theme.palette.colorVariables.TRANSPARENT,
-    '&$selected, &$selected:hover': {
-      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER
+    '&.Mui-selected, &.Mui-selected:hover': {
+      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER,
     },
     '&:hover': {
-      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER
-    }
+      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER,
+    },
   },
   gutters: {
-    padding: '0 13px 0 13px'
+    padding: '0 13px 0 13px',
   },
   divider: {
     borderBottom: `1px solid ${theme.palette.primary.main}`,
     '&:last-child': {
-      borderBottom: 'none'
-    }
+      borderBottom: 'none',
+    },
   },
   primary: {
-    fontSize: '18px',
+    fontSize: 18,
     letterSpacing: 'normal',
     fontStretch: 'normal',
     lineHeight: 1.5,
     [theme.breakpoints.between('xs', 'sm')]: {
-      fontSize: '16px'
-    }
+      fontSize: 16,
+    },
   },
-  selected: {}
 });
 
 function isValid(id, display) {
@@ -60,12 +59,12 @@ function isValid(id, display) {
 
 function SelectListItemText({ classes, item, onSelect }: propTypes) {
   const { display, id } = item || {};
-  const { divider, gutters, primary, root, selected } = classes;
+  const { divider, gutters, primary, root } = classes;
 
   return isValid(id, display) ? (
     <ListItem
       data-quid={`SelectListItem-${id}`}
-      classes={{ root, divider, gutters, selected }}
+      classes={{ root, divider, gutters }}
       divider
       selected={item.selected}
       onClick={() => onSelect(item)}
