@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.u-center {
+  margin: 0 auto;
+}
+
 .u-width--full {
   width: 100%;
 }
@@ -13,6 +17,10 @@
 
 .u-padding--50 {
   padding: 50px;
+}
+
+.u-max-width--1024 {
+  max-width: 1024px;
 }
 
 /* Flex classes */

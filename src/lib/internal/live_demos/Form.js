@@ -35,10 +35,6 @@ export const demo = `class FormDemo extends React.Component {
     };
   }
 
-  static handleValidate(values){
-    return Validate.validateForm(values, FormDemo.validations());
-  }
-
   static handleFormValueSubmission(vals){
     console.log('vals', vals);
   }
@@ -49,7 +45,7 @@ export const demo = `class FormDemo extends React.Component {
       <div>
         <AAAPrimaryTheme>
           <Form
-            validate={FormDemo.handleValidate}
+            validations={FormDemo.validations}
             onSubmit={FormDemo.handleFormValueSubmission}
             render={({ allFieldsHaveValues, handleSubmit }) => {
               return (
@@ -59,6 +55,7 @@ export const demo = `class FormDemo extends React.Component {
                       name="firstName"
                       id="firstName"
                       labelName="First name"
+                      helperText="If you have a first name, please enter it here"
                       type="text"
                     />
                   </FormGroup>

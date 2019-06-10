@@ -37,6 +37,9 @@ const styleClasses = theme => ({
   disabled: {
     background: theme.palette.disabled.main,
     boxShadow: 'initial',
+    '&:hover': {
+      boxShadow: 'none',
+    },
   },
   input: {
     padding: '10px 12px',
@@ -64,6 +67,7 @@ const styleClasses = theme => ({
     },
   },
   helperTextStyle: {
+    marginTop: 0,
     color: `${theme.palette.colorVariables.GRAY} !important`,
     [theme.breakpoints.up('sm')]: {
       fontSize: 14,
@@ -72,19 +76,23 @@ const styleClasses = theme => ({
       fontSize: 16,
     },
   },
+  helperTextStyleErrorActive: {
+    marginTop: 8,
+  },
   error: {
     boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
     '&:focus': {
       boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
     },
   },
-  errorTextWrapper: {
+  metaWrapper: {
     marginTop: 8,
+    minHeight: 20,
   },
   errorText: {
     display: 'inline',
+    marginTop: 0,
     paddingTop: 10,
-    marginTop: 8,
     [theme.breakpoints.up('sm')]: {
       fontSize: 14,
     },
@@ -200,29 +208,35 @@ function BaseInput({
         onFocus={onFocus}
       />
 
-      {(error && !disableWarning) && (
-        <div className={classes.errorTextWrapper}>
-          <MUIReportProblem
-            color="error"
-            className={classes.errorIcon}
-          />
-          <MUIFormHelperText
-            id={`${id}-component-error-text`}
-            className={classes.errorText}
-          >
-            {error}
-          </MUIFormHelperText>
-        </div>
-      )}
 
-      {helperText && (
-        <MUIFormHelperText
-          id={`${id}-component-helper-text`}
-          className={classes.helperTextStyle}
-        >
-          {helperText}
-        </MUIFormHelperText>
-      )}
+      <div className={classes.metaWrapper}>
+        {(error && !disableWarning) && (
+          <div>
+            <MUIReportProblem
+              color="error"
+              className={classes.errorIcon}
+            />
+            <MUIFormHelperText
+              id={`${id}-component-error-text`}
+              className={classes.errorText}
+            >
+              {error}
+            </MUIFormHelperText>
+          </div>
+        )}
+
+        {helperText && (
+          <MUIFormHelperText
+            id={`${id}-component-helper-text`}
+            className={cx(
+              classes.helperTextStyle,
+              { [classes.helperTextStyleErrorActive] : error && !disableWarning }
+            )}
+          >
+            {helperText}
+          </MUIFormHelperText>
+        )}
+      </div>
     </MUIFormControl>
   );
 }
