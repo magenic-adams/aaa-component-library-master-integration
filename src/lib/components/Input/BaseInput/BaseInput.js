@@ -26,86 +26,78 @@ const styleClasses = theme => ({
     boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.GRAY}`,
     '&:hover,&:active': {
       boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.DARKER_BLUE}`,
-      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER
-    }
+    },
   },
   focused: {
     boxShadow: `inset 0 0 0 2px ${theme.palette.colorVariables.DARKER_BLUE}`,
     '&:hover': {
-      boxShadow: `inset 0 0 0 2px ${theme.palette.colorVariables.DARKER_BLUE}`
-    }
+      boxShadow: `inset 0 0 0 2px ${theme.palette.colorVariables.DARKER_BLUE}`,
+    },
   },
   disabled: {
     background: theme.palette.disabled.main,
     boxShadow: 'initial',
-    '&:hover': {
-      boxShadow: 'initial',
-      backgroundColor: theme.palette.disabled.main
-    }
   },
   input: {
     padding: '10px 12px',
     [theme.breakpoints.up('sm')]: {
-      fontSize: '16px'
+      fontSize: 16,
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '18px'
-    }
+      fontSize: 18,
+    },
   },
   iconButton: {
-    padding: '10px',
-    transition: 'none'
+    padding: 10,
+    transition: 'none',
   },
   iconStyle: {
-    fontSize: '20px',
-    color: theme.palette.primary.main
+    fontSize: 20,
+    color: theme.palette.primary.main,
   },
   formControlStyle: {
     [theme.breakpoints.up('sm')]: {
-      width: '100%'
+      width: '100%',
     },
     [theme.breakpoints.up('md')]: {
-      width: '534px'
-    }
+      width: 534,
+    },
   },
   helperTextStyle: {
     color: `${theme.palette.colorVariables.GRAY} !important`,
     [theme.breakpoints.up('sm')]: {
-      fontSize: '14px'
+      fontSize: 14,
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '16px'
-    }
+      fontSize: 16,
+    },
   },
   error: {
     boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
     '&:focus': {
-      boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`
+      boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
     },
-    '&:hover': {
-      background: theme.palette.error.ERROR_HOVER
-    }
   },
   errorTextWrapper: {
-    marginTop: 8
+    marginTop: 8,
   },
   errorText: {
     display: 'inline',
     paddingTop: 10,
     marginTop: 8,
     [theme.breakpoints.up('sm')]: {
-      fontSize: '14px'
+      fontSize: 14,
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '16px'
-    }
+      fontSize: 16,
+    },
   },
   errorIcon: {
     display: 'inline',
     verticalAlign: 'text-bottom',
     fontSize: 20,
-    marginRight: 8
-  }
+    marginRight: 8,
+  },
 });
 
 type propTypes = {
@@ -117,6 +109,7 @@ type propTypes = {
   disabled?: PropTypes.bool,
   disableWarning?: PropTypes.bool,
   error?: PropTypes.string,
+  disableErrorWarning?: PropTypes.bool,
   helperText?: PropTypes.string,
   id: PropTypes.string,
   inputComponent?: PropTypes.element,
@@ -151,7 +144,7 @@ function BaseInput({
   onBlur,
   onChange,
   onClear,
-  onFocus
+  onFocus,
 }): propTypes {
   return (
     <MUIFormControl
@@ -169,7 +162,7 @@ function BaseInput({
           disabled: classes.disabled,
           focused: classes.focused,
           error: classes.error,
-          input: classes.input
+          input: classes.input,
         }}
         className={cx('BaseInput', className)}
         disableUnderline
@@ -191,10 +184,8 @@ function BaseInput({
           )
         }
         id={id}
-        inputProps={{
-          'data-quid': `BaseInput-${id}`,
-          ref: forwardedRef
-        }}
+        inputProps={{ 'data-quid': `BaseInput-${id}` }}
+        inputRef={forwardedRef}
         inputComponent={inputComponent}
         name={name}
         placeholder={labelName ? null : placeholder}
@@ -233,7 +224,6 @@ BaseInput.defaultProps = {
   autoFocus: false,
   className: '',
   formControlClass: '',
-  forwardedRef: React.createRef(),
   disabled: false,
   disableWarning: false,
   helperText: null,
@@ -245,7 +235,7 @@ BaseInput.defaultProps = {
   onBlur: () => {},
   onChange: () => {},
   onClear: null,
-  onFocus: () => {}
+  onFocus: () => {},
 };
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
