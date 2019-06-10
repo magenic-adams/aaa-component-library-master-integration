@@ -22,10 +22,10 @@ function getFakeProps(overrides) {
   return {
     items: [
       { id: 1, value: 1, display: 'Iron Man' },
-      { id: 2, value: 2, display: 'Captain A' }
+      { id: 2, value: 2, display: 'Captain A' },
     ],
     onSelect: jest.fn(v => v),
-    ...overrides
+    ...overrides,
   };
 }
 
@@ -87,28 +87,28 @@ describe('SelectList', () => {
 
     it('should throw error if invalid items is passed', () => {
       props = getFakeProps({
-        items: null
+        items: null,
       });
       expect(() => {
         createSelectListWithTheme(props);
       }).to.throw('Invariant failed: items array is empty');
 
       props = getFakeProps({
-        items: undefined
+        items: undefined,
       });
       expect(() => {
         createSelectListWithTheme(props);
       }).to.throw('Invariant failed: items array is empty');
 
       props = getFakeProps({
-        items: []
+        items: [],
       });
       expect(() => {
         createSelectListWithTheme(props);
       }).to.throw('Invariant failed: items array is empty');
 
       props = getFakeProps({
-        items: [{}]
+        items: [{}],
       });
       expect(() => {
         createSelectListWithTheme(props);
@@ -117,7 +117,7 @@ describe('SelectList', () => {
       );
 
       props = getFakeProps({
-        items: [{ idx: 1, value: 1, text: '1' }]
+        items: [{ idx: 1, value: 1, text: '1' }],
       });
       expect(() => {
         createSelectListWithTheme(props);
@@ -127,7 +127,7 @@ describe('SelectList', () => {
     });
 
     describe('event handlers', () => {
-      it("selectListWrapper call it's click event handler", () => {
+      it('selectListWrapper call it\'s click event handler', () => {
         selectListWrapper
           .find('li')
           .at(0)
@@ -137,7 +137,7 @@ describe('SelectList', () => {
         expect(spy.getCall(0).args[0]).to.deep.equal({
           id: 1,
           value: 1,
-          display: 'Iron Man'
+          display: 'Iron Man',
         });
       });
     });

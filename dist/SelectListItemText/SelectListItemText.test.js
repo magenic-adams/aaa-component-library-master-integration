@@ -70,35 +70,34 @@ describe('SelectListItemText', function () {
       expect(listItemTextWrapper.find('li').at(0).getDOMNode().dataset.quid).to.equal("SelectListItem-".concat(props.item.id));
     });
     it('should not render list item if invalid item is passed', function () {
-      var listItem;
       props = getFakeProps({
         item: null
       });
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      listItem = listItemTextWrapper.find('li').get(0);
-      expect(listItem).to.equal(undefined);
+      expect(function () {
+        createSelectListItemTextWithTheme(props);
+      }).to.throw('Invariant failed: id and display should have value.');
       props = getFakeProps({
         item: undefined
       });
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      listItem = listItemTextWrapper.find('li').get(0);
-      expect(listItem).to.equal(undefined);
+      expect(function () {
+        createSelectListItemTextWithTheme(props);
+      }).to.throw('Invariant failed: id and display should have value.');
       props = getFakeProps({
         item: {}
       });
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      listItem = listItemTextWrapper.find('li').get(0);
-      expect(listItem).to.equal(undefined);
+      expect(function () {
+        createSelectListItemTextWithTheme(props);
+      }).to.throw('Invariant failed: id and display should have value.');
       props = getFakeProps({
         item: ''
       });
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      listItem = listItemTextWrapper.find('li').get(0);
-      expect(listItem).to.equal(undefined);
+      expect(function () {
+        createSelectListItemTextWithTheme(props);
+      }).to.throw('Invariant failed: id and display should have value.');
     });
   });
   describe('event handlers', function () {
-    it("listItemTextWrapper call it's click event handler", function () {
+    it('listItemTextWrapper call it\'s click event handler', function () {
       listItemTextWrapper.simulate('click');
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.deep.equal({
