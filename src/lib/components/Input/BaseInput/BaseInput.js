@@ -77,9 +77,6 @@ const styleClasses = theme => ({
     '&:focus': {
       boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
     },
-    '&:hover': {
-      background: theme.palette.error.ERROR_HOVER,
-    },
   },
   errorTextWrapper: {
     marginTop: 8,
