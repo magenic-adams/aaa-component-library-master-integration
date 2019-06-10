@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-
 // Colors
 import {
   AAA_COLOR_MAIN_ERROR,
@@ -20,9 +19,8 @@ import {
   AAA_COLOR_MAIN_WHITE,
   AAA_COLOR_SECONDARY_HOVER,
   AAA_COLOR_TRANSPARENT,
-  AAA_COLOR_MAIN_VERY_DARK_BLUE
+  AAA_COLOR_MAIN_VERY_DARK_BLUE,
 } from '../../constants/colors';
-
 
 const theme = createMuiTheme({
   breakpoints: {
@@ -43,7 +41,7 @@ const theme = createMuiTheme({
     },
     error: {
       main: AAA_COLOR_MAIN_ERROR,
-      ERROR_HOVER: AAA_COLOR_MAIN_ERROR_HOVER
+      ERROR_HOVER: AAA_COLOR_MAIN_ERROR_HOVER,
     },
     disabled: {
       main: AAA_COLOR_MAIN_DISABLED,
@@ -67,7 +65,8 @@ const theme = createMuiTheme({
 });
 
 // ** Typography ** //
-theme.typography.h1 = { // Headline
+theme.typography.h1 = {
+  // Headline
   fontSize: 20,
   lineHeight: 1.5,
   fontWeight: 500,
@@ -77,7 +76,8 @@ theme.typography.h1 = { // Headline
   },
 };
 
-theme.typography.h2 = { // Subheadline
+theme.typography.h2 = {
+  // Subheadline
   fontSize: 18,
   lineHeight: 1.45,
   [theme.breakpoints.up('lg')]: {
@@ -85,7 +85,8 @@ theme.typography.h2 = { // Subheadline
   },
 };
 
-theme.typography.subtitle1 = { // Subtitle 1 / Table Header
+theme.typography.subtitle1 = {
+  // Subtitle 1 / Table Header
   fontSize: 16,
   lineHeight: 1.5,
   fontWeight: 500,
@@ -95,7 +96,8 @@ theme.typography.subtitle1 = { // Subtitle 1 / Table Header
   },
 };
 
-theme.typography.body1 = { // Body 1 / Primary Copy
+theme.typography.body1 = {
+  // Body 1 / Primary Copy
   fontSize: 16,
   lineHeight: 1.5,
   [theme.breakpoints.up('lg')]: {
@@ -104,7 +106,8 @@ theme.typography.body1 = { // Body 1 / Primary Copy
   },
 };
 
-theme.typography.body2 = { // Body 2 / Primary Copy
+theme.typography.body2 = {
+  // Body 2 / Primary Copy
   fontSize: 14,
   lineHeight: 1.45,
   [theme.breakpoints.up('lg')]: {
@@ -114,13 +117,9 @@ theme.typography.body2 = { // Body 2 / Primary Copy
 };
 
 type propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
-export default function AAAThemeProvider({children}:propTypes){
-  return (
-    <ThemeProvider theme={theme}>
-      {children}
-    </ThemeProvider>
-  );
+export default function AAAThemeProvider({ children }: propTypes) {
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }

@@ -10,15 +10,12 @@ const styleClasses = () => ({
   root: {
     marginTop: 16,
     marginBottom: 16,
-  }
+  },
 });
 
 function FormGroup({ children, classes, className }) {
   return (
-    <MUIFormGroup
-      className={cx('FormGroup', className)}
-      classes={classes}
-    >
+    <MUIFormGroup className={cx('FormGroup', className)} classes={classes}>
       {children}
     </MUIFormGroup>
   );
@@ -28,4 +25,6 @@ FormGroup.defaultProps = {
   className: PropTypes.string,
 };
 
-export default withStyles(styleClasses, {index: 0, withTheme: true})(FormGroup);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(
+  FormGroup
+);

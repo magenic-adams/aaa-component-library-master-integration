@@ -12,6 +12,8 @@ import FormGroup from './Form/FormGroup/FormGroup';
 import FormInput from './Form/FormInput/FormInput';
 import FormNumericInput from './Form/FormNumericInput/FormNumericInput';
 import ToggleButtonGroup from './ToggleButtonGroup/ToggleButtonGroup';
+import RadioItem from './RadioItem/RadioItem';
+import RadioItemGroup from './RadioItemGroup/RadioItemGroup';
 import SelectList from './SelectList/SelectList';
 import SelectListItemText from './SelectListItemText/SelectListItemText';
 
@@ -27,6 +29,8 @@ export {
   Label,
   Link,
   NumericInput,
+  RadioItem,
+  RadioItemGroup,
   SelectList,
   SelectListItemText,
   ToggleButtonGroup,

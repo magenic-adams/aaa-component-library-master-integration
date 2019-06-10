@@ -21,20 +21,20 @@ const styleClasses = theme => ({
     height: '48px',
     background: theme.palette.colorVariables.TRANSPARENT,
     '&$selected, &$selected:hover': {
-      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER
+      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER,
     },
     '&:hover': {
-      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER
-    }
+      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER,
+    },
   },
   gutters: {
-    padding: '0 13px 0 13px'
+    padding: '0 13px 0 13px',
   },
   divider: {
     borderBottom: `1px solid ${theme.palette.primary.main}`,
     '&:last-child': {
-      borderBottom: 'none'
-    }
+      borderBottom: 'none',
+    },
   },
   primary: {
     fontSize: '18px',
@@ -42,10 +42,10 @@ const styleClasses = theme => ({
     fontStretch: 'normal',
     lineHeight: 1.5,
     [theme.breakpoints.between('xs', 'sm')]: {
-      fontSize: '16px'
-    }
+      fontSize: '16px',
+    },
   },
-  selected: {}
+  selected: {},
 });
 
 function isValid(id, display) {

@@ -4,12 +4,14 @@ import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 import List from '@material-ui/core/List';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import SelectListItemText from '../SelectListItemText/SelectListItemText';
 
 type propTypes = {
   // Decorator Props
   classes: PropTypes.object,
   // Passed Props
+  name?: PropTypes.string,
   items: [
     {
       id: PropTypes.string | PropTypes.number,
@@ -32,7 +34,7 @@ const styleClasses = theme => ({
     padding: '0px',
     boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.35)',
     '& span': {
-      fontFamily: theme.typography.fontFamily
+      fontFamily: theme.typography.fontFamily,
     },
     [theme.breakpoints.down(321)]: {
       width: '100%',
@@ -40,9 +42,9 @@ const styleClasses = theme => ({
       boxShadow: 'none',
       borderRadius: '0px',
       '& span': {
-        fontSize: '16px'
-      }
-    }
+        fontSize: '16px',
+      },
+    },
   },
   fullOverlay: {
     [theme.breakpoints.down(415)]: {
@@ -51,10 +53,10 @@ const styleClasses = theme => ({
       boxShadow: 'none',
       borderRadius: '0px',
       '& span': {
-        fontSize: '16px'
-      }
-    }
-  }
+        fontSize: '16px',
+      },
+    },
+  },
 });
 
 function areItemKeysPresent(items) {
@@ -75,7 +77,7 @@ function areItemsValid(items) {
   return true;
 }
 
-function SelectList({ classes, items, type, onSelect }: propTypes) {
+function SelectList({ classes, items, name, type, onSelect }: propTypes) {
   return (
     <Fragment>
       {areItemsValid(items)
@@ -86,7 +88,7 @@ function SelectList({ classes, items, type, onSelect }: propTypes) {
                   <List
                     dense
                     className={cx('List', classes.root, {
-                      [classes.fullOverlay]: items.length > 6
+                      [classes.fullOverlay]: items.length > 6,
                     })}
                   >
                     {items.map(item => (
@@ -100,8 +102,11 @@ function SelectList({ classes, items, type, onSelect }: propTypes) {
                   </List>
                 );
               case 'radioGroup':
-                // TODO: ACL-19 Radio Group
-                return null;
+                return (
+                  <RadioGroup name={name} onChange={onSelect}>
+                    {items.map(item => item.display)}
+                  </RadioGroup>
+                );
               default:
                 return null;
             }
@@ -110,5 +115,9 @@ function SelectList({ classes, items, type, onSelect }: propTypes) {
     </Fragment>
   );
 }
+
+SelectList.defaultProps = {
+  name: '',
+};
 
 export default withStyles(styleClasses, { withTheme: true })(SelectList);

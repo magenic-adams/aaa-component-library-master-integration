@@ -13,7 +13,7 @@ const styleClasses = theme => ({
     display: 'block',
     marginBottom: -8,
     color: theme.palette.colorVariables.BLACK,
-    fontFamily: theme.typography.fontFamily
+    fontFamily: theme.typography.fontFamily,
   },
   focused: {
     color: `${theme.palette.colorVariables.BLACK} !important`,
@@ -23,7 +23,7 @@ const styleClasses = theme => ({
   },
   disabled: {
     color: `${theme.palette.colorVariables.BLACK} !important`,
-  }
+  },
 });
 
 type propTypes = {
@@ -32,25 +32,26 @@ type propTypes = {
   // Passed Props
   children: PropTypes.string,
   className?: PropTypes.string,
-  id: PropTypes.string,
+  id: PropTypes.string
 };
 
 function Label({ classes, className, children, id }): propTypes {
   return (
     <InputLabel
-      className={cx("InputLabel", className)}
+      className={cx('InputLabel', className)}
       classes={classes}
       disableAnimation
       htmlFor={id}
       data-quid={`Label-${id}`}
-      shrink={false}>
+      shrink={false}
+    >
       {children}
     </InputLabel>
   );
 }
 
 Label.defaultProps = {
-  className: ""
+  className: '',
 };
 
 export default withStyles(styleClasses, { withTheme: true })(Label);

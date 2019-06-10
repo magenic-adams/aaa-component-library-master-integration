@@ -8,28 +8,29 @@ import {
   Button,
   BaseInput,
   Link as TextLink,
-  SelectList
+  RadioItemGroup,
 } from './lib/components';
+import RadioButtonGroup from './lib/components/experiment/experiment';
 
 const handleSelectItem = selectedItem => {
   console.log('selectedItem', selectedItem);
 };
 
 const items = [
-  { id: 1, value: 1, display: 'First Item', selected: true },
-  { id: 2, value: 2, display: 'Second Item' },
+  { id: 1, value: 1, text: 'First Item', selected: true },
+  { id: 2, value: 2, text: 'Second Item' },
   {
     id: 3,
     value: 3,
-    display: 'Third Item '
+    text: 'Third Item ',
   },
-  { id: 4, value: 4, display: '4th Item' },
-  { id: 5, value: 5, display: '5th Item' },
+  { id: 4, value: 4, text: '4th Item' },
+  { id: 5, value: 5, text: '5th Item' },
   {
     id: 6,
     value: 6,
-    display: '6th item'
-  }
+    text: '6th item',
+  },
 ];
 
 const App = () => {
@@ -90,11 +91,13 @@ const App = () => {
       <TextLink className="secondary" onClick={() => {}}>
         Secondary enabled Link
       </TextLink>
-      <SelectList
+      <RadioItemGroup
         type="primary"
+        name="testRadio"
         items={items}
         onSelect={selectedOption => handleSelectItem(selectedOption)}
       />
+      <RadioButtonGroup />
     </AAAPrimaryTheme>
   );
 };
