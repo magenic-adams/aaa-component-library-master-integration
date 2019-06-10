@@ -3,8 +3,16 @@
   text-align: center;
 }
 
+.u-center {
+  margin: 0 auto;
+}
+
 .u-width--full {
   width: 100%;
+}
+
+.u-max-width--1024 {
+  max-width: 1024px;
 }
 
 .u-padding--50 {

@@ -16,7 +16,9 @@ stories
   .add('input', () => {
     return (
       <AAAPrimaryTheme>
-        <img className="u-width--full" src="https://www.dropbox.com/s/z63xbp8dmurch8v/01whentouse.png?dl=1" alt="rules"/>
+        <div className="u-center u-max-width--1024">
+          <img className="u-width--full" src="https://www.dropbox.com/s/z63xbp8dmurch8v/01whentouse.png?dl=1" alt="rules"/>
+        </div>
         <ElementContainer>
           <BaseInput 
           id="enabledId" 
@@ -42,6 +44,21 @@ stories
           onClear={action('clear')}  
           />
         </ElementContainer>
+        <div className="u-center u-max-width--1024">
+          <img className="u-width--full" src="https://www.dropbox.com/s/o8eq3x2lpbd3wwv/02states.png?dl=1" alt="rules"/>
+        </div>
+        <div className="u-center u-max-width--1024">
+          <img className="u-width--full" src="https://www.dropbox.com/s/8r1boiz3vqmelya/03-1anatomy-breakpoints.png?dl=1" alt="rules"/>
+        </div>
+        <div className="u-center u-max-width--1024">
+          <img className="u-width--full" src="https://www.dropbox.com/s/3850hozhaj0o9ug/03-2anatomy-states.png?dl=1" alt="rules"/>
+        </div>
+        <div className="u-center u-max-width--1024">
+          <img className="u-width--full" src="https://www.dropbox.com/s/jau40r826yzhhbq/03-3anatomy-spacing.png?dl=1" alt="rules"/>
+        </div>
+        <div className="u-center u-max-width--1024">
+          <img className="u-width--full" src="https://www.dropbox.com/s/lzva5wt44nutsmv/04behaviors.png?dl=1" alt="rules"/>
+        </div>
       </AAAPrimaryTheme>
     );
   })
