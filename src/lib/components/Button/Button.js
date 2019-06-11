@@ -7,6 +7,7 @@ import {
   AAA_CSS_IMPORTANT,
   AAA_CSS_SOLID,
   AAA_CSS_BOTTOM,
+  AAA_CSS_INLINE_BLOCK,
 } from '../../constants/cssConstants';
 
 type propTypes = {
@@ -76,6 +77,7 @@ const styleClasses = theme => {
     },
 
     iconButton: {
+      display: `${AAA_CSS_INLINE_BLOCK}`,
       verticalAlign: `${AAA_CSS_BOTTOM}`,
       width: `48px ${AAA_CSS_IMPORTANT}`,
       height: `48px ${AAA_CSS_IMPORTANT}`,

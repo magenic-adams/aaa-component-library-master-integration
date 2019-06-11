@@ -10,12 +10,14 @@ import MUIStepLabel from '@material-ui/core/StepLabel';
 
 import StepperButton from '../Button/Button';
 import NumericInput from '../Input/NumericInput/NumericInput';
+
 import {
   AAA_CSS_IMPORTANT,
   AAA_CSS_CENTER,
   AAA_CSS_INLINE,
   AAA_CSS_MIDDLE,
   AAA_CSS_BASELINE,
+  AAA_CSS_INLINE_BLOCK,
 } from '../../constants/cssConstants';
 
 const styleClasses = theme => ({
@@ -25,12 +27,14 @@ const styleClasses = theme => ({
     height: '24px',
   },
   stepperInput: {
+    display: `${AAA_CSS_INLINE_BLOCK}`,
     height: '48px',
     verticalAlign: `${AAA_CSS_BASELINE} ${AAA_CSS_IMPORTANT}`,
     borderRadius: '4px',
     textAlign: `${AAA_CSS_CENTER}`,
     '& input': {
       textAlign: `${AAA_CSS_CENTER} ${AAA_CSS_IMPORTANT}`,
+      verticalAlign: `${AAA_CSS_MIDDLE}`,
     },
   },
   stepperLabel: {
@@ -54,6 +58,7 @@ const styleClasses = theme => ({
   formControl: {
     width: `25% ${AAA_CSS_IMPORTANT}`,
     marginTop: '0',
+    padding: `0 ${AAA_CSS_IMPORTANT}`,
   },
   error: {
     color: theme.palette.error.main,
