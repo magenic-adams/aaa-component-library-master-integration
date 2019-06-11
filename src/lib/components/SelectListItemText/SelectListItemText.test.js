@@ -59,11 +59,7 @@ describe('SelectListItemText', () => {
 
       listItemTextWrapper = createSelectListItemTextWithTheme(props);
 
-      const listItem = listItemTextWrapper
-        .find('.MuiListItemText-primary')
-        .at(0);
-
-      expect(listItem.props().children).to.equal(props.item.display);
+      expect(listItemTextWrapper.text()).to.equal(props.item.display);
     });
 
     it('attaches a data-quid attribute to the input base element', () => {

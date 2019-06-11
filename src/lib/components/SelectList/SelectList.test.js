@@ -69,10 +69,7 @@ describe('SelectList', () => {
       const listItems = selectListWrapper.find('li');
 
       listItems.forEach((listItem, i) => {
-        expect(
-          listItem.get(0).props.children[0].props.primary,
-          'listItem'
-        ).to.equal(props.items[i].display);
+        expect(listItem.text()).to.equal(props.items[i].display);
       });
     });
 
