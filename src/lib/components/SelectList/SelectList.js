@@ -17,7 +17,7 @@ type propTypes = {
       id: PropTypes.string | PropTypes.number,
       value: PropTypes.string | PropTypes.number,
       display: PropTypes.string | PropTypes.number | PropTypes.node,
-      isSelected?: PropTypes.bool,
+      selected?: PropTypes.bool,
       disabled?: PropTypes.bool
     }
   ],
@@ -28,12 +28,12 @@ type propTypes = {
 
 const styleClasses = theme => ({
   root: {
-    width: '341px',
+    width: 341,
     background: theme.palette.common.white,
     border: `2px solid ${theme.palette.primary.main}`,
-    borderRadius: '4px',
+    borderRadius: 4,
     padding: '0px',
-    boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.35)',
+    boxShadow: `0 2px 8px 0 ${theme.palette.colorVariables.GRAY}`,
     '& span': {
       fontFamily: theme.typography.fontFamily,
     },
@@ -41,9 +41,9 @@ const styleClasses = theme => ({
       width: '100%',
       border: `1px solid ${theme.palette.primary.main}`,
       boxShadow: 'none',
-      borderRadius: '0px',
+      borderRadius: 0,
       '& span': {
-        fontSize: '16px',
+        fontSize: 16,
       },
     },
   },
@@ -52,9 +52,9 @@ const styleClasses = theme => ({
       width: '100%',
       border: `1px solid ${theme.palette.primary.main}`,
       boxShadow: 'none',
-      borderRadius: '0px',
+      borderRadius: 0,
       '& span': {
-        fontSize: '16px',
+        fontSize: 16,
       },
     },
   },
@@ -103,7 +103,6 @@ function SelectList({
                       <SelectListItemText
                         key={item.id}
                         item={item}
-                        selected
                         onSelect={() => onSelect(item)}
                       />
                     ))}

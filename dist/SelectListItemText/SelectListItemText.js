@@ -9,9 +9,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 var styleClasses = function styleClasses(theme) {
   return {
     root: {
-      height: '48px',
+      height: 48,
       background: theme.palette.colorVariables.TRANSPARENT,
-      '&$selected, &$selected:hover': {
+      '&.Mui-selected, &.Mui-selected:hover': {
         backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER
       },
       '&:hover': {
@@ -28,14 +28,13 @@ var styleClasses = function styleClasses(theme) {
       }
     },
     primary: _defineProperty({
-      fontSize: '18px',
+      fontSize: 18,
       letterSpacing: 'normal',
       fontStretch: 'normal',
       lineHeight: 1.5
     }, theme.breakpoints.between('xs', 'sm'), {
-      fontSize: '16px'
-    }),
-    selected: {}
+      fontSize: 16
+    })
   };
 };
 
@@ -63,15 +62,13 @@ function SelectListItemText(_ref) {
   var divider = classes.divider,
       gutters = classes.gutters,
       primary = classes.primary,
-      root = classes.root,
-      selected = classes.selected;
+      root = classes.root;
   return isValid(id, display) ? React.createElement(ListItem, {
     "data-quid": "SelectListItem-".concat(id),
     classes: {
       root: root,
       divider: divider,
-      gutters: gutters,
-      selected: selected
+      gutters: gutters
     },
     divider: true,
     selected: item.selected,
