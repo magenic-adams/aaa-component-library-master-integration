@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import MUIButton from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
+import {
+  AAA_CSS_IMPORTANT,
+  AAA_CSS_SOLID,
+  AAA_CSS_BOTTOM,
+} from '../../constants/cssConstants';
 
 type propTypes = {
   // MUI Decorator
@@ -15,8 +20,8 @@ type propTypes = {
   fadeUp?: PropTypes.bool,
   id: PropTypes.string,
   href?: PropTypes.bool,
-  forwardedRef?: {current: {}},
-  onClick: () => {},
+  forwardedRef?: { current: {} },
+  onClick: () => {}
 };
 
 const styleClasses = theme => {
@@ -24,7 +29,7 @@ const styleClasses = theme => {
     root: {
       display: 'block',
       border: 0,
-      height: '48px',
+      height: 48,
       boxShadow: 'none',
       color: theme.palette.common.white,
       padding: '0 16px',
@@ -34,13 +39,13 @@ const styleClasses = theme => {
       transform: 'translateY(0)',
       width: '100%',
       [theme.breakpoints.up('md')]: {
-        width: '314px',
+        width: 314,
       },
     },
     label: {
-      fontSize: '18px',
+      fontSize: 18,
       [theme.breakpoints.up('md')]: {
-        fontSize: '20px',
+        fontSize: 20,
       },
     },
     containedPrimary: {
@@ -69,9 +74,44 @@ const styleClasses = theme => {
     fadeUp: {
       transform: 'translateY(-8px)',
     },
+
+    iconButton: {
+      verticalAlign: `${AAA_CSS_BOTTOM}`,
+      width: `48px ${AAA_CSS_IMPORTANT}`,
+      height: `48px ${AAA_CSS_IMPORTANT}`,
+      marginLeft: 8,
+      marginRight: 8,
+      border: `${AAA_CSS_SOLID} 1px ${
+        theme.palette.colorVariables.GRAY
+      } ${AAA_CSS_IMPORTANT}`,
+      borderRadius: 4,
+      backgroundColor: `${
+        theme.palette.colorVariables.WHITE
+      } ${AAA_CSS_IMPORTANT}`,
+      '&:active,&:hover': {
+        backgroundColor: `${
+          theme.palette.colorVariables.SECONDARY_HOVER
+        } ${AAA_CSS_IMPORTANT}`,
+        borderColor: `${
+          theme.palette.colorVariables.DARKER_BLUE
+        } 1px ${AAA_CSS_IMPORTANT}`,
+        '& svg': {
+          color: `${theme.palette.primary.main} ${AAA_CSS_IMPORTANT}`,
+        },
+      },
+      '&:disabled': {
+        background: `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`,
+        border: `none ${AAA_CSS_IMPORTANT}`,
+        '&:hover': {
+          backgroundColor: `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`,
+        },
+        '& svg': {
+          color: `${theme.palette.colorVariables.GRAY} ${AAA_CSS_IMPORTANT}`,
+        },
+      },
+    },
   };
 };
-
 
 function Button({
   children,
@@ -84,13 +124,15 @@ function Button({
   href,
   forwardedRef,
   onClick,
-}:propTypes){
+  isButtonIcon,
+}: propTypes) {
   return (
     <MUIButton
       className={cx(
         'Button',
         { [classes.fadeUp]: fadeUp },
-        className,
+        { [classes.iconButton]: isButtonIcon },
+        className
       )}
       classes={{
         root: classes.root,

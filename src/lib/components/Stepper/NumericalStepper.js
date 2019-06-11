@@ -8,7 +8,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import ReportProblem from '@material-ui/icons/ReportProblem';
 import MUIStepLabel from '@material-ui/core/StepLabel';
 
-import StepperButton from '../Button/StepperIconButton';
+import StepperButton from '../Button/Button';
 import NumericInput from '../Input/NumericInput/NumericInput';
 import {
   AAA_CSS_IMPORTANT,
@@ -98,6 +98,7 @@ const NumericalStepper = props => {
         id={`DecreaseStepper-${id}`}
         disabled={disabled}
         onClick={onDecrease}
+        isButtonIcon
       >
         <RemoveIcon
           data-quid={`RemoveIcon-${id}`}
@@ -121,6 +122,7 @@ const NumericalStepper = props => {
         id={`IncreaseStepper-${id}`}
         disabled={disabled}
         onClick={onIncrease}
+        isButtonIcon
       >
         <AddIcon data-quid={`AddIcon-${id}`} className={classes.stepperIcon} />
       </StepperButton>
