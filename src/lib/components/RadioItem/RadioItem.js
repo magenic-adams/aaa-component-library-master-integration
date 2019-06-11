@@ -12,10 +12,10 @@ type propTypes = {
   item: {
     id: PropTypes.string | PropTypes.number,
     value: PropTypes.string | PropTypes.number,
-    text: PropTypes.string | PropTypes.number,
-    disabled?: PropTypes.bool
+    text: PropTypes.string | PropTypes.number
   },
-  selectedValue?: PropTypes.string | PropTypes.number
+  checked?: PropTypes.bool,
+  disabled?: PropTypes.bool
 };
 
 const styleClasses = theme => ({
@@ -28,6 +28,10 @@ const styleClasses = theme => ({
     '&:hover': {
       background: theme.palette.colorVariables.SECONDARY_HOVER,
     },
+    '&.Mui-disabled, &.Mui-disabled:hover': {
+      borderColor: theme.palette.disabled.main,
+      background: 'none',
+    },
   },
   radio: {
     color: theme.palette.colorVariables.GRAY,
@@ -37,9 +41,10 @@ const styleClasses = theme => ({
   },
   selected: {
     border: `2px solid ${theme.palette.primary.main}`,
-  },
-  disabled: {
-    borderColor: theme.palette.disabled.main,
+    '&.Mui-disabled, &.Mui-disabled:hover': {
+      borderColor: theme.palette.disabled.main,
+      background: 'none',
+    },
   },
   label: {
     fontFamily: theme.typography.fontFamily,
@@ -48,28 +53,31 @@ const styleClasses = theme => ({
   },
 });
 
-function RadioItem({ classes, item, selectedValue }: propTypes) {
-  const { disabled, id, value, text } = item;
+function RadioItem({ classes, checked, disabled, item }: propTypes) {
+  // eslint-disable-next-line no-console
+  console.log(disabled);
+  const { id, value, text } = item;
   const { label, radio, root } = classes;
   return (
     <FormControlLabel
       className={cx('FormControlLabel', root, {
-        [classes.selected]: selectedValue === value.toString(),
+        [classes.selected]: checked,
       })}
-      classes={{ label }}
+      classes={{
+        root,
+        label,
+      }}
       value={value.toString()}
-      disabled={disabled}
+      disabled
       control={
         <Radio
           key={id}
           data-quid={`RadioItem-${id}`}
           classes={{
             root: radio,
-            checked: classes.checked,
-            disabled: classes.disabled,
           }}
+          checked={checked}
           color="primary"
-          disabled={disabled}
         />
       }
       label={text}
@@ -78,7 +86,8 @@ function RadioItem({ classes, item, selectedValue }: propTypes) {
 }
 
 RadioItem.defaultProps = {
-  selectedValue: '',
+  checked: false,
+  disabled: false,
 };
 
 export default withStyles(styleClasses, { withTheme: true })(RadioItem);

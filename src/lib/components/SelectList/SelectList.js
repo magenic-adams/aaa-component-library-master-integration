@@ -32,7 +32,7 @@ const styleClasses = theme => ({
     background: theme.palette.common.white,
     border: `2px solid ${theme.palette.primary.main}`,
     borderRadius: 4,
-    padding: '0px',
+    padding: 0,
     boxShadow: `0 2px 8px 0 ${theme.palette.colorVariables.GRAY}`,
     '& span': {
       fontFamily: theme.typography.fontFamily,

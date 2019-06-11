@@ -26,9 +26,16 @@ type propTypes = {
 
 function constructDisplayItems(items, selectedValue) {
   return items.map(item => {
+    const isChecked = item.value.toString() === selectedValue;
     return {
       ...item,
-      display: <RadioItem item={item} selectedValue={selectedValue} />,
+      display: (
+        <RadioItem
+          item={item}
+          selectedValue={selectedValue}
+          checked={isChecked}
+        />
+      ),
     };
   });
 }
