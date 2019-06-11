@@ -13,7 +13,7 @@ import FormInput from './Form/FormInput/FormInput';
 import FormNumericInput from './Form/FormNumericInput/FormNumericInput';
 import ToggleButtonGroup from './ToggleButtonGroup/ToggleButtonGroup';
 import RadioItem from './RadioItem/RadioItem';
-import RadioItemGroup from './RadioItemGroup/RadioItemGroup';
+import RadioGroup from './RadioGroup/RadioGroup';
 import SelectList from './SelectList/SelectList';
 import SelectListItemText from './SelectListItemText/SelectListItemText';
 
@@ -30,7 +30,7 @@ export {
   Link,
   NumericInput,
   RadioItem,
-  RadioItemGroup,
+  RadioGroup,
   SelectList,
   SelectListItemText,
   ToggleButtonGroup,

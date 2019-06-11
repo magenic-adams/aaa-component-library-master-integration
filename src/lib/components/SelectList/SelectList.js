@@ -22,6 +22,7 @@ type propTypes = {
     }
   ],
   type: PropTypes.string,
+  value: PropTypes.string | PropTypes.number,
   onSelect: PropTypes.func
 };
 
@@ -77,7 +78,14 @@ function areItemsValid(items) {
   return true;
 }
 
-function SelectList({ classes, items, name, type, onSelect }: propTypes) {
+function SelectList({
+  classes,
+  items,
+  name,
+  type,
+  value,
+  onSelect,
+}: propTypes) {
   return (
     <Fragment>
       {areItemsValid(items)
@@ -103,7 +111,7 @@ function SelectList({ classes, items, name, type, onSelect }: propTypes) {
                 );
               case 'radioGroup':
                 return (
-                  <RadioGroup name={name} onChange={onSelect}>
+                  <RadioGroup name={name} value={value} onChange={onSelect}>
                     {items.map(item => item.display)}
                   </RadioGroup>
                 );

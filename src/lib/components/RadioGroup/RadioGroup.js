@@ -12,34 +12,38 @@ type propTypes = {
       id: PropTypes.string | PropTypes.number,
       value: PropTypes.string | PropTypes.number,
       text: PropTypes.string | PropTypes.number,
-      isSelected?: PropTypes.bool,
       disabled?: PropTypes.bool
     }
   ],
+  /**
+   * The selected value of the component
+   */
+  value: PropTypes.string | PropTypes.number,
   onSelect: PropTypes.func
 };
 
-function constructDisplayItems(name, items) {
+function constructDisplayItems(items, selectedValue) {
   return items.map(item => {
     return {
       ...item,
-      name,
-      display: <RadioItem item={item} />,
+      display: <RadioItem item={item} selectedValue={selectedValue} />,
     };
   });
 }
 
-function RadioItemGroup({ name, items, onSelect }: propTypes) {
-  const newItems = constructDisplayItems(name, items);
+function RadioGroup({ name, items, value, onSelect }: propTypes) {
+  const selectedValue = value.toString();
+  const newItems = constructDisplayItems(items, selectedValue);
 
   return (
     <SelectList
       type="radioGroup"
       name={name}
+      value={selectedValue}
       items={newItems}
       onSelect={onSelect}
     />
   );
 }
 
-export default RadioItemGroup;
+export default RadioGroup;

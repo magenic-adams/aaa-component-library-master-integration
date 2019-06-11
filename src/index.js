@@ -8,30 +8,22 @@ import {
   Button,
   BaseInput,
   Link as TextLink,
-  RadioItemGroup,
+  // RadioGroup,
 } from './lib/components';
 import RadioButtonGroup from './lib/components/experiment/experiment';
 
-const handleSelectItem = selectedItem => {
-  console.log('selectedItem', selectedItem);
-};
+// const handleSelectItem = event => {
+//   console.log('selectedItem', event.targe);
+// };
 
-const items = [
-  { id: 1, value: 1, text: 'First Item', selected: true },
-  { id: 2, value: 2, text: 'Second Item' },
-  {
-    id: 3,
-    value: 3,
-    text: 'Third Item ',
-  },
-  { id: 4, value: 4, text: '4th Item' },
-  { id: 5, value: 5, text: '5th Item' },
-  {
-    id: 6,
-    value: 6,
-    text: '6th item',
-  },
-];
+// const items = [
+//   { id: 1, value: 1, text: 'First Item' },
+//   { id: 2, value: 2, text: 'Second Item' },
+//   { id: 3, value: 3, text: 'Third Item' },
+//   { id: 4, value: 4, text: '4th Item' },
+//   { id: 5, value: 5, text: '5th Item' },
+//   { id: 6, value: 6, text: '6th Item' },
+// ];
 
 const App = () => {
   return (
@@ -91,12 +83,12 @@ const App = () => {
       <TextLink className="secondary" onClick={() => {}}>
         Secondary enabled Link
       </TextLink>
-      <RadioItemGroup
-        type="primary"
+      {/* <RadioGroup
         name="testRadio"
+        value={2}
         items={items}
         onSelect={selectedOption => handleSelectItem(selectedOption)}
-      />
+      /> */}
       <RadioButtonGroup />
     </AAAPrimaryTheme>
   );
