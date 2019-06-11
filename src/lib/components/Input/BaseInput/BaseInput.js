@@ -5,15 +5,15 @@ import { withStyles } from '@material-ui/core/styles';
 
 // Material UI components
 import MUIInput from '@material-ui/core/Input';
-import MUIFormControl from "@material-ui/core/FormControl";
-import MUIFormHelperText from "@material-ui/core/FormHelperText";
+import MUIFormControl from '@material-ui/core/FormControl';
+import MUIFormHelperText from '@material-ui/core/FormHelperText';
 import MUIClear from '@material-ui/icons/Clear';
 import MUIInputAdornment from '@material-ui/core/InputAdornment';
 import MUIIconButton from '@material-ui/core/IconButton';
 import MUIReportProblem from '@material-ui/icons/ReportProblem';
 
 // Components
-import Label from "../../Label/Label";
+import Label from '../../Label/Label';
 
 const styleClasses = theme => ({
   root: {
@@ -26,7 +26,6 @@ const styleClasses = theme => ({
     boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.GRAY}`,
     '&:hover,&:active': {
       boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.DARKER_BLUE}`,
-      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER,
     },
   },
   focused: {
@@ -37,53 +36,46 @@ const styleClasses = theme => ({
   },
   disabled: {
     background: theme.palette.disabled.main,
-    boxShadow: "initial",
-    '&:hover': {
-      boxShadow: "initial",
-      backgroundColor: theme.palette.disabled.main,
-    },
+    boxShadow: 'initial',
   },
   input: {
     padding: '10px 12px',
     [theme.breakpoints.up('sm')]: {
-      fontSize: '16px'
+      fontSize: 16,
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '18px'
-    }
+      fontSize: 18,
+    },
   },
   iconButton: {
-    padding: '10px',
-    transition: 'none'
+    padding: 10,
+    transition: 'none',
   },
   iconStyle: {
-    fontSize: '20px',
-    color: theme.palette.primary.main
+    fontSize: 20,
+    color: theme.palette.primary.main,
   },
   formControlStyle: {
     [theme.breakpoints.up('sm')]: {
       width: '100%',
     },
     [theme.breakpoints.up('md')]: {
-      width: '534px',
+      width: 534,
     },
   },
   helperTextStyle: {
     color: `${theme.palette.colorVariables.GRAY} !important`,
     [theme.breakpoints.up('sm')]: {
-      fontSize: '14px'
+      fontSize: 14,
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '16px'
-    }
+      fontSize: 16,
+    },
   },
   error: {
     boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
     '&:focus': {
       boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
-    },
-    '&:hover': {
-      background: theme.palette.error.ERROR_HOVER
     },
   },
   errorTextWrapper: {
@@ -94,10 +86,10 @@ const styleClasses = theme => ({
     paddingTop: 10,
     marginTop: 8,
     [theme.breakpoints.up('sm')]: {
-      fontSize: '14px'
+      fontSize: 14,
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '16px'
+      fontSize: 16,
     },
   },
   errorIcon: {
@@ -105,7 +97,7 @@ const styleClasses = theme => ({
     verticalAlign: 'text-bottom',
     fontSize: 20,
     marginRight: 8,
-  }
+  },
 });
 
 type propTypes = {
@@ -117,6 +109,7 @@ type propTypes = {
   disabled?: PropTypes.bool,
   disableWarning?: PropTypes.bool,
   error?: PropTypes.string,
+  disableErrorWarning?: PropTypes.bool,
   helperText?: PropTypes.string,
   id: PropTypes.string,
   inputComponent?: PropTypes.element,
@@ -174,9 +167,9 @@ function BaseInput({
           disabled: classes.disabled,
           focused: classes.focused,
           error: classes.error,
-          input: classes.input
+          input: classes.input,
         }}
-        className={cx("BaseInput", className)}
+        className={cx('BaseInput', className)}
         disableUnderline
         endAdornment={
           (onClear && value) && (
@@ -195,10 +188,8 @@ function BaseInput({
           )
         }
         id={id}
-        inputProps={{
-          'data-quid': `BaseInput-${id}`,
-          ref: forwardedRef,
-        }}
+        inputProps={{ 'data-quid': `BaseInput-${id}` }}
+        inputRef={forwardedRef}
         inputComponent={inputComponent}
         name={name}
         placeholder={labelName ? null : placeholder}
@@ -240,7 +231,6 @@ BaseInput.defaultProps = {
   autoFocus: false,
   className: '',
   formControlClass: '',
-  forwardedRef: React.createRef(),
   disabled: false,
   disableWarning: false,
   helperText: null,

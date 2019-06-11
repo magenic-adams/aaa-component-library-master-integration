@@ -11,6 +11,9 @@
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
     "semi": [1, "always"],
+    "comma-dangle": ["error", "always-multiline"],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "object-curly-spacing": ["error", "always", { "objectsInObjects": false }],
     "import/imports-first": ["error", "absolute-first"]
   },
   "parser": "babel-eslint",

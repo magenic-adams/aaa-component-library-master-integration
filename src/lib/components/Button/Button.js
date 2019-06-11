@@ -1,5 +1,4 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 import MUIButton from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
@@ -13,21 +12,26 @@ type propTypes = {
   children: PropTypes.string | PropTypes.node,
   color?: 'primary' | 'secondary',
   disabled: PropTypes.bool,
+  fadeUp?: PropTypes.bool,
   id: PropTypes.string,
   href?: PropTypes.bool,
-  forwardedRef?: PropTypes.object,
+  forwardedRef?: {current: {}},
   onClick: () => {},
 };
 
 const styleClasses = theme => {
   return {
     root: {
+      display: 'block',
       border: 0,
       height: '48px',
       boxShadow: 'none',
       color: theme.palette.common.white,
       padding: '0 16px',
       textTransform: 'none',
+      marginTop: 0,
+      transition: '300ms transform ease-in-out',
+      transform: 'translateY(0)',
       width: '100%',
       [theme.breakpoints.up('md')]: {
         width: '314px',
@@ -47,7 +51,7 @@ const styleClasses = theme => {
       '&:disabled': {
         background: theme.palette.disabled.main,
         color: theme.palette.common.white,
-      }
+      },
     },
     containedSecondary: {
       color: theme.palette.primary.main,
@@ -60,8 +64,11 @@ const styleClasses = theme => {
       '&:disabled': {
         background: theme.palette.colorVariables.TRANSPARENT,
         borderColor: theme.palette.disabled.main,
-      }
-    }
+      },
+    },
+    fadeUp: {
+      transform: 'translateY(-8px)',
+    },
   };
 };
 
@@ -71,16 +78,26 @@ function Button({
   className,
   classes,
   disabled,
+  fadeUp,
   id,
   color,
   href,
   forwardedRef,
-  onClick
+  onClick,
 }:propTypes){
   return (
     <MUIButton
-      className={cx('Button', classes.root, className)}
-      classes={classes}
+      className={cx(
+        'Button',
+        { [classes.fadeUp]: fadeUp },
+        className,
+      )}
+      classes={{
+        root: classes.root,
+        label: classes.label,
+        containedPrimary: classes.containedPrimary,
+        containedSecondary: classes.containedSecondary,
+      }}
       disabled={disabled}
       disableRipple
       data-quid={id}
@@ -97,8 +114,9 @@ function Button({
 
 Button.defaultProps = {
   color: 'primary',
+  fadeUp: false,
+  forwardedRef: {},
   href: null,
-  forwardedRef: React.createRef(),
 };
 
-export default withStyles(styleClasses, {index: 0, withTheme: true})(Button);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(Button);
