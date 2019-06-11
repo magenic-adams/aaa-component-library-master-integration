@@ -10,6 +10,7 @@ import ButtonGroup from '../ButtonGroup/ButtonGroup';
 var styleClasses = function styleClasses(theme) {
   return {
     root: _defineProperty({
+      display: 'flex',
       '& .Button': {
         width: '157px',
         height: '48px',
