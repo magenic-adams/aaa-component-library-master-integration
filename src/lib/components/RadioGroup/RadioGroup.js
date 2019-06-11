@@ -12,6 +12,7 @@ type propTypes = {
       id: PropTypes.string | PropTypes.number,
       value: PropTypes.string | PropTypes.number,
       text: PropTypes.string | PropTypes.number,
+      selected?: PropTypes.bool,
       disabled?: PropTypes.bool
     }
   ],
@@ -19,6 +20,7 @@ type propTypes = {
    * The selected value of the component
    */
   value: PropTypes.string | PropTypes.number,
+  type?: PropTypes.string,
   onSelect: PropTypes.func
 };
 
@@ -31,13 +33,14 @@ function constructDisplayItems(items, selectedValue) {
   });
 }
 
-function RadioGroup({ name, items, value, onSelect }: propTypes) {
+function RadioGroup({ name, items, value, type, onSelect }: propTypes) {
   const selectedValue = value.toString();
   const newItems = constructDisplayItems(items, selectedValue);
 
+  // TODO: Create type validation
   return (
     <SelectList
-      type="radioGroup"
+      type={type}
       name={name}
       value={selectedValue}
       items={newItems}
@@ -45,5 +48,9 @@ function RadioGroup({ name, items, value, onSelect }: propTypes) {
     />
   );
 }
+
+RadioGroup.defaultProps = {
+  type: 'single-select-radio',
+};
 
 export default RadioGroup;

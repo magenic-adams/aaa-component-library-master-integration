@@ -10,20 +10,21 @@ import {
   Link as TextLink,
 } from './lib/components';
 import RadioButtonGroup from './lib/components/experiment/experiment';
+import RadioButtonsContainer from './lib/components/MultiselectExp/MultiselectExp';
 
 // const handleSelectItem = event => {
 //   console.log('selectedItem', event.targe);
 // };
 
-const items = [
-  { id: 1, value: 1, display: 'First Item' },
-  { id: 2, value: 2, display: 'Second Item' },
-  { id: 3, value: 3, display: 'Third Item ' },
-  { id: 4, value: 4, display: '4th Item' },
-  { id: 5, value: 5, display: '5th Item' },
-  { id: 6, value: 6, display: '6th item' },
-  { id: 7, value: 7, display: '7th Item' },
-];
+// const items = [
+//   { id: 1, value: 1, display: 'First Item' },
+//   { id: 2, value: 2, display: 'Second Item' },
+//   { id: 3, value: 3, display: 'Third Item ' },
+//   { id: 4, value: 4, display: '4th Item' },
+//   { id: 5, value: 5, display: '5th Item' },
+//   { id: 6, value: 6, display: '6th item' },
+//   { id: 7, value: 7, display: '7th Item' },
+// ];
 
 const App = () => {
   return (
@@ -89,6 +90,7 @@ const App = () => {
         items={items}
         onSelect={selectedOption => handleSelectItem(selectedOption)}
       /> */}
+      <RadioButtonsContainer />
       <RadioButtonGroup />
     </AAAPrimaryTheme>
   );

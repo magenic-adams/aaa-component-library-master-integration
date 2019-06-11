@@ -4,7 +4,7 @@ import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 import List from '@material-ui/core/List';
-import RadioGroup from '@material-ui/core/RadioGroup';
+import MUIRadioGroup from '@material-ui/core/RadioGroup';
 import SelectListItemText from '../SelectListItemText/SelectListItemText';
 
 type propTypes = {
@@ -22,7 +22,7 @@ type propTypes = {
     }
   ],
   type: PropTypes.string,
-  value: PropTypes.string | PropTypes.number,
+  value?: PropTypes.string | PropTypes.number,
   onSelect: PropTypes.func
 };
 
@@ -108,12 +108,14 @@ function SelectList({
                     ))}
                   </List>
                 );
-              case 'radioGroup':
+              case 'single-select-radio':
                 return (
-                  <RadioGroup name={name} value={value} onChange={onSelect}>
+                  <MUIRadioGroup name={name} value={value} onChange={onSelect}>
                     {items.map(item => item.display)}
-                  </RadioGroup>
+                  </MUIRadioGroup>
                 );
+              case 'multi-select-radio':
+                return items.map(item => item.display);
               default:
                 return null;
             }
@@ -125,6 +127,7 @@ function SelectList({
 
 SelectList.defaultProps = {
   name: '',
+  value: '',
 };
 
 export default withStyles(styleClasses, { withTheme: true })(SelectList);
