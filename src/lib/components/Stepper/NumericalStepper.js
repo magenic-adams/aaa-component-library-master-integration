@@ -74,16 +74,16 @@ const styleClasses = theme => ({
 const NumericalStepper = props => {
   const {
     classes,
+    disabled,
     error,
-    labelText,
-    helpText,
     errorText,
-    value,
+    helpText,
+    id,
+    labelText,
+    mask,
     onIncrease,
     onDecrease,
-    disabled,
-    id,
-    mask,
+    value,
   } = props;
 
   return (
