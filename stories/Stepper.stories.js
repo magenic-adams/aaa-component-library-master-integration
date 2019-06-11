@@ -39,9 +39,10 @@ stories.addDecorator(withKnobs).add('numerical ', () => {
           labelText="This is a numerical stepper"
           errorText="This is an error text"
           helpText="This is a helper text"
-          value={text('Error Value', 'sadas')}
           mask={[/\d/, /\d/, /\d/]}
           error
+          onIncrease={action('Button increase responded.')}
+          onDecrease={action('Button decrease responded.')}
         />
       </ElementContainer>
       <br />
@@ -53,6 +54,8 @@ stories.addDecorator(withKnobs).add('numerical ', () => {
           id="3"
           labelText="This is a numerical stepper"
           helpText="This is a helper message"
+          onIncrease={action('Button increase responded.')}
+          onDecrease={action('Button decrease responded.')}
           disabled
         />
       </ElementContainer>

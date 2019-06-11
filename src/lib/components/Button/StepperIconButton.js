@@ -1,12 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import AAAButton from './Button';
 import {
   AAA_CSS_IMPORTANT,
   AAA_CSS_SOLID,
-  AAA_CSS_BOTTOM
+  AAA_CSS_BOTTOM,
 } from '../../constants/cssConstants';
 
 const styleClasses = theme => ({
@@ -31,35 +30,33 @@ const styleClasses = theme => ({
         theme.palette.colorVariables.DARKER_BLUE
       } 1px ${AAA_CSS_IMPORTANT}`,
       '& svg': {
-        color: `${theme.palette.primary.main} ${AAA_CSS_IMPORTANT}`
-      }
+        color: `${theme.palette.primary.main} ${AAA_CSS_IMPORTANT}`,
+      },
     },
     '&:disabled': {
       background: `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`,
       border: `none ${AAA_CSS_IMPORTANT}`,
       '&:hover': {
-        backgroundColor: `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`
+        backgroundColor: `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`,
       },
       '& svg': {
-        color: `${theme.palette.colorVariables.GRAY} ${AAA_CSS_IMPORTANT}`
-      }
-    }
-  }
+        color: `${theme.palette.colorVariables.GRAY} ${AAA_CSS_IMPORTANT}`,
+      },
+    },
+  },
 });
-class IconButton extends Component {
-  render() {
-    const { classes, children, disabled, onClick, id } = this.props;
-    return (
-      <AAAButton
-        onClick={onClick}
-        disabled={disabled}
-        className={classes.iconButton}
-        id={id}
-      >
-        {children}
-      </AAAButton>
-    );
-  }
-}
+const IconButton = props => {
+  const { classes, children, disabled, onClick, id } = props;
+  return (
+    <AAAButton
+      onClick={onClick}
+      disabled={disabled}
+      className={classes.iconButton}
+      id={id}
+    >
+      {children}
+    </AAAButton>
+  );
+};
 
 export default withStyles(styleClasses, { withTheme: true })(IconButton);
