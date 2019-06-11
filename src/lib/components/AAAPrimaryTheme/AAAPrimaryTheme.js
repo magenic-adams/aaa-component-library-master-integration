@@ -19,7 +19,7 @@ import {
   AAA_COLOR_MAIN_WHITE,
   AAA_COLOR_SECONDARY_HOVER,
   AAA_COLOR_TRANSPARENT,
-  AAA_COLOR_MAIN_VERY_DARK_BLUE
+  AAA_COLOR_MAIN_VERY_DARK_BLUE,
 } from '../../constants/colors';
 
 const theme = createMuiTheme({
@@ -29,22 +29,22 @@ const theme = createMuiTheme({
       sm: 320,
       md: 768,
       lg: 1024,
-      xl: 1440
-    }
+      xl: 1440,
+    },
   },
   palette: {
     primary: {
       // NOTE: when not specifying other values like "light", they will
       // be calculated from palette.primary.main,
       main: AAA_COLOR_MAIN_BLUE,
-      dark: AAA_COLOR_MAIN_DARK_BLUE
+      dark: AAA_COLOR_MAIN_DARK_BLUE,
     },
     error: {
       main: AAA_COLOR_MAIN_ERROR,
-      ERROR_HOVER: AAA_COLOR_MAIN_ERROR_HOVER
+      ERROR_HOVER: AAA_COLOR_MAIN_ERROR_HOVER,
     },
     disabled: {
-      main: AAA_COLOR_MAIN_DISABLED
+      main: AAA_COLOR_MAIN_DISABLED,
     },
     // These are use defined variables we can use
     colorVariables: {
@@ -54,14 +54,14 @@ const theme = createMuiTheme({
       DARKER_BLUE: AAA_COLOR_MAIN_DARKER_BLUE,
       VERY_DARK_BLUE: AAA_COLOR_MAIN_VERY_DARK_BLUE,
       GRAY: AAA_COLOR_MAIN_GRAY,
-      WHITE: AAA_COLOR_MAIN_WHITE
-    }
+      WHITE: AAA_COLOR_MAIN_WHITE,
+    },
   },
   typography: {
     fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',
     fontWeight: 400, // Medium
-    color: AAA_COLOR_MAIN_BLACK
-  }
+    color: AAA_COLOR_MAIN_BLACK,
+  },
 });
 
 // ** Typography ** //
@@ -72,8 +72,8 @@ theme.typography.h1 = {
   fontWeight: 500,
   [theme.breakpoints.up('lg')]: {
     fontSize: 28,
-    lineHeight: 1.57
-  }
+    lineHeight: 1.57,
+  },
 };
 
 theme.typography.h2 = {
@@ -81,8 +81,8 @@ theme.typography.h2 = {
   fontSize: 18,
   lineHeight: 1.45,
   [theme.breakpoints.up('lg')]: {
-    fontSize: 22
-  }
+    fontSize: 22,
+  },
 };
 
 theme.typography.subtitle1 = {
@@ -92,8 +92,8 @@ theme.typography.subtitle1 = {
   fontWeight: 500,
   [theme.breakpoints.up('lg')]: {
     fontSize: 18,
-    lineHeight: 1.45
-  }
+    lineHeight: 1.45,
+  },
 };
 
 theme.typography.body1 = {
@@ -102,8 +102,8 @@ theme.typography.body1 = {
   lineHeight: 1.5,
   [theme.breakpoints.up('lg')]: {
     fontSize: 18,
-    lineHeight: 1.45
-  }
+    lineHeight: 1.45,
+  },
 };
 
 theme.typography.body2 = {
@@ -112,8 +112,8 @@ theme.typography.body2 = {
   lineHeight: 1.45,
   [theme.breakpoints.up('lg')]: {
     fontSize: 16,
-    lineHeight: 1.5
-  }
+    lineHeight: 1.5,
+  },
 };
 
 type propTypes = {

@@ -3,12 +3,6 @@ import PropTypes from 'prop-types';
 import MUIButton from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
-import {
-  AAA_CSS_IMPORTANT,
-  AAA_CSS_SOLID,
-  AAA_CSS_BOTTOM,
-  AAA_CSS_INLINE_BLOCK,
-} from '../../constants/cssConstants';
 
 type propTypes = {
   // MUI Decorator
@@ -44,6 +38,7 @@ const styleClasses = theme => {
       },
     },
     label: {
+      height: '100%',
       fontSize: 18,
       [theme.breakpoints.up('md')]: {
         fontSize: 20,
@@ -75,40 +70,32 @@ const styleClasses = theme => {
     fadeUp: {
       transform: 'translateY(-8px)',
     },
-
     iconButton: {
-      display: `${AAA_CSS_INLINE_BLOCK}`,
-      verticalAlign: `${AAA_CSS_BOTTOM}`,
-      width: `48px ${AAA_CSS_IMPORTANT}`,
-      height: `48px ${AAA_CSS_IMPORTANT}`,
+      display: 'inline-block',
+      verticalAlign: `bottom`,
+      width: 48,
+      height: 48,
       marginLeft: 8,
       marginRight: 8,
-      border: `${AAA_CSS_SOLID} 1px ${
-        theme.palette.colorVariables.GRAY
-      } ${AAA_CSS_IMPORTANT}`,
+      border: `1px solid ${theme.palette.colorVariables.GRAY}`,
       borderRadius: 4,
-      backgroundColor: `${
-        theme.palette.colorVariables.WHITE
-      } ${AAA_CSS_IMPORTANT}`,
+      backgroundColor: `${theme.palette.colorVariables.WHITE}`,
       '&:active,&:hover': {
-        backgroundColor: `${
-          theme.palette.colorVariables.SECONDARY_HOVER
-        } ${AAA_CSS_IMPORTANT}`,
-        borderColor: `${
-          theme.palette.colorVariables.DARKER_BLUE
-        } 1px ${AAA_CSS_IMPORTANT}`,
+        borderWidth: 1,
+        backgroundColor: `${theme.palette.colorVariables.SECONDARY_HOVER}`,
+        borderColor: `${theme.palette.colorVariables.DARKER_BLUE}`,
         '& svg': {
-          color: `${theme.palette.primary.main} ${AAA_CSS_IMPORTANT}`,
+          color: `${theme.palette.primary.main}`,
         },
       },
       '&:disabled': {
-        background: `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`,
-        border: `none ${AAA_CSS_IMPORTANT}`,
+        background: `${theme.palette.disabled.main}`,
+        border: `none`,
         '&:hover': {
-          backgroundColor: `${theme.palette.disabled.main} ${AAA_CSS_IMPORTANT}`,
+          backgroundColor: `${theme.palette.disabled.main}`,
         },
         '& svg': {
-          color: `${theme.palette.colorVariables.GRAY} ${AAA_CSS_IMPORTANT}`,
+          color: `${theme.palette.colorVariables.GRAY}`,
         },
       },
     },
@@ -126,14 +113,16 @@ function Button({
   href,
   forwardedRef,
   onClick,
-  isButtonIcon,
+  isIconButton,
 }: propTypes) {
   return (
     <MUIButton
       className={cx(
         'Button',
-        { [classes.fadeUp]: fadeUp },
-        { [classes.iconButton]: isButtonIcon },
+        {
+          [classes.fadeUp]: fadeUp,
+          [classes.iconButton]: isIconButton,
+        },
         className
       )}
       classes={{

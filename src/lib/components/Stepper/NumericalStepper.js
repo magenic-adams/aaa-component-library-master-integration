@@ -12,34 +12,24 @@ import StepperButton from '../Button/Button';
 import NumericInput from '../Input/NumericInput/NumericInput';
 
 import {
-  AAA_CSS_IMPORTANT,
-  AAA_CSS_CENTER,
   AAA_CSS_INLINE,
   AAA_CSS_MIDDLE,
-  AAA_CSS_BASELINE,
-  AAA_CSS_INLINE_BLOCK,
 } from '../../constants/cssConstants';
+
 
 const styleClasses = theme => ({
   stepperIcon: {
+    width: 24,
+    height: '100%',
     color: theme.palette.primary.main,
-    width: '24px',
-    height: '24px',
   },
-  stepperInput: {
-    display: `${AAA_CSS_INLINE_BLOCK}`,
-    height: '48px',
-    verticalAlign: `${AAA_CSS_BASELINE} ${AAA_CSS_IMPORTANT}`,
-    borderRadius: '4px',
-    textAlign: `${AAA_CSS_CENTER}`,
-    '& input': {
-      textAlign: `${AAA_CSS_CENTER} ${AAA_CSS_IMPORTANT}`,
-      verticalAlign: `${AAA_CSS_MIDDLE}`,
-    },
+  stepperInputWrapper: {
+    display: 'inline-block',
+    width: 78,
   },
   stepperLabel: {
     color: theme.palette.colorVariables.BLACK,
-    marginTop: '8px',
+    marginTop: 8,
     fontSize: '16px',
     [theme.breakpoints.up('md')]: {
       fontSize: '18px',
@@ -47,36 +37,44 @@ const styleClasses = theme => ({
   },
   helpText: {
     color: theme.palette.colorVariables.GRAY,
-    marginTop: '8px',
+    marginTop: 8,
     '& span': {
-      fontSize: '14px',
+      fontSize: 14,
       [theme.breakpoints.up('md')]: {
-        fontSize: `16px  ${AAA_CSS_IMPORTANT}`,
+        fontSize: 16,
       },
     },
   },
-  formControl: {
-    width: `25% ${AAA_CSS_IMPORTANT}`,
-    marginTop: '0',
-    padding: `0 ${AAA_CSS_IMPORTANT}`,
-  },
   error: {
     color: theme.palette.error.main,
-    fontSize: '14px',
+    fontSize: 14,
     [theme.breakpoints.up('md')]: {
       fontSize: '16px',
     },
     '& svg': {
       display: `${AAA_CSS_INLINE}`,
-      fontSize: '20px',
-      marginLeft: '8px',
-      marginRight: '8px',
+      fontSize: 20,
+      marginLeft: 8,
+      marginRight: 8,
       verticalAlign: `${AAA_CSS_MIDDLE}`,
     },
   },
 });
 
-const NumericalStepper = props => {
+type propTypes = {
+  id: PropTypes.string.isRequired,
+  classes?: {},
+  disabled?: PropTypes.bool,
+  error?: PropTypes.bool,
+  labelText?: PropTypes.string,
+  helpText?: PropTypes.string,
+  mask?: [], // Pass through
+  onIncrease: (React.SyntheticEvent) => void,
+  onDecrease: (React.SyntheticEvent) => void,
+  value?: PropTypes.number,
+};
+
+const NumericalStepper = (props:propTypes) => {
   const {
     classes,
     disabled,
@@ -90,9 +88,13 @@ const NumericalStepper = props => {
     onDecrease,
     value,
   } = props;
-
+  console.log('value', value);
   return (
-    <MUIStep id={id} disabled={disabled} classes={classes.root}>
+    <MUIStep
+      id={id}
+      disabled={disabled}
+      classes={classes.root}
+    >
       <MUIStepLabel
         data-quid={`StepLabel-${id}`}
         classes={{ label: classes.stepperLabel }}
@@ -103,7 +105,7 @@ const NumericalStepper = props => {
         id={`DecreaseStepper-${id}`}
         disabled={disabled}
         onClick={onDecrease}
-        isButtonIcon
+        isIconButton
       >
         <RemoveIcon
           data-quid={`RemoveIcon-${id}`}
@@ -112,22 +114,24 @@ const NumericalStepper = props => {
         />
       </StepperButton>
 
-      <NumericInput
-        id={`NumericInput-${id}`}
-        className={classes.stepperInput}
-        formControlClass={classes.formControl}
-        type="text"
-        value={value}
-        error={error}
-        disabled={disabled}
-        mask={mask}
-        disableWarning
-      />
+      <div className={classes.stepperInputWrapper}>
+        <NumericInput
+          id={`NumericalStepperInput-${id}`}
+          className={classes.stepperInputWrapper}
+          centerText
+          type="text"
+          value={value}
+          error={error}
+          disabled={disabled}
+          mask={mask}
+          disableWarning
+        />
+      </div>
       <StepperButton
         id={`IncreaseStepper-${id}`}
         disabled={disabled}
         onClick={onIncrease}
-        isButtonIcon
+        isIconButton
       >
         <AddIcon data-quid={`AddIcon-${id}`} className={classes.stepperIcon} />
       </StepperButton>
@@ -150,26 +154,13 @@ const NumericalStepper = props => {
   );
 };
 
-NumericalStepper.propTypes = {
-  id: PropTypes.string.isRequired,
-  classes: PropTypes.object,
-  disabled: PropTypes.bool,
-  labelText: PropTypes.string.isRequired,
-  helpText: PropTypes.string,
-  onIncrease: PropTypes.func.isRequired,
-  value: PropTypes.number,
-  onDecrease: PropTypes.func.isRequired,
-  mask: PropTypes.array,
-  error: PropTypes.bool,
-};
-
 NumericalStepper.defaultProps = {
   classes: {},
   disabled: false,
   helpText: '',
   mask: [],
   error: false,
-  value: 0,
+  value: 1,
 };
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(

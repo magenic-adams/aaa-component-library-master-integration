@@ -1,4 +1,3 @@
-export const AAA_CSS_IMPORTANT = '!important';
 export const AAA_CSS_SOLID = 'solid';
 
 // alignments

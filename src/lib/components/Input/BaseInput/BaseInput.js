@@ -15,90 +15,99 @@ import MUIReportProblem from '@material-ui/icons/ReportProblem';
 // Components
 import Label from '../../Label/Label';
 
-const styleClasses = theme => ({
-  root: {
-    marginTop: '8px',
-    height: 48,
-    width: '100%',
-    border: 0,
-    borderRadius: 4,
-    background: theme.palette.colorVariables.WHITE,
-    boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.GRAY}`,
-    '&:hover,&:active': {
-      boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.DARKER_BLUE}`,
-    },
-  },
-  focused: {
-    boxShadow: `inset 0 0 0 2px ${theme.palette.colorVariables.DARKER_BLUE}`,
-    '&:hover': {
-      boxShadow: `inset 0 0 0 2px ${theme.palette.colorVariables.DARKER_BLUE}`,
-    },
-  },
-  disabled: {
-    background: theme.palette.disabled.main,
-    boxShadow: 'initial',
-  },
-  input: {
-    padding: '10px 12px',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: 16,
-    },
-    [theme.breakpoints.up('md')]: {
-      fontSize: 18,
-    },
-  },
-  iconButton: {
-    padding: 10,
-    transition: 'none',
-  },
-  iconStyle: {
-    fontSize: 20,
-    color: theme.palette.primary.main,
-  },
-  formControlStyle: {
-    [theme.breakpoints.up('sm')]: {
+const styleClasses = theme => {
+  return {
+    root: {
+      padding: '0 12px',
+      height: 48,
       width: '100%',
+      border: 0,
+      borderRadius: 4,
+      background: theme.palette.colorVariables.WHITE,
+      boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.GRAY}`,
+      '&:hover,&:active': {
+        boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.DARKER_BLUE}`,
+      },
     },
-    [theme.breakpoints.up('md')]: {
-      width: 534,
+    focused: {
+      boxShadow: `inset 0 0 0 2px ${theme.palette.colorVariables.DARKER_BLUE}`,
+      '&:hover': {
+        boxShadow: `inset 0 0 0 2px ${theme.palette.colorVariables.DARKER_BLUE}`,
+      },
     },
-  },
-  helperTextStyle: {
-    color: `${theme.palette.colorVariables.GRAY} !important`,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: 14,
+    disabled: {
+      background: theme.palette.disabled.main,
+      boxShadow: 'initial',
     },
-    [theme.breakpoints.up('md')]: {
-      fontSize: 16,
+    input: {
+      boxSizing: 'border-box',
+      height: '100%',
+      lineHeight: '100%',
+      textAlign: props => props.centerText ? 'center' : 'left',
+      [theme.breakpoints.up('sm')]: {
+        fontSize: 16,
+      },
+      [theme.breakpoints.up('md')]: {
+        fontSize: 18,
+      },
     },
-  },
-  error: {
-    boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
-    '&:focus': {
+    iconButton: {
+      padding: 10,
+      transition: 'none',
+    },
+    iconStyle: {
+      fontSize: 20,
+      color: theme.palette.primary.main,
+    },
+    formControlStyle: {
+      [theme.breakpoints.up('sm')]: {
+        width: '100%',
+      },
+      [theme.breakpoints.up('md')]: {
+        maxWidth: 534,
+      },
+    },
+    helperTextStyle: {
+      color: `${theme.palette.colorVariables.GRAY}`,
+      [theme.breakpoints.up('sm')]: {
+        fontSize: 14,
+      },
+      [theme.breakpoints.up('md')]: {
+        fontSize: 16,
+      },
+    },
+    error: {
       boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
+      '&:focus': {
+        boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
+      },
     },
-  },
-  errorTextWrapper: {
-    marginTop: 8,
-  },
-  errorText: {
-    display: 'inline',
-    paddingTop: 10,
-    marginTop: 8,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: 14,
+    errorTextWrapper: {
+      marginTop: 8,
     },
-    [theme.breakpoints.up('md')]: {
-      fontSize: 16,
+    errorText: {
+      display: 'inline',
+      paddingTop: 10,
+      marginTop: 8,
+      [theme.breakpoints.up('sm')]: {
+        fontSize: 14,
+      },
+      [theme.breakpoints.up('md')]: {
+        fontSize: 16,
+      },
     },
-  },
-  errorIcon: {
-    display: 'inline',
-    verticalAlign: 'text-bottom',
-    fontSize: 20,
-    marginRight: 8,
-  },
-});
+    errorIcon: {
+      display: 'inline',
+      verticalAlign: 'text-bottom',
+      fontSize: 20,
+      marginRight: 8,
+    },
+    // Modifiers
+    centerText: {
+      textAlign: 'center',
+    },
+  };
+};
 
 type propTypes = {
   // MUI Decorator
@@ -128,6 +137,7 @@ function BaseInput({
   autoFocus,
   classes,
   className,
+  centerText,
   forwardedRef,
   formControlClass,
   disabled,
@@ -152,7 +162,16 @@ function BaseInput({
       error={!!error}
       disabled={disabled}
     >
-      {labelName && <Label id={id}>{labelName}</Label>}
+      {labelName && (
+        <Label
+          id={id}
+          disabled={false}
+          error={false}
+          focused={false}
+        >
+          {labelName}
+        </Label>
+      )}
 
       <MUIInput
         autoFocus={autoFocus}
@@ -164,7 +183,11 @@ function BaseInput({
           error: classes.error,
           input: classes.input,
         }}
-        className={cx('BaseInput', className)}
+        className={cx(
+          'BaseInput',
+          className,
+          { [classes.centerText] : centerText }
+        )}
         disableUnderline
         endAdornment={
           onClear &&
@@ -224,6 +247,7 @@ BaseInput.defaultProps = {
   autoFocus: false,
   className: '',
   formControlClass: '',
+  centerText: false,
   disabled: false,
   disableWarning: false,
   helperText: null,
