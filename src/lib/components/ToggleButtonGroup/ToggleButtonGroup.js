@@ -20,49 +20,50 @@ type propTypes = {
 
 const styleClasses = theme => ({
   root: {
+    display: 'flex',
     '& .Button': {
       width: '157px',
       height: '48px',
       '& span': {
-        fontSize: '18px'
-      }
+        fontSize: '18px',
+      },
     },
     [theme.breakpoints.down('sm')]: {
       '& .Button': {
         width: '50%',
         '& span': {
           fontSize: '16px !important',
-          fontWeight: '700 !important'
+          fontWeight: '700 !important',
         },
         '&:hover': {
-          background: theme.palette.colorVariables.SECONDARY_HOVER
-        }
-      }
-    }
+          background: theme.palette.colorVariables.SECONDARY_HOVER,
+        },
+      },
+    },
   },
   left: {
     borderTopRightRadius: '0px',
     borderBottomRightRadius: '0px',
-    borderRightStyle: 'none !important'
+    borderRightStyle: 'none !important',
   },
   right: {
     borderTopLeftRadius: '0px',
-    borderBottomLeftRadius: '0px'
+    borderBottomLeftRadius: '0px',
   },
   active: {
     background: `${theme.palette.primary.dark} !important`,
     color: `${theme.palette.common.white} !important`,
     '&:hover': {
-      background: theme.palette.primary.dark
+      background: theme.palette.primary.dark,
     },
     [theme.breakpoints.down('sm')]: {
       background: `${theme.palette.colorVariables.SECONDARY_HOVER} !important`,
       color: `${theme.palette.primary.main} !important`,
       '&:hover': {
-        background: theme.palette.colorVariables.SECONDARY_HOVER
-      }
-    }
-  }
+        background: theme.palette.colorVariables.SECONDARY_HOVER,
+      },
+    },
+  },
 });
 
 function handleClick(value, callback) {
@@ -100,7 +101,7 @@ function ToggleButtonGroup({
   disabled,
   options,
   value,
-  onSelect
+  onSelect,
 }: propTypes) {
   return (
     <Fragment>
@@ -142,7 +143,7 @@ function ToggleButtonGroup({
 
 ToggleButtonGroup.defaultProps = {
   className: '',
-  value: ''
+  value: '',
 };
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
