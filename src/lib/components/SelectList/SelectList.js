@@ -15,7 +15,7 @@ type propTypes = {
       id: PropTypes.string | PropTypes.number,
       value: PropTypes.string | PropTypes.number,
       display: PropTypes.string | PropTypes.number | PropTypes.node,
-      isSelected?: PropTypes.bool,
+      selected?: PropTypes.bool,
       disabled?: PropTypes.bool
     }
   ],
@@ -25,36 +25,36 @@ type propTypes = {
 
 const styleClasses = theme => ({
   root: {
-    width: '341px',
+    width: 341,
     background: theme.palette.common.white,
     border: `2px solid ${theme.palette.primary.main}`,
-    borderRadius: '4px',
+    borderRadius: 4,
     padding: '0px',
-    boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.35)',
+    boxShadow: `0 2px 8px 0 ${theme.palette.colorVariables.GRAY}`,
     '& span': {
-      fontFamily: theme.typography.fontFamily
+      fontFamily: theme.typography.fontFamily,
     },
     [theme.breakpoints.down(321)]: {
       width: '100%',
       border: `1px solid ${theme.palette.primary.main}`,
       boxShadow: 'none',
-      borderRadius: '0px',
+      borderRadius: 0,
       '& span': {
-        fontSize: '16px'
-      }
-    }
+        fontSize: 16,
+      },
+    },
   },
   fullOverlay: {
     [theme.breakpoints.down(415)]: {
       width: '100%',
       border: `1px solid ${theme.palette.primary.main}`,
       boxShadow: 'none',
-      borderRadius: '0px',
+      borderRadius: 0,
       '& span': {
-        fontSize: '16px'
-      }
-    }
-  }
+        fontSize: 16,
+      },
+    },
+  },
 });
 
 function areItemKeysPresent(items) {
@@ -86,14 +86,13 @@ function SelectList({ classes, items, type, onSelect }: propTypes) {
                   <List
                     dense
                     className={cx('List', classes.root, {
-                      [classes.fullOverlay]: items.length > 6
+                      [classes.fullOverlay]: items.length > 6,
                     })}
                   >
                     {items.map(item => (
                       <SelectListItemText
                         key={item.id}
                         item={item}
-                        selected
                         onSelect={() => onSelect(item)}
                       />
                     ))}

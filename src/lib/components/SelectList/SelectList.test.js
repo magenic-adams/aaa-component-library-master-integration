@@ -163,9 +163,9 @@ describe('SelectList', () => {
         expect(borderRadiusStyle).to.equal('4px');
       });
 
-      it('has box shadow of 0 2px 8px 0 rgba(0, 0, 0, 0.35)', () => {
+      it('has box shadow of 0 2px 8px 0 rgb(113, 113, 116)', () => {
         const boxShadowStyle = getDOMNodeComputedStyle(listNode, 'box-shadow');
-        expect(boxShadowStyle).to.equal('0 2px 8px 0 rgba(0, 0, 0, 0.35)');
+        expect(boxShadowStyle).to.equal('0 2px 8px 0 rgb(113, 113, 116)');
       });
     });
   });
