@@ -12,7 +12,8 @@ type propTypes = {
   item: {
     id: PropTypes.string | PropTypes.number,
     value: PropTypes.string | PropTypes.number,
-    display: PropTypes.string | PropTypes.number
+    display: PropTypes.string | PropTypes.number,
+    selected?: PropTypes.bool
   }
 };
 
