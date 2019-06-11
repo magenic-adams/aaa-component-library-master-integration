@@ -72,7 +72,6 @@ class FormDecorator extends React.Component {
     // This component acts as mainly a pass through to react-final-form,
     // but we augment functionality and encapsulate required form behaviors
     const { render, validations } = this.props;
-    console.log('validations', validations);
     return (
       <Form
         validate={FormDecorator.handleValidate({ validations })}

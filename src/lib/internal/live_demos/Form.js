@@ -1,6 +1,5 @@
 import {
   AAAPrimaryTheme,
-  // BaseInput,
   Button,
   ButtonGroup,
   Form,
@@ -8,9 +7,6 @@ import {
   FormInput,
   FormNumericInput,
 } from '../../components';
-
-// Utilities
-import Validate from '../../utilities/validate';
 
 export const demo = `class FormDemo extends React.Component {
   static validations(){
@@ -99,7 +95,5 @@ export const scope = {
   Form,
   FormGroup,
   FormInput,
-  FormNumericInput,
-  Validate,
-  // FormDemo,
+  FormNumericInput, 
 };
