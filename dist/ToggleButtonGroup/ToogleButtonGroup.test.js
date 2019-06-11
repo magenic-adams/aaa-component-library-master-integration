@@ -18,7 +18,7 @@ import ToggleButtonGroup from './ToggleButtonGroup'; // Test Utilities
 import { getDOMNodeComputedStyle } from '../../../../test/DOM';
 import Button from '../Button/Button'; // Constants
 
-import { AAA_COLOR_TRANSPARENT, AAA_COLOR_MAIN_BLUE, AAA_COLOR_MAIN_DISABLED } from '../../constants/colors';
+import { AAA_COLOR_TRANSPARENT, AAA_COLOR_MAIN_BLUE, AAA_COLOR_MAIN_DISABLED, AAA_COLOR_MAIN_WHITE } from '../../constants/colors';
 
 function getFakeProps(overrides) {
   return _objectSpread({
@@ -121,7 +121,7 @@ describe('ToggleButtonGroup', function () {
     });
   });
   describe('event handlers', function () {
-    it("will call it's click event handler and return selected button value", function () {
+    it('will call it\'s click event handler and return selected button value', function () {
       var leftButton = ToggleButtonWrapper.find(Button).at(0);
       leftButton.simulate('click');
       expect(spy.calledOnce).to.equal(true);
@@ -151,9 +151,9 @@ describe('ToggleButtonGroup', function () {
       var borderColorStyle = getDOMNodeComputedStyle(ToggleButtonWrapper.find(Button).at(0).getDOMNode(), 'border-top-color');
       expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_BLUE);
     });
-    it('has text color of white', function () {
+    it('has text color of AAA_COLOR_MAIN_WHITE', function () {
       var textColor = getDOMNodeComputedStyle(ToggleButtonWrapper.find(Button).at(0).getDOMNode(), 'color');
-      expect(textColor).to.equal('rgb(255, 255, 255)');
+      expect(textColor).to.equal(AAA_COLOR_MAIN_WHITE);
     });
     it('should set button to active when has matched value in options', function () {
       props = getFakeProps({

@@ -21,14 +21,15 @@ import Button from '../Button/Button';
 import {
   AAA_COLOR_TRANSPARENT,
   AAA_COLOR_MAIN_BLUE,
-  AAA_COLOR_MAIN_DISABLED
+  AAA_COLOR_MAIN_DISABLED,
+  AAA_COLOR_MAIN_WHITE,
 } from '../../constants/colors';
 
 function getFakeProps(overrides) {
   return {
     options: [{ id: 1, text: 'Yes' }, { id: 2, text: 'No' }],
     onSelect: jest.fn(v => v),
-    ...overrides
+    ...overrides,
   };
 }
 
@@ -64,7 +65,7 @@ describe('ToggleButtonGroup', () => {
 
     it('rendered text should match passed options text', () => {
       props = getFakeProps({
-        options: [{ id: 1, text: 'Yes !!!' }, { id: 2, text: 'No !!!' }]
+        options: [{ id: 1, text: 'Yes !!!' }, { id: 2, text: 'No !!!' }],
       });
       ToggleButtonWrapper = createToggleButtonWithTheme(props);
       buttonGroup = ToggleButtonWrapper.find(ButtonGroup).get(0);
@@ -110,13 +111,13 @@ describe('ToggleButtonGroup', () => {
         options: [
           {
             idx: 1,
-            texts: 'Invalid Prop'
+            texts: 'Invalid Prop',
           },
           {
             idx: 2,
-            texts: 'Invalid '
-          }
-        ]
+            texts: 'Invalid ',
+          },
+        ],
       });
 
       expect(() => {
@@ -137,7 +138,7 @@ describe('ToggleButtonGroup', () => {
   });
 
   describe('event handlers', () => {
-    it("will call it's click event handler and return selected button value", () => {
+    it('will call it\'s click event handler and return selected button value', () => {
       const leftButton = ToggleButtonWrapper.find(Button).at(0);
 
       leftButton.simulate('click');
@@ -189,14 +190,14 @@ describe('ToggleButtonGroup', () => {
       expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_BLUE);
     });
 
-    it('has text color of white', () => {
+    it('has text color of AAA_COLOR_MAIN_WHITE', () => {
       const textColor = getDOMNodeComputedStyle(
         ToggleButtonWrapper.find(Button)
           .at(0)
           .getDOMNode(),
         'color'
       );
-      expect(textColor).to.equal('rgb(255, 255, 255)');
+      expect(textColor).to.equal(AAA_COLOR_MAIN_WHITE);
     });
 
     it('should set button to active when has matched value in options', () => {
