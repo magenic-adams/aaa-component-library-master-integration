@@ -59,9 +59,7 @@ describe('SelectListItemText', () => {
 
       listItemTextWrapper = createSelectListItemTextWithTheme(props);
 
-      const listItem = listItemTextWrapper.find('span').at(0);
-
-      expect(listItem.props().children).to.equal(props.item.display);
+      expect(listItemTextWrapper.text()).to.equal(props.item.display);
     });
 
     it('attaches a data-quid attribute to the input base element', () => {
@@ -74,39 +72,33 @@ describe('SelectListItemText', () => {
     });
 
     it('should not render list item if invalid item is passed', () => {
-      let listItem;
       props = getFakeProps({
         item: null,
       });
-
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      listItem = listItemTextWrapper.find('li').get(0);
-
-      expect(listItem).to.equal(undefined);
+      expect(() => {
+        createSelectListItemTextWithTheme(props);
+      }).to.throw('Invariant failed: id and display should have value.');
 
       props = getFakeProps({
         item: undefined,
       });
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      listItem = listItemTextWrapper.find('li').get(0);
-
-      expect(listItem).to.equal(undefined);
+      expect(() => {
+        createSelectListItemTextWithTheme(props);
+      }).to.throw('Invariant failed: id and display should have value.');
 
       props = getFakeProps({
         item: {},
       });
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      listItem = listItemTextWrapper.find('li').get(0);
-
-      expect(listItem).to.equal(undefined);
+      expect(() => {
+        createSelectListItemTextWithTheme(props);
+      }).to.throw('Invariant failed: id and display should have value.');
 
       props = getFakeProps({
         item: '',
       });
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      listItem = listItemTextWrapper.find('li').get(0);
-
-      expect(listItem).to.equal(undefined);
+      expect(() => {
+        createSelectListItemTextWithTheme(props);
+      }).to.throw('Invariant failed: id and display should have value.');
     });
   });
 
