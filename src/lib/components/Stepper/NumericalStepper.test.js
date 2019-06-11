@@ -50,7 +50,7 @@ describe('Numerical Stepper', () => {
         .find('button')
         .at(1)
         .simulate('click');
-      expect(onDecreaseSpy.calledOnce).to.equal(true);
+      expect(onIncreaseSpy.calledOnce).to.equal(true);
     });
   });
 
