@@ -12,6 +12,8 @@ import FormGroup from './Form/FormGroup/FormGroup';
 import FormInput from './Form/FormInput/FormInput';
 import FormNumericInput from './Form/FormNumericInput/FormNumericInput';
 import ToggleButtonGroup from './ToggleButtonGroup/ToggleButtonGroup';
+import SelectList from './SelectList/SelectList';
+import SelectListItemText from './SelectListItemText/SelectListItemText';
 
 export {
   AAAPrimaryTheme,
@@ -25,5 +27,7 @@ export {
   Label,
   Link,
   NumericInput,
+  SelectList,
+  SelectListItemText,
   ToggleButtonGroup,
 };

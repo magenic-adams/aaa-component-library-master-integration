@@ -37,6 +37,9 @@ const styleClasses = theme => {
     disabled: {
       background: theme.palette.disabled.main,
       boxShadow: 'initial',
+      '&:hover': {
+        boxShadow: 'none',
+      },
     },
     input: {
       boxSizing: 'border-box',
@@ -66,15 +69,18 @@ const styleClasses = theme => {
         maxWidth: 534,
       },
     },
+    helperTextStyleErrorActive: {
+      marginTop: 8,
+    },
     error: {
       boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
-      '&:focus': {
+      '&$focused': { // TODO
         boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
       },
-    },
-    // Modifiers
-    centerText: {
-      textAlign: 'center',
+      // Modifiers
+      centerText: {
+        textAlign: 'center',
+      },
     },
   };
 };
