@@ -5,7 +5,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import '../src/css/helpers.css';
 
 // Components
-import { AAAPrimaryTheme, BaseInput, NumericInput } from '../src/lib/components';
+import { AAAPrimaryTheme, BaseInput, NumericInput } from '../src/lib/package/components';
 
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
 

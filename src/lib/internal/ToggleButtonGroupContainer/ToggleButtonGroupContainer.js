@@ -1,11 +1,11 @@
 import React from 'react';
-import { ToggleButtonGroup } from '../../components';
+import { ToggleButtonGroup } from '../../package/components';
 
 export default function ToggleButtonGroupContainer({
   disabled,
   options,
   value,
-  onSelect
+  onSelect,
 }) {
   const [option, setOption] = React.useState(value);
 

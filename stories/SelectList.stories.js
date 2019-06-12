@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
 // Components
-import { AAAPrimaryTheme, SelectList } from '../src/lib/components';
+import { AAAPrimaryTheme, SelectList } from '../src/lib/package/components';
 
 // Internal
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';

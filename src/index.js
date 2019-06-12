@@ -9,7 +9,7 @@ import {
   BaseInput,
   Link as TextLink,
   SelectList,
-} from './lib/components';
+} from './lib/package/components';
 
 const handleSelectItem = selectedItem => {
   console.log('selectedItem', selectedItem);

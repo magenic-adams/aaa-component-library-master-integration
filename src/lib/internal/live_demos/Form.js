@@ -6,7 +6,7 @@ import {
   FormGroup,
   FormInput,
   FormNumericInput,
-} from '../../components';
+} from '../../package/components';
 
 export const demo = `class FormDemo extends React.Component {
   static validations(){

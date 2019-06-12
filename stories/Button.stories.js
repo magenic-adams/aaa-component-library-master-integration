@@ -4,10 +4,11 @@ import { action } from '@storybook/addon-actions';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
 // Components
-import {AAAPrimaryTheme, Button, ButtonGroup} from '../src/lib/components';
+import { AAAPrimaryTheme, Button, ButtonGroup, Subheadline } from '../src/lib/package/components';
 
 // Internal
-import {ElementContainer} from '../src/lib/internal/ElementContainer/ElementContainer';
+import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
+import { StoryIntroduction } from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
 
 const stories = storiesOf('Atomic|Button', module);
 
@@ -17,7 +18,10 @@ stories
     return (
       <AAAPrimaryTheme>
       <div>
-        <h3>Tweak button settings below</h3>
+        <div className="u-padding--50">
+          <StoryIntroduction elementName="Button"/>
+          <Subheadline>Change the button text within Storybook &quot;knobs&quot; addon</Subheadline>
+        </div>
         <ElementContainer>
           <Button onClick={action('clicked')}>{text('Button text', 'Change the text')}</Button>
         </ElementContainer>
