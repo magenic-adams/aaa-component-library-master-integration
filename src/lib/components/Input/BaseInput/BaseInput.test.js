@@ -68,7 +68,7 @@ describe('Input', () => {
 
     it('has a default rendering of an input without helper text', () => {
       expect(InputWrapper.find(`input#${props.id}`).exists()).to.equal(true);
-      expect(InputWrapper.find(`p[id="${props.id}-component-helper-text"]`).exists()).to.equal(false);
+      expect(InputWrapper.find(`p[data-quid="FormFieldMetaHelperText-${props.id}"]`).exists()).to.equal(false);
     });
 
     it('renders the prop "value" within the input', () => {
@@ -83,8 +83,8 @@ describe('Input', () => {
       InputWrapper = createInput(props);
 
       expect(InputWrapper.find(`input#${props.id}`).exists()).to.equal(true);
-      expect(InputWrapper.find(`p[id="${props.id}-component-helper-text"]`).exists()).to.equal(true);
-      expect(InputWrapper.find(`p[id="${props.id}-component-helper-text"]`).text()).to.equal('This field is required');
+      expect(InputWrapper.find(`p[data-quid="FormFieldMetaHelperText-${props.id}"]`).exists()).to.equal(true);
+      expect(InputWrapper.find(`p[data-quid="FormFieldMetaHelperText-${props.id}"]`).text()).to.equal('This field is required');
     });
 
     it('renders the prop "labelName" as a label', () => {
@@ -239,19 +239,16 @@ describe('Input', () => {
 
       describe('error elements', () => {
         it('should show an error text message if it has an error', () => {
-          expect(ErrorInputWrapper.find(`#${props.id}-component-error-text p`).exists()).to.equal(true);
-          expect(ErrorInputWrapper.find(`#${props.id}-component-error-text p`).text()).to.equal('Show this error message to the user');
-        });
-
-        it('should show an error icon if it has an error', () => {
-          expect(ErrorInputWrapper.find(`#${props.id}-component-error-text`).exists()).to.equal(true);
+          const errorElement = ErrorInputWrapper.find(`p[data-quid="FormFieldMetaErrorText-${props.id}"]`);
+          expect(errorElement.exists()).to.equal(true);
+          expect(errorElement.text()).to.equal('Show this error message to the user');
         });
 
         it('should not show an error text message if it has no error', () => {
           const noErrorProps = getFakeProps({ error: undefined });
           InputWrapper = createInput(noErrorProps);
-
-          expect(InputWrapper.find(`#${noErrorProps.id}-component-error-text`).exists()).to.equal(false);
+          const errorElement = InputWrapper.find(`p[data-quid="FormFieldMetaErrorText-${props.id}"]`);
+          expect(errorElement.exists()).to.equal(false);
         });
 
         it('should not show an error icon if it has no error', () => {
