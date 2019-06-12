@@ -116,6 +116,20 @@ theme.typography.body2 = {
   },
 };
 
+theme.typography.buttonPrimary = {
+  lineHeight: 1.45,
+  fontSize: 18,
+  fontWeight: 500,
+  [theme.breakpoints.up('md')]: {
+    fontSize: 20,
+  },
+};
+
+theme.typography.buttonSecondary = {
+  fontSize: 18,
+  lineHeight: 1.45,
+};
+
 type propTypes = {
   children: PropTypes.node
 };

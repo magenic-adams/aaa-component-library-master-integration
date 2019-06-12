@@ -25,6 +25,7 @@ const styleClasses = theme => {
       display: 'block',
       border: 0,
       height: 48,
+      lineHeight: '48px',
       boxShadow: 'none',
       color: theme.palette.common.white,
       padding: '0 16px',
@@ -36,13 +37,14 @@ const styleClasses = theme => {
       [theme.breakpoints.up('md')]: {
         width: 314,
       },
+      '&$disabled': {
+        cursor: 'not-allowed',
+      },
     },
     label: {
+      lineHeight: '48px',
       height: '100%',
       fontSize: 18,
-      [theme.breakpoints.up('md')]: {
-        fontSize: 20,
-      },
     },
     containedPrimary: {
       background: theme.palette.primary.main,
@@ -53,6 +55,7 @@ const styleClasses = theme => {
         background: theme.palette.disabled.main,
         color: theme.palette.common.white,
       },
+      ...theme.typography.buttonPrimary,
     },
     containedSecondary: {
       color: theme.palette.primary.main,
@@ -66,6 +69,8 @@ const styleClasses = theme => {
         background: theme.palette.colorVariables.TRANSPARENT,
         borderColor: theme.palette.disabled.main,
       },
+      fontWeight: theme.typography.fontWeight,
+      ...theme.typography.buttonSecondary,
     },
     fadeUp: {
       transform: 'translateY(-8px)',
@@ -127,9 +132,9 @@ function Button({
       )}
       classes={{
         root: classes.root,
-        label: classes.label,
         containedPrimary: classes.containedPrimary,
         containedSecondary: classes.containedSecondary,
+        label: classes.label,
       }}
       disabled={disabled}
       disableRipple

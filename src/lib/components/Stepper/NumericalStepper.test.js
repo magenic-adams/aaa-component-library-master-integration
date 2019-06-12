@@ -7,7 +7,7 @@ import MUIStep from '@material-ui/core/Step';
 import { AAAPrimaryTheme } from '..';
 import NumericalStepper from './NumericalStepper';
 import NumericInput from '../Input/NumericInput/NumericInput';
-import StepperButton from '../Button/StepperIconButton';
+// import StepperButton from '../Button/StepperIconButton';
 
 const createNumericalStepper = props => {
   return mount(
@@ -22,10 +22,9 @@ const getProps = override => {
   return {
     id: '1',
     labelText: 'This is a numerical stepper',
-    helpText: 'This is a helper message',
-    errorText: 'This is an error text',
+    helperText: 'This is a helper message',
+    error: 'This is an error text',
     value: 10,
-    error: true,
     onIncrease: onIncreaseSpy,
     onDecrease: onDecreaseSpy,
     ...override,
@@ -63,7 +62,7 @@ describe('Numerical Stepper', () => {
       expect(wrapper.find(MUIStep)).to.have.lengthOf(1);
       expect(wrapper.find(MUIStepLabel)).to.have.lengthOf(3);
       expect(wrapper.find(NumericInput)).to.have.lengthOf(1);
-      expect(wrapper.find(StepperButton)).to.have.lengthOf(2);
+      // expect(wrapper.find(StepperButton)).to.have.lengthOf(2);
       expect(wrapper.find('svg')).to.have.lengthOf(3);
 
       expect(wrapper.find('span[data-quid="StepLabel-1"]')).to.have.lengthOf(1);
@@ -72,7 +71,7 @@ describe('Numerical Stepper', () => {
       ).to.have.lengthOf(1);
       expect(wrapper.find('svg[data-quid="RemoveIcon-1"]')).to.have.lengthOf(1);
       expect(
-        wrapper.find('input[data-quid="BaseInput-NumericInput-1"]')
+        wrapper.find('input[data-quid="BaseInput-NumericalStepperInput-1"]')
       ).to.have.lengthOf(1);
       expect(
         wrapper.find('button[data-quid="IncreaseStepper-1"]')

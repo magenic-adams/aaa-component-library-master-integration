@@ -5,9 +5,10 @@ import { withStyles } from '@material-ui/styles';
 import MUIStep from '@material-ui/core/Step';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import ReportProblem from '@material-ui/icons/ReportProblem';
-import MUIStepLabel from '@material-ui/core/StepLabel';
 
+// Components
+import FormFieldMeta from '../Form/FormFieldMeta/FormFieldMeta';
+import Label from '../Label/Label';
 import StepperButton from '../Button/Button';
 import NumericInput from '../Input/NumericInput/NumericInput';
 
@@ -35,7 +36,10 @@ const styleClasses = theme => ({
       fontSize: '18px',
     },
   },
-  helpText: {
+  actionWrapper: {
+    margin: '16px 0',
+  },
+  helperText: {
     color: theme.palette.colorVariables.GRAY,
     marginTop: 8,
     '& span': {
@@ -65,9 +69,9 @@ type propTypes = {
   id: PropTypes.string.isRequired,
   classes?: {},
   disabled?: PropTypes.bool,
-  error?: PropTypes.bool,
+  error?: PropTypes.string,
   labelText?: PropTypes.string,
-  helpText?: PropTypes.string,
+  helperText?: PropTypes.string,
   mask?: [], // Pass through
   onIncrease: (React.SyntheticEvent) => void,
   onDecrease: (React.SyntheticEvent) => void,
@@ -78,9 +82,9 @@ const NumericalStepper = (props:propTypes) => {
   const {
     classes,
     disabled,
+    disableWarning,
     error,
-    errorText,
-    helpText,
+    helperText,
     id,
     labelText,
     mask,
@@ -88,68 +92,62 @@ const NumericalStepper = (props:propTypes) => {
     onDecrease,
     value,
   } = props;
-  console.log('value', value);
   return (
     <MUIStep
       id={id}
       disabled={disabled}
       classes={classes.root}
     >
-      <MUIStepLabel
-        data-quid={`StepLabel-${id}`}
-        classes={{ label: classes.stepperLabel }}
+      <Label
+        id={id}
+        disabled={false}
+        error={false}
+        focused={false}
       >
         {labelText}
-      </MUIStepLabel>
-      <StepperButton
-        id={`DecreaseStepper-${id}`}
-        disabled={disabled}
-        onClick={onDecrease}
-        isIconButton
-      >
-        <RemoveIcon
-          data-quid={`RemoveIcon-${id}`}
+      </Label>
+      <div className={classes.actionWrapper}>
+        <StepperButton
+          id={`DecreaseStepper-${id}`}
           disabled={disabled}
-          className={classes.stepperIcon}
-        />
-      </StepperButton>
+          onClick={onDecrease}
+          isIconButton
+        >
+          <RemoveIcon
+            data-quid={`RemoveIcon-${id}`}
+            disabled={disabled}
+            className={classes.stepperIcon}
+          />
+        </StepperButton>
 
-      <div className={classes.stepperInputWrapper}>
-        <NumericInput
-          id={`NumericalStepperInput-${id}`}
-          className={classes.stepperInputWrapper}
-          centerText
-          type="text"
-          value={value}
-          error={error}
+        <div className={classes.stepperInputWrapper}>
+          <NumericInput
+            id={`NumericalStepperInput-${id}`}
+            centerText
+            type="text"
+            value={value}
+            error={error}
+            disabled={disabled}
+            mask={mask}
+            disableWarning
+          />
+        </div>
+        <StepperButton
+          id={`IncreaseStepper-${id}`}
           disabled={disabled}
-          mask={mask}
-          disableWarning
-        />
+          onClick={onIncrease}
+          isIconButton
+        >
+          <AddIcon data-quid={`AddIcon-${id}`} className={classes.stepperIcon} />
+        </StepperButton>
       </div>
-      <StepperButton
-        id={`IncreaseStepper-${id}`}
-        disabled={disabled}
-        onClick={onIncrease}
-        isIconButton
-      >
-        <AddIcon data-quid={`AddIcon-${id}`} className={classes.stepperIcon} />
-      </StepperButton>
-      <MUIStepLabel
-        data-quid={`Component-error-text-${id}`}
-        classes={{ error: classes.error }}
-        className={classes.helpText}
+      
+      <FormFieldMeta
+        disableWarning={disableWarning}
         error={error}
-      >
-        {error && <ReportProblem data-quid={`ReportProblem-${id}`} />}
-        {errorText}
-      </MUIStepLabel>
-      <MUIStepLabel
-        data-quid={`Component-helper-text-${id}`}
-        className={classes.helpText}
-      >
-        {helpText}
-      </MUIStepLabel>
+        helperText={helperText}
+        id={id}
+      />
     </MUIStep>
   );
 };
@@ -157,7 +155,8 @@ const NumericalStepper = (props:propTypes) => {
 NumericalStepper.defaultProps = {
   classes: {},
   disabled: false,
-  helpText: '',
+  labelText: '',
+  helperText: '',
   mask: [],
   error: false,
   value: 1,

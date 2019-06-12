@@ -6,11 +6,12 @@ import cx from 'clsx';
 
 const styleClasses = theme => ({
   root: {
-    fontSize: theme.typography.body1.fontSize,
+    color: theme.palette.colorVariables.BLACK,
     display: 'block',
     marginBottom: -8,
-    color: theme.palette.colorVariables.BLACK,
     fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeight,
+    ...theme.typography.body1,
   },
   formControl: {
     position: 'relative',
@@ -49,7 +50,8 @@ function Label({
       focused={focused}
       htmlFor={id}
       data-quid={`Label-${id}`}
-      shrink={false}>
+      shrink={false}
+    >
       {children}
     </MUIInputLabel>
   );

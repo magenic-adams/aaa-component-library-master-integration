@@ -1,12 +1,11 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
-import AAAButton from './Button';
+import Button from './Button';
 
 const IconButton = props => {
   const { classes, children, disabled, onClick, id } = props;
   return (
-    <AAAButton
+    <Button
       onClick={onClick}
       disabled={disabled}
       className={classes.iconButton}
@@ -14,8 +13,8 @@ const IconButton = props => {
       isButtonIcon
     >
       {children}
-    </AAAButton>
+    </Button>
   );
 };
 
-export default withStyles({ withTheme: true })(IconButton);
+export default withStyles({ index: 0, withTheme: true })(IconButton);

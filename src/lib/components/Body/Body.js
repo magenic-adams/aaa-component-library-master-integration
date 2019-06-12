@@ -19,10 +19,10 @@ const styleClasses = theme => {
       color: theme.typography.color,
       fontFamily: theme.typography.fontFamily,
       fontWeight: theme.typography.fontWeight,
-      ...theme.typography.body1
+      ...theme.typography.body1,
     },
     secondary: theme.typography.body2,
-  }
+  };
 };
 
 function Body({
@@ -37,14 +37,14 @@ function Body({
       className={cx(
         'Body',
         classes.root,
-        {[classes.secondary]: secondary},
+        { [classes.secondary]: secondary },
         className,
       )}
       data-quid={`Body-${id}`}
     >
       {children}
     </p>
-  )
+  );
 }
 
-export default withStyles(styleClasses, {index: 0, withTheme: true})(Body);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(Body);

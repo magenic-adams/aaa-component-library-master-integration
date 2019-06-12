@@ -6,14 +6,13 @@ import { withStyles } from '@material-ui/core/styles';
 // Material UI components
 import MUIInput from '@material-ui/core/Input';
 import MUIFormControl from '@material-ui/core/FormControl';
-import MUIFormHelperText from '@material-ui/core/FormHelperText';
 import MUIClear from '@material-ui/icons/Clear';
 import MUIInputAdornment from '@material-ui/core/InputAdornment';
 import MUIIconButton from '@material-ui/core/IconButton';
-import MUIReportProblem from '@material-ui/icons/ReportProblem';
 
 // Components
 import Label from '../../Label/Label';
+import FormFieldMeta from '../../Form/FormFieldMeta/FormFieldMeta';
 
 const styleClasses = theme => {
   return {
@@ -67,40 +66,11 @@ const styleClasses = theme => {
         maxWidth: 534,
       },
     },
-    helperTextStyle: {
-      color: `${theme.palette.colorVariables.GRAY}`,
-      [theme.breakpoints.up('sm')]: {
-        fontSize: 14,
-      },
-      [theme.breakpoints.up('md')]: {
-        fontSize: 16,
-      },
-    },
     error: {
       boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
       '&:focus': {
         boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
       },
-    },
-    errorTextWrapper: {
-      marginTop: 8,
-    },
-    errorText: {
-      display: 'inline',
-      paddingTop: 10,
-      marginTop: 8,
-      [theme.breakpoints.up('sm')]: {
-        fontSize: 14,
-      },
-      [theme.breakpoints.up('md')]: {
-        fontSize: 16,
-      },
-    },
-    errorIcon: {
-      display: 'inline',
-      verticalAlign: 'text-bottom',
-      fontSize: 20,
-      marginRight: 8,
     },
     // Modifiers
     centerText: {
@@ -219,26 +189,12 @@ function BaseInput({
         onFocus={onFocus}
       />
 
-      {error && !disableWarning && (
-        <div className={classes.errorTextWrapper}>
-          <MUIReportProblem color="error" className={classes.errorIcon} />
-          <MUIFormHelperText
-            id={`${id}-component-error-text`}
-            className={classes.errorText}
-          >
-            {error}
-          </MUIFormHelperText>
-        </div>
-      )}
-
-      {helperText && (
-        <MUIFormHelperText
-          id={`${id}-component-helper-text`}
-          className={classes.helperTextStyle}
-        >
-          {helperText}
-        </MUIFormHelperText>
-      )}
+      <FormFieldMeta
+        disableWarning={disableWarning}
+        error={error}
+        helperText={helperText}
+        id={id}
+      />
     </MUIFormControl>
   );
 }
