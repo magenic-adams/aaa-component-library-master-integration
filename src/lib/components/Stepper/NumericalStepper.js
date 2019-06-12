@@ -2,8 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
-import MUIStep from '@material-ui/core/Step';
-import AddIcon from '@material-ui/icons/Add';
+
+// Material UI Components
+import MUIFormControl from '@material-ui/core/FormControl';
+import MUIAddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 
 // Components
@@ -37,7 +39,7 @@ const styleClasses = theme => ({
     },
   },
   actionWrapper: {
-    margin: '16px 0',
+    margin: '16px 0 6px 0',
   },
   helperText: {
     color: theme.palette.colorVariables.GRAY,
@@ -93,13 +95,13 @@ const NumericalStepper = (props:propTypes) => {
     value,
   } = props;
   return (
-    <MUIStep
+    <MUIFormControl
       id={id}
       disabled={disabled}
       classes={classes.root}
     >
       <Label
-        id={id}
+        id={`NumericalStepperLabel-${id}`}
         disabled={false}
         error={false}
         focused={false}
@@ -138,17 +140,20 @@ const NumericalStepper = (props:propTypes) => {
           onClick={onIncrease}
           isIconButton
         >
-          <AddIcon data-quid={`AddIcon-${id}`} className={classes.stepperIcon} />
+          <MUIAddIcon
+            data-quid={`AddIcon-${id}`}
+            className={classes.stepperIcon}
+          />
         </StepperButton>
       </div>
       
       <FormFieldMeta
+        id={`NumericalStepperMeta-${id}`}
         disableWarning={disableWarning}
         error={error}
         helperText={helperText}
-        id={id}
       />
-    </MUIStep>
+    </MUIFormControl>
   );
 };
 

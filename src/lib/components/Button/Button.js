@@ -37,7 +37,7 @@ const styleClasses = theme => {
       [theme.breakpoints.up('md')]: {
         width: 314,
       },
-      '&$disabled': {
+      '&:disabled': {
         cursor: 'not-allowed',
       },
     },
@@ -80,8 +80,6 @@ const styleClasses = theme => {
       verticalAlign: `bottom`,
       width: 48,
       height: 48,
-      marginLeft: 8,
-      marginRight: 8,
       border: `1px solid ${theme.palette.colorVariables.GRAY}`,
       borderRadius: 4,
       backgroundColor: `${theme.palette.colorVariables.WHITE}`,
@@ -102,6 +100,12 @@ const styleClasses = theme => {
         '& svg': {
           color: `${theme.palette.colorVariables.GRAY}`,
         },
+      },
+      '&:nth-child(n+1)': {
+        marginRight: 8,
+      },
+      '&:nth-child(n+2)': {
+        marginLeft: 8,
       },
     },
   };

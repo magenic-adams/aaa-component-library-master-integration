@@ -6,7 +6,7 @@
   it
 */
 import React from 'react';
-import { expect } from "chai";
+import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 
@@ -19,7 +19,7 @@ import BaseInput from './BaseInput';
 import AAAPrimaryTheme from '../../AAAPrimaryTheme/AAAPrimaryTheme';
 
 // Test Utilities
-import {getDOMNodeComputedStyle} from "../../../../../test/DOM";
+import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 
 // Constants
 import {
@@ -36,9 +36,9 @@ function createInput(props) {
 
 function getFakeProps(override) {
   return { // Required
-    id: "input-unique-identifier", // used for unique identifier and data tracking
-    name: "input-unique-name", // used for form value
-    ...override
+    id: 'input-unique-identifier', // used for unique identifier and data tracking
+    name: 'input-unique-name', // used for form value
+    ...override,
   };
 }
 // Styling tests
@@ -75,7 +75,7 @@ describe('Input', () => {
       props = getFakeProps({ value: 'Jerry Seinfeld' });
       InputWrapper = createInput(props);
 
-      expect(InputWrapper.find(`input#${props.id}`).get(0).props.value).to.equal("Jerry Seinfeld");
+      expect(InputWrapper.find(`input#${props.id}`).get(0).props.value).to.equal('Jerry Seinfeld');
     });
 
     it('renders the prop "helperText" as helper text within the component', () => {
@@ -88,30 +88,30 @@ describe('Input', () => {
     });
 
     it('renders the prop "labelName" as a label', () => {
-      props = getFakeProps({labelName: 'Favorite comedian name?'});
+      props = getFakeProps({ labelName: 'Favorite comedian name?' });
       InputWrapper = createInput(props);
 
       expect(InputWrapper.find(`label[htmlFor="${props.id}"]`).exists()).to.equal(true);
-      expect(InputWrapper.find(`label[htmlFor="${props.id}"]`).text()).to.equal("Favorite comedian name?");
+      expect(InputWrapper.find(`label[htmlFor="${props.id}"]`).text()).to.equal('Favorite comedian name?');
       expect(InputWrapper.find(`input#${props.id}`).exists()).to.equal(true);
     });
 
     it('renders the prop "placeholder" as a placeholder', () => {
-      props = getFakeProps({placeholder: 'First name?'});
+      props = getFakeProps({ placeholder: 'First name?' });
       InputWrapper = createInput(props);
 
       expect(InputWrapper.find('input').getDOMNode().placeholder).to.equal('First name?');
     });
   });
 
-  describe("events", () => {
+  describe('events', () => {
     let spy;
     beforeEach(() => {spy = sinon.spy();});
 
     it('triggers prop "onFocus" event on focus', () => {
       props = getFakeProps({ onFocus: spy });
       InputWrapper = createInput(props);
-      InputWrapper.find(`input#${props.id}`).simulate("focus");
+      InputWrapper.find(`input#${props.id}`).simulate('focus');
 
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.have.property('target');
@@ -120,7 +120,7 @@ describe('Input', () => {
     it('triggers prop "onChange" event on change', () => {
       props = getFakeProps({ onChange: spy });
       InputWrapper = createInput(props);
-      InputWrapper.find(`input#${props.id}`).simulate("change");
+      InputWrapper.find(`input#${props.id}`).simulate('change');
 
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.have.property('target');
@@ -129,14 +129,14 @@ describe('Input', () => {
     it('triggers prop "onBlur" event on blur', () => {
       props = getFakeProps({ onBlur: spy });
       InputWrapper = createInput(props);
-      InputWrapper.find(`input#${props.id}`).simulate("blur");
+      InputWrapper.find(`input#${props.id}`).simulate('blur');
 
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.have.property('target');
     });
   });
 
-  describe("prop functionality", () => {
+  describe('prop functionality', () => {
     it ('forwards a reference to the underlying button with "forwardedRef" prop', () => {
       const forwardedRef = React.createRef();
       props = getFakeProps({ forwardedRef });
@@ -156,17 +156,17 @@ describe('Input', () => {
     });
   });
 
-  describe("clearing input", () => {
+  describe('clearing input', () => {
 
     it('displays a clear icon if it has prop "value" and "onClear"', () => {
-      props = getFakeProps({value: 'A value on input', onClear: () => {} });
+      props = getFakeProps({ value: 'A value on input', onClear: () => {} });
       InputWrapper = createInput(props);
 
       expect(InputWrapper.find(MUIIconButton).exists()).to.equal(true);
     });
 
     it('will not display a clear icon if it has an empty value', () => {
-      props = getFakeProps({ value: "" });
+      props = getFakeProps({ value: '' });
       InputWrapper = createInput(props);
 
       expect(InputWrapper.find(MUIIconButton).exists()).to.equal(false);
@@ -183,14 +183,14 @@ describe('Input', () => {
       const onClearSpy = sinon.spy();
       props = getFakeProps({ value: 'Clear me please!', onClear: onClearSpy });
       InputWrapper = createInput(props);
-      InputWrapper.find(MUIIconButton).simulate("click");
+      InputWrapper.find(MUIIconButton).simulate('click');
 
       expect(onClearSpy.calledOnce).to.equal(true);
       expect(onClearSpy.getCall(0).args[0]).to.have.property('target');
     });
   });
 
-  describe("states", () => {
+  describe('states', () => {
     // TODO: Can't seem to get focused state css working
     // describe('focused', () => {
     //   const focusProps = getFakeProps({ autoFocus: true });
@@ -226,14 +226,14 @@ describe('Input', () => {
         const onFocusSpy = sinon.spy();
         disabledProps = getFakeProps({ disabled: true, onFocus: onFocusSpy });
         DisabledInputWrapper = createInput(props);
-        DisabledInputWrapper.find('input').simulate("focus");
+        DisabledInputWrapper.find('input').simulate('focus');
 
         expect(onFocusSpy.calledOnce).to.equal(false);
       });
     });
 
     describe('error', () => {
-      const errorProps = getFakeProps({error: 'Show this error message to the user'});
+      const errorProps = getFakeProps({ error: 'Show this error message to the user' });
       const ErrorInputWrapper = createInput(errorProps);
       const ErrorMUIInputNode = ErrorInputWrapper.find(MUIInput).getDOMNode();
 
@@ -270,7 +270,7 @@ describe('Input', () => {
       });
     });
 
-    describe("base styles", () => {
+    describe('base styles', () => {
       it ('should have 48px height', () => {
         const heightStyle = getDOMNodeComputedStyle(MUIInputNode, 'height');
         expect(heightStyle).to.equal('48px');

@@ -10,6 +10,8 @@ exports[`Storyshots Atomic|Input states 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Atomic|Link text link 1`] = `ReactWrapper {}`;
 
+exports[`Storyshots Atomic|SelectList Usage and States 1`] = `ReactWrapper {}`;
+
 exports[`Storyshots Atomic|Typography Text sizes 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Button with text 1`] = `ReactWrapper {}`;
@@ -17,6 +19,8 @@ exports[`Storyshots Button with text 1`] = `ReactWrapper {}`;
 exports[`Storyshots Components|Button with text 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Molecules|ButtonGroup primary and secondary 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Molecules|Form basic form + code demo 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Molecules|Form basic form 1`] = `ReactWrapper {}`;
 

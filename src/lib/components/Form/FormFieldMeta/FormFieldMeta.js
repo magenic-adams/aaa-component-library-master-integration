@@ -53,9 +53,13 @@ function FormFieldMeta({
     <div className={classes.root}>
       {error && (
         <div className={classes.errorTextWrapper}>
-          <MUIReportProblem color="error" className={classes.errorIcon} />
+          <MUIReportProblem
+            data-quid={`FormFieldMetaReportProblem-${id}`}
+            color="error"
+            className={classes.errorIcon}
+          />
           <MUIFormHelperText
-            id={`${id}-component-error-text`}
+            data-quid={`FormFieldMetaErrorText-${id}`}
             className={classes.errorText}
           >
             {error}
@@ -65,7 +69,7 @@ function FormFieldMeta({
 
       {helperText && (
         <MUIFormHelperText
-          id={`${id}-component-helper-text`}
+          data-quid={`FormFieldMetaHelperText-${id}`}
           className={classes.helperTextStyle}
           error={false}
         >

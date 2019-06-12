@@ -40,7 +40,7 @@ export const demo = `class FormDemo extends React.Component {
           <Form
             validations={FormDemo.validations()}
             onSubmit={FormDemo.handleFormValueSubmission}
-            render={({ allFieldsHaveValues, handleSubmit }) => {
+            render={({ allRequiredFieldsHaveBeenVisited, handleSubmit }) => {
               return (
                 <form onSubmit={handleSubmit}>
                   <FormGroup>
@@ -70,8 +70,8 @@ export const demo = `class FormDemo extends React.Component {
                   </FormGroup>
                   <ButtonGroup>
                     <Button
-                      disabled={!allFieldsHaveValues}
-                      fadeUp={allFieldsHaveValues}
+                      disabled={!allRequiredFieldsHaveBeenVisited}
+                      fadeUp={allRequiredFieldsHaveBeenVisited}
                       type="submit"
                     >
                       Submit
