@@ -2,11 +2,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // Components
-import { AAAPrimaryTheme } from '../../src/lib/components';
-import Headline from '../../src/lib/components/Headline/Headline'
-import Subheadline from '../../src/lib/components/Subheadline/Subheadline'
-import Subtitle from '../../src/lib/components/Subtitle/Subtitle'
-import Body from '../../src/lib/components/Body/Body'
+import { AAAPrimaryTheme } from '../../src/lib/package/components';
+import Headline from '../../src/lib/package/components/Headline/Headline';
+import Subheadline from '../../src/lib/package/components/Subheadline/Subheadline';
+import Subtitle from '../../src/lib/package/components/Subtitle/Subtitle';
+import Body from '../../src/lib/package/components/Body/Body';
 
 // Internal
 import { StoryLayoutContainer } from '../../src/lib/internal/StoryLayoutContainer/StoryLayoutContainer';
@@ -103,4 +103,4 @@ stories
         />
       </StoryLayoutContainer>
     </AAAPrimaryTheme>
-  ))
+  ));

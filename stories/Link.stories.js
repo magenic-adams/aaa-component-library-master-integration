@@ -6,10 +6,10 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs } from '@storybook/addon-knobs';
 
 // Components
-import {AAAPrimaryTheme, Link as TextLink } from '../src/lib/components';
+import { AAAPrimaryTheme, Link as TextLink } from '../src/lib/package/components';
 
 // Internal
-import {ElementContainer} from '../src/lib/internal/ElementContainer/ElementContainer';
+import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
 
 const stories = storiesOf('Atomic|Link', module);
 
@@ -61,4 +61,4 @@ stories
 
   </AAAPrimaryTheme>
   )
-)
+);

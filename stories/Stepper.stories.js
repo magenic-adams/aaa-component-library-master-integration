@@ -4,8 +4,8 @@ import { storiesOf } from '@storybook/react';
 
 import { action } from '@storybook/addon-actions';
 import { text, withKnobs } from '@storybook/addon-knobs';
-import { AAAPrimaryTheme } from '../src/lib/components';
-import NumericalStepper from '../src/lib/components/Stepper/NumericalStepper';
+import { AAAPrimaryTheme } from '../src/lib/package/components';
+import NumericalStepper from '../src/lib/package/components/Stepper/NumericalStepper';
 // Internal
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
 

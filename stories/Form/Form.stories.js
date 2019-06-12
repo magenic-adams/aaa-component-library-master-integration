@@ -14,7 +14,7 @@ import {
   Form,
   FormGroup,
   FormInput,
-} from '../../src/lib/components';
+} from '../../src/lib/package/components';
 
 const VALIDATIONS = {
   firstName: {
