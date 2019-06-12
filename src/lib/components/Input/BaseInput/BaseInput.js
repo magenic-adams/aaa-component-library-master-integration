@@ -53,7 +53,13 @@ const styleClasses = theme => {
         fontSize: 18,
       },
     },
+    inputAdornment: {
+      marginRight: -10,
+    },
     iconButton: {
+      height: 48,
+      width: 48,
+      borderRadius: 0,
       padding: 10,
       transition: 'none',
     },
@@ -166,9 +172,11 @@ function BaseInput({
         )}
         disableUnderline
         endAdornment={
-          onClear &&
-          value && (
-            <MUIInputAdornment position="end">
+          onClear && value && (
+            <MUIInputAdornment
+              className={classes.inputAdornment}
+              position="end"
+            >
               <MUIIconButton
                 disableRipple
                 aria-label="Clear text"
