@@ -5,8 +5,14 @@ import { storiesOf } from '@storybook/react';
 
 // Components
 import { AAAPrimaryTheme, SelectList } from '../src/lib/package/components';
+import { demo, scope } from '../src/lib/internal/live_demos/SelectList';
 
 // Internal
+import { StoryIntroduction } from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
+import { StoryCodePlayground } from '../src/lib/internal/StoryCodePlayground/StoryCodePlayground';
+import { StoryLayoutContainer } from '../src/lib/internal/StoryLayoutContainer/StoryLayoutContainer';
+import { StoryUsageDescription } from '../src/lib/internal/StoryUsageDescription/StoryUsageDescription';
+import { StorySectionHeader } from '../src/lib/internal/StorySectionHeader/StorySectionHeader';
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
 
 const stories = storiesOf('Atomic|SelectList', module);
@@ -23,31 +29,45 @@ const items = [
 stories.add('Usage and States', () => {
   return (
     <AAAPrimaryTheme>
-      <div>
-        <h3>Base component for Dropdown or RadioGroup</h3>
-        <h2>Usage</h2>
-        <h3>When to use</h3>
-        <ul>
-          <li>To pick one option from a a set of choices.</li>
-          <li>
-            When options are dynamically generated (meaning the choices can vary
-            in numbers from 4 or more)
-          </li>
-        </ul>
-        <h3>Don’t use</h3>
-        <ul>
-          <li>If the choices are not presetted.</li>
-          <li>If multiple options can be chosen from the set of choices.</li>
-        </ul>
-        <br />
-        <ElementContainer>
-          <SelectList
-            type="primary"
-            items={items}
-            onSelect={action('You selected:')}
-          />
-        </ElementContainer>
-      </div>
+      <StoryLayoutContainer>
+        <StoryIntroduction
+          elementName="SelectList"
+          subtitle="Base element for Dropdown or RadioGroup"
+        />
+      </StoryLayoutContainer>
+      
+      <StoryLayoutContainer>
+        <StoryUsageDescription
+          positive
+          usageText="SelectList usage"
+          items={[
+            'To pick one option from a a set of choices.',
+            'When options are dynamically generated (meaning the choices can vary in numbers from 4 or more)',
+          ]}
+        />
+
+        <StoryUsageDescription
+          positive={false}
+          usageText="SelectList DON'Ts"
+          items={[
+            'If the choices are not preset.',
+            'If multiple options can be chosen from the set of choices.',
+          ]}
+        />
+      </StoryLayoutContainer>
+
+      <ElementContainer>
+        <SelectList
+          type="primary"
+          items={items}
+          onSelect={action('You selected:')}
+        />
+      </ElementContainer>
+
+      <StoryLayoutContainer>
+        <StorySectionHeader title="Code examples" />
+        <StoryCodePlayground demo={demo} scope={scope} />
+      </StoryLayoutContainer>
     </AAAPrimaryTheme>
   );
 });

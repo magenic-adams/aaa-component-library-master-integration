@@ -3,15 +3,6 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
-// React-Live Editor Components
-import {
-  LiveProvider,
-  LiveEditor,
-  LiveError,
-  LivePreview,
-} from 'react-live';
-import theme from '../src/lib/internal/live_demos/theme';
-
 // Components
 import {
   AAAPrimaryTheme,
@@ -26,6 +17,7 @@ import { StoryIntroduction } from '../src/lib/internal/StoryIntroduction/StoryIn
 import { StoryLayoutContainer } from '../src/lib/internal/StoryLayoutContainer/StoryLayoutContainer';
 import { StoryUsageDescription } from '../src/lib/internal/StoryUsageDescription/StoryUsageDescription';
 import { StorySectionHeader } from '../src/lib/internal/StorySectionHeader/StorySectionHeader';
+import { StoryCodePlayground } from '../src/lib/internal/StoryCodePlayground/StoryCodePlayground';
 
 const stories = storiesOf('Atomic|Button', module);
 
@@ -102,21 +94,7 @@ stories
 
       <StoryLayoutContainer>
         <StorySectionHeader title="Code examples" />
-        <LiveProvider
-          code={demo}
-          scope={scope}
-          theme={theme}
-        >
-          <div className="u-flex">
-            <div className="u-padding--20">
-              <LivePreview />
-            </div>
-            <div className="u-flex--1">
-              <LiveEditor />
-              <LiveError />
-            </div>
-          </div>
-        </LiveProvider>
+        <StoryCodePlayground demo={demo} scope={scope} />
       </StoryLayoutContainer>
 
     </AAAPrimaryTheme>
