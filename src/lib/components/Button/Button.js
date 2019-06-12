@@ -15,8 +15,8 @@ type propTypes = {
   fadeUp?: PropTypes.bool,
   id: PropTypes.string,
   href?: PropTypes.bool,
-  forwardedRef?: {current: {}},
-  onClick: () => {},
+  forwardedRef?: { current: {} },
+  onClick: () => {}
 };
 
 const styleClasses = theme => {
@@ -24,7 +24,8 @@ const styleClasses = theme => {
     root: {
       display: 'block',
       border: 0,
-      height: '48px',
+      height: 48,
+      lineHeight: '48px',
       boxShadow: 'none',
       color: theme.palette.common.white,
       padding: '0 16px',
@@ -34,14 +35,16 @@ const styleClasses = theme => {
       transform: 'translateY(0)',
       width: '100%',
       [theme.breakpoints.up('md')]: {
-        width: '314px',
+        width: 314,
+      },
+      '&:disabled': {
+        cursor: 'not-allowed',
       },
     },
     label: {
-      fontSize: '18px',
-      [theme.breakpoints.up('md')]: {
-        fontSize: '20px',
-      },
+      lineHeight: '48px',
+      height: '100%',
+      fontSize: 18,
     },
     containedPrimary: {
       background: theme.palette.primary.main,
@@ -52,6 +55,7 @@ const styleClasses = theme => {
         background: theme.palette.disabled.main,
         color: theme.palette.common.white,
       },
+      ...theme.typography.buttonPrimary,
     },
     containedSecondary: {
       color: theme.palette.primary.main,
@@ -65,13 +69,47 @@ const styleClasses = theme => {
         background: theme.palette.colorVariables.TRANSPARENT,
         borderColor: theme.palette.disabled.main,
       },
+      fontWeight: theme.typography.fontWeight,
+      ...theme.typography.buttonSecondary,
     },
     fadeUp: {
       transform: 'translateY(-8px)',
     },
+    iconButton: {
+      display: 'inline-block',
+      verticalAlign: `bottom`,
+      width: 48,
+      height: 48,
+      border: `1px solid ${theme.palette.colorVariables.GRAY}`,
+      borderRadius: 4,
+      backgroundColor: `${theme.palette.colorVariables.WHITE}`,
+      '&:active,&:hover': {
+        borderWidth: 1,
+        backgroundColor: `${theme.palette.colorVariables.SECONDARY_HOVER}`,
+        borderColor: `${theme.palette.colorVariables.DARKER_BLUE}`,
+        '& svg': {
+          color: `${theme.palette.primary.main}`,
+        },
+      },
+      '&:disabled': {
+        background: `${theme.palette.disabled.main}`,
+        border: `none`,
+        '&:hover': {
+          backgroundColor: `${theme.palette.disabled.main}`,
+        },
+        '& svg': {
+          color: `${theme.palette.colorVariables.GRAY}`,
+        },
+      },
+      '&:nth-child(n+1)': {
+        marginRight: 8,
+      },
+      '&:nth-child(n+2)': {
+        marginLeft: 8,
+      },
+    },
   };
 };
-
 
 function Button({
   children,
@@ -84,19 +122,23 @@ function Button({
   href,
   forwardedRef,
   onClick,
-}:propTypes){
+  isIconButton,
+}: propTypes) {
   return (
     <MUIButton
       className={cx(
         'Button',
-        { [classes.fadeUp]: fadeUp },
-        className,
+        {
+          [classes.fadeUp]: fadeUp,
+          [classes.iconButton]: isIconButton,
+        },
+        className
       )}
       classes={{
         root: classes.root,
-        label: classes.label,
         containedPrimary: classes.containedPrimary,
         containedSecondary: classes.containedSecondary,
+        label: classes.label,
       }}
       disabled={disabled}
       disableRipple

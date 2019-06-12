@@ -1,74 +1,172 @@
-import React, { Component } from 'react';
+/* eslint-disable import/no-extraneous-dependencies */
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
-import AAAButton from '../Button/Button';
-//import {Add as AddIcon, Remove as RemoveIcon} from '@material-ui/icons';
-import AddIcon from '@material-ui/icons/Add';
+
+// Material UI Components
+import MUIFormControl from '@material-ui/core/FormControl';
+import MUIAddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-type propTypes = {
-    // MUI Decorator
-    classes: PropTypes.object,
-    // Passed Props
-    className: PropTypes.string,
-    children?: PropTypes.string | PropTypes.node,
-    color?: 'primary' | 'secondary',
-    disabled: PropTypes.bool,
-    href?: PropTypes.bool,
-    onClick: () => {},
-  };
+
+// Components
+import FormFieldMeta from '../Form/FormFieldMeta/FormFieldMeta';
+import Label from '../Label/Label';
+import StepperButton from '../Button/Button';
+import NumericInput from '../Input/NumericInput/NumericInput';
+
+import {
+  AAA_CSS_INLINE,
+  AAA_CSS_MIDDLE,
+} from '../../constants/cssConstants';
+
 
 const styleClasses = theme => ({
-    stepperButton: {
-        width: '48px',
-        height: '48px',
-        margin: '8px 8px',
-        border: 'solid 1px #717174',
-        'border-radius': '4px',
-        'background-color': '#FFFFFF'
+  stepperIcon: {
+    width: 24,
+    height: '100%',
+    color: theme.palette.primary.main,
+  },
+  stepperInputWrapper: {
+    display: 'inline-block',
+    width: 78,
+  },
+  stepperLabel: {
+    color: theme.palette.colorVariables.BLACK,
+    marginTop: 8,
+    fontSize: '16px',
+    [theme.breakpoints.up('md')]: {
+      fontSize: '18px',
     },
-    stepperIcon: {
-        color: '#4470BF',
-        width: '24px',
-        height: '24px'
+  },
+  actionWrapper: {
+    margin: '16px 0 6px 0',
+  },
+  helperText: {
+    color: theme.palette.colorVariables.GRAY,
+    marginTop: 8,
+    '& span': {
+      fontSize: 14,
+      [theme.breakpoints.up('md')]: {
+        fontSize: 16,
+      },
     },
-    numericInput: {
-        height: '48px',
-        margin: '8px 8px',
-        border: 'solid 1px #717174',
-        'border-radius': '4px',
-        'text-align': 'center'
+  },
+  error: {
+    color: theme.palette.error.main,
+    fontSize: 14,
+    [theme.breakpoints.up('md')]: {
+      fontSize: '16px',
     },
-    label: {
-        color: '#2A282C',
-        fontSize: '16px',
-        [theme.breakpoints.up('md')]: {
-        fontSize: '18px'
-        }
+    '& svg': {
+      display: `${AAA_CSS_INLINE}`,
+      fontSize: 20,
+      marginLeft: 8,
+      marginRight: 8,
+      verticalAlign: `${AAA_CSS_MIDDLE}`,
     },
-    helpTextError: {
-          color: '#717174',
-          fontSize: '14px',
-          [theme.breakpoints.up('md')]: {
-              fontSize: '16px'
-          }
-      }
-})
+  },
+});
 
-class NumericalStepper extends Component {
-    render() {
-    const {classes} = this.props;
-        return (
-            <div>
-                <AAAButton className={classes.stepperButton}>
-                    <RemoveIcon className={classes.stepperIcon}/>
-                </AAAButton>
-                <input className={classes.numericInput} type="text"></input>
-                <AAAButton className={classes.stepperButton}>
-                    <AddIcon className={classes.stepperIcon}/>
-                </AAAButton>
-            </div>
-        )
-    }
-}
+type propTypes = {
+  id: PropTypes.string.isRequired,
+  classes?: {},
+  disabled?: PropTypes.bool,
+  error?: PropTypes.string,
+  labelText?: PropTypes.string,
+  helperText?: PropTypes.string,
+  mask?: [], // Pass through
+  onIncrease: (React.SyntheticEvent) => void,
+  onDecrease: (React.SyntheticEvent) => void,
+  value?: PropTypes.number,
+};
 
-export default withStyles(styleClasses, {withTheme: true})(NumericalStepper);;
+const NumericalStepper = (props:propTypes) => {
+  const {
+    classes,
+    disabled,
+    disableWarning,
+    error,
+    helperText,
+    id,
+    labelText,
+    mask,
+    onIncrease,
+    onDecrease,
+    value,
+  } = props;
+  return (
+    <MUIFormControl
+      id={id}
+      disabled={disabled}
+      classes={classes.root}
+    >
+      <Label
+        id={`NumericalStepperLabel-${id}`}
+        disabled={false}
+        error={false}
+        focused={false}
+      >
+        {labelText}
+      </Label>
+      <div className={classes.actionWrapper}>
+        <StepperButton
+          id={`DecreaseStepper-${id}`}
+          disabled={disabled}
+          onClick={onDecrease}
+          isIconButton
+        >
+          <RemoveIcon
+            data-quid={`RemoveIcon-${id}`}
+            disabled={disabled}
+            className={classes.stepperIcon}
+          />
+        </StepperButton>
+
+        <div className={classes.stepperInputWrapper}>
+          <NumericInput
+            id={`NumericalStepperInput-${id}`}
+            centerText
+            type="text"
+            value={value}
+            error={error}
+            disabled={disabled}
+            mask={mask}
+            disableWarning
+          />
+        </div>
+        <StepperButton
+          id={`IncreaseStepper-${id}`}
+          disabled={disabled}
+          onClick={onIncrease}
+          isIconButton
+        >
+          <MUIAddIcon
+            data-quid={`AddIcon-${id}`}
+            className={classes.stepperIcon}
+          />
+        </StepperButton>
+      </div>
+      
+      <FormFieldMeta
+        id={`NumericalStepperMeta-${id}`}
+        disableWarning={disableWarning}
+        error={error}
+        helperText={helperText}
+      />
+    </MUIFormControl>
+  );
+};
+
+NumericalStepper.defaultProps = {
+  classes: {},
+  disabled: false,
+  labelText: '',
+  helperText: '',
+  mask: [],
+  error: false,
+  value: 1,
+};
+
+export default withStyles(styleClasses, { index: 0, withTheme: true })(
+  NumericalStepper
+);
