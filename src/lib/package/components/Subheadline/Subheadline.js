@@ -18,9 +18,9 @@ const styleClasses = theme => {
       color: theme.typography.color,
       fontFamily: theme.typography.fontFamily,
       fontWeight: theme.typography.fontWeight,
-      ...theme.typography.h2
-    }
-  }
+      ...theme.typography.h2,
+    },
+  };
 };
 
 function Subheadline({
@@ -36,7 +36,7 @@ function Subheadline({
     >
       {children}
     </h2>
-  )
+  );
 }
 
-export default withStyles(styleClasses, {index: 0, withTheme: true})(Subheadline);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(Subheadline);

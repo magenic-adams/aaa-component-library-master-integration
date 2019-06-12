@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 // NOTE FOR REVIEW:
 // ************
 // PLEASE IGNORE THIS FILE, WE WILL HAVE ANOTHER TICKET TO UNIT TEST

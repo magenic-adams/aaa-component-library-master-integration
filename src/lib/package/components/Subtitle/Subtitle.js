@@ -18,9 +18,9 @@ const styleClasses = theme => {
       color: theme.typography.color,
       fontFamily: theme.typography.fontFamily,
       fontWeight: theme.typography.fontWeight,
-      ...theme.typography.subtitle1
-    }
-  }
+      ...theme.typography.subtitle1,
+    },
+  };
 };
 
 function Subtitle({
@@ -36,7 +36,7 @@ function Subtitle({
     >
       {children}
     </div>
-  )
+  );
 }
 
-export default withStyles(styleClasses, {index: 0, withTheme: true})(Subtitle);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(Subtitle);
