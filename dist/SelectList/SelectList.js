@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
-import List from '@material-ui/core/List';
+import List from '@material-ui/core/List'; // Components
+
 import SelectListItemText from '../SelectListItemText/SelectListItemText';
 
 var styleClasses = function styleClasses(theme) {
@@ -14,7 +15,7 @@ var styleClasses = function styleClasses(theme) {
       background: theme.palette.common.white,
       border: "2px solid ".concat(theme.palette.primary.main),
       borderRadius: 4,
-      padding: '0px',
+      padding: 0,
       boxShadow: "0 2px 8px 0 ".concat(theme.palette.colorVariables.GRAY),
       '& span': {
         fontFamily: theme.typography.fontFamily
@@ -36,7 +37,11 @@ var styleClasses = function styleClasses(theme) {
       '& span': {
         fontSize: 16
       }
-    })
+    }),
+    radioGroup: {
+      display: 'flex',
+      flexDirection: 'column'
+    }
   };
 };
 
@@ -79,9 +84,13 @@ function SelectList(_ref) {
           });
         }));
 
-      case 'radioGroup':
-        // TODO: ACL-19 Radio Group
-        return null;
+      case 'single-select-radio':
+      case 'multi-select-radio':
+        return React.createElement("div", {
+          className: cx(classes.radioGroup)
+        }, items.map(function (item) {
+          return item.display;
+        }));
 
       default:
         return null;
