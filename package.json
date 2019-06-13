@@ -1,8 +1,8 @@
 {
   "name": "aaa-component-library",
   "version": "0.1.0",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/components/index.js",
+  "module": "dist/components/index.js",
   "files": [
     "dist"
   ],
@@ -10,7 +10,7 @@
     "start": "node scripts/start.js",
     "build-examples": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "build": "rimraf dist && NODE_ENV=production babel src/lib/package/components --out-dir dist --copy-files --ignore test.js,__snapshots__",
+    "build": "rimraf dist && NODE_ENV=production babel src/lib/package --out-dir dist --copy-files --ignore test.js,__snapshots__",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
