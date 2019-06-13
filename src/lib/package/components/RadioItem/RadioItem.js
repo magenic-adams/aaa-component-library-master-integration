@@ -9,6 +9,7 @@ type propTypes = {
   // Decorator Props
   classes: PropTypes.object,
   // Passed Props
+  name: PropTypes.string,
   item: {
     id: PropTypes.string | PropTypes.number,
     value: PropTypes.string | PropTypes.number,
@@ -21,10 +22,10 @@ type propTypes = {
 
 const styleClasses = theme => ({
   root: {
-    width: 343,
+    width: 534,
     height: 48,
     borderRadius: 4,
-    border: `1px solid ${theme.palette.primary.main}`,
+    border: `1px solid ${theme.palette.colorVariables.BLACK}`,
     margin: '0px 0px 8px 0px',
     '&:hover': {
       background: theme.palette.colorVariables.SECONDARY_HOVER,
@@ -32,6 +33,9 @@ const styleClasses = theme => ({
     '&.Mui-disabled, &.Mui-disabled:hover': {
       borderColor: theme.palette.disabled.main,
       background: 'none',
+    },
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
     },
   },
   radio: {
@@ -41,7 +45,8 @@ const styleClasses = theme => ({
     },
   },
   selected: {
-    border: `2px solid ${theme.palette.primary.main}`,
+    border: `2px solid ${theme.palette.colorVariables.DARKER_BLUE}`,
+    fontWeight: theme.typography.buttonPrimary.fontWeight,
     '&.Mui-disabled, &.Mui-disabled:hover': {
       borderColor: theme.palette.disabled.main,
       background: 'none',
@@ -54,9 +59,14 @@ const styleClasses = theme => ({
   },
 });
 
-function RadioItem({ classes, checked, disabled, item, onSelect }: propTypes) {
-  // eslint-disable-next-line no-console
-  console.log(disabled);
+function RadioItem({
+  classes,
+  checked,
+  disabled,
+  item,
+  name,
+  onSelect,
+}: propTypes) {
   const { id, value, text } = item;
   const { label, radio, root } = classes;
   return (
@@ -65,14 +75,14 @@ function RadioItem({ classes, checked, disabled, item, onSelect }: propTypes) {
         [classes.selected]: checked,
       })}
       classes={{
-        root,
         label,
       }}
-      value={value.toString()}
+      value={value}
       disabled={disabled}
       control={
         <Radio
-          key={id}
+          name={name}
+          key={`RadioItem-${id}`}
           data-quid={`RadioItem-${id}`}
           classes={{
             root: radio,

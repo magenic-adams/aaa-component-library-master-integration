@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import React from 'react';
 import PropTypes from 'prop-types';
 import RadioItem from '../RadioItem/RadioItem';
@@ -11,50 +10,73 @@ type propTypes = {
     {
       id: PropTypes.string | PropTypes.number,
       value: PropTypes.string | PropTypes.number,
-      text: PropTypes.string | PropTypes.number,
-      selected?: PropTypes.bool,
-      disabled?: PropTypes.bool
+      text: PropTypes.string | PropTypes.number
     }
   ],
   /**
-   * Used to set checked props in radio item for single select radio buttons
+   * Used to set checked props in radio item for single-select radio buttons
    */
   selectedValue?: PropTypes.string | PropTypes.number,
   /**
-   * Used to set checked props in radio item for single select radio buttons
+   * Used to set checked props in radio item for multi-select radio buttons
    */
   selectedValues?: [PropTypes.string | PropTypes.number],
+  /**
+   * Used to disable specific radio items by value
+   */
+  disabledValues?: [PropTypes.string | PropTypes.number],
+  disableAll?: PropTypes.bool,
   type?: PropTypes.string,
   onSelect: PropTypes.func
 };
 
 function isSelected(type, value, selectedValue, selectedValues) {
   if (type === 'single-select-radio') {
-    return value.toString() === selectedValue;
+    return value.toString() === selectedValue.toString();
   }
   if (type === 'multi-select-radio') {
-    return selectedValues.includes(value.toString());
+    return selectedValues.map(String).includes(value.toString());
   }
   return false;
 }
 
 function constructDisplayItems(
+  name,
   type,
-  items,
+  items = [],
   selectedValue,
   selectedValues,
+  disableAll,
+  disabledValues,
   onSelect
 ) {
-  return items.map(item => {
-    const checked = isSelected(type, item.value, selectedValue, selectedValues);
-    return {
-      ...item,
-      display: <RadioItem item={item} checked={checked} onSelect={onSelect} />,
-    };
-  });
+  return (
+    Array.isArray(items) &&
+    items.map(item => {
+      const { value } = item;
+      const checked = isSelected(type, value, selectedValue, selectedValues);
+      const disabled =
+        !!disableAll || disabledValues.map(String).includes(value.toString());
+
+      return {
+        ...item,
+        display: (
+          <RadioItem
+            name={name}
+            item={item}
+            checked={checked}
+            disabled={disabled}
+            onSelect={onSelect}
+          />
+        ),
+      };
+    })
+  );
 }
 
 function RadioGroup({
+  disableAll,
+  disabledValues,
   items,
   name,
   selectedValue,
@@ -63,23 +85,27 @@ function RadioGroup({
   onSelect,
 }: propTypes) {
   const newItems = constructDisplayItems(
+    name,
     type,
     items,
     selectedValue,
     selectedValues,
+    disableAll,
+    disabledValues,
     onSelect
   );
 
-  // TODO: Create type validation
   return (
     <SelectList type={type} name={name} items={newItems} onSelect={onSelect} />
   );
 }
 
 RadioGroup.defaultProps = {
+  type: 'single-select-radio',
   selectedValue: '',
   selectedValues: [],
-  type: 'single-select-radio',
+  disableAll: false,
+  disabledValues: [],
 };
 
 export default RadioGroup;

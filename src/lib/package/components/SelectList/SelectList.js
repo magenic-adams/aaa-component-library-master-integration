@@ -12,7 +12,6 @@ type propTypes = {
   // Decorator Props
   classes: PropTypes.object,
   // Passed Props
-  // name?: PropTypes.string,
   items: [
     {
       id: PropTypes.string | PropTypes.number,
@@ -23,7 +22,6 @@ type propTypes = {
     }
   ],
   type: PropTypes.string,
-  // value?: PropTypes.string | PropTypes.number,
   onSelect: PropTypes.func
 };
 
@@ -121,10 +119,5 @@ function SelectList({ classes, items, type, onSelect }: propTypes) {
     </Fragment>
   );
 }
-
-SelectList.defaultProps = {
-  // name: '',
-  // value: '',
-};
 
 export default withStyles(styleClasses, { withTheme: true })(SelectList);
