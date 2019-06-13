@@ -15,7 +15,7 @@ import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import ToggleButtonGroup from './ToggleButtonGroup'; // Test Utilities
 
-import { getDOMNodeComputedStyle } from '../../../../test/DOM';
+import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 import Button from '../Button/Button'; // Constants
 
 import { AAA_COLOR_TRANSPARENT, AAA_COLOR_MAIN_BLUE, AAA_COLOR_MAIN_DISABLED, AAA_COLOR_MAIN_WHITE } from '../../constants/colors';

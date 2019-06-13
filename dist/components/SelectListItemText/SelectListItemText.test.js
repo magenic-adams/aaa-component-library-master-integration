@@ -14,7 +14,7 @@ import sinon from 'sinon';
 import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
 import SelectListItemText from './SelectListItemText'; // Test Utilities
 
-import { getDOMNodeComputedStyle } from '../../../../test/DOM'; // Constants
+import { getDOMNodeComputedStyle } from '../../../../../test/DOM'; // Constants
 
 import { AAA_COLOR_TRANSPARENT } from '../../constants/colors';
 
