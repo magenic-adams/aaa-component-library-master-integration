@@ -9,11 +9,11 @@ import { AAAPrimaryTheme, BaseInput, NumericInput } from '../src/lib/package/com
 
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
 
-const stories = storiesOf('Atomic|Input', module);
+const stories = storiesOf('Atomic', module);
 
 stories
   .addDecorator(withKnobs)
-  .add('input', () => {
+  .add('Input', () => {
     return (
       <AAAPrimaryTheme>
         <div className="u-center u-max-width--1024">
@@ -107,55 +107,4 @@ stories
         </div>
       </AAAPrimaryTheme>
     );
-  })
-  .add('states', () => (
-    <AAAPrimaryTheme>
-      <h2 className='text-align-center'>ACTIVE STATE</h2>
-
-      <ElementContainer>
-        <BaseInput 
-          id="enabledId" 
-          name="enabledName" 
-          helperText="Enabled Helper Text" 
-          labelName="Enabled Label" 
-          value="Enabled"
-          onBlur={action('blur')} 
-          onClear={action('clear')} 
-          onChange={action('change')}
-        />
-      </ElementContainer>
-
-      <h2 className='text-align-center'>DISABLED STATE</h2>
-
-      <ElementContainer>
-        <BaseInput 
-          disabled 
-          id="disabledId" 
-          helperText="Disabled Helper Text" 
-          labelName="Disabled Label" 
-          name="disabledName" 
-          value="Disabled"
-          onChange={action('change')} 
-          onClear={action('clear')} 
-          onBlur={action('blur')}
-        />
-      </ElementContainer>
-
-      <h2 className='text-align-center'>ERROR STATE</h2>
-
-      <ElementContainer>
-        <BaseInput 
-          id="errorId" 
-          helperText="Error Helper Text" 
-          name="errorName"
-          error="This is an error"
-          value="(@20"
-          onBlur={action('blur')} 
-          onChange={action('change')} 
-          onClear={action('clear')}
-        />
-      </ElementContainer>
-
-    </AAAPrimaryTheme>
-  )
-  );
+  });

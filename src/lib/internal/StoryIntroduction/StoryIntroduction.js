@@ -9,10 +9,13 @@ type propTypes = {
   elementName: PropTypes.string,
 };
 
-export function StoryIntroduction({ elementName }:propTypes){
+export function StoryIntroduction({ elementName, subtitle }:propTypes){
   return (
     <div className="StoryIntroduction">
       <h1 className="StoryIntroduction__title">{elementName}</h1>
+      {subtitle &&
+        <h2 className="StoryIntroduction__subtitle">{subtitle}</h2>
+      }
     </div>
   );
 }
