@@ -19,6 +19,9 @@
   padding: 50px;
 }
 
+.u-mt--20 { margin-top: 20px; }
+.u-mt--50 { margin-top: 50px; }
+
 .u-max-width--1024 {
   max-width: 1024px;
 }

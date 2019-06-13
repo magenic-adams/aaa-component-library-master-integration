@@ -8,7 +8,7 @@ type propTypes = {
   // MUI Decorator
   classes: PropTypes.object,
   // Passed Props
-  className: PropTypes.string,
+  className?: PropTypes.string,
   children: PropTypes.string | PropTypes.node,
   color?: 'primary' | 'secondary',
   disabled: PropTypes.bool,
@@ -156,6 +156,7 @@ function Button({
 
 Button.defaultProps = {
   color: 'primary',
+  className: '',
   fadeUp: false,
   forwardedRef: {},
   href: null,

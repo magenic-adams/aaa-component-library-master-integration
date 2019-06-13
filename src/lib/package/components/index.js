@@ -8,6 +8,7 @@ import Link from './Link/Link';
 
 // Typography
 import Body from './Body/Body';
+import Headline from './Headline/Headline';
 import Subheadline from './Subheadline/Subheadline';
 import Subtitle from './Subtitle/Subtitle';
 
@@ -32,6 +33,7 @@ export {
   FormGroup,
   FormInput,
   FormNumericInput,
+  Headline,
   Label,
   Link,
   NumericInput,

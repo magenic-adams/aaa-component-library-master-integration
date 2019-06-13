@@ -51,9 +51,11 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
 pre {
   font-family: monospace;
+}
+ul, li {
+  list-style: none;
 }
 li {
   padding: 0.5rem 0;

@@ -7,6 +7,6 @@ import '../src/css/helpers.css';
 import '../src/css/reset.css';
 
 // Internal
-import { Welcome } from '../src/lib/internal/Welcome';
+import Welcome from '../src/lib/internal/Welcome';
 
 storiesOf('Welcome|Storybook', module).add('Welcome description', () => <Welcome />);
