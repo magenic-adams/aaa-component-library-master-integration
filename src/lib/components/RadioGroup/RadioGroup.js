@@ -17,46 +17,68 @@ type propTypes = {
     }
   ],
   /**
-   * The selected value of the component
+   * Used to set checked props in radio item for single select radio buttons
    */
-  value: PropTypes.string | PropTypes.number,
+  selectedValue?: PropTypes.string | PropTypes.number,
+  /**
+   * Used to set checked props in radio item for single select radio buttons
+   */
+  selectedValues?: [PropTypes.string | PropTypes.number],
   type?: PropTypes.string,
   onSelect: PropTypes.func
 };
 
-function constructDisplayItems(items, selectedValue) {
+function isSelected(type, value, selectedValue, selectedValues) {
+  if (type === 'single-select-radio') {
+    return value.toString() === selectedValue;
+  }
+  if (type === 'multi-select-radio') {
+    return selectedValues.includes(value.toString());
+  }
+  return false;
+}
+
+function constructDisplayItems(
+  type,
+  items,
+  selectedValue,
+  selectedValues,
+  onSelect
+) {
   return items.map(item => {
-    const isChecked = item.value.toString() === selectedValue;
+    const checked = isSelected(type, item.value, selectedValue, selectedValues);
     return {
       ...item,
-      display: (
-        <RadioItem
-          item={item}
-          selectedValue={selectedValue}
-          checked={isChecked}
-        />
-      ),
+      display: <RadioItem item={item} checked={checked} onSelect={onSelect} />,
     };
   });
 }
 
-function RadioGroup({ name, items, value, type, onSelect }: propTypes) {
-  const selectedValue = value.toString();
-  const newItems = constructDisplayItems(items, selectedValue);
+function RadioGroup({
+  items,
+  name,
+  selectedValue,
+  selectedValues,
+  type,
+  onSelect,
+}: propTypes) {
+  const newItems = constructDisplayItems(
+    type,
+    items,
+    selectedValue,
+    selectedValues,
+    onSelect
+  );
 
   // TODO: Create type validation
   return (
-    <SelectList
-      type={type}
-      name={name}
-      value={selectedValue}
-      items={newItems}
-      onSelect={onSelect}
-    />
+    <SelectList type={type} name={name} items={newItems} onSelect={onSelect} />
   );
 }
 
 RadioGroup.defaultProps = {
+  selectedValue: '',
+  selectedValues: [],
   type: 'single-select-radio',
 };
 

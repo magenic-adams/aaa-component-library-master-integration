@@ -24,30 +24,32 @@ export default function RadioButtonsContainer() {
   // eslint-disable-next-line no-console
   console.log(items);
 
-  // const [selectedValues, setSelectedValue] = React.useState('a');
+  // const [selectedValue, setSelectedValue] = React.useState('1');
 
   // function handleChange(event) {
+  //   // eslint-disable-next-line no-console
+  //   console.log(event.target.value, 'target');
   //   setSelectedValue(event.target.value);
   // }
 
   return (
     <div>
       <Radio
-        // checked={selectedValue === 1}
+        checked={items[0].selected}
         // onChange={handleChange}
-        value={1}
+        value="1"
         inputProps={{ 'aria-label': 1 }}
       />
       <Radio
-        // checked={selectedValue === 1}
+        // checked={selectedValue === '2'}
         // onChange={handleChange}
-        value={2}
+        value="2"
         inputProps={{ 'aria-label': 2 }}
       />
       <GreenRadio
-        // checked={selectedValue === 1}
+        // checked={selectedValue === '3'}
         // onChange={handleChange}
-        value={3}
+        value="3"
         inputProps={{ 'aria-label': 3 }}
       />
     </div>

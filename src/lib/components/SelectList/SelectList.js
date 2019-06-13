@@ -4,14 +4,13 @@ import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 import List from '@material-ui/core/List';
-import MUIRadioGroup from '@material-ui/core/RadioGroup';
 import SelectListItemText from '../SelectListItemText/SelectListItemText';
 
 type propTypes = {
   // Decorator Props
   classes: PropTypes.object,
   // Passed Props
-  name?: PropTypes.string,
+  // name?: PropTypes.string,
   items: [
     {
       id: PropTypes.string | PropTypes.number,
@@ -22,7 +21,7 @@ type propTypes = {
     }
   ],
   type: PropTypes.string,
-  value?: PropTypes.string | PropTypes.number,
+  // value?: PropTypes.string | PropTypes.number,
   onSelect: PropTypes.func
 };
 
@@ -58,6 +57,10 @@ const styleClasses = theme => ({
       },
     },
   },
+  radioGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
 });
 
 function areItemKeysPresent(items) {
@@ -78,14 +81,7 @@ function areItemsValid(items) {
   return true;
 }
 
-function SelectList({
-  classes,
-  items,
-  name,
-  type,
-  value,
-  onSelect,
-}: propTypes) {
+function SelectList({ classes, items, type, onSelect }: propTypes) {
   return (
     <Fragment>
       {areItemsValid(items)
@@ -109,13 +105,12 @@ function SelectList({
                   </List>
                 );
               case 'single-select-radio':
-                return (
-                  <MUIRadioGroup name={name} value={value} onChange={onSelect}>
-                    {items.map(item => item.display)}
-                  </MUIRadioGroup>
-                );
               case 'multi-select-radio':
-                return items.map(item => item.display);
+                return (
+                  <div className={cx(classes.radioGroup)}>
+                    {items.map(item => item.display)}
+                  </div>
+                );
               default:
                 return null;
             }
@@ -126,8 +121,8 @@ function SelectList({
 }
 
 SelectList.defaultProps = {
-  name: '',
-  value: '',
+  // name: '',
+  // value: '',
 };
 
 export default withStyles(styleClasses, { withTheme: true })(SelectList);

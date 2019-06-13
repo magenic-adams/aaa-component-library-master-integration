@@ -1,4 +1,6 @@
-import React from 'react';
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 // import Radio from '@material-ui/core/Radio';
 // import RadioGroup from '@material-ui/core/RadioGroup';
@@ -17,94 +19,103 @@ const items = [
   // { id: 6, value: 6, text: '6th Item' },
 ];
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-  },
-  formControl: {
-    margin: theme.spacing(3),
-  },
-  group: {
-    margin: theme.spacing(1, 0),
-  },
-}));
+class RadioButtonsGroup extends Component {
+  constructor(props) {
+    super(props);
 
-function RadioButtonsGroup() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(2);
-  // const value = 1;
-  function handleChange(event) {
-    setValue(event.target.value);
+    this.state = {
+      selectedValue: '',
+      selectedValues: [],
+    };
   }
 
-  return (
-    <div className={classes.root}>
-      {/* <FormControl component="fieldset" className={classes.formControl}> */}
-      <FormLabel component="legend">Gender</FormLabel>
-      <RadioGroup
-        type="single-select-radio"
-        name="testRadio"
-        items={items}
-        value={value}
-        onSelect={handleChange}
-      />
-      {/* <RadioGroup
-        aria-label="Gender"
-        name="gender1"
-        className={classes.group}
-        value={value}
-        onChange={handleChange}
-      >
-        <FormControlLabel value={1} control={<Radio />} label="Female" />
-        <FormControlLabel value={2} control={<Radio />} label="Male" />
-        <FormControlLabel value={3} control={<Radio />} label="Other" />
-        <FormControlLabel
-          value={4}
-          disabled
-          control={<Radio />}
-          label="(Disabled option)"
-        />
-      </RadioGroup> */}
-      {/* </FormControl> */}
-      {/* <FormControl component="fieldset" className={classes.formControl}>
+  //   function handleChange(event) {
+  //     console.log('event.target.value', event.target.value);
+  //     temp.push(event.target.value);
+  //     // selectedValues.push(event.target.value);
+  //     setValues(temp);
+  // }
+
+  handleChange = event => {
+    const { selectedValues } = this.state;
+    this.setState({
+      selectedValue: event.target.value,
+      selectedValues: [...selectedValues, event.target.value],
+    });
+  };
+
+  render() {
+    const { selectedValue, selectedValues } = this.state;
+    return (
+      <div>
+        {/* <FormControl component="fieldset" className={classes.formControl}> */}
         <FormLabel component="legend">Gender</FormLabel>
         <RadioGroup
-          aria-label="gender"
-          name="gender2"
+          type="multi-select-radio"
+          name="testRadio"
+          items={items}
+          selectedValue={selectedValue}
+          selectedValues={selectedValues}
+          onSelect={this.handleChange}
+        />
+        {/* <RadioGroup
+          aria-label="Gender"
+          name="gender1"
           className={classes.group}
           value={value}
           onChange={handleChange}
         >
+          <FormControlLabel value={1} control={<Radio />} label="Female" />
+          <FormControlLabel value={2} control={<Radio />} label="Male" />
+          <FormControlLabel value={3} control={<Radio />} label="Other" />
           <FormControlLabel
-            value="female"
-            control={<Radio color="primary" />}
-            label="Female"
-            labelPlacement="start"
-          />
-          <FormControlLabel
-            value="male"
-            control={<Radio color="primary" />}
-            label="Male"
-            labelPlacement="start"
-          />
-          <FormControlLabel
-            value="other"
-            control={<Radio color="primary" />}
-            label="Other"
-            labelPlacement="start"
-          />
-          <FormControlLabel
-            value="disabled"
+            value={4}
             disabled
             control={<Radio />}
             label="(Disabled option)"
-            labelPlacement="start"
           />
-        </RadioGroup>
-        <FormHelperText>labelPlacement start</FormHelperText>
-      </FormControl> */}
-    </div>
-  );
+        </RadioGroup> */}
+        {/* </FormControl> */}
+        {/* <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel component="legend">Gender</FormLabel>
+          <RadioGroup
+            aria-label="gender"
+            name="gender2"
+            className={classes.group}
+            value={value}
+            onChange={handleChange}
+          >
+            <FormControlLabel
+              value="female"
+              control={<Radio color="primary" />}
+              label="Female"
+              labelPlacement="start"
+            />
+            <FormControlLabel
+              value="male"
+              control={<Radio color="primary" />}
+              label="Male"
+              labelPlacement="start"
+            />
+            <FormControlLabel
+              value="other"
+              control={<Radio color="primary" />}
+              label="Other"
+              labelPlacement="start"
+            />
+            <FormControlLabel
+              value="disabled"
+              disabled
+              control={<Radio />}
+              label="(Disabled option)"
+              labelPlacement="start"
+            />
+          </RadioGroup>
+          <FormHelperText>labelPlacement start</FormHelperText>
+        </FormControl> */}
+      </div>
+    );
+  }
 }
 
 export default RadioButtonsGroup;

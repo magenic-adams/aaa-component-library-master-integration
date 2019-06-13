@@ -15,7 +15,8 @@ type propTypes = {
     text: PropTypes.string | PropTypes.number
   },
   checked?: PropTypes.bool,
-  disabled?: PropTypes.bool
+  disabled?: PropTypes.bool,
+  onSelect: PropTypes.func
 };
 
 const styleClasses = theme => ({
@@ -53,7 +54,7 @@ const styleClasses = theme => ({
   },
 });
 
-function RadioItem({ classes, checked, disabled, item }: propTypes) {
+function RadioItem({ classes, checked, disabled, item, onSelect }: propTypes) {
   // eslint-disable-next-line no-console
   console.log(disabled);
   const { id, value, text } = item;
@@ -68,7 +69,7 @@ function RadioItem({ classes, checked, disabled, item }: propTypes) {
         label,
       }}
       value={value.toString()}
-      disabled
+      disabled={disabled}
       control={
         <Radio
           key={id}
@@ -78,6 +79,7 @@ function RadioItem({ classes, checked, disabled, item }: propTypes) {
           }}
           checked={checked}
           color="primary"
+          onChange={onSelect}
         />
       }
       label={text}
