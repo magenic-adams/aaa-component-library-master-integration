@@ -5,7 +5,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import '../src/css/helpers.css';
 
 // Components
-import { AAAPrimaryTheme, BaseInput, NumericInput } from '../src/lib/components';
+import { AAAPrimaryTheme, BaseInput, NumericInput } from '../src/lib/package/components';
 
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
 
@@ -22,31 +22,74 @@ stories
         <div className="u-center u-max-width--1024">
           <img className="u-width--full" src="https://www.dropbox.com/s/z63xbp8dmurch8v/01whentouse.png?dl=1" alt="rules"/>
         </div>
+
+
+      <div className="u-max-width--1024 u-center">
         <ElementContainer>
           <BaseInput 
-          id="enabledId" 
-          name="enabledName" 
-          helperText={text('Input Helper Text', 'Change the Helper Text')} 
-          labelName={text('Text Label', 'Change the Label')} 
-          value={text('Text Value', 'Change the Value')}
-          onBlur={action('blur')} 
-          onChange={action('change')} 
-          onClear={action('clear')} />
+            id="enabledId" 
+            name="enabledName" 
+            helperText="Enabled Helper Text" 
+            labelName="Enabled Label" 
+            value="Enabled"
+            onBlur={action('blur')} 
+            onClear={action('clear')} 
+            onChange={action('change')}
+          />
         </ElementContainer>
 
         <ElementContainer>
-          <NumericInput 
-          id="numericId" 
-          name="numericName" 
-          helperText={text('Numeric Helper Text', 'Change the Helper Text')} 
-          labelName={text('Numeric Label', 'Change the label')} 
-          value={text('Numeric Value', 12301991)}
-          mask={[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/]}
-          onBlur={action('blur')} 
-          onChange={action('change')} 
-          onClear={action('clear')}  
+          <BaseInput 
+            disabled 
+            id="disabledId" 
+            helperText="Disabled Helper Text" 
+            labelName="Disabled Label" 
+            name="disabledName" 
+            value="Disabled"
+            onChange={action('change')} 
+            onClear={action('clear')} 
+            onBlur={action('blur')}
           />
         </ElementContainer>
+
+        <ElementContainer>
+          <BaseInput 
+            id="errorId" 
+            helperText="Error Helper Text" 
+            name="errorName"
+            error="This is an error"
+            value="(@20"
+            onBlur={action('blur')} 
+            onChange={action('change')} 
+            onClear={action('clear')}
+          />
+        </ElementContainer>
+          <ElementContainer>
+            <BaseInput 
+            id="enabledId" 
+            name="enabledName" 
+            helperText={text('Input Helper Text', 'Change the Helper Text')} 
+            labelName={text('Text Label', 'Change the Label')} 
+            value={text('Text Value', 'Change the Value')}
+            onBlur={action('blur')} 
+            onChange={action('change')} 
+            onClear={action('clear')} />
+          </ElementContainer>
+
+          <ElementContainer>
+            <NumericInput 
+            id="numericId" 
+            name="numericName" 
+            helperText={text('Numeric Helper Text', 'Change the Helper Text')} 
+            labelName={text('Numeric Label', 'Change the label')} 
+            value={text('Numeric Value', 12301991)}
+            mask={[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/]}
+            onBlur={action('blur')} 
+            onChange={action('change')} 
+            onClear={action('clear')}  
+            />
+          </ElementContainer>
+      </div>
         <div className="u-center u-max-width--1024">
           <img className="u-width--full" src="https://www.dropbox.com/s/o8eq3x2lpbd3wwv/02states.png?dl=1" alt="rules"/>
         </div>

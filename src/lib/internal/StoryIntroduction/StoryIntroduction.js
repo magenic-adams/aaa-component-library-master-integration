@@ -9,7 +9,7 @@ type propTypes = {
   elementName: PropTypes.string,
 };
 
-export function StoryIntroduction({elementName}:propTypes){
+export function StoryIntroduction({ elementName }:propTypes){
   return (
     <div className="StoryIntroduction">
       <h1 className="StoryIntroduction__title">{elementName}</h1>
@@ -18,5 +18,5 @@ export function StoryIntroduction({elementName}:propTypes){
 }
 
 export default {
-  StoryIntroduction
+  StoryIntroduction,
 };

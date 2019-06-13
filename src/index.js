@@ -8,9 +8,10 @@ import {
   Button,
   BaseInput,
   Link as TextLink,
-} from './lib/components';
-import RadioButtonGroup from './lib/components/experiment/experiment';
-import RadioButtonsContainer from './lib/components/MultiselectExp/MultiselectExp';
+} from './lib/package/components';
+
+import RadioButtonGroup from './lib/package/components/experiment/experiment';
+import RadioButtonsContainer from './lib/package/components/MultiselectExp/MultiselectExp';
 
 // const handleSelectItem = event => {
 //   console.log('selectedItem', event.targe);

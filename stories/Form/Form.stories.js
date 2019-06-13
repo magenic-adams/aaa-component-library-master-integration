@@ -14,11 +14,7 @@ import {
   Form,
   FormGroup,
   FormInput,
-  FormNumericInput,
-} from '../../src/lib/components';
-
-// Utilities
-import Validate from '../../src/lib/utilities/validate';
+} from '../../src/lib/package/components';
 
 const VALIDATIONS = {
   firstName: {
@@ -26,8 +22,8 @@ const VALIDATIONS = {
     'max_length[24]': 'Too long. Do you have a nickname?',
     alpha_dash_dot_space: 'Name can only contain letters, dashes, periods, and spaces',
   },
-  dob: {
-    required: 'Date of birth required',
+  lastName: {
+    alpha_dash_dot_space: 'Name can only contain letters, dashes, periods, and spaces',
   },
   password: {
     required: 'Password is required',
@@ -39,10 +35,6 @@ const VALIDATIONS = {
     'matches[password]': 'This does not match',
   },
 };
-
-function handleValidate(values){
-  return Validate.validateForm(values, VALIDATIONS);
-}
 
 function handleFormValueSubmission(vals){
   action(vals);
@@ -56,27 +48,26 @@ stories
         <div className="u-background--gray">
           <Paper className="u-padding--50">
               <Form
-                validate={handleValidate}
+                validations={VALIDATIONS}
                 onSubmit={handleFormValueSubmission}
-                render={({ allFieldsHaveValues, handleSubmit }) => {
+                render={({ allRequiredFieldsHaveBeenVisited, handleSubmit }) => {
                   return (
                     <form onSubmit={handleSubmit}>
                       <FormGroup>
                         <FormInput 
+                          autoFocus
                           name="firstName"
                           id="firstName"
-                          autoFocus
                           labelName="First name"
                           type="text"
                         />
                       </FormGroup>
                       <FormGroup>
-                        <FormNumericInput 
-                          name="dob"
-                          id="dob"
-                          mask={[/[0-1]/, /\d/, '/', /[0-3]/, /\d/, '/', /[1-2]/, /\d/, /\d/, /\d/]}
-                          labelName="Date of Birth"
-                          helperText="mm/dd/yyyy"
+                        <FormInput 
+                          name="lastName"
+                          id="lastName"
+                          labelName="Last name"
+                          helperText="Not required"
                           type="text"
                         />
                       </FormGroup>
@@ -98,8 +89,8 @@ stories
                       </FormGroup>
                       <ButtonGroup>
                         <Button
-                          disabled={!allFieldsHaveValues}
-                          fadeUp={allFieldsHaveValues}
+                          disabled={!allRequiredFieldsHaveBeenVisited}
+                          fadeUp={allRequiredFieldsHaveBeenVisited}
                           type="submit"
                         >
                           Submit
