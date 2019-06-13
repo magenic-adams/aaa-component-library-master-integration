@@ -26,7 +26,7 @@ export function StoryCodePlayground({ demo, scope }:propTypes){
           theme={theme}
         >
           <div className="u-flex">
-            <div className="u-padding--20">
+            <div className="StoryCodePlayground__left">
               <LivePreview />
             </div>
             <div className="u-flex--1">

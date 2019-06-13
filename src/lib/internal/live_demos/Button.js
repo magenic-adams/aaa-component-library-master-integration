@@ -20,26 +20,24 @@ export const demo = `class ButtonDemo extends React.Component {
 
   render(){
     return (
-      <div>
-        <AAAPrimaryTheme>
-          <Button
-            id="main-btn"
-            className="my-class-name"
-            fadeUp
-            onClick={this.handlePrimaryClick}
-          >
-            Primary
-          </Button>
-          <Button
-            id="main-secondary-btn"
-            color="secondary"
-            className="my-class-name"
-            onClick={this.handleSecondaryClick}
-          >
-            Secondary button
-          </Button>
-        </AAAPrimaryTheme>
-      </div>
+      <AAAPrimaryTheme>
+        <Button
+          id="main-btn"
+          className="my-class-name"
+          fadeUp
+          onClick={this.handlePrimaryClick}
+        >
+          Primary
+        </Button>
+        <Button
+          id="main-secondary-btn"
+          color="secondary"
+          className="my-class-name"
+          onClick={this.handleSecondaryClick}
+        >
+          Secondary button
+        </Button>
+      </AAAPrimaryTheme>  
     );
   }
 }`;
