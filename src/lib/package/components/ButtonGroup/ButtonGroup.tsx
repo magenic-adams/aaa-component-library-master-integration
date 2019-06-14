@@ -7,10 +7,10 @@ import cx from 'clsx';
 
 type propTypes = {
   // Decorator Props
-  classes: PropTypes.object,
+  classes: object,
   // Passed Props
   children: PropTypes.node,
-  className?: PropTypes.string
+  className?: string
 };
 
 const styleClasses = theme => ({

@@ -15,9 +15,9 @@ import Body from '../../package/components/Body/Body';
 import './StoryUsageDescription.css';
 
 type propTypes = {
-  positive: PropTypes.bool,
-  items: [PropTypes.string],
-  usageText: PropTypes.string,
+  positive: boolean,
+  items: string[],
+  usageText: string,
 };
 
 const useStyles = props => makeStyles(theme => ({

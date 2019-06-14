@@ -6,8 +6,8 @@ import { Field, useForm } from 'react-final-form';
 import BaseInput from '../../Input/BaseInput/BaseInput';
 
 type propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
+  id: string,
+  name: string,
 };
 
 /**

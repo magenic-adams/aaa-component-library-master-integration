@@ -25,7 +25,7 @@ function FormGroup({ children, classes, className }) {
 }
 
 FormGroup.defaultProps = {
-  className: PropTypes.string,
+  className: string,
 };
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(FormGroup);

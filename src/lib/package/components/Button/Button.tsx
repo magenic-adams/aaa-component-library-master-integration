@@ -6,15 +6,15 @@ import cx from 'clsx';
 
 type propTypes = {
   // MUI Decorator
-  classes: PropTypes.object,
+  classes: object,
   // Passed Props
-  className?: PropTypes.string,
-  children: PropTypes.string | PropTypes.node,
+  className?: string,
+  children: string | PropTypes.node,
   color?: 'primary' | 'secondary',
-  disabled: PropTypes.bool,
-  fadeUp?: PropTypes.bool,
-  id: PropTypes.string,
-  href?: PropTypes.bool,
+  disabled: boolean,
+  fadeUp?: boolean,
+  id: string,
+  href?: boolean,
   forwardedRef?: { current: {} },
   onClick: () => {}
 };

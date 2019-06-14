@@ -21,14 +21,14 @@ const styleClasses = theme => ({
 
 type propTypes = {
   // Decorator Props
-  classes: PropTypes.object,
+  classes: object,
   // Passed Props
-  children: PropTypes.string,
-  className?: PropTypes.string,
-  disabled?: PropTypes.bool,
-  error?: PropTypes.bool,
-  focused?: PropTypes.bool,
-  id: PropTypes.string,
+  children: string,
+  className?: string,
+  disabled?: boolean,
+  error?: boolean,
+  focused?: boolean,
+  id: string,
 };
 
 function Label({

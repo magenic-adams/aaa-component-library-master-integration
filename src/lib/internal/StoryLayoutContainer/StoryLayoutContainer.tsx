@@ -7,7 +7,7 @@ import './StoryLayoutContainer.css';
 
 type propTypes = {
   children: PropTypes.node,
-  verticalPadding: PropTypes.bool,
+  verticalPadding: boolean,
 };
 
 export function StoryLayoutContainer({ children, verticalPadding }:propTypes){

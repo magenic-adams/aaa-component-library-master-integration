@@ -10,19 +10,19 @@ import SelectListItemText from '../SelectListItemText/SelectListItemText';
 
 type propTypes = {
   // Decorator Props
-  classes: PropTypes.object,
+  classes: object,
   // Passed Props
   items: [
     {
-      id: PropTypes.string | PropTypes.number,
-      value: PropTypes.string | PropTypes.number,
-      display: PropTypes.string | PropTypes.number | PropTypes.node,
-      selected?: PropTypes.bool,
-      disabled?: PropTypes.bool
+      id: string | number,
+      value: string | number,
+      display: string | number | object,
+      selected?: boolean,
+      disabled?: boolean
     }
   ],
-  type: PropTypes.string,
-  onSelect: PropTypes.func
+  type: string,
+  onSelect: () => void
 };
 
 const styleClasses = theme => ({

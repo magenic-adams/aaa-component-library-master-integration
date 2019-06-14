@@ -5,10 +5,10 @@ import cx from 'clsx';
 
 type propTypes = {
   // MUI Decorator
-  classes: PropTypes.object,
+  classes: object,
   // Passed Props
-  className: PropTypes.string,
-  children: PropTypes.string,
+  className: string,
+  children: string,
 };
 
 // Component styles manipulated entirely by theme

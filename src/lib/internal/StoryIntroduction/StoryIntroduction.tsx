@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import './StoryIntroduction.css';
 
 type propTypes = {
-  elementName: PropTypes.string,
+  elementName: string,
 };
 
 export function StoryIntroduction({ elementName, subtitle }:propTypes){

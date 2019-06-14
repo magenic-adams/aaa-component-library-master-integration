@@ -5,10 +5,10 @@ import cx from 'clsx';
 
 type propTypes = {
   // MUI Decorator
-  classes: PropTypes.object,
+  classes: object,
   // Passed Props
-  className: PropTypes.string,
-  children: PropTypes.string,
+  className: string,
+  children: string,
 };
 
 // Component styles manipulated entirely by theme
@@ -18,25 +18,25 @@ const styleClasses = theme => {
       color: theme.typography.color,
       fontFamily: theme.typography.fontFamily,
       fontWeight: theme.typography.fontWeight,
-      ...theme.typography.h2,
+      ...theme.typography.h1,
     },
   };
 };
 
-function Subheadline({
+function Headline({
   children,
   className,
   classes,
   id,
 }:propTypes){
   return (
-    <h2
-      className={cx('Subheadline', classes.root, className)}
-      data-quid={`Subheadline-${id}`}
+    <h1
+      className={cx('Headline', classes.root, className)}
+      data-quid={`Headline-${id}`}
     >
       {children}
-    </h2>
+    </h1>
   );
 }
 
-export default withStyles(styleClasses, { index: 0, withTheme: true })(Subheadline);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(Headline);

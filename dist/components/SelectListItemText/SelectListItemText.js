@@ -9,13 +9,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 type propTypes = {
   // Decorator Props
-  classes: PropTypes.object,
+  classes: object,
   // Passed Props
   item: {
-    id: PropTypes.string | PropTypes.number,
-    value: PropTypes.string | PropTypes.number,
-    display: PropTypes.string | PropTypes.number,
-    selected?: PropTypes.bool
+    id: string | number,
+    value: string | number,
+    display: string | number,
+    selected?: boolean
   }
 };
 

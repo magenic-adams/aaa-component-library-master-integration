@@ -6,8 +6,8 @@ import { Field, useForm } from 'react-final-form';
 import NumericInput from '../../Input/NumericInput/NumericInput';
 
 type propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
+  id: string,
+  name: string,
 };
 
 /**

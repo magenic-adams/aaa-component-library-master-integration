@@ -8,14 +8,14 @@ import ButtonGroup from '../ButtonGroup/ButtonGroup';
 
 type propTypes = {
   // Decorator Props
-  classes: PropTypes.object,
-  className?: PropTypes.string,
+  classes: object,
+  className?: string,
   // Passed Props
   options: [
-    { id: PropTypes.number | PropTypes.string, text: PropTypes.string }
+    { id: number | string, text: string }
   ],
   onSelect: PropTypes.func,
-  value?: PropTypes.string | PropTypes.number
+  value?: string | number
 };
 
 const styleClasses = theme => ({

@@ -68,16 +68,22 @@ const styleClasses = theme => ({
 });
 
 type propTypes = {
-  id: PropTypes.string.isRequired,
-  classes?: {},
-  disabled?: PropTypes.bool,
-  error?: PropTypes.string,
-  labelText?: PropTypes.string,
-  helperText?: PropTypes.string,
-  mask?: [], // Pass through
+  // Decorator Prop
+  classes: {
+    actionWrapper: string,
+    stepperIcon: string,
+    root: string
+  },
+  // Passed Props
+  id: string,
+  disabled?: boolean,
+  error?: string,
+  labelText?: string,
+  helperText?: string,
+  mask?: string[], // Pass through
   onIncrease: (React.SyntheticEvent) => void,
   onDecrease: (React.SyntheticEvent) => void,
-  value?: PropTypes.number,
+  value?: number,
 };
 
 const NumericalStepper = (props:propTypes) => {
@@ -163,7 +169,7 @@ NumericalStepper.defaultProps = {
   labelText: '',
   helperText: '',
   mask: [],
-  error: false,
+  error: '',
   value: 1,
 };
 
