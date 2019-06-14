@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "start": "node scripts/start.js",
+    "deploy-storybook": "storybook-to-ghpages",
     "build-examples": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "build": "rimraf dist && NODE_ENV=production babel src/lib/package --out-dir dist --copy-files --ignore test.js,__snapshots__",
@@ -23,6 +24,7 @@
     "@storybook/addon-storyshots": "^5.0.11",
     "@storybook/addons": "^5.0.11",
     "@storybook/react": "^5.0.11",
+    "@storybook/storybook-deployer": "^2.8.1",
     "babel-plugin-require-context-hook": "^1.0.0",
     "babel-preset-react-app": "^9.0.0",
     "chai": "^4.2.0",
@@ -36,7 +38,12 @@
     "prettier": "^1.17.1",
     "pretty-quick": "^1.11.0",
     "react-test-renderer": "^16.8.6",
-    "rimraf": "^2.6.3"
+    "rimraf": "^2.6.3",
+    "webpack": "4.29.6",
+    "webpack-dev-server": "3.2.1",
+    "webpack-manifest-plugin": "2.0.4",
+    "workbox-webpack-plugin": "4.2.0",
+    "yarn": "^1.16.0"
   },
   "browserslist": {
     "production": [
@@ -112,12 +119,7 @@
     "terser-webpack-plugin": "1.2.3",
     "tiny-invariant": "1.0.4",
     "ts-pnp": "1.1.2",
-    "url-loader": "1.1.2",
-    "webpack": "4.29.6",
-    "webpack-dev-server": "3.2.1",
-    "webpack-manifest-plugin": "2.0.4",
-    "workbox-webpack-plugin": "4.2.0",
-    "yarn": "^1.16.0"
+    "url-loader": "1.1.2"
   },
   "jest": {
     "collectCoverageFrom": [
