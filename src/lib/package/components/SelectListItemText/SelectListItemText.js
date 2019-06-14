@@ -14,7 +14,7 @@ type propTypes = {
   item: {
     id: PropTypes.string | PropTypes.number,
     value: PropTypes.string | PropTypes.number,
-    display: PropTypes.string | PropTypes.number,
+    text: PropTypes.string,
     selected?: PropTypes.bool
   }
 };
@@ -50,21 +50,18 @@ const styleClasses = theme => ({
   },
 });
 
-function isValid(id, display) {
-  if (!id && !display) {
-    invariant(false, 'id and display should have value.');
-  }
-  if (!(typeof display === 'string' || typeof display === 'number')) {
-    invariant(false, 'Invalid display type. It must be string or number');
+function isValid(id, text) {
+  if (!id && !text) {
+    invariant(false, 'id and text should have value.');
   }
   return true;
 }
 
 function SelectListItemText({ classes, item, onSelect }: propTypes) {
-  const { display, id } = item || {};
+  const { text, id } = { ...item };
   const { divider, gutters, primary, root } = classes;
 
-  return isValid(id, display) ? (
+  return item && isValid(id, text) ? (
     <ListItem
       data-quid={`SelectListItem-${id}`}
       classes={{ root, divider, gutters }}
@@ -72,7 +69,7 @@ function SelectListItemText({ classes, item, onSelect }: propTypes) {
       selected={item.selected}
       onClick={() => onSelect(item)}
     >
-      <ListItemText classes={{ primary }} primary={display} />
+      <ListItemText classes={{ primary }} primary={text} />
     </ListItem>
   ) : null;
 }

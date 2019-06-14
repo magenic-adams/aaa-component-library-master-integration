@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'clsx';
+import { withStyles } from '@material-ui/styles';
 import RadioItem from '../RadioItem/RadioItem';
 import SelectList from '../SelectList/SelectList';
 
 type propTypes = {
+  // Decorator Props
+  classes: PropTypes.object,
   // Passed Props
   name: PropTypes.string,
   items: [
@@ -30,11 +34,19 @@ type propTypes = {
   onSelect: PropTypes.func
 };
 
+const styleClasses = () => ({
+  root: {
+    width: 534,
+    border: 'none',
+    boxShadow: 'none',
+  },
+});
+
 function isSelected(type, value, selectedValue, selectedValues) {
-  if (type === 'single-select-radio') {
+  if (type === 'single-select') {
     return value.toString() === selectedValue.toString();
   }
-  if (type === 'multi-select-radio') {
+  if (type === 'multi-select') {
     return selectedValues.map(String).includes(value.toString());
   }
   return false;
@@ -53,13 +65,14 @@ function constructDisplayItems(
   return (
     Array.isArray(items) &&
     items.map(item => {
-      const { value } = item;
+      const { id, value } = item;
       const checked = isSelected(type, value, selectedValue, selectedValues);
       const disabled =
         !!disableAll || disabledValues.map(String).includes(value.toString());
 
       return {
         ...item,
+        key: `RadioItem-${id}`,
         display: (
           <RadioItem
             name={name}
@@ -75,6 +88,7 @@ function constructDisplayItems(
 }
 
 function RadioGroup({
+  classes,
   disableAll,
   disabledValues,
   items,
@@ -96,16 +110,24 @@ function RadioGroup({
   );
 
   return (
-    <SelectList type={type} name={name} items={newItems} onSelect={onSelect} />
+    <SelectList
+      className={cx('RadioGroup', classes.root)}
+      type={type}
+      name={name}
+      items={newItems}
+      onSelect={onSelect}
+    />
   );
 }
 
 RadioGroup.defaultProps = {
-  type: 'single-select-radio',
+  type: 'single-select',
   selectedValue: '',
   selectedValues: [],
   disableAll: false,
   disabledValues: [],
 };
 
-export default RadioGroup;
+export default withStyles(styleClasses, { index: 0, withTheme: true })(
+  RadioGroup
+);

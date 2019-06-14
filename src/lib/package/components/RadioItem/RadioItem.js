@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'clsx';
+import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -59,6 +60,13 @@ const styleClasses = theme => ({
   },
 });
 
+function isValidItem(item) {
+  if (!item.id && !item.value) {
+    invariant(false, 'id and value are empty');
+  }
+  return true;
+}
+
 function RadioItem({
   classes,
   checked,
@@ -67,9 +75,10 @@ function RadioItem({
   name,
   onSelect,
 }: propTypes) {
-  const { id, value, text } = item;
-  const { label, radio, root } = classes;
-  return (
+  const { id, value, text } = { ...item };
+  const { label, radio, root } = { ...classes };
+
+  return item && isValidItem(item) ? (
     <FormControlLabel
       className={cx('FormControlLabel', root, {
         [classes.selected]: checked,
@@ -83,7 +92,7 @@ function RadioItem({
         <Radio
           name={name}
           key={`RadioItem-${id}`}
-          data-quid={`RadioItem-${id}`}
+          inputProps={{ 'data-quid': `RadioItem-${id}` }}
           classes={{
             root: radio,
           }}
@@ -94,7 +103,7 @@ function RadioItem({
       }
       label={text}
     />
-  );
+  ) : null;
 }
 
 RadioItem.defaultProps = {
