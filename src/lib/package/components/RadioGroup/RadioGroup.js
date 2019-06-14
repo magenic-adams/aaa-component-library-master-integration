@@ -12,7 +12,7 @@ type propTypes = {
   name: PropTypes.string,
   items: [
     {
-      id: PropTypes.string | PropTypes.number,
+      id: PropTypes.number,
       value: PropTypes.string | PropTypes.number,
       text: PropTypes.string | PropTypes.number
     }
@@ -20,15 +20,15 @@ type propTypes = {
   /**
    * Used to set checked props in radio item for single-select radio buttons
    */
-  selectedValue?: PropTypes.string | PropTypes.number,
+  selectedId?: PropTypes.number,
   /**
    * Used to set checked props in radio item for multi-select radio buttons
    */
-  selectedValues?: [PropTypes.string | PropTypes.number],
+  selectedIds?: [PropTypes.number],
   /**
    * Used to disable specific radio items by value
    */
-  disabledValues?: [PropTypes.string | PropTypes.number],
+  disabledIds?: [PropTypes.number],
   disableAll?: PropTypes.bool,
   type?: PropTypes.string,
   onSelect: PropTypes.func
@@ -42,12 +42,12 @@ const styleClasses = () => ({
   },
 });
 
-function isSelected(type, value, selectedValue, selectedValues) {
+function isSelected(type, id, selectedId, selectedIds) {
   if (type === 'single-select') {
-    return value.toString() === selectedValue.toString();
+    return id === selectedId;
   }
   if (type === 'multi-select') {
-    return selectedValues.map(String).includes(value.toString());
+    return selectedIds.includes(id);
   }
   return false;
 }
@@ -56,19 +56,18 @@ function constructDisplayItems(
   name,
   type,
   items = [],
-  selectedValue,
-  selectedValues,
+  selectedId,
+  selectedIds,
   disableAll,
-  disabledValues,
+  disabledIds,
   onSelect
 ) {
   return (
     Array.isArray(items) &&
     items.map(item => {
-      const { id, value } = item;
-      const checked = isSelected(type, value, selectedValue, selectedValues);
-      const disabled =
-        !!disableAll || disabledValues.map(String).includes(value.toString());
+      const { id } = item;
+      const checked = isSelected(type, id, selectedId, selectedIds);
+      const disabled = !!disableAll || disabledIds.includes(id);
 
       return {
         ...item,
@@ -79,7 +78,9 @@ function constructDisplayItems(
             item={item}
             checked={checked}
             disabled={disabled}
-            onSelect={onSelect}
+            onSelect={() =>
+              typeof onSelect === 'function' ? onSelect(item) : null
+            }
           />
         ),
       };
@@ -90,11 +91,11 @@ function constructDisplayItems(
 function RadioGroup({
   classes,
   disableAll,
-  disabledValues,
+  disabledIds,
   items,
   name,
-  selectedValue,
-  selectedValues,
+  selectedId,
+  selectedIds,
   type,
   onSelect,
 }: propTypes) {
@@ -102,10 +103,10 @@ function RadioGroup({
     name,
     type,
     items,
-    selectedValue,
-    selectedValues,
+    selectedId,
+    selectedIds,
     disableAll,
-    disabledValues,
+    disabledIds,
     onSelect
   );
 
@@ -122,10 +123,10 @@ function RadioGroup({
 
 RadioGroup.defaultProps = {
   type: 'single-select',
-  selectedValue: '',
-  selectedValues: [],
+  selectedId: '',
+  selectedIds: [],
   disableAll: false,
-  disabledValues: [],
+  disabledIds: [],
 };
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(

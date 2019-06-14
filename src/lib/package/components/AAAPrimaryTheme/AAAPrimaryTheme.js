@@ -22,6 +22,8 @@ import {
   AAA_COLOR_MAIN_VERY_DARK_BLUE,
 } from '../../constants/colors';
 
+import { ELEMENT_FONT_WEIGHT_BOLD } from '../../constants/cssConstants';
+
 const theme = createMuiTheme({
   breakpoints: {
     values: {
@@ -61,6 +63,9 @@ const theme = createMuiTheme({
     fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',
     fontWeight: 400, // Medium
     color: AAA_COLOR_MAIN_BLACK,
+  },
+  typographyVariables: {
+    BOLD: ELEMENT_FONT_WEIGHT_BOLD,
   },
 });
 

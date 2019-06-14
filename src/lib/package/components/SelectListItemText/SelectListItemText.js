@@ -12,9 +12,9 @@ type propTypes = {
   classes: PropTypes.object,
   // Passed Props
   item: {
-    id: PropTypes.string | PropTypes.number,
+    id: PropTypes.number,
     value: PropTypes.string | PropTypes.number,
-    text: PropTypes.string,
+    text: PropTypes.string | PropTypes.number,
     selected?: PropTypes.bool
   }
 };

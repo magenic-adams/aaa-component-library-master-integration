@@ -6,13 +6,19 @@ import { withStyles } from '@material-ui/styles';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+import {
+  ELEMENT_PANEL_WIDTH_TABLET,
+  ELEMENT_PANEL_HEIGHT,
+  ELEMENT_BORDER_RADIUS,
+} from '../../constants/cssConstants';
+
 type propTypes = {
   // Decorator Props
   classes: PropTypes.object,
   // Passed Props
   name: PropTypes.string,
   item: {
-    id: PropTypes.string | PropTypes.number,
+    id: PropTypes.number,
     value: PropTypes.string | PropTypes.number,
     text: PropTypes.string | PropTypes.number
   },
@@ -24,8 +30,8 @@ type propTypes = {
 const styleClasses = theme => ({
   root: {
     width: 534,
-    height: 48,
-    borderRadius: 4,
+    height: ELEMENT_PANEL_HEIGHT,
+    borderRadius: ELEMENT_BORDER_RADIUS,
     border: `1px solid ${theme.palette.colorVariables.BLACK}`,
     margin: '0px 0px 8px 0px',
     '&:hover': {
@@ -36,7 +42,7 @@ const styleClasses = theme => ({
       background: 'none',
     },
     [theme.breakpoints.down('md')]: {
-      width: '100%',
+      width: ELEMENT_PANEL_WIDTH_TABLET,
     },
   },
   radio: {
@@ -47,7 +53,7 @@ const styleClasses = theme => ({
   },
   selected: {
     border: `2px solid ${theme.palette.colorVariables.DARKER_BLUE}`,
-    fontWeight: theme.typography.buttonPrimary.fontWeight,
+    fontWeight: theme.typographyVariables.BOLD,
     '&.Mui-disabled, &.Mui-disabled:hover': {
       borderColor: theme.palette.disabled.main,
       background: 'none',
@@ -80,7 +86,7 @@ function RadioItem({
 
   return item && isValidItem(item) ? (
     <FormControlLabel
-      className={cx('FormControlLabel', root, {
+      className={cx('Radio', root, {
         [classes.selected]: checked,
       })}
       classes={{
@@ -88,6 +94,7 @@ function RadioItem({
       }}
       value={value}
       disabled={disabled}
+      onClick={() => onSelect(item)}
       control={
         <Radio
           name={name}
@@ -98,7 +105,7 @@ function RadioItem({
           }}
           checked={checked}
           color="primary"
-          onChange={onSelect}
+          onClick={onSelect}
         />
       }
       label={text}
@@ -111,4 +118,6 @@ RadioItem.defaultProps = {
   disabled: false,
 };
 
-export default withStyles(styleClasses, { withTheme: true })(RadioItem);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(
+  RadioItem
+);
