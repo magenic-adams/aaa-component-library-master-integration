@@ -20,7 +20,7 @@ import { AAA_COLOR_TRANSPARENT } from '../../constants/colors';
 
 function getFakeProps(overrides) {
   return {
-    item: { id: 1, value: 1, display: 'Yes' },
+    item: { id: 1, value: 1, text: 'Yes' },
     onSelect: jest.fn(v => v),
     ...overrides,
   };
@@ -54,15 +54,15 @@ describe('SelectListItemText', () => {
   describe('html rendering', () => {
     it('rendered text should match passed options text', () => {
       props = getFakeProps({
-        item: { id: 1, value: 1, display: 'I am Iron Man' },
+        item: { id: 1, value: 1, text: 'I am Iron Man' },
       });
 
       listItemTextWrapper = createSelectListItemTextWithTheme(props);
 
-      expect(listItemTextWrapper.text()).to.equal(props.item.display);
+      expect(listItemTextWrapper.text()).to.equal(props.item.text);
     });
 
-    it('attaches a data-quid attribute to the input base element', () => {
+    it('attaches a data-quid attribute to listItem element', () => {
       expect(
         listItemTextWrapper
           .find('li')
@@ -71,34 +71,46 @@ describe('SelectListItemText', () => {
       ).to.equal(`SelectListItem-${props.item.id}`);
     });
 
+    it('attaches a value attribute to the listItem element', () => {
+      expect(
+        listItemTextWrapper
+          .find('li')
+          .at(0)
+          .getDOMNode().value
+      ).to.equal(props.item.value);
+    });
+
     it('should not render list item if invalid item is passed', () => {
       props = getFakeProps({
         item: null,
       });
-      expect(() => {
-        createSelectListItemTextWithTheme(props);
-      }).to.throw('Invariant failed: id and display should have value.');
+      listItemTextWrapper = createSelectListItemTextWithTheme(props);
+      listItemNode = listItemTextWrapper.getDOMNode();
+
+      expect(listItemNode).to.equal(null);
 
       props = getFakeProps({
         item: undefined,
       });
-      expect(() => {
-        createSelectListItemTextWithTheme(props);
-      }).to.throw('Invariant failed: id and display should have value.');
+      listItemTextWrapper = createSelectListItemTextWithTheme(props);
+      listItemNode = listItemTextWrapper.getDOMNode();
+
+      expect(listItemNode).to.equal(null);
+
+      props = getFakeProps({
+        item: '',
+      });
+      listItemTextWrapper = createSelectListItemTextWithTheme(props);
+      listItemNode = listItemTextWrapper.getDOMNode();
+
+      expect(listItemNode).to.equal(null);
 
       props = getFakeProps({
         item: {},
       });
       expect(() => {
         createSelectListItemTextWithTheme(props);
-      }).to.throw('Invariant failed: id and display should have value.');
-
-      props = getFakeProps({
-        item: '',
-      });
-      expect(() => {
-        createSelectListItemTextWithTheme(props);
-      }).to.throw('Invariant failed: id and display should have value.');
+      }).to.throw('id or value is empty.');
     });
   });
 
@@ -110,7 +122,7 @@ describe('SelectListItemText', () => {
       expect(spy.getCall(0).args[0]).to.deep.equal({
         id: 1,
         value: 1,
-        display: 'Yes',
+        text: 'Yes',
       });
     });
   });

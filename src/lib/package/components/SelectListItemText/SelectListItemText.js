@@ -50,19 +50,20 @@ const styleClasses = theme => ({
   },
 });
 
-function isValid(id, text) {
-  if (!id && !text) {
-    invariant(false, 'id and text should have value.');
+function isValid(id, value) {
+  if (!id || !value) {
+    invariant(false, 'id or value is empty.');
   }
   return true;
 }
 
 function SelectListItemText({ classes, item, onSelect }: propTypes) {
-  const { text, id } = { ...item };
+  const { id, value, text } = { ...item };
   const { divider, gutters, primary, root } = classes;
 
-  return item && isValid(id, text) ? (
+  return item && isValid(id, value) ? (
     <ListItem
+      value={value}
       data-quid={`SelectListItem-${id}`}
       classes={{ root, divider, gutters }}
       divider

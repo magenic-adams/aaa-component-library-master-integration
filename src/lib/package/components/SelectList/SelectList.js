@@ -19,8 +19,8 @@ type propTypes = {
       id: PropTypes.string | PropTypes.number,
       value: PropTypes.string | PropTypes.number,
       text: PropTypes.string,
-      className?: PropTypes.string,
       display?: PropTypes.node,
+      className?: PropTypes.string,
       selected?: PropTypes.bool,
       disabled?: PropTypes.bool
     }
@@ -66,15 +66,16 @@ function renderDefaultListItem(item, onSelect) {
 function SelectList({ className, classes, items, onSelect }: propTypes) {
   return (
     <div className={cx(classes.root, className)}>
-      {items.map(item => {
-        return item && item.display ? (
-          <div className={item.className} key={item.key}>
-            {item.display}
-          </div>
-        ) : (
-          renderDefaultListItem(item, onSelect)
-        );
-      })}
+      {Array.isArray(items) &&
+        items.map(item => {
+          return item && item.display ? (
+            <div className={item.className} key={item.key}>
+              {item.display}
+            </div>
+          ) : (
+            renderDefaultListItem(item, onSelect)
+          );
+        })}
     </div>
   );
 }

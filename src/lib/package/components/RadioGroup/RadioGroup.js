@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/styles';
+
+import Label from '../Label/Label';
 import RadioItem from '../RadioItem/RadioItem';
 import SelectList from '../SelectList/SelectList';
 
@@ -17,6 +19,7 @@ type propTypes = {
       text: PropTypes.string | PropTypes.number
     }
   ],
+  instructionLabel: PropTypes.string,
   /**
    * Used to set checked props in radio item for single-select radio buttons
    */
@@ -39,6 +42,7 @@ const styleClasses = () => ({
     width: 534,
     border: 'none',
     boxShadow: 'none',
+    marginTop: 16,
   },
 });
 
@@ -93,6 +97,7 @@ function RadioGroup({
   disableAll,
   disabledIds,
   items,
+  instructionLabel,
   name,
   selectedId,
   selectedIds,
@@ -111,13 +116,20 @@ function RadioGroup({
   );
 
   return (
-    <SelectList
-      className={cx('RadioGroup', classes.root)}
-      type={type}
-      name={name}
-      items={newItems}
-      onSelect={onSelect}
-    />
+    <Fragment>
+      {instructionLabel && (
+        <Label disabled={false} error={false} focused={false}>
+          {instructionLabel}
+        </Label>
+      )}
+      <SelectList
+        className={cx('RadioGroup', classes.root)}
+        type={type}
+        name={name}
+        items={newItems}
+        onSelect={onSelect}
+      />
+    </Fragment>
   );
 }
 
