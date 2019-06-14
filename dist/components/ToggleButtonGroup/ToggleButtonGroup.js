@@ -41,7 +41,7 @@ var styleClasses = function styleClasses(theme) {
     },
     active: _defineProperty({
       background: "".concat(theme.palette.primary.dark, " !important"),
-      color: "".concat(theme.palette.common.white, " !important"),
+      color: "".concat(theme.palette.colorVariables.WHITE, " !important"),
       '&:hover': {
         background: theme.palette.primary.dark
       }

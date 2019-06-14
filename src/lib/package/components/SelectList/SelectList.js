@@ -31,7 +31,7 @@ type propTypes = {
 const styleClasses = theme => ({
   root: {
     width: 341,
-    background: theme.palette.common.white,
+    background: theme.palette.colorVariables.WHITE,
     border: `2px solid ${theme.palette.primary.main}`,
     borderRadius: 4,
     padding: 0,

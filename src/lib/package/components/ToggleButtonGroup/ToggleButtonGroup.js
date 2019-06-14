@@ -52,7 +52,7 @@ const styleClasses = theme => ({
   },
   active: {
     background: `${theme.palette.primary.dark} !important`,
-    color: `${theme.palette.common.white} !important`,
+    color: `${theme.palette.colorVariables.WHITE} !important`,
     '&:hover': {
       background: theme.palette.primary.dark,
     },

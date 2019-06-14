@@ -27,7 +27,7 @@ const styleClasses = theme => {
       height: 48,
       lineHeight: '48px',
       boxShadow: 'none',
-      color: theme.palette.common.white,
+      color: theme.palette.colorVariables.WHITE,
       padding: '0 16px',
       textTransform: 'none',
       marginTop: 0,

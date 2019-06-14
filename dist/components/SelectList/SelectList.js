@@ -12,7 +12,7 @@ var styleClasses = function styleClasses(theme) {
   return {
     root: _defineProperty({
       width: 341,
-      background: theme.palette.common.white,
+      background: theme.palette.colorVariables.WHITE,
       border: "2px solid ".concat(theme.palette.primary.main),
       borderRadius: 4,
       padding: 0,
