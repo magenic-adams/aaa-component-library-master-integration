@@ -1,33 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'clsx';
-import { withStyles } from '@material-ui/styles'; // Components
+import { withStyles } from '@material-ui/styles';
 
+// Components
 import MUIFormGroup from '@material-ui/core/FormGroup';
 
-var styleClasses = function styleClasses() {
-  return {
-    root: {
-      marginTop: 16,
-      marginBottom: 16
-    }
-  };
-};
+const styleClasses = () => ({
+  root: {
+    marginTop: 16,
+    marginBottom: 16,
+  },
+});
 
-function FormGroup(_ref) {
-  var children = _ref.children,
-      classes = _ref.classes,
-      className = _ref.className;
-  return React.createElement(MUIFormGroup, {
-    className: cx('FormGroup', className),
-    classes: classes
-  }, children);
+function FormGroup({ children, classes, className }) {
+  return (
+    <MUIFormGroup
+      className={cx('FormGroup', className)}
+      classes={classes}
+    >
+      {children}
+    </MUIFormGroup>
+  );
 }
 
 FormGroup.defaultProps = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
-export default withStyles(styleClasses, {
-  index: 0,
-  withTheme: true
-})(FormGroup);
+
+export default withStyles(styleClasses, { index: 0, withTheme: true })(FormGroup);

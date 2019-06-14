@@ -1,7 +1,6 @@
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
-import PropTypes from 'prop-types';
 import MUIButton from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';

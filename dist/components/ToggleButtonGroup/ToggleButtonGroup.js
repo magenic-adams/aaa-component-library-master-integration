@@ -1,4 +1,3 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
@@ -7,114 +6,146 @@ import cx from 'clsx';
 import Button from '../Button/Button';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 
-var styleClasses = function styleClasses(theme) {
-  return {
-    root: _defineProperty({
-      display: 'flex',
-      '& .Button': {
-        width: '157px',
-        height: '48px',
-        '& span': {
-          fontSize: '18px'
-        }
-      }
-    }, theme.breakpoints.down('sm'), {
+type propTypes = {
+  // Decorator Props
+  classes: PropTypes.object,
+  className?: PropTypes.string,
+  // Passed Props
+  options: [
+    { id: PropTypes.number | PropTypes.string, text: PropTypes.string }
+  ],
+  onSelect: PropTypes.func,
+  value?: PropTypes.string | PropTypes.number
+};
+
+const styleClasses = theme => ({
+  root: {
+    display: 'flex',
+    '& .Button': {
+      width: '157px',
+      height: '48px',
+      '& span': {
+        fontSize: '18px',
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
       '& .Button': {
         width: '50%',
         '& span': {
           fontSize: '16px !important',
-          fontWeight: '700 !important'
+          fontWeight: '700 !important',
         },
         '&:hover': {
-          background: theme.palette.colorVariables.SECONDARY_HOVER
-        }
-      }
-    }),
-    left: {
-      borderTopRightRadius: '0px',
-      borderBottomRightRadius: '0px',
-      borderRightStyle: 'none !important'
+          background: theme.palette.colorVariables.SECONDARY_HOVER,
+        },
+      },
     },
-    right: {
-      borderTopLeftRadius: '0px',
-      borderBottomLeftRadius: '0px'
+  },
+  left: {
+    borderTopRightRadius: '0px',
+    borderBottomRightRadius: '0px',
+    borderRightStyle: 'none !important',
+  },
+  right: {
+    borderTopLeftRadius: '0px',
+    borderBottomLeftRadius: '0px',
+  },
+  active: {
+    background: `${theme.palette.primary.dark} !important`,
+    color: `${theme.palette.colorVariables.WHITE} !important`,
+    '&:hover': {
+      background: theme.palette.primary.dark,
     },
-    active: _defineProperty({
-      background: "".concat(theme.palette.primary.dark, " !important"),
-      color: "".concat(theme.palette.colorVariables.WHITE, " !important"),
+    [theme.breakpoints.down('sm')]: {
+      background: `${theme.palette.colorVariables.SECONDARY_HOVER} !important`,
+      color: `${theme.palette.primary.main} !important`,
       '&:hover': {
-        background: theme.palette.primary.dark
-      }
-    }, theme.breakpoints.down('sm'), {
-      background: "".concat(theme.palette.colorVariables.SECONDARY_HOVER, " !important"),
-      color: "".concat(theme.palette.primary.main, " !important"),
-      '&:hover': {
-        background: theme.palette.colorVariables.SECONDARY_HOVER
-      }
-    })
-  };
-};
+        background: theme.palette.colorVariables.SECONDARY_HOVER,
+      },
+    },
+  },
+});
 
 function handleClick(value, callback) {
   if (callback) callback(value);
 }
 
 function isOptionsKeysPresent(options) {
-  return options.every(function (op) {
-    return op.id && op.text;
-  });
+  return options.every(op => op.id && op.text);
 }
 
 function getActiveClass(value, id, classes) {
-  var active = classes.active;
-  return value === id ? "".concat(active) : '';
+  const { active } = classes;
+  return value === id ? `${active}` : '';
 }
 
 function isOptionsValid(options) {
   if (!Array.isArray(options) || options.length < 2) {
-    invariant(false, 'Invalid length of options. You must passed maximum number of two options');
+    invariant(
+      false,
+      'Invalid length of options. You must passed maximum number of two options'
+    );
   }
-
   if (!isOptionsKeysPresent(options)) {
-    invariant(false, 'Invalid object keys are present. Keys should contain id and text');
+    invariant(
+      false,
+      'Invalid object keys are present. Keys should contain id and text'
+    );
   }
-
   return true;
 }
 
-function ToggleButtonGroup(_ref) {
-  var classes = _ref.classes,
-      className = _ref.className,
-      disabled = _ref.disabled,
-      options = _ref.options,
-      value = _ref.value,
-      onSelect = _ref.onSelect;
-  return React.createElement(Fragment, null, isOptionsValid(options) ? React.createElement(ButtonGroup, {
-    className: cx(classes.root, className)
-  }, React.createElement(Button, {
-    className: cx("".concat(getActiveClass(value, options[0].id, classes), " ").concat(classes.left), className),
-    color: "secondary",
-    id: "ToggleButton-".concat(options[0].id),
-    disabled: disabled,
-    onClick: function onClick() {
-      return handleClick(options[0], onSelect);
-    }
-  }, options[0].text), React.createElement(Button, {
-    className: cx("".concat(getActiveClass(value, options[1].id, classes), " ").concat(classes.right), className),
-    color: "secondary",
-    id: "ToggleButton-".concat(options[1].id),
-    disabled: disabled,
-    onClick: function onClick() {
-      return handleClick(options[1], onSelect);
-    }
-  }, options[1].text)) : null);
+function ToggleButtonGroup({
+  classes,
+  className,
+  disabled,
+  options,
+  value,
+  onSelect,
+}: propTypes) {
+  return (
+    <Fragment>
+      {isOptionsValid(options) ? (
+        <ButtonGroup className={cx(classes.root, className)}>
+          <Button
+            className={cx(
+              `${getActiveClass(value, options[0].id, classes)} ${
+                classes.left
+              }`,
+              className
+            )}
+            color="secondary"
+            id={`ToggleButton-${options[0].id}`}
+            disabled={disabled}
+            onClick={() => handleClick(options[0], onSelect)}
+          >
+            {options[0].text}
+          </Button>
+          <Button
+            className={cx(
+              `${getActiveClass(value, options[1].id, classes)} ${
+                classes.right
+              }`,
+              className
+            )}
+            color="secondary"
+            id={`ToggleButton-${options[1].id}`}
+            disabled={disabled}
+            onClick={() => handleClick(options[1], onSelect)}
+          >
+            {options[1].text}
+          </Button>
+        </ButtonGroup>
+      ) : null}
+    </Fragment>
+  );
 }
 
 ToggleButtonGroup.defaultProps = {
   className: '',
-  value: ''
+  value: '',
 };
-export default withStyles(styleClasses, {
-  index: 0,
-  withTheme: true
-})(ToggleButtonGroup);
+
+export default withStyles(styleClasses, { index: 0, withTheme: true })(
+  ToggleButtonGroup
+);

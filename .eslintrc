@@ -16,6 +16,13 @@
     "object-curly-spacing": ["error", "always", { "objectsInObjects": false }],
     "import/imports-first": ["error", "absolute-first"]
   },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "parser": "babel-eslint",
   "env": {
     "jasmine": true

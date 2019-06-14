@@ -2,22 +2,19 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import Button from './Button';
 
-var IconButton = function IconButton(props) {
-  var classes = props.classes,
-      children = props.children,
-      disabled = props.disabled,
-      onClick = props.onClick,
-      id = props.id;
-  return React.createElement(Button, {
-    onClick: onClick,
-    disabled: disabled,
-    className: classes.iconButton,
-    id: id,
-    isButtonIcon: true
-  }, children);
+const IconButton = props => {
+  const { classes, children, disabled, onClick, id } = props;
+  return (
+    <Button
+      onClick={onClick}
+      disabled={disabled}
+      className={classes.iconButton}
+      id={id}
+      isButtonIcon
+    >
+      {children}
+    </Button>
+  );
 };
 
-export default withStyles({
-  index: 0,
-  withTheme: true
-})(IconButton);
+export default withStyles({ index: 0, withTheme: true })(IconButton);

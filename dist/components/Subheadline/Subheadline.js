@@ -1,32 +1,42 @@
-import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
+type propTypes = {
+  // MUI Decorator
+  classes: PropTypes.object,
+  // Passed Props
+  className: PropTypes.string,
+  children: PropTypes.string,
+};
+
 // Component styles manipulated entirely by theme
-var styleClasses = function styleClasses(theme) {
+const styleClasses = theme => {
   return {
-    root: _objectSpread({
+    root: {
       color: theme.typography.color,
       fontFamily: theme.typography.fontFamily,
-      fontWeight: theme.typography.fontWeight
-    }, theme.typography.h2)
+      fontWeight: theme.typography.fontWeight,
+      ...theme.typography.h2,
+    },
   };
 };
 
-function Subheadline(_ref) {
-  var children = _ref.children,
-      className = _ref.className,
-      classes = _ref.classes,
-      id = _ref.id;
-  return React.createElement("h2", {
-    className: cx('Subheadline', classes.root, className),
-    "data-quid": "Subheadline-".concat(id)
-  }, children);
+function Subheadline({
+  children,
+  className,
+  classes,
+  id,
+}:propTypes){
+  return (
+    <h2
+      className={cx('Subheadline', classes.root, className)}
+      data-quid={`Subheadline-${id}`}
+    >
+      {children}
+    </h2>
+  );
 }
 
-export default withStyles(styleClasses, {
-  index: 0,
-  withTheme: true
-})(Subheadline);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(Subheadline);

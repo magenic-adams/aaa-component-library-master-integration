@@ -1,41 +1,47 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-
 /* eslint-disable react/require-default-props */
-
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
-var styleClasses = function styleClasses(theme) {
-  return {
-    root: _defineProperty({
-      width: '100%',
-      marginTop: 24,
-      marginBottom: 24,
-      '& .Button:nth-child(n+1)': {
-        marginTop: 8
-      }
-    }, theme.breakpoints.up('md'), {
-      width: 'inherit'
-    })
-  };
+type propTypes = {
+  // Decorator Props
+  classes: PropTypes.object,
+  // Passed Props
+  children: PropTypes.node,
+  className?: PropTypes.string
 };
 
-function ButtonGroup(_ref) {
-  var children = _ref.children,
-      classes = _ref.classes,
-      className = _ref.className;
-  return React.createElement("div", {
-    className: cx('ButtonGroup', classes.root, className)
-  }, children);
+const styleClasses = theme => ({
+  root: {
+    width: '100%',
+    marginTop: 24,
+    marginBottom: 24,
+    '& .Button:nth-child(n+1)': {
+      marginTop: 8,
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 'inherit',
+    },
+  },
+});
+
+
+function ButtonGroup({
+  children,
+  classes,
+  className,
+}:propTypes){
+  return (
+    <div className={cx('ButtonGroup', classes.root, className)}>
+      {children}
+    </div>
+  );
 }
 
 ButtonGroup.defaultProps = {
-  className: ''
+  className: '',
 };
-export default withStyles(styleClasses, {
-  index: 0,
-  withTheme: true
-})(ButtonGroup);
+
+export default withStyles(styleClasses, { index: 0, withTheme: true })(ButtonGroup);
