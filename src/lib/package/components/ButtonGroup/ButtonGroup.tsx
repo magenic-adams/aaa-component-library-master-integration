@@ -12,7 +12,11 @@ type propTypes = {
   className?: string
 };
 
-const styleClasses = theme => ({
+const styleClasses = (theme:{
+  breakpoints: {
+    up: (breakpoint:string) => string
+  }
+}) => ({
   root: {
     width: '100%',
     marginTop: 24,

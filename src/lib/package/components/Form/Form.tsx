@@ -5,17 +5,26 @@ import { Form } from 'react-final-form';
 // https://github.com/final-form/final-form-set-field-touched
 import setFieldTouched from 'final-form-set-field-touched';
 
+// Types
+import { FormRenderProps } from '../../types/FormRenderProps'
+
 // Utilities
 import Validate from '../../utilities/validate';
 
-class FormDecorator extends React.Component {
+interface RequiredProps {
+  render: () => any,
+  validations: any,
+  onSubmit: (values: any, form:any) => Promise<any>
+}
+
+class FormDecorator extends React.Component<RequiredProps> {
   /**
    * A UX requirement to check there is at least some value in all fields
    * @param  {Function} options.formRenderProps.form.getRegisteredFields - the form field names
    * @param  {Object} options.values - current key/values of form state
    * @return {Boolean}
    */
-  static allFieldsHaveValues({ formRenderProps }){
+  static allFieldsHaveValues({ formRenderProps }: {formRenderProps:FormRenderProps}){
     const { form, values } = formRenderProps;
     const registeredFields = form.getRegisteredFields();
     return registeredFields.every(fieldKey => !!values[fieldKey]);
@@ -28,7 +37,10 @@ class FormDecorator extends React.Component {
    * @param  {Object} options.values - current key/values of form state
    * @return {Boolean}
    */
-  static allRequiredFieldsHaveBeenVisited({ formRenderProps, validations }){
+  static allRequiredFieldsHaveBeenVisited(
+    { formRenderProps, validations }
+    : {formRenderProps:FormRenderProps, validations: any })
+  {
     const { visited } = formRenderProps;
     const validationFields = Object.keys(validations);
     const requiredFields = validationFields.filter(fieldKey => {
@@ -43,20 +55,32 @@ class FormDecorator extends React.Component {
    * @param  {Object} options.validations - dynamic validation object
    * @return {Object} props + computedProps
    */
-  static decorateFormRenderProps({ formRenderProps, validations }){
+  static decorateFormRenderProps(
+    { formRenderProps, validations }
+    : {formRenderProps:FormRenderProps, validations: any})
+  {
     return Object.assign({}, formRenderProps, {
       allFieldsHaveValues: this.allFieldsHaveValues({ formRenderProps }),
       allRequiredFieldsHaveBeenVisited: this.allRequiredFieldsHaveBeenVisited({ formRenderProps, validations }),
     });
   }
 
-  static handleValidate({ validations }){
-    return (values) => {
+  static handleValidate({ validations }:{validations:any}){
+    return (values:any) => {
       return Validate.validateForm(values, validations);
     };
   }
 
-  static decorateRender(renderFn, validations){
+  static decorateRender(
+    renderFn:(decorator:any) => {
+      allFieldsHaveValues: boolean,
+      allRequiredFieldsHaveBeenVisited: boolean,
+    },
+    validations:any
+   ):(formRenderProps:any) => {
+      allFieldsHaveValues: boolean,
+      allRequiredFieldsHaveBeenVisited: boolean,
+    }{
     return (formRenderProps) => {
       // Form Render Props are passed to the render method of the Form
       // Values include [handleSubmit, form, and ...formState]
@@ -71,11 +95,12 @@ class FormDecorator extends React.Component {
   render(){
     // This component acts as mainly a pass through to react-final-form,
     // but we augment functionality and encapsulate required form behaviors
-    const { render, validations } = this.props;
+    const { render, validations, onSubmit } = this.props;
     return (
       <Form
         validate={FormDecorator.handleValidate({ validations })}
         mutators={{ setFieldTouched }}
+        onSubmit={onSubmit}
         {...this.props}
         render={FormDecorator.decorateRender(render, validations)} // Render passed is always decorated
       />
