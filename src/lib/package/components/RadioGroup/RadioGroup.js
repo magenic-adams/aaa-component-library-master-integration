@@ -11,6 +11,7 @@ type propTypes = {
   // Decorator Props
   classes: PropTypes.object,
   // Passed Props
+  id: PropTypes.string,
   name: PropTypes.string,
   items: [
     {
@@ -19,7 +20,7 @@ type propTypes = {
       text: PropTypes.string | PropTypes.number
     }
   ],
-  instructionLabel: PropTypes.string,
+  instructionLabel?: PropTypes.string,
   /**
    * Used to set checked props in radio item for single-select radio buttons
    */
@@ -96,6 +97,7 @@ function RadioGroup({
   classes,
   disableAll,
   disabledIds,
+  id,
   items,
   instructionLabel,
   name,
@@ -118,7 +120,7 @@ function RadioGroup({
   return (
     <Fragment>
       {instructionLabel && (
-        <Label disabled={false} error={false} focused={false}>
+        <Label disabled={false} id={id} error={false} focused={false}>
           {instructionLabel}
         </Label>
       )}
@@ -135,6 +137,7 @@ function RadioGroup({
 
 RadioGroup.defaultProps = {
   type: 'single-select',
+  instructionLabel: '',
   selectedId: '',
   selectedIds: [],
   disableAll: false,

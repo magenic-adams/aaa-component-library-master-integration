@@ -6,12 +6,6 @@ import { withStyles } from '@material-ui/styles';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import {
-  ELEMENT_PANEL_WIDTH_TABLET,
-  ELEMENT_PANEL_HEIGHT,
-  ELEMENT_BORDER_RADIUS,
-} from '../../constants/cssConstants';
-
 type propTypes = {
   // Decorator Props
   classes: PropTypes.object,
@@ -29,10 +23,11 @@ type propTypes = {
 
 const styleClasses = theme => ({
   root: {
-    width: 534,
-    height: ELEMENT_PANEL_HEIGHT,
-    borderRadius: ELEMENT_BORDER_RADIUS,
+    width: theme.common.ELEMENT_PANEL_WIDTH_MOBILE,
+    height: theme.common.ELEMENT_PANEL_HEIGHT,
+    borderRadius: theme.common.ELEMENT_BORDER_RADIUS,
     border: `1px solid ${theme.palette.colorVariables.BLACK}`,
+    background: theme.palette.colorVariables.WHITE,
     margin: '0px 0px 8px 0px',
     '&:hover': {
       background: theme.palette.colorVariables.SECONDARY_HOVER,
@@ -42,7 +37,7 @@ const styleClasses = theme => ({
       background: 'none',
     },
     [theme.breakpoints.down('md')]: {
-      width: ELEMENT_PANEL_WIDTH_TABLET,
+      width: theme.common.ELEMENT_PANEL_WIDTH_TABLET,
     },
   },
   radio: {
@@ -54,6 +49,7 @@ const styleClasses = theme => ({
   selected: {
     border: `2px solid ${theme.palette.colorVariables.DARKER_BLUE}`,
     fontWeight: theme.typographyVariables.BOLD,
+    background: theme.palette.colorVariables.SECONDARY_HOVER,
     '&.Mui-disabled, &.Mui-disabled:hover': {
       borderColor: theme.palette.disabled.main,
       background: 'none',
@@ -86,6 +82,7 @@ function RadioItem({
 
   return item && isValidItem(item) ? (
     <FormControlLabel
+      data-quid={`RadioItem-${id}`}
       className={cx('Radio', root, {
         [classes.selected]: checked,
       })}
@@ -99,13 +96,12 @@ function RadioItem({
         <Radio
           name={name}
           key={`RadioItem-${id}`}
-          inputProps={{ 'data-quid': `RadioItem-${id}` }}
           classes={{
             root: radio,
           }}
           checked={checked}
           color="primary"
-          onClick={onSelect}
+          onClick={() => onSelect(item)}
         />
       }
       label={text}

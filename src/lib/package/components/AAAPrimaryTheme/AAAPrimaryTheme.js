@@ -22,8 +22,6 @@ import {
   AAA_COLOR_MAIN_VERY_DARK_BLUE,
 } from '../../constants/colors';
 
-import { ELEMENT_FONT_WEIGHT_BOLD } from '../../constants/cssConstants';
-
 const theme = createMuiTheme({
   breakpoints: {
     values: {
@@ -65,7 +63,13 @@ const theme = createMuiTheme({
     color: AAA_COLOR_MAIN_BLACK,
   },
   typographyVariables: {
-    BOLD: ELEMENT_FONT_WEIGHT_BOLD,
+    BOLD: 500,
+  },
+  common: {
+    ELEMENT_PANEL_WIDTH_MOBILE: 534,
+    ELEMENT_PANEL_WIDTH_TABLET: '100%',
+    ELEMENT_PANEL_HEIGHT: 48,
+    ELEMENT_BORDER_RADIUS: 4,
   },
 });
 

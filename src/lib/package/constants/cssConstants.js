@@ -10,8 +10,3 @@ export const AAA_CSS_CENTER = 'center';
 export const AAA_CSS_INLINE = 'inline';
 export const AAA_CSS_INLINE_BLOCK = 'inline-block';
 export const AAA_CSS_BASELINE = 'baseline';
-
-export const ELEMENT_FONT_WEIGHT_BOLD = 500;
-export const ELEMENT_PANEL_WIDTH_TABLET = '100%';
-export const ELEMENT_PANEL_HEIGHT = 48;
-export const ELEMENT_BORDER_RADIUS = 4;
