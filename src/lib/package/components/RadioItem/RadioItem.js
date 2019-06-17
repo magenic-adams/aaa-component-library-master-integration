@@ -91,7 +91,7 @@ function RadioItem({
       }}
       value={value}
       disabled={disabled}
-      onClick={() => onSelect(item)}
+      onChange={() => onSelect(item)}
       control={
         <Radio
           name={name}
@@ -99,9 +99,10 @@ function RadioItem({
           classes={{
             root: radio,
           }}
+          disabled={disabled}
           checked={checked}
           color="primary"
-          onClick={() => onSelect(item)}
+          onChange={() => onSelect(item)}
         />
       }
       label={text}

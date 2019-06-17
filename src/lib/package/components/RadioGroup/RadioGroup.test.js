@@ -105,9 +105,9 @@ describe('RadioGroup', () => {
   describe('event handlers', () => {
     it('call it\'s click event handler when list item is clicked', () => {
       radioGroupWrapper
-        .find('label')
+        .find('input[type="radio"]')
         .at(1)
-        .simulate('click');
+        .simulate('change');
 
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.deep.equal({
@@ -120,21 +120,21 @@ describe('RadioGroup', () => {
 
   describe('selection', () => {
     describe('single-select', () => {
-      it('sets radio item className to checked if selectedId matches with item id', () => {
+      it('sets radio item className to checked if selectedId matches to item id', () => {
         const selectedId = 1;
         props = getFakeProps({ selectedId });
         radioGroupWrapper = createRadioGroupWithTheme(props);
-        const listItems = radioGroupWrapper.find('label');
 
         expect(
-          listItems
+          radioGroupWrapper
             .find(`label[data-quid="RadioItem-${selectedId}"]`)
-            .childAt(0)
+            .find('span')
+            .at(0)
             .getDOMNode().className
         ).to.contains('checked');
       });
 
-      it('does NOT set radio item className to checked if selectedId don\'t match with item id', () => {
+      it('does NOT set radio item className to checked if selectedId don\'t match to item id', () => {
         let selectedId = [1, 2];
         props = getFakeProps({ selectedId });
         radioGroupWrapper = createRadioGroupWithTheme(props);
@@ -166,7 +166,7 @@ describe('RadioGroup', () => {
     });
 
     describe('multi-select', () => {
-      it('can set multiple radio item className to checked if selectedIds match with item id', () => {
+      it('can set multiple radio item className to checked if selectedIds match to item id', () => {
         const selectedIds = [1, 2];
         props = getFakeProps({ type: 'multi-select', selectedIds });
         radioGroupWrapper = createRadioGroupWithTheme(props);
@@ -182,7 +182,7 @@ describe('RadioGroup', () => {
         });
       });
 
-      it('does NOT set radio item className to checked if selectedIds don\'t match with item id', () => {
+      it('does NOT set radio item className to checked if selectedIds don\'t match to item id', () => {
         let selectedIds = 1;
         props = getFakeProps({ selectedIds });
         props = getFakeProps({ type: 'multi-select', selectedIds });
@@ -210,6 +210,40 @@ describe('RadioGroup', () => {
               .getDOMNode().className
           ).to.not.contains('checked');
         });
+      });
+    });
+  });
+
+  describe('disabled radioGroup', () => {
+    it('can disable selected radio item', () => {
+      const disabledIds = [1];
+      props = getFakeProps({ disabledIds });
+      radioGroupWrapper = createRadioGroupWithTheme(props);
+
+      expect(
+        radioGroupWrapper
+          .find('label[data-quid="RadioItem-1"]')
+          .find('span')
+          .at(0)
+          .getDOMNode().className
+      ).to.contains('disabled');
+
+      const radioElement = radioGroupWrapper.find('input[type="radio"]').at(0);
+
+      radioElement.simulate('change');
+
+      expect(radioElement.getDOMNode().disabled).to.equal(true);
+
+      expect(spy.calledOnce).to.equal(false);
+    });
+
+    it('can disable all radio elements if disabledAll is true', () => {
+      props = getFakeProps({ disableAll: true });
+      radioGroupWrapper = createRadioGroupWithTheme(props);
+      const listItems = radioGroupWrapper.find('input[type="radio"]');
+
+      listItems.forEach(item => {
+        expect(item.getDOMNode().disabled).to.equal(true);
       });
     });
   });

@@ -109,9 +109,11 @@ describe('RadioItem', () => {
   });
 
   describe('event handlers', () => {
-    it('radioItemWrapper call it\'s click event handler', () => {
-      radioItemWrapper.simulate('click');
-
+    it('radioItemWrapper call it\'s onchange event handler', () => {
+      radioItemWrapper
+        .find('input[type="radio"]')
+        .at(0)
+        .simulate('change');
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.deep.equal({
         id: 1,
@@ -234,7 +236,7 @@ describe('RadioItem', () => {
           expect(borderColor).to.equal(AAA_COLOR_MAIN_DISABLED);
         });
 
-        it.only('has no background color', () => {
+        it('has no background color', () => {
           props = getFakeProps({ disabled: true });
           radioItemWrapper = createRadioItemWithTheme(props);
           radioItemNode = radioItemWrapper.getDOMNode();
