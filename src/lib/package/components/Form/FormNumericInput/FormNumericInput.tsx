@@ -4,10 +4,15 @@ import { Field, useForm } from 'react-final-form';
 // Components
 import NumericInput from '../../Input/NumericInput/NumericInput';
 
-type propTypes = {
+interface RequiredProps {
   id: string,
   name: string,
 };
+
+interface OptionalProps {
+  forwardedRef?: React.RefObject<any>
+};
+
 
 /**
  * Form field change interceptor calls a form effect "setFieldTouched"
@@ -15,12 +20,15 @@ type propTypes = {
  * @param  {Object} formState - global form state
  * @return {Function} decoratored onChange
  */
-function handleFormFieldChange({ input }, formState){
-  return (val) => {
+function handleFormFieldChange(
+  { input }:{input: {name: string, onChange: (evt:any) => void}},
+  formState:any
+ ):(evt:any) => void {
+  return (evt) => {
     const { name, onChange } = input;
     const { mutators: { setFieldTouched }} = formState;
     setFieldTouched(name, false);
-    onChange(val);
+    onChange(evt);
   };
 }
 
@@ -31,13 +39,19 @@ function handleFormFieldChange({ input }, formState){
  * @param  {Object} inputRef - reference to the underlying input
  * @return {Function} onClear handler
  */
-function handleFieldClear({ input }, formState, inputRef ){
+function handleFieldClear(
+  { input }:{input: {name: string, onChange: (val:string) => void}},
+  formState:any,
+  inputRef: React.RefObject<any>
+  ) {
   return () => {
     const { name, onChange } = input;
     const { mutators: { setFieldTouched }} = formState;
     setFieldTouched(name, false);
     onChange('');
-    inputRef.current.focus();
+    if (inputRef){
+      inputRef.current.focus();
+    }
   };
 }
 
@@ -50,7 +64,7 @@ function handleFieldClear({ input }, formState, inputRef ){
  * By exposing the form's state via hooks, we are able to tap into custom mutators and other form state
  * defined on our top-level <Form> component and plucked from context
  */
-function FormNumericInput(props:propTypes) {
+  const FormNumericInput:React.FunctionComponent<RequiredProps & OptionalProps> = (props) => {
   const { forwardedRef } = props;
   const inputRef = forwardedRef || useRef(null);
   const formState = useForm();

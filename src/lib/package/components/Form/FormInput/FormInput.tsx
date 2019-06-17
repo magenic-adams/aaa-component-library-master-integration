@@ -22,7 +22,7 @@ type OptionalProps = {
 function handleFormFieldChange(
   { input }:{input: {name: string, onChange: (val:string) => void}},
   formState:any
- ):(val:string) => void{
+ ):(val:string) => void {
   return (val) => {
     const { name, onChange } = input;
     const { mutators: { setFieldTouched }} = formState;

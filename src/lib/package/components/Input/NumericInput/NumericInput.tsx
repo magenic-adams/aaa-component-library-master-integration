@@ -1,18 +1,31 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import MaskedInput from 'react-text-mask';
 
 // Components
 import BaseInput from '../BaseInput/BaseInput';
 
-function TextMaskCustom(mask) {
-  return (props) => {
-    const { inputRef, ...other } = props;
+interface RequiredProps {
+  onChange: (evt:any) => void,
+  onClear: (evt:any) => void,
+}
+
+interface OptionalProps {
+  error?: string,
+  mask?: string[],
+  forwardedRef?: React.RefObject<any>
+};
+
+const defaultProps:OptionalProps = {
+  error: '',
+  mask: [],
+};
+
+function TextMaskCustom(mask?:string[]) {
+  return (props:OptionalProps) => {
+    const { forwardedRef, ...other } = props;
     return (
       <MaskedInput
-        ref={ref => {
-          inputRef(ref ? ref.inputElement : null);
-        }}
+        ref={forwardedRef}
         mask={mask}
         guide={false}
         autoComplete="off"
@@ -22,22 +35,24 @@ function TextMaskCustom(mask) {
   };
 }
 
-type propTypes = {
-  mask?: PropTypes.array
-};
+const NumericInput:React.FunctionComponent<RequiredProps & OptionalProps> = (props) => {
+  const {
+    mask,
+    error,
+    onChange,
+    onClear,
+  } = props;
+  return (
+      <BaseInput
+        inputComponent={TextMaskCustom(mask)}
+        error={error}
+        onChange={onChange}
+        onClear={onClear}
+        {...props}
+      />
+  );
+ }
 
-function NumericInput(props): propTypes {
-    const { mask } = props;
-    return (
-        <BaseInput
-          inputComponent={TextMaskCustom(mask)}
-          {...props}
-        />
-    );
-  }
-
-NumericInput.defaultProps = {
-  mask: [],
-};
+NumericInput.defaultProps = defaultProps;
 
 export default NumericInput;
