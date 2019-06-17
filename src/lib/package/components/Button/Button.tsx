@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
 interface RequiredProps {
-  // Passed Props
   className: string | undefined,
   children: string | any,
   disabled?: boolean,

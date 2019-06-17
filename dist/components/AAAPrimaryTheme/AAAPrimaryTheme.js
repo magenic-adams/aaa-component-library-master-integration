@@ -2,7 +2,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // https://next.material-ui.com/customization/themes
 import React from 'react';
-import PropTypes from 'prop-types';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 
@@ -48,16 +47,16 @@ const theme = createMuiTheme({
     disabled: {
       main: AAA_COLOR_MAIN_DISABLED,
     },
-  },
-  // These are use defined variables we can use
-  colorVariables: {
-    SECONDARY_HOVER: AAA_COLOR_SECONDARY_HOVER,
-    TRANSPARENT: AAA_COLOR_TRANSPARENT,
-    BLACK: AAA_COLOR_MAIN_BLACK,
-    DARKER_BLUE: AAA_COLOR_MAIN_DARKER_BLUE,
-    VERY_DARK_BLUE: AAA_COLOR_MAIN_VERY_DARK_BLUE,
-    GRAY: AAA_COLOR_MAIN_GRAY,
-    WHITE: AAA_COLOR_MAIN_WHITE,
+    // These are use defined variables we can use
+    colorVariables: {
+      SECONDARY_HOVER: AAA_COLOR_SECONDARY_HOVER,
+      TRANSPARENT: AAA_COLOR_TRANSPARENT,
+      BLACK: AAA_COLOR_MAIN_BLACK,
+      DARKER_BLUE: AAA_COLOR_MAIN_DARKER_BLUE,
+      VERY_DARK_BLUE: AAA_COLOR_MAIN_VERY_DARK_BLUE,
+      GRAY: AAA_COLOR_MAIN_GRAY,
+      WHITE: AAA_COLOR_MAIN_WHITE,
+    },
   },
   typography: {
     fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',
@@ -132,10 +131,6 @@ theme.typography.buttonSecondary = {
   lineHeight: 1.45,
 };
 
-type propTypes = {
-  children: PropTypes.node
-};
-
-export default function AAAThemeProvider({ children }: propTypes) {
+export default function AAAThemeProvider({ children }) {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }
