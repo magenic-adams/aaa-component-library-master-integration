@@ -13,7 +13,66 @@ import MUIIconButton from '@material-ui/core/IconButton';
 import Label from '../../Label/Label';
 import FormFieldMeta from '../../Form/FormFieldMeta/FormFieldMeta';
 
-const styleClasses = theme => {
+interface RequiredProps{
+  id: string,
+  name: string,
+};
+
+interface OptionalProps {
+  autoFocus?: boolean,
+  classes?: any, // MUI Decorator
+  className?: string,
+  centerText?: boolean,
+  formControlClass?: string,
+  disabled?: boolean,
+  disableWarning?: boolean,
+  disableErrorWarning?: boolean,
+  error?: string,
+  forwardedRef?: React.RefObject<any>,
+  helperText?: string,
+  inputComponent?: any,
+  labelName?: string,
+  placeholder?: string,
+  type?: string,
+  value?: string,
+  onBlur?: (evt:React.FocusEvent) => void,
+  onChange?: (evt:React.SyntheticEvent) => void,
+  onClear?: (evt:React.SyntheticEvent) => void,
+  onFocus?: (evt:React.FocusEvent) => void
+}
+
+const defaultProps:OptionalProps = {
+  autoFocus: false,
+  className: '',
+  formControlClass: '',
+  centerText: false,
+  disabled: false,
+  disableWarning: false,
+  helperText: '',
+  inputComponent: undefined,
+  labelName: '',
+  placeholder: '',
+  type: 'text',
+  value: undefined,
+  onBlur: () => {},
+  onChange: () => {},
+  onClear: undefined,
+  onFocus: () => {},
+};
+
+
+const styleClasses = (theme:any): {
+  // CSS Classes
+  root: any,
+  focused: any,
+  disabled: any,
+  input: any,
+  inputAdornment: any,
+  iconButton: any,
+  iconStyle: any,
+  formControlStyle: any,
+  error: any,
+} => {
   return {
     root: {
       padding: '0 12px',
@@ -44,7 +103,7 @@ const styleClasses = theme => {
       boxSizing: 'border-box',
       height: '100%',
       lineHeight: '100%',
-      textAlign: props => props.centerText ? 'center' : 'left',
+      textAlign: (props:{centerText: boolean}) => props.centerText ? 'center' : 'left',
       [theme.breakpoints.up('sm')]: {
         fontSize: 16,
       },
@@ -74,9 +133,6 @@ const styleClasses = theme => {
         maxWidth: 534,
       },
     },
-    helperTextStyleErrorActive: {
-      marginTop: 8,
-    },
     error: {
       boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
       '&$focused': { // TODO
@@ -90,31 +146,8 @@ const styleClasses = theme => {
   };
 };
 
-type propTypes = {
-  // MUI Decorator
-  classes: any,
-  // Passed Props
-  className?: string,
-  formControlClass?: string,
-  disabled?: boolean,
-  disableWarning?: boolean,
-  error?: string,
-  disableErrorWarning?: boolean,
-  helperText?: string,
-  id: string,
-  inputComponent?: any,
-  labelName?: string,
-  name: string,
-  placeholder?: string,
-  type?: string,
-  value?: string,
-  onBlur?: () => void,
-  onChange?: () => void,
-  onClear?: () => void,
-  onFocus?: () => void
-};
 
-function BaseInput({
+const BaseInput:React.FunctionComponent<RequiredProps & OptionalProps> = ({
   autoFocus,
   classes,
   className,
@@ -136,7 +169,7 @@ function BaseInput({
   onChange,
   onClear,
   onFocus,
-}): propTypes {
+}) => {
   return (
     <MUIFormControl
       className={cx(classes.formControlStyle, formControlClass)}
@@ -147,7 +180,7 @@ function BaseInput({
         <Label
           id={id}
           disabled={false}
-          error={false}
+          error={error}
           focused={false}
         >
           {labelName}
@@ -194,7 +227,7 @@ function BaseInput({
         inputRef={forwardedRef}
         inputComponent={inputComponent}
         name={name}
-        placeholder={labelName ? null : placeholder}
+        placeholder={labelName ? '' : placeholder}
         type={type}
         value={value}
         onBlur={onBlur}
@@ -212,24 +245,7 @@ function BaseInput({
   );
 }
 
-BaseInput.defaultProps = {
-  autoFocus: false,
-  className: '',
-  formControlClass: '',
-  centerText: false,
-  disabled: false,
-  disableWarning: false,
-  helperText: null,
-  inputComponent: undefined,
-  labelName: null,
-  placeholder: '',
-  type: 'text',
-  value: undefined,
-  onBlur: () => {},
-  onChange: () => {},
-  onClear: null,
-  onFocus: () => {},
-};
+BaseInput.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
   BaseInput

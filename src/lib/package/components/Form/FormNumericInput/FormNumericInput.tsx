@@ -21,9 +21,9 @@ interface OptionalProps {
  * @return {Function} decoratored onChange
  */
 function handleFormFieldChange(
-  { input }:{input: {name: string, onChange: (evt:any) => void}},
+  { input }:{input: {name: string, onChange: (evt:React.SyntheticEvent) => void}},
   formState:any
- ):(evt:any) => void {
+ ):(evt:React.SyntheticEvent) => void {
   return (evt) => {
     const { name, onChange } = input;
     const { mutators: { setFieldTouched }} = formState;

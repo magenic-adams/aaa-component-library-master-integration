@@ -20,14 +20,14 @@ type OptionalProps = {
  * @return {Function} decoratored onChange
  */
 function handleFormFieldChange(
-  { input }:{input: {name: string, onChange: (val:string) => void}},
+  { input }:{input: {name: string, onChange: (evt:React.SyntheticEvent) => void}},
   formState:any
- ):(val:string) => void {
-  return (val) => {
+ ):(evt:React.SyntheticEvent) => void {
+  return (evt) => {
     const { name, onChange } = input;
     const { mutators: { setFieldTouched }} = formState;
     setFieldTouched(name, false);
-    onChange(val);
+    onChange(evt);
   };
 }
 

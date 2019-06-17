@@ -3,7 +3,30 @@ import { withStyles } from '@material-ui/core/styles';
 import MUIInputLabel from '@material-ui/core/InputLabel';
 import cx from 'clsx';
 
-const styleClasses = theme => ({
+interface RequiredProps {
+  classes: any, // MUI Decorator
+  children: string,
+  id: string,
+};
+
+interface OptionalProps {
+  className?: string,
+  disabled?: boolean,
+  error?: string,
+  focused?: boolean,
+}
+
+const defaultProps:OptionalProps = {
+  className: '',
+  disabled: false,
+  error: '',
+  focused: false,
+}
+
+const styleClasses = (theme:any): {
+  root: any,
+  formControl: any
+} => ({
   root: {
     color: theme.palette.colorVariables.BLACK,
     display: 'block',
@@ -18,19 +41,7 @@ const styleClasses = theme => ({
   },
 });
 
-type propTypes = {
-  // Decorator Props
-  classes: any,
-  // Passed Props
-  children: string,
-  className?: string,
-  disabled?: boolean,
-  error?: boolean,
-  focused?: boolean,
-  id: string,
-};
-
-function Label({
+const Label:React.FunctionComponent<RequiredProps & OptionalProps> = ({
     children,
     classes,
     className,
@@ -38,14 +49,14 @@ function Label({
     error,
     focused,
     id,
-  }): propTypes {
+  }) => {
   return (
     <MUIInputLabel
       className={cx('InputLabel', className)}
       classes={classes}
       disabled={disabled}
       disableAnimation
-      error={error}
+      error={!!error}
       focused={focused}
       htmlFor={id}
       data-quid={`Label-${id}`}
@@ -56,8 +67,6 @@ function Label({
   );
 }
 
-Label.defaultProps = {
-  className: '',
-};
+Label.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(Label);

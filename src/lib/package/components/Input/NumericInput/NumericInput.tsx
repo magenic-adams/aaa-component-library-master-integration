@@ -5,6 +5,8 @@ import MaskedInput from 'react-text-mask';
 import BaseInput from '../BaseInput/BaseInput';
 
 interface RequiredProps {
+  id: string,
+  name: string,
   onChange: (evt:any) => void,
   onClear: (evt:any) => void,
 }
@@ -37,13 +39,17 @@ function TextMaskCustom(mask?:string[]) {
 
 const NumericInput:React.FunctionComponent<RequiredProps & OptionalProps> = (props) => {
   const {
-    mask,
     error,
+    id,
+    name,
+    mask,
     onChange,
     onClear,
   } = props;
   return (
       <BaseInput
+        id={id}
+        name={name}
         inputComponent={TextMaskCustom(mask)}
         error={error}
         onChange={onChange}

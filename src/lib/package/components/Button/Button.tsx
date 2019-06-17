@@ -8,7 +8,7 @@ interface RequiredProps {
   children: string | any,
   disabled?: boolean,
   id: string,
-  forwardedRef?: { current: any },
+  forwardedRef?: React.RefObject<any>,
   onClick: () => {}
 };
 
