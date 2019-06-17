@@ -4,19 +4,18 @@ import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
 interface RequiredProps {
-  className: string | undefined,
   children: string | any,
-  disabled?: boolean,
   id: string,
-  forwardedRef?: React.RefObject<any>,
-  onClick: () => {}
+  onClick: (evt:React.SyntheticEvent) => void
 };
 
 interface OptionalProps {
   classes?: any, // MUI Decorator
   color?: 'primary' | 'secondary',
   className?: string,
+  disabled?: boolean,
   fadeUp?: boolean,
+  forwardedRef?: React.RefObject<any>,
   isIconButton?: boolean,
   href?: string,
 }
@@ -24,6 +23,7 @@ interface OptionalProps {
 const defaultProps:OptionalProps = {
   color: 'primary',
   className: '',
+  disabled: false,
   fadeUp: false,
   isIconButton: false,
   href: '',

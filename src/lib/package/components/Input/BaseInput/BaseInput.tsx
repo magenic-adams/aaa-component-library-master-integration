@@ -13,7 +13,7 @@ import MUIIconButton from '@material-ui/core/IconButton';
 import Label from '../../Label/Label';
 import FormFieldMeta from '../../Form/FormFieldMeta/FormFieldMeta';
 
-interface RequiredProps{
+interface RequiredProps {
   id: string,
   name: string,
 };
