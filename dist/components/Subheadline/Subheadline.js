@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
 type propTypes = {
   // MUI Decorator
-  classes: object,
+  classes: any,
   // Passed Props
-  className: string,
+  className?: string,
   children: string,
 };
 
@@ -38,5 +37,9 @@ function Subheadline({
     </h2>
   );
 }
+
+Subheadline.defaultProps = {
+  className: '',
+};
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(Subheadline);

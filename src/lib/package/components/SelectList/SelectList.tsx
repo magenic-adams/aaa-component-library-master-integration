@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
@@ -10,13 +9,13 @@ import SelectListItemText from '../SelectListItemText/SelectListItemText';
 
 type propTypes = {
   // Decorator Props
-  classes: object,
+  classes: any,
   // Passed Props
   items: [
     {
       id: string | number,
       value: string | number,
-      display: string | number | object,
+      display: string | number,
       selected?: boolean,
       disabled?: boolean
     }

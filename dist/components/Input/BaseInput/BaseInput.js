@@ -35,7 +35,7 @@ const styleClasses = theme => {
       },
     },
     disabled: {
-      background: theme.palette.disabled.main,
+      background: theme.secondaryPalette.disabled.main,
       boxShadow: 'initial',
       '&:hover': {
         boxShadow: 'none',

@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import invariant from 'tiny-invariant';
 import cx from 'clsx';
@@ -8,13 +7,13 @@ import ButtonGroup from '../ButtonGroup/ButtonGroup';
 
 type propTypes = {
   // Decorator Props
-  classes: object,
+  classes: any,
   className?: string,
   // Passed Props
   options: [
     { id: number | string, text: string }
   ],
-  onSelect: PropTypes.func,
+  onSelect: () => void,
   value?: string | number
 };
 

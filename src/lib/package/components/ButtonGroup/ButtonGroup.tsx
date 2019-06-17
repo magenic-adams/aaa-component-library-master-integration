@@ -1,15 +1,14 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
 type propTypes = {
   // Decorator Props
-  classes: object,
+  classes: any,
   // Passed Props
-  children: PropTypes.node,
+  children: any,
   className?: string
 };
 

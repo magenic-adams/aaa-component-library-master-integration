@@ -1,25 +1,77 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import MUIButton from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
-type propTypes = {
-  // MUI Decorator
-  classes: object,
+interface RequiredProps {
   // Passed Props
-  className?: string,
-  children: string | PropTypes.node,
-  color?: 'primary' | 'secondary',
-  disabled: boolean,
-  fadeUp?: boolean,
+  className: string | undefined,
+  children: string | any,
+  disabled?: boolean,
   id: string,
-  href?: boolean,
-  forwardedRef?: { current: {} },
+  forwardedRef?: { current: any },
   onClick: () => {}
 };
 
-const styleClasses = theme => {
+interface OptionalProps {
+  classes?: any, // MUI Decorator
+  color?: 'primary' | 'secondary',
+  className?: string,
+  fadeUp?: boolean,
+  isIconButton?: boolean,
+  href?: string,
+}
+
+const defaultProps:OptionalProps = {
+  color: 'primary',
+  className: '',
+  fadeUp: false,
+  isIconButton: false,
+  href: '',
+};
+
+const styleClasses = (theme:{
+  palette: {
+    primary: {
+      main: string,
+      dark: string,
+    },
+  },
+  secondaryPalette: {
+    colorVariables: {
+      DARKER_BLUE: string,
+      GRAY: string,
+      SECONDARY_HOVER: string,
+      TRANSPARENT: string,
+      WHITE: string,
+    },
+    disabled: {
+      main: string,
+    }
+  },
+  typography: {
+    fontWeight: number,
+    buttonPrimary: {
+      lineHeight: number,
+      fontSize: number,
+      fontWeight: number,
+    },
+    buttonSecondary: {
+      lineHeight: number,
+      fontSize: number,
+      fontWeight: number,
+    }
+  },
+  breakpoints: {
+    up: (breakpoint:string) => string,
+  }}):{
+    root: any,
+    label: any,
+    containedPrimary: any,
+    containedSecondary: any,
+    fadeUp: any,
+    iconButton: any,
+  } => {
   return {
     root: {
       display: 'block',
@@ -27,7 +79,7 @@ const styleClasses = theme => {
       height: 48,
       lineHeight: '48px',
       boxShadow: 'none',
-      color: theme.palette.colorVariables.WHITE,
+      color: theme.secondaryPalette.colorVariables.WHITE,
       padding: '0 16px',
       textTransform: 'none',
       marginTop: 0,
@@ -52,8 +104,8 @@ const styleClasses = theme => {
         background: theme.palette.primary.dark,
       },
       '&:disabled': {
-        background: theme.palette.disabled.main,
-        color: theme.palette.common.white,
+        background: theme.secondaryPalette.disabled.main,
+        color: theme.secondaryPalette.colorVariables.WHITE,
       },
       ...theme.typography.buttonPrimary,
     },
@@ -61,13 +113,13 @@ const styleClasses = theme => {
       color: theme.palette.primary.main,
       border: '1px solid',
       borderColor: theme.palette.primary.main,
-      background: theme.palette.colorVariables.TRANSPARENT,
+      background: theme.secondaryPalette.colorVariables.TRANSPARENT,
       '&:active,&:hover': {
-        background: theme.palette.colorVariables.SECONDARY_HOVER,
+        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
       },
       '&:disabled': {
-        background: theme.palette.colorVariables.TRANSPARENT,
-        borderColor: theme.palette.disabled.main,
+        background: theme.secondaryPalette.colorVariables.TRANSPARENT,
+        borderColor: theme.secondaryPalette.disabled.main,
       },
       fontWeight: theme.typography.fontWeight,
       ...theme.typography.buttonSecondary,
@@ -80,25 +132,25 @@ const styleClasses = theme => {
       verticalAlign: `bottom`,
       width: 48,
       height: 48,
-      border: `1px solid ${theme.palette.colorVariables.GRAY}`,
+      border: `1px solid ${theme.secondaryPalette.colorVariables.GRAY}`,
       borderRadius: 4,
-      backgroundColor: `${theme.palette.colorVariables.WHITE}`,
+      backgroundColor: `${theme.secondaryPalette.colorVariables.WHITE}`,
       '&:active,&:hover': {
         borderWidth: 1,
-        backgroundColor: `${theme.palette.colorVariables.SECONDARY_HOVER}`,
-        borderColor: `${theme.palette.colorVariables.DARKER_BLUE}`,
+        backgroundColor: `${theme.secondaryPalette.colorVariables.SECONDARY_HOVER}`,
+        borderColor: `${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
         '& svg': {
           color: `${theme.palette.primary.main}`,
         },
       },
       '&:disabled': {
-        background: `${theme.palette.disabled.main}`,
+        background: `${theme.secondaryPalette.disabled.main}`,
         border: `none`,
         '&:hover': {
-          backgroundColor: `${theme.palette.disabled.main}`,
+          backgroundColor: `${theme.secondaryPalette.disabled.main}`,
         },
         '& svg': {
-          color: `${theme.palette.colorVariables.GRAY}`,
+          color: `${theme.secondaryPalette.colorVariables.GRAY}`,
         },
       },
       '&:nth-child(n+1)': {
@@ -111,7 +163,7 @@ const styleClasses = theme => {
   };
 };
 
-function Button({
+const Button:React.FunctionComponent<RequiredProps & OptionalProps> = ({
   children,
   className,
   classes,
@@ -120,10 +172,10 @@ function Button({
   id,
   color,
   href,
-  forwardedRef,
+  // forwardedRef,
   onClick,
   isIconButton,
-}: propTypes) {
+}) => {
   return (
     <MUIButton
       className={cx(
@@ -146,7 +198,6 @@ function Button({
       color={color}
       variant="contained"
       href={href}
-      ref={forwardedRef}
       onClick={onClick}
     >
       {children}
@@ -154,12 +205,6 @@ function Button({
   );
 }
 
-Button.defaultProps = {
-  color: 'primary',
-  className: '',
-  fadeUp: false,
-  forwardedRef: {},
-  href: null,
-};
+Button.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(Button);

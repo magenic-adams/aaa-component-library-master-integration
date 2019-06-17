@@ -81,8 +81,8 @@ type propTypes = {
   labelText?: string,
   helperText?: string,
   mask?: string[], // Pass through
-  onIncrease: (React.SyntheticEvent) => void,
-  onDecrease: (React.SyntheticEvent) => void,
+  onIncrease: () => void,
+  onDecrease: () => void,
   value?: number,
 };
 

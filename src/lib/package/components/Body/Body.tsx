@@ -1,19 +1,38 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
 type propTypes = {
   // MUI Decorator
-  classes: object,
+  classes: any,
   // Passed Props
-  className: string,
-  children: string,
-  secondary: boolean,
+  className?: string,
+  children: any,
+  id: string | number,
+  secondary?: boolean,
 };
 
 // Component styles manipulated entirely by theme
-const styleClasses = theme => {
+const styleClasses = (theme:{
+  typography: {
+    color: string,
+    fontFamily: string,
+    fontWeight: string,
+    body1: {
+      color: string,
+      fontFamily: string,
+      fontWeight: string,
+    },
+    body2: {
+      color: string,
+      fontFamily: string,
+      fontWeight: string,
+    }
+  }
+}):{
+  root: any,
+  secondary: any
+} => {
   return {
     root: {
       color: theme.typography.color,
@@ -45,6 +64,11 @@ function Body({
       {children}
     </p>
   );
+}
+
+Body.defaultProps = {
+  className: '',
+  secondary: false,
 }
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(Body);

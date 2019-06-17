@@ -8,8 +8,8 @@
     ],
     "allowJs": true,
     "awesomeTypescriptLoaderOptions": {
-      silent: true,
-      transpileOnly: true
+      "silent": true,
+      "transpileOnly": true
     },
     "skipLibCheck": true,
     "esModuleInterop": true,

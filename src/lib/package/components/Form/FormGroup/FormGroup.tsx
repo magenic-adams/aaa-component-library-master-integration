@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/styles';
 
@@ -13,7 +12,13 @@ const styleClasses = () => ({
   },
 });
 
-function FormGroup({ children, classes, className }) {
+type propTypes = {
+  children: any,
+  classes: any,
+  className?: string,
+};
+
+function FormGroup({ children, classes, className }:propTypes) {
   return (
     <MUIFormGroup
       className={cx('FormGroup', className)}
@@ -25,7 +30,7 @@ function FormGroup({ children, classes, className }) {
 }
 
 FormGroup.defaultProps = {
-  className: string,
+  className: '',
 };
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(FormGroup);

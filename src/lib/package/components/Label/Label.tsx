@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MUIInputLabel from '@material-ui/core/InputLabel';
 import cx from 'clsx';
@@ -21,7 +20,7 @@ const styleClasses = theme => ({
 
 type propTypes = {
   // Decorator Props
-  classes: object,
+  classes: any,
   // Passed Props
   children: string,
   className?: string,

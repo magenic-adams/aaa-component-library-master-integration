@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
 type propTypes = {
   // MUI Decorator
-  classes: object,
+  classes: any,
   // Passed Props
   className: string,
   children: string,

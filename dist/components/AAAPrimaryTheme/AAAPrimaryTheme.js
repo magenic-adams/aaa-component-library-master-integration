@@ -43,19 +43,21 @@ const theme = createMuiTheme({
       main: AAA_COLOR_MAIN_ERROR,
       ERROR_HOVER: AAA_COLOR_MAIN_ERROR_HOVER,
     },
+  },
+  secondaryPalette: {
     disabled: {
       main: AAA_COLOR_MAIN_DISABLED,
     },
-    // These are use defined variables we can use
-    colorVariables: {
-      SECONDARY_HOVER: AAA_COLOR_SECONDARY_HOVER,
-      TRANSPARENT: AAA_COLOR_TRANSPARENT,
-      BLACK: AAA_COLOR_MAIN_BLACK,
-      DARKER_BLUE: AAA_COLOR_MAIN_DARKER_BLUE,
-      VERY_DARK_BLUE: AAA_COLOR_MAIN_VERY_DARK_BLUE,
-      GRAY: AAA_COLOR_MAIN_GRAY,
-      WHITE: AAA_COLOR_MAIN_WHITE,
-    },
+  },
+  // These are use defined variables we can use
+  colorVariables: {
+    SECONDARY_HOVER: AAA_COLOR_SECONDARY_HOVER,
+    TRANSPARENT: AAA_COLOR_TRANSPARENT,
+    BLACK: AAA_COLOR_MAIN_BLACK,
+    DARKER_BLUE: AAA_COLOR_MAIN_DARKER_BLUE,
+    VERY_DARK_BLUE: AAA_COLOR_MAIN_VERY_DARK_BLUE,
+    GRAY: AAA_COLOR_MAIN_GRAY,
+    WHITE: AAA_COLOR_MAIN_WHITE,
   },
   typography: {
     fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',

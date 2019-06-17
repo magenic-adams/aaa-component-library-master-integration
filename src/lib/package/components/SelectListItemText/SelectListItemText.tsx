@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import invariant from 'tiny-invariant';
 
@@ -9,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 type propTypes = {
   // Decorator Props
-  classes: object,
+  classes: any,
   // Passed Props
   item: {
     id: string | number,

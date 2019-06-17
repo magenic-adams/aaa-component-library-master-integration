@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -35,7 +34,7 @@ const styleClasses = theme => {
       },
     },
     disabled: {
-      background: theme.palette.disabled.main,
+      background: theme.secondaryPalette.disabled.main,
       boxShadow: 'initial',
       '&:hover': {
         boxShadow: 'none',
@@ -93,7 +92,7 @@ const styleClasses = theme => {
 
 type propTypes = {
   // MUI Decorator
-  classes: object,
+  classes: any,
   // Passed Props
   className?: string,
   formControlClass?: string,
@@ -103,16 +102,16 @@ type propTypes = {
   disableErrorWarning?: boolean,
   helperText?: string,
   id: string,
-  inputComponent?: PropTypes.element,
+  inputComponent?: any,
   labelName?: string,
   name: string,
   placeholder?: string,
   type?: string,
   value?: string,
-  onBlur?: PropTypes.func,
-  onChange?: PropTypes.func,
-  onClear?: PropTypes.func,
-  onFocus?: PropTypes.func
+  onBlur?: () => void,
+  onChange?: () => void,
+  onClear?: () => void,
+  onFocus?: () => void
 };
 
 function BaseInput({
