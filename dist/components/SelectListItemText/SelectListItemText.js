@@ -1,82 +1,88 @@
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
-import invariant from 'tiny-invariant';
+import invariant from 'tiny-invariant'; // Material Components
 
-// Material Components
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-type propTypes = {
-  // Decorator Props
-  classes: object,
-  // Passed Props
-  item: {
-    id: string | number,
-    value: string | number,
-    display: string | number,
-    selected?: boolean
-  }
+var styleClasses = function styleClasses(theme) {
+  return {
+    root: {
+      height: 48,
+      background: theme.secondaryPalette.colorVariables.TRANSPARENT,
+      '&.Mui-selected, &.Mui-selected:hover': {
+        backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
+      },
+      '&:hover': {
+        backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
+      }
+    },
+    gutters: {
+      padding: '0 13px 0 13px'
+    },
+    divider: {
+      borderBottom: "1px solid ".concat(theme.palette.primary.main),
+      '&:last-child': {
+        borderBottom: 'none'
+      }
+    },
+    primary: _defineProperty({
+      fontSize: 18,
+      letterSpacing: 'normal',
+      fontStretch: 'normal',
+      lineHeight: 1.5
+    }, theme.breakpoints.between('xs', 'sm'), {
+      fontSize: 16
+    })
+  };
 };
 
-const styleClasses = theme => ({
-  root: {
-    height: 48,
-    background: theme.secondaryPalette.colorVariables.TRANSPARENT,
-    '&.Mui-selected, &.Mui-selected:hover': {
-      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
-    },
-    '&:hover': {
-      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
-    },
-  },
-  gutters: {
-    padding: '0 13px 0 13px',
-  },
-  divider: {
-    borderBottom: `1px solid ${theme.palette.primary.main}`,
-    '&:last-child': {
-      borderBottom: 'none',
-    },
-  },
-  primary: {
-    fontSize: 18,
-    letterSpacing: 'normal',
-    fontStretch: 'normal',
-    lineHeight: 1.5,
-    [theme.breakpoints.between('xs', 'sm')]: {
-      fontSize: 16,
-    },
-  },
-});
+function checkValidity(item) {
+  if (!item) {
+    invariant(false, 'You have not passed an item for rendering.');
+  } else {
+    if (!item.id && !item.display) {
+      invariant(false, 'id and display should have value.');
+    }
 
-function isValid(id, display) {
-  if (!id && !display) {
-    invariant(false, 'id and display should have value.');
+    if (!(typeof item.display === 'string' || typeof item.display === 'number')) {
+      invariant(false, 'Invalid display type. It must be string or number');
+    }
   }
-  if (!(typeof display === 'string' || typeof display === 'number')) {
-    invariant(false, 'Invalid display type. It must be string or number');
-  }
-  return true;
 }
 
-function SelectListItemText({ classes, item, onSelect }: propTypes) {
-  const { display, id } = item || {};
-  const { divider, gutters, primary, root } = classes;
+var SelectListItemText = function SelectListItemText(_ref) {
+  var classes = _ref.classes,
+      item = _ref.item,
+      onSelect = _ref.onSelect;
+  checkValidity(item);
+  var display = item.display,
+      id = item.id;
+  var divider = classes.divider,
+      gutters = classes.gutters,
+      primary = classes.primary,
+      root = classes.root;
+  return React.createElement(ListItem, {
+    "data-quid": "SelectListItem-".concat(id),
+    classes: {
+      root: root,
+      divider: divider,
+      gutters: gutters
+    },
+    divider: true,
+    selected: item.selected,
+    onClick: function onClick() {
+      return onSelect(item);
+    }
+  }, React.createElement(ListItemText, {
+    classes: {
+      primary: primary
+    },
+    primary: display
+  }));
+};
 
-  return isValid(id, display) ? (
-    <ListItem
-      data-quid={`SelectListItem-${id}`}
-      classes={{ root, divider, gutters }}
-      divider
-      selected={item.selected}
-      onClick={() => onSelect(item)}
-    >
-      <ListItemText classes={{ primary }} primary={display} />
-    </ListItem>
-  ) : null;
-}
-
-export default withStyles(styleClasses, { withTheme: true })(
-  SelectListItemText
-);
+export default withStyles(styleClasses, {
+  withTheme: true
+})(SelectListItemText);

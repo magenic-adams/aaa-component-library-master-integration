@@ -77,14 +77,14 @@ describe('SelectListItemText', () => {
       });
       expect(() => {
         createSelectListItemTextWithTheme(props);
-      }).to.throw('Invariant failed: id and display should have value.');
+      }).to.throw('Invariant failed: You have not passed an item for rendering.');
 
       props = getFakeProps({
         item: undefined,
       });
       expect(() => {
         createSelectListItemTextWithTheme(props);
-      }).to.throw('Invariant failed: id and display should have value.');
+      }).to.throw('Invariant failed: You have not passed an item for rendering.');
 
       props = getFakeProps({
         item: {},
@@ -98,7 +98,7 @@ describe('SelectListItemText', () => {
       });
       expect(() => {
         createSelectListItemTextWithTheme(props);
-      }).to.throw('Invariant failed: id and display should have value.');
+      }).to.throw('Invariant failed: You have not passed an item for rendering.');
     });
   });
 

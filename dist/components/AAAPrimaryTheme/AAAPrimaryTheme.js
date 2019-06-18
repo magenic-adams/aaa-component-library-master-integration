@@ -1,9 +1,9 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-extraneous-dependencies */
 // https://next.material-ui.com/customization/themes
 import React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
+
+// Augmented themea definition
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 // Colors
 import {
@@ -130,6 +130,7 @@ theme.typography.buttonSecondary = {
   fontSize: 18,
   lineHeight: 1.45,
 };
+
 
 export default function AAAThemeProvider({ children }) {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;

@@ -1,66 +1,50 @@
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
-import List from '@material-ui/core/List';
+import List from '@material-ui/core/List'; // Components
 
-// Components
 import SelectListItemText from '../SelectListItemText/SelectListItemText';
+;
 
-type propTypes = {
-  // Decorator Props
-  classes: object,
-  // Passed Props
-  items: [
-    {
-      id: string | number,
-      value: string | number,
-      display: string | number | PropTypes.node,
-      selected?: boolean,
-      disabled?: boolean
-    }
-  ],
-  type: string,
-  onSelect: PropTypes.func
+var styleClasses = function styleClasses(theme) {
+  return {
+    root: _defineProperty({
+      width: 341,
+      background: theme.secondaryPalette.colorVariables.WHITE,
+      border: "2px solid ".concat(theme.palette.primary.main),
+      borderRadius: 4,
+      padding: '0px',
+      boxShadow: "0 2px 8px 0 ".concat(theme.secondaryPalette.colorVariables.GRAY),
+      '& span': {
+        fontFamily: theme.typography.fontFamily
+      }
+    }, theme.breakpoints.down(321), {
+      width: '100%',
+      border: "1px solid ".concat(theme.palette.primary.main),
+      boxShadow: 'none',
+      borderRadius: 0,
+      '& span': {
+        fontSize: 16
+      }
+    }),
+    fullOverlay: _defineProperty({}, theme.breakpoints.down(415), {
+      width: '100%',
+      border: "1px solid ".concat(theme.palette.primary.main),
+      boxShadow: 'none',
+      borderRadius: 0,
+      '& span': {
+        fontSize: 16
+      }
+    })
+  };
 };
 
-const styleClasses = theme => ({
-  root: {
-    width: 341,
-    background: theme.secondaryPalette.colorVariables.WHITE,
-    border: `2px solid ${theme.palette.primary.main}`,
-    borderRadius: 4,
-    padding: '0px',
-    boxShadow: `0 2px 8px 0 ${theme.secondaryPalette.colorVariables.GRAY}`,
-    '& span': {
-      fontFamily: theme.typography.fontFamily,
-    },
-    [theme.breakpoints.down(321)]: {
-      width: '100%',
-      border: `1px solid ${theme.palette.primary.main}`,
-      boxShadow: 'none',
-      borderRadius: 0,
-      '& span': {
-        fontSize: 16,
-      },
-    },
-  },
-  fullOverlay: {
-    [theme.breakpoints.down(415)]: {
-      width: '100%',
-      border: `1px solid ${theme.palette.primary.main}`,
-      boxShadow: 'none',
-      borderRadius: 0,
-      '& span': {
-        fontSize: 16,
-      },
-    },
-  },
-});
-
 function areItemKeysPresent(items) {
-  return items.every(item => item.id && item.value && item.display);
+  return items.every(function (item) {
+    return item.id && item.value && item.display;
+  });
 }
 
 function areItemsValid(items) {
@@ -69,47 +53,43 @@ function areItemsValid(items) {
   }
 
   if (!areItemKeysPresent(items)) {
-    invariant(
-      false,
-      'Invalid object keys are present. Keys should contain id, value and display'
-    );
+    invariant(false, 'Invalid object keys are present. Keys should contain id, value and display');
   }
+
   return true;
 }
 
-function SelectList({ classes, items, type, onSelect }: propTypes) {
-  return (
-    <Fragment>
-      {areItemsValid(items)
-        ? (() => {
-            switch (type) {
-              case 'primary':
-                return (
-                  <List
-                    dense
-                    className={cx('List', classes.root, {
-                      [classes.fullOverlay]: items.length > 6,
-                    })}
-                  >
-                    {items.map(item => (
-                      <SelectListItemText
-                        key={item.id}
-                        item={item}
-                        onSelect={() => onSelect(item)}
-                      />
-                    ))}
-                  </List>
-                );
-              case 'radioGroup':
-                // TODO: ACL-19 Radio Group
-                return null;
-              default:
-                return null;
+var SelectList = function SelectList(_ref) {
+  var classes = _ref.classes,
+      items = _ref.items,
+      type = _ref.type,
+      _onSelect = _ref.onSelect;
+  return React.createElement(Fragment, null, areItemsValid(items) ? function () {
+    switch (type) {
+      case 'primary':
+        return React.createElement(List, {
+          dense: true,
+          className: cx('List', classes.root, _defineProperty({}, classes.fullOverlay, items.length > 6))
+        }, items.map(function (item) {
+          return React.createElement(SelectListItemText, {
+            key: item.id,
+            item: item,
+            onSelect: function onSelect() {
+              return _onSelect(item);
             }
-          })()
-        : null}
-    </Fragment>
-  );
-}
+          });
+        }));
 
-export default withStyles(styleClasses, { withTheme: true })(SelectList);
+      case 'radioGroup':
+        // TODO: ACL-19 Radio Group
+        return null;
+
+      default:
+        return null;
+    }
+  }() : null);
+};
+
+export default withStyles(styleClasses, {
+  withTheme: true
+})(SelectList);
