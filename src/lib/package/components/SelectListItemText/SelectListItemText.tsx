@@ -6,19 +6,30 @@ import invariant from 'tiny-invariant';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-type propTypes = {
-  // Decorator Props
-  classes: any,
-  // Passed Props
-  item: {
-    id: string | number,
-    value: string | number,
-    display: string | number,
-    selected?: boolean
-  }
-};
+interface selectItem {
+  id: string | number,
+  value: string | number,
+  display?: string | number,
+  selected?: boolean,
+  disabled?: boolean,
+}
 
-const styleClasses = theme => ({
+interface RequiredProps {
+  item: selectItem,
+  onSelect: (item:selectItem) => void
+}
+
+interface OptionalProps {
+  classes?: any,
+}
+
+const styleClasses = (theme:any): {
+  // CSS Classes
+  root: any,
+  gutters: any,
+  divider: any,
+  primary: any,
+} => ({
   root: {
     height: 48,
     background: theme.palette.colorVariables.TRANSPARENT,
@@ -49,7 +60,7 @@ const styleClasses = theme => ({
   },
 });
 
-function isValid(id, display) {
+function isValid(id?:string|number, display?:string|number) {
   if (!id && !display) {
     invariant(false, 'id and display should have value.');
   }
@@ -59,8 +70,12 @@ function isValid(id, display) {
   return true;
 }
 
-function SelectListItemText({ classes, item, onSelect }: propTypes) {
-  const { display, id } = item || {};
+const SelectListItemText:React.FunctionComponent<RequiredProps & OptionalProps> = ({
+  classes,
+  item,
+  onSelect,
+}) => {
+  const { display, id } = item;
   const { divider, gutters, primary, root } = classes;
 
   return isValid(id, display) ? (

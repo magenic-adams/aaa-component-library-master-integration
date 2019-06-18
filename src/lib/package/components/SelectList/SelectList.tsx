@@ -7,24 +7,29 @@ import List from '@material-ui/core/List';
 // Components
 import SelectListItemText from '../SelectListItemText/SelectListItemText';
 
-type propTypes = {
-  // Decorator Props
-  classes: any,
-  // Passed Props
-  items: [
-    {
-      id: string | number,
-      value: string | number,
-      display: string | number,
-      selected?: boolean,
-      disabled?: boolean
-    }
-  ],
+interface selectItem {
+  id: string | number,
+  value: string | number,
+  display: string | number,
+  selected?: boolean,
+  disabled?: boolean
+}
+
+interface RequiredProps {
+  items: selectItem[],
   type: string,
-  onSelect: () => void
+  onSelect: (item:selectItem) => void
 };
 
-const styleClasses = theme => ({
+interface OptionalProps {
+  classes?: any, // MUI Decorator
+}
+
+const styleClasses = (theme:any): {
+  // CSS Classes
+  root: any,
+  fullOverlay: any,
+} => ({
   root: {
     width: 341,
     background: theme.palette.colorVariables.WHITE,
@@ -58,11 +63,11 @@ const styleClasses = theme => ({
   },
 });
 
-function areItemKeysPresent(items) {
+function areItemKeysPresent(items:selectItem[]) {
   return items.every(item => item.id && item.value && item.display);
 }
 
-function areItemsValid(items) {
+function areItemsValid(items:selectItem[]) {
   if (!Array.isArray(items) || items.length === 0) {
     invariant(false, 'items array is empty');
   }
@@ -76,7 +81,12 @@ function areItemsValid(items) {
   return true;
 }
 
-function SelectList({ classes, items, type, onSelect }: propTypes) {
+const SelectList:React.FunctionComponent<RequiredProps & OptionalProps> = ({
+  classes,
+  items,
+  type,
+  onSelect,
+}) => {
   return (
     <Fragment>
       {areItemsValid(items)
