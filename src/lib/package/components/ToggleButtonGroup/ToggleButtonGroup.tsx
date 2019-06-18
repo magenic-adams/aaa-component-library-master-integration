@@ -93,10 +93,10 @@ const styleClasses = (theme:any):{
  * @return {void}
  */
 function handleClick(
-  value:string|number,
+  option:option,
   onSelect:(value:string|number) => void
  ) {
-  onSelect(value);
+  onSelect(option);
 }
 
 /**
@@ -169,7 +169,7 @@ const ToggleButtonGroup:React.FunctionComponent<RequiredProps & OptionalProps> =
             color="secondary"
             id={`ToggleButton-${options[0].id}`}
             disabled={disabled}
-            onClick={() => handleClick(options[0].value, onSelect)}
+            onClick={() => handleClick(options[0], onSelect)}
           >
             {options[0].text}
           </Button>
@@ -183,7 +183,7 @@ const ToggleButtonGroup:React.FunctionComponent<RequiredProps & OptionalProps> =
             color="secondary"
             id={`ToggleButton-${options[1].id}`}
             disabled={disabled}
-            onClick={() => handleClick(options[1].value, onSelect)}
+            onClick={() => handleClick(options[1], onSelect)}
           >
             {options[1].text}
           </Button>

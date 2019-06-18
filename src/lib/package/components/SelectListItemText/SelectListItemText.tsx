@@ -60,14 +60,19 @@ const styleClasses = (theme:any): {
   },
 });
 
-function isValid(id?:string|number, display?:string|number) {
-  if (!id && !display) {
-    invariant(false, 'id and display should have value.');
+function checkValidity(
+  item?: {id?:string|number, display?:string|number}
+  ):void {
+  if (!item){
+    invariant(false, 'You have not passed an item for rendering.');
+  } else {
+    if (!item.id && !item.display) {
+      invariant(false, 'id and display should have value.');
+    }
+    if (!(typeof item.display === 'string' || typeof item.display === 'number')) {
+      invariant(false, 'Invalid display type. It must be string or number');
+    }
   }
-  if (!(typeof display === 'string' || typeof display === 'number')) {
-    invariant(false, 'Invalid display type. It must be string or number');
-  }
-  return true;
 }
 
 const SelectListItemText:React.FunctionComponent<RequiredProps & OptionalProps> = ({
@@ -75,10 +80,11 @@ const SelectListItemText:React.FunctionComponent<RequiredProps & OptionalProps> 
   item,
   onSelect,
 }) => {
+  checkValidity(item); 
   const { display, id } = item;
   const { divider, gutters, primary, root } = classes;
 
-  return isValid(id, display) ? (
+  return (
     <ListItem
       data-quid={`SelectListItem-${id}`}
       classes={{ root, divider, gutters }}
@@ -88,7 +94,7 @@ const SelectListItemText:React.FunctionComponent<RequiredProps & OptionalProps> 
     >
       <ListItemText classes={{ primary }} primary={display} />
     </ListItem>
-  ) : null;
+  );
 }
 
 export default withStyles(styleClasses, { withTheme: true })(

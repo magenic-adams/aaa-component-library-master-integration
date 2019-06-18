@@ -71,7 +71,6 @@ const styleClasses = (theme:{
     fadeUp: any,
     iconButton: any,
   } => {
-    console.log('theme', theme);
   return {
     root: {
       display: 'block',
@@ -172,7 +171,7 @@ const Button:React.FunctionComponent<RequiredProps & OptionalProps> = ({
   id,
   color,
   href,
-  // forwardedRef,
+  forwardedRef,
   onClick,
   isIconButton,
 }) => {
@@ -198,6 +197,7 @@ const Button:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       color={color}
       variant="contained"
       href={href}
+      ref={forwardedRef}
       onClick={onClick}
     >
       {children}
