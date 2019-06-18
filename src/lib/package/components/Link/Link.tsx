@@ -28,7 +28,7 @@ const defaultProps:OptionalProps = {
   href: '',
   onClick: noop,
   onBlur: noop,
-}
+};
 
 const styleClasses = (theme:any):{
   // CSS Classes

@@ -101,7 +101,7 @@ const FormFieldMeta:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       )} 
     </div>
   );
-}
+};
 
 FormFieldMeta.defaultProps = defaultProps;
 

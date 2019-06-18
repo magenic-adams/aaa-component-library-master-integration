@@ -88,15 +88,15 @@ const styleClasses = (theme:any):{
 
 /**
  * Propagates value selected to parent callback
- * @param  {String|Number} value - value passed
+ * @param  {String|Number} option - value passed
  * @param  {Function} onSelect
  * @return {void}
  */
 function handleClick(
-  option:option,
-  onSelect:(value:option) => void
+  opt:option,
+  onSelect:(opt:option) => void
  ) {
-  onSelect(option);
+  onSelect(opt);
 }
 
 /**
@@ -191,7 +191,7 @@ const ToggleButtonGroup:React.FunctionComponent<RequiredProps & OptionalProps> =
       ) : null}
     </Fragment>
   );
-}
+};
 
 ToggleButtonGroup.defaultProps = defaultProps;
 

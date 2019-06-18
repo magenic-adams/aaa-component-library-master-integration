@@ -203,7 +203,7 @@ const Button:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       {children}
     </MUIButton>
   );
-}
+};
 
 Button.defaultProps = defaultProps;
 

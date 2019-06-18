@@ -119,6 +119,6 @@ const SelectList:React.FunctionComponent<RequiredProps & OptionalProps> = ({
         : null}
     </Fragment>
   );
-}
+};
 
 export default withStyles(styleClasses, { withTheme: true })(SelectList);

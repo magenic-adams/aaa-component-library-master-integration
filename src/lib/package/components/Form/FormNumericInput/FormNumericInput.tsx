@@ -87,7 +87,7 @@ function handleFieldClear(
       }}
     />
   );
-}
+};
 
 
 export default FormNumericInput;

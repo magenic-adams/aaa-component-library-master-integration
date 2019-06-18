@@ -21,7 +21,7 @@ const defaultProps:OptionalProps = {
   disabled: false,
   error: '',
   focused: false,
-}
+};
 
 const styleClasses = (theme:any): {
   root: any,
@@ -65,7 +65,7 @@ const Label:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       {children}
     </MUIInputLabel>
   );
-}
+};
 
 Label.defaultProps = defaultProps;
 

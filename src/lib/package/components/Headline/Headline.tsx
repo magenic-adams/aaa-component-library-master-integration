@@ -42,7 +42,7 @@ const Headline:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       {children}
     </h1>
   );
-}
+};
 
 Headline.defaultProps = defaultProps;
 

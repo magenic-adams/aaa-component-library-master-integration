@@ -39,7 +39,7 @@ const Subheadline:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       {children}
     </h2>
   );
-}
+};
 
 Subheadline.defaultProps = {
   className: '',

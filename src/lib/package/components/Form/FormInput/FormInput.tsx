@@ -85,7 +85,7 @@ const FormInput:React.FunctionComponent<RequiredProps & OptionalProps> = (props)
       }}
     />
   );
-}
+};
 
 
 export default FormInput;

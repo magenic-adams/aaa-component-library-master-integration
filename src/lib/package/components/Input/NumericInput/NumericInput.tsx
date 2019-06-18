@@ -65,7 +65,7 @@ const NumericInput:React.FunctionComponent<RequiredProps & OptionalProps> = (pro
       {...props}
     />
   );
- }
+ };
 
 NumericInput.defaultProps = defaultProps;
 

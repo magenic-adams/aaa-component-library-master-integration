@@ -28,7 +28,7 @@ const defaultProps:OptionalProps = {
 const FormGroup:React.FunctionComponent<RequiredProps & OptionalProps> = ({
   children,
   classes,
-  className
+  className,
 }) => {
   return (
     <MUIFormGroup
@@ -38,10 +38,8 @@ const FormGroup:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       {children}
     </MUIFormGroup>
   );
-}
-
-FormGroup.defaultProps = {
-  className: '',
 };
+
+FormGroup.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(FormGroup);

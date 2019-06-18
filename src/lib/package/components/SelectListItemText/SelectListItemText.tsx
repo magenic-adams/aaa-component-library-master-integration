@@ -95,7 +95,7 @@ const SelectListItemText:React.FunctionComponent<RequiredProps & OptionalProps> 
       <ListItemText classes={{ primary }} primary={display} />
     </ListItem>
   );
-}
+};
 
 export default withStyles(styleClasses, { withTheme: true })(
   SelectListItemText

@@ -243,7 +243,7 @@ const BaseInput:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       />
     </MUIFormControl>
   );
-}
+};
 
 BaseInput.defaultProps = defaultProps;
 

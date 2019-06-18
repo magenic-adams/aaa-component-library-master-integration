@@ -13,7 +13,7 @@ interface OptionalProps {
 
 const defaultProps:OptionalProps = {
   className: '',
-}
+};
 
 const styleClasses = (theme:{
   breakpoints: {
@@ -47,10 +47,8 @@ const ButtonGroup:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       {children}
     </div>
   );
-}
-
-ButtonGroup.defaultProps = {
-  className: '',
 };
+
+ButtonGroup.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(ButtonGroup);

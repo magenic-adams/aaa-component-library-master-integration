@@ -38,6 +38,6 @@ const Subtitle:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       {children}
     </div>
   );
-}
+};
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(Subtitle);

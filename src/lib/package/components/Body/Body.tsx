@@ -15,7 +15,7 @@ interface OptionalProps {
 const defaultProps:OptionalProps = {
   className: '',
   secondary: false,
-}
+};
 
 // Component styles manipulated entirely by theme
 const styleClasses = (theme:{
@@ -64,7 +64,7 @@ const Body:React.FunctionComponent<RequiredProps & OptionalProps> = ({
         classes.root,
         { 
           [classes.primary]: !secondary,
-          [classes.secondary]: secondary
+          [classes.secondary]: secondary,
         },
         className,
       )}
@@ -73,11 +73,8 @@ const Body:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       {children}
     </p>
   );
-}
+};
 
-Body.defaultProps = {
-  className: '',
-  secondary: false,
-}
+Body.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(Body);

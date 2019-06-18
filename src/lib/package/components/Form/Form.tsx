@@ -6,7 +6,7 @@ import { Form } from 'react-final-form';
 import setFieldTouched from 'final-form-set-field-touched';
 
 // Types
-import { FormRenderProps } from '../../types/FormRenderProps'
+import { FormRenderProps } from '../../types/form/FormRenderProps';
 
 // Utilities
 import Validate from '../../utilities/validate';
