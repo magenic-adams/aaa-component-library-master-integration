@@ -2,15 +2,20 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
-type propTypes = {
-  // MUI Decorator
-  classes: any,
-  // Passed Props
-  className?: string,
-  children: any,
+interface RequiredProps {
   id: string | number,
+  children: any,
+}
+interface OptionalProps {
+  classes?: any, // MUI Decorator
+  className?: string,
   secondary?: boolean,
-};
+}
+
+const defaultProps:OptionalProps = {
+  className: '',
+  secondary: false,
+}
 
 // Component styles manipulated entirely by theme
 const styleClasses = (theme:{
@@ -31,6 +36,7 @@ const styleClasses = (theme:{
   }
 }):{
   root: any,
+  primary: any,
   secondary: any
 } => {
   return {
@@ -38,25 +44,28 @@ const styleClasses = (theme:{
       color: theme.typography.color,
       fontFamily: theme.typography.fontFamily,
       fontWeight: theme.typography.fontWeight,
-      ...theme.typography.body1,
     },
+    primary: theme.typography.body1,
     secondary: theme.typography.body2,
   };
 };
 
-function Body({
+const Body:React.FunctionComponent<RequiredProps & OptionalProps> = ({
   children,
   className,
   classes,
   id,
   secondary,
-}:propTypes){
+}) => {
   return (
     <p
       className={cx(
         'Body',
         classes.root,
-        { [classes.secondary]: secondary },
+        { 
+          [classes.primary]: !secondary,
+          [classes.secondary]: secondary
+        },
         className,
       )}
       data-quid={`Body-${id}`}

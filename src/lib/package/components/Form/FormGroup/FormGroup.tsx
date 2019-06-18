@@ -12,13 +12,24 @@ const styleClasses = () => ({
   },
 });
 
-type propTypes = {
+interface RequiredProps {
   children: any,
-  classes: any,
+};
+
+interface OptionalProps {
+  classes?: any, // MUI Decorator
   className?: string,
 };
 
-function FormGroup({ children, classes, className }:propTypes) {
+const defaultProps:OptionalProps = {
+  className: '',
+};
+
+const FormGroup:React.FunctionComponent<RequiredProps & OptionalProps> = ({
+  children,
+  classes,
+  className
+}) => {
   return (
     <MUIFormGroup
       className={cx('FormGroup', className)}

@@ -16,7 +16,7 @@ interface RequiredProps {
   id: string | number,
   children: any,
   options: option[],
-  onSelect: (value:string|number) => void
+  onSelect: (option:option) => void
 }
 
 interface OptionalProps {
@@ -89,12 +89,12 @@ const styleClasses = (theme:any):{
 /**
  * Propagates value selected to parent callback
  * @param  {String|Number} value - value passed
- * @param  {Function} callback
+ * @param  {Function} onSelect
  * @return {void}
  */
 function handleClick(
   option:option,
-  onSelect:(value:string|number) => void
+  onSelect:(value:option) => void
  ) {
   onSelect(option);
 }

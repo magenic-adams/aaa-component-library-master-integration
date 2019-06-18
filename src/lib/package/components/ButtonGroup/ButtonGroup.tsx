@@ -1,22 +1,28 @@
-/* eslint-disable react/require-default-props */
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
-type propTypes = {
-  // Decorator Props
-  classes: any,
-  // Passed Props
+interface RequiredProps {
   children: any,
+};
+
+interface OptionalProps {
+  classes?: any,
   className?: string
 };
+
+const defaultProps:OptionalProps = {
+  className: '',
+}
 
 const styleClasses = (theme:{
   breakpoints: {
     up: (breakpoint:string) => string
   }
-}) => ({
+}): {
+  // CSS Classes
+  root: any
+} => ({
   root: {
     width: '100%',
     marginTop: 24,
@@ -31,11 +37,11 @@ const styleClasses = (theme:{
 });
 
 
-function ButtonGroup({
+const ButtonGroup:React.FunctionComponent<RequiredProps & OptionalProps> = ({
   children,
   classes,
   className,
-}:propTypes){
+}) => {
   return (
     <div className={cx('ButtonGroup', classes.root, className)}>
       {children}
