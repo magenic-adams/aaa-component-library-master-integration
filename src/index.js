@@ -10,6 +10,7 @@ import {
   Link as TextLink,
   SelectList,
 } from './lib/package/components';
+import NumericalStepper from './lib/package/components/Stepper/NumericalStepper';
 
 const handleSelectItem = selectedItem => {
   console.log('selectedItem', selectedItem);
@@ -24,6 +25,14 @@ const items = [
   { id: 6, value: 6, display: '6th item' },
   { id: 7, value: 7, display: '7th Item' },
 ];
+
+const overrideDefaultStepperStyles = () => {
+  return {
+    label: {
+      color: '#9ACD32', // yellow,
+    },
+  };
+};
 
 const App = () => {
   return (
@@ -87,6 +96,17 @@ const App = () => {
         type="primary"
         items={items}
         onSelect={selectedOption => handleSelectItem(selectedOption)}
+      />
+      <br />
+      <br />
+      <NumericalStepper
+        id="3"
+        overrides={overrideDefaultStepperStyles()}
+        labelText="Numerical stepper with style overrides"
+        helperText="This is a helper message"
+        mask={[/\d/, /\d/]}
+        onIncrease={() => {}}
+        onDecrease={() => {}}
       />
     </AAAPrimaryTheme>
   );
