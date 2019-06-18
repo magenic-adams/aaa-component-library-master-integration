@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/styles';
 // Material UI Components
 import MUIFormControl from '@material-ui/core/FormControl';
 import MUIAddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
+import MUIRemoveIcon from '@material-ui/icons/Remove';
 
 // Components
 import FormFieldMeta from '../Form/FormFieldMeta/FormFieldMeta';
@@ -19,8 +19,37 @@ import {
   AAA_CSS_MIDDLE,
 } from '../../constants/cssConstants';
 
+interface RequiredProps {
+  id: string,
+  name: string,
+  children: string | React.ReactElement | React.ReactHTMLElement<any>,
+  onDecrease: (evt:React.SyntheticEvent) => void,
+  onIncrease: (evt:React.SyntheticEvent) => void,
+}
 
-const styleClasses = theme => ({
+interface OptionalProps {
+  classes?: any, // MUI Decorator
+  disabled?: boolean,
+  disableWarning?: boolean,
+  error?: string,
+  helperText?: string,
+  labelText?: string | React.ReactElement | React.ReactHTMLElement<any>,
+  mask?: string[], // Pass through
+  value?: number,
+}
+
+const defaultProps: OptionalProps = {
+  disabled: false,
+  disableWarning: false,
+  error: '',
+  helperText: '',
+  labelText: '',
+  mask: [],
+  value: 0,
+};
+
+
+const styleClasses = (theme:any) => ({
   stepperIcon: {
     width: 24,
     height: '100%',
@@ -67,53 +96,36 @@ const styleClasses = theme => ({
   },
 });
 
-type propTypes = {
-  // Decorator Prop
-  classes: {
-    actionWrapper: string,
-    stepperIcon: string,
-    root: string
-  },
-  // Passed Props
-  id: string,
-  disabled?: boolean,
-  error?: string,
-  labelText?: string,
-  helperText?: string,
-  mask?: string[], // Pass through
-  onIncrease: () => void,
-  onDecrease: () => void,
-  value?: number,
-};
-
-const NumericalStepper = (props:propTypes) => {
-  const {
-    classes,
-    disabled,
-    disableWarning,
-    error,
-    helperText,
-    id,
-    labelText,
-    mask,
-    onIncrease,
-    onDecrease,
-    value,
-  } = props;
+const NumericalStepper:React.FunctionComponent<RequiredProps & OptionalProps> = ({
+  classes,
+  disabled,
+  disableWarning,
+  error,
+  helperText,
+  id,
+  labelText,
+  mask,
+  name,
+  onIncrease,
+  onDecrease,
+  value,
+}) => {
   return (
     <MUIFormControl
       id={id}
       disabled={disabled}
       classes={classes.root}
     >
-      <Label
-        id={`NumericalStepperLabel-${id}`}
-        disabled={false}
-        error={false}
-        focused={false}
-      >
-        {labelText}
-      </Label>
+      {labelText && (
+        <Label
+          id={`NumericalStepperLabel-${id}`}
+          disabled={false}
+          error={error}
+          focused={false}
+        >
+          {labelText}
+        </Label>
+      )}
       <div className={classes.actionWrapper}>
         <StepperButton
           id={`DecreaseStepper-${id}`}
@@ -121,18 +133,17 @@ const NumericalStepper = (props:propTypes) => {
           onClick={onDecrease}
           isIconButton
         >
-          <RemoveIcon
+          <MUIRemoveIcon
             data-quid={`RemoveIcon-${id}`}
-            disabled={disabled}
             className={classes.stepperIcon}
           />
         </StepperButton>
 
         <div className={classes.stepperInputWrapper}>
           <NumericInput
+            name={name}
             id={`NumericalStepperInput-${id}`}
             centerText
-            type="text"
             value={value}
             error={error}
             disabled={disabled}
@@ -163,15 +174,7 @@ const NumericalStepper = (props:propTypes) => {
   );
 };
 
-NumericalStepper.defaultProps = {
-  classes: {},
-  disabled: false,
-  labelText: '',
-  helperText: '',
-  mask: [],
-  error: '',
-  value: 1,
-};
+NumericalStepper.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
   NumericalStepper

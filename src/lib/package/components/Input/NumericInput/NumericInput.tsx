@@ -7,18 +7,26 @@ import BaseInput from '../BaseInput/BaseInput';
 interface RequiredProps {
   id: string,
   name: string,
-  onChange: (evt:any) => void,
-  onClear: (evt:any) => void,
 }
 
 interface OptionalProps {
+  centerText?: boolean,
+  disabled?: boolean,
+  disableWarning?: boolean,
   error?: string,
+  forwardedRef?: React.RefObject<any>,
   mask?: string[],
-  forwardedRef?: React.RefObject<any>
+  type?: string,
+  value?: number,
+  onChange?: (evt:any) => void,
+  onClear?: (evt:any) => void,
 };
 
 const defaultProps:OptionalProps = {
+  centerText: false,
+  disabled: false,
   error: '',
+  type: 'number',
   mask: [],
 };
 
@@ -47,15 +55,15 @@ const NumericInput:React.FunctionComponent<RequiredProps & OptionalProps> = (pro
     onClear,
   } = props;
   return (
-      <BaseInput
-        id={id}
-        name={name}
-        inputComponent={TextMaskCustom(mask)}
-        error={error}
-        onChange={onChange}
-        onClear={onClear}
-        {...props}
-      />
+    <BaseInput
+      id={id}
+      name={name}
+      inputComponent={TextMaskCustom(mask)}
+      error={error}
+      onChange={onChange}
+      onClear={onClear}
+      {...props}
+    />
   );
  }
 

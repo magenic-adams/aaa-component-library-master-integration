@@ -34,7 +34,7 @@ interface OptionalProps {
   labelName?: string,
   placeholder?: string,
   type?: string,
-  value?: string,
+  value?: string | number,
   onBlur?: (evt:React.FocusEvent) => void,
   onChange?: (evt:React.SyntheticEvent) => void,
   onClear?: (evt:React.SyntheticEvent) => void,

@@ -5,7 +5,7 @@ import cx from 'clsx';
 
 interface RequiredProps {
   classes: any, // MUI Decorator
-  children: string,
+  children: string | React.ReactElement | React.ReactHTMLElement<any>,
   id: string,
 };
 
