@@ -36,7 +36,7 @@ const styleClasses = theme => ({
           fontWeight: '700 !important',
         },
         '&:hover': {
-          background: theme.palette.colorVariables.SECONDARY_HOVER,
+          background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
         },
       },
     },
@@ -52,15 +52,15 @@ const styleClasses = theme => ({
   },
   active: {
     background: `${theme.palette.primary.dark} !important`,
-    color: `${theme.palette.colorVariables.WHITE} !important`,
+    color: `${theme.secondaryPalette.colorVariables.WHITE} !important`,
     '&:hover': {
       background: theme.palette.primary.dark,
     },
     [theme.breakpoints.down('sm')]: {
-      background: `${theme.palette.colorVariables.SECONDARY_HOVER} !important`,
+      background: `${theme.secondaryPalette.colorVariables.SECONDARY_HOVER} !important`,
       color: `${theme.palette.primary.main} !important`,
       '&:hover': {
-        background: theme.palette.colorVariables.SECONDARY_HOVER,
+        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
       },
     },
   },

@@ -9,7 +9,7 @@ const styleClasses = theme => {
       minHeight: 26,
     },
     helperTextStyle: {
-      color: theme.palette.colorVariables.GRAY,
+      color: theme.secondaryPalette.colorVariables.GRAY,
       [theme.breakpoints.up('sm')]: {
         fontSize: 14,
       },

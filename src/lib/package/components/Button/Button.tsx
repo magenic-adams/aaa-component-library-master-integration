@@ -71,6 +71,7 @@ const styleClasses = (theme:{
     fadeUp: any,
     iconButton: any,
   } => {
+    console.log('theme', theme);
   return {
     root: {
       display: 'block',

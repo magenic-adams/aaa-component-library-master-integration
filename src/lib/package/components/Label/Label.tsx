@@ -28,7 +28,7 @@ const styleClasses = (theme:any): {
   formControl: any
 } => ({
   root: {
-    color: theme.palette.colorVariables.BLACK,
+    color: theme.secondaryPalette.colorVariables.BLACK,
     display: 'block',
     marginBottom: -8,
     fontFamily: theme.typography.fontFamily,

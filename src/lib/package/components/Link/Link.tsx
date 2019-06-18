@@ -36,7 +36,7 @@ const styleClasses = (theme:any):{
   secondary: any,
 } => ({
   primary: {
-    color: theme.palette.colorVariables.DARKER_BLUE,
+    color: theme.secondaryPalette.colorVariables.DARKER_BLUE,
     cursor: 'pointer',
     fontSize: 18,
     fontWeight: 'normal',
@@ -51,11 +51,11 @@ const styleClasses = (theme:any):{
       padding: '13.5px 0 13.5px 0',
     },
     '&:hover': {
-      color: theme.palette.colorVariables.VERY_DARK_BLUE,
+      color: theme.secondaryPalette.colorVariables.VERY_DARK_BLUE,
     },
   },
   secondary: {
-    color: theme.palette.colorVariables.DARKER_BLUE,
+    color: theme.secondaryPalette.colorVariables.DARKER_BLUE,
     cursor: 'pointer',
     fontWeight: 500,
     fontSize: 16,
@@ -71,7 +71,7 @@ const styleClasses = (theme:any):{
       padding: '14.5px 0 14.5px 0',
     },
     '&:hover': {
-      color: theme.palette.colorVariables.VERY_DARK_BLUE,
+      color: theme.secondaryPalette.colorVariables.VERY_DARK_BLUE,
     },
   },
 });

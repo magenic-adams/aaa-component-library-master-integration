@@ -32,11 +32,11 @@ const styleClasses = (theme:any): {
 } => ({
   root: {
     width: 341,
-    background: theme.palette.colorVariables.WHITE,
+    background: theme.secondaryPalette.colorVariables.WHITE,
     border: `2px solid ${theme.palette.primary.main}`,
     borderRadius: 4,
     padding: '0px',
-    boxShadow: `0 2px 8px 0 ${theme.palette.colorVariables.GRAY}`,
+    boxShadow: `0 2px 8px 0 ${theme.secondaryPalette.colorVariables.GRAY}`,
     '& span': {
       fontFamily: theme.typography.fontFamily,
     },

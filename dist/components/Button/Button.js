@@ -15,7 +15,7 @@ const styleClasses = function styleClasses(theme) {
       height: 48,
       lineHeight: '48px',
       boxShadow: 'none',
-      color: theme.palette.colorVariables.WHITE,
+      color: theme.secondaryPalette.colorVariables.WHITE,
       padding: '0 16px',
       textTransform: 'none',
       marginTop: 0,
@@ -46,12 +46,12 @@ const styleClasses = function styleClasses(theme) {
       color: theme.palette.primary.main,
       border: '1px solid',
       borderColor: theme.palette.primary.main,
-      background: theme.palette.colorVariables.TRANSPARENT,
+      background: theme.secondaryPalette.colorVariables.TRANSPARENT,
       '&:active,&:hover': {
-        background: theme.palette.colorVariables.SECONDARY_HOVER,
+        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
       },
       '&:disabled': {
-        background: theme.palette.colorVariables.TRANSPARENT,
+        background: theme.secondaryPalette.colorVariables.TRANSPARENT,
         borderColor: theme.secondaryPalette.disabled.main,
       },
       fontWeight: theme.typography.fontWeight,
@@ -64,13 +64,13 @@ const styleClasses = function styleClasses(theme) {
       verticalAlign: 'bottom',
       width: 48,
       height: 48,
-      border: '1px solid '.concat(theme.palette.colorVariables.GRAY),
+      border: '1px solid '.concat(theme.secondaryPalette.colorVariables.GRAY),
       borderRadius: 4,
-      backgroundColor: ''.concat(theme.palette.colorVariables.WHITE),
+      backgroundColor: ''.concat(theme.secondaryPalette.colorVariables.WHITE),
       '&:active,&:hover': {
         borderWidth: 1,
-        backgroundColor: ''.concat(theme.palette.colorVariables.SECONDARY_HOVER),
-        borderColor: ''.concat(theme.palette.colorVariables.DARKER_BLUE),
+        backgroundColor: ''.concat(theme.secondaryPalette.colorVariables.SECONDARY_HOVER),
+        borderColor: ''.concat(theme.secondaryPalette.colorVariables.DARKER_BLUE),
         '& svg': {
           color: ''.concat(theme.palette.primary.main),
         },
@@ -82,7 +82,7 @@ const styleClasses = function styleClasses(theme) {
           backgroundColor: ''.concat(theme.secondaryPalette.disabled.main),
         },
         '& svg': {
-          color: ''.concat(theme.palette.colorVariables.GRAY),
+          color: ''.concat(theme.secondaryPalette.colorVariables.GRAY),
         },
       },
       '&:nth-child(n+1)': {

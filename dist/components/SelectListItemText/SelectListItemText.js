@@ -22,12 +22,12 @@ type propTypes = {
 const styleClasses = theme => ({
   root: {
     height: 48,
-    background: theme.palette.colorVariables.TRANSPARENT,
+    background: theme.secondaryPalette.colorVariables.TRANSPARENT,
     '&.Mui-selected, &.Mui-selected:hover': {
-      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER,
+      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
     },
     '&:hover': {
-      backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER,
+      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
     },
   },
   gutters: {

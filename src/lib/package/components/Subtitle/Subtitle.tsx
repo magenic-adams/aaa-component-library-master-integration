@@ -2,16 +2,18 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
-type propTypes = {
-  // MUI Decorator
-  classes: any,
-  // Passed Props
-  className: string,
-  children: string,
-};
+interface RequiredProps {
+  id: string | number,
+  children: any,
+}
+
+interface OptionalProps {
+  classes?: any, // MUI Decorator
+  className?: string,
+}
 
 // Component styles manipulated entirely by theme
-const styleClasses = theme => {
+const styleClasses = (theme:any) => {
   return {
     root: {
       color: theme.typography.color,
@@ -22,12 +24,12 @@ const styleClasses = theme => {
   };
 };
 
-function Subtitle({
+const Subtitle:React.FunctionComponent<RequiredProps & OptionalProps> = ({
   children,
   className,
   classes,
   id,
-}:propTypes){
+}) => {
   return (
     <div
       className={cx('Subtitle', classes.root, className)}

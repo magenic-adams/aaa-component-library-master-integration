@@ -7,10 +7,6 @@
       "esnext"
     ],
     "allowJs": true,
-    "awesomeTypescriptLoaderOptions": {
-      "silent": true,
-      "transpileOnly": true
-    },
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

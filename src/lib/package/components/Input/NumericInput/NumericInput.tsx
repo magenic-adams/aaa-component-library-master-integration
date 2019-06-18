@@ -26,7 +26,7 @@ const defaultProps:OptionalProps = {
   centerText: false,
   disabled: false,
   error: '',
-  type: 'number',
+  type: 'text',
   mask: [],
 };
 

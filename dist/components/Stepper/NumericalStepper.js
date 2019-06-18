@@ -31,7 +31,7 @@ const styleClasses = theme => ({
     width: 78,
   },
   stepperLabel: {
-    color: theme.palette.colorVariables.BLACK,
+    color: theme.secondaryPalette.colorVariables.BLACK,
     marginTop: 8,
     fontSize: '16px',
     [theme.breakpoints.up('md')]: {
@@ -42,7 +42,7 @@ const styleClasses = theme => ({
     margin: '16px 0 6px 0',
   },
   helperText: {
-    color: theme.palette.colorVariables.GRAY,
+    color: theme.secondaryPalette.colorVariables.GRAY,
     marginTop: 8,
     '& span': {
       fontSize: 14,

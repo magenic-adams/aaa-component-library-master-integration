@@ -42,6 +42,8 @@ const theme = createMuiTheme({
       main: AAA_COLOR_MAIN_ERROR,
       ERROR_HOVER: AAA_COLOR_MAIN_ERROR_HOVER,
     },
+  },
+  secondaryPalette: {
     disabled: {
       main: AAA_COLOR_MAIN_DISABLED,
     },

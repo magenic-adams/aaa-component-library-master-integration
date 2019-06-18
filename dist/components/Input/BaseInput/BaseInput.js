@@ -22,16 +22,16 @@ const styleClasses = theme => {
       width: '100%',
       border: 0,
       borderRadius: 4,
-      background: theme.palette.colorVariables.WHITE,
-      boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.GRAY}`,
+      background: theme.secondaryPalette.colorVariables.WHITE,
+      boxShadow: `inset 0 0 0 1px ${theme.secondaryPalette.colorVariables.GRAY}`,
       '&:hover,&:active': {
-        boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.DARKER_BLUE}`,
+        boxShadow: `inset 0 0 0 1px ${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
       },
     },
     focused: {
-      boxShadow: `inset 0 0 0 2px ${theme.palette.colorVariables.DARKER_BLUE}`,
+      boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
       '&:hover': {
-        boxShadow: `inset 0 0 0 2px ${theme.palette.colorVariables.DARKER_BLUE}`,
+        boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
       },
     },
     disabled: {
