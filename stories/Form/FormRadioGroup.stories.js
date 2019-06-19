@@ -7,6 +7,10 @@ import { action } from '@storybook/addon-actions';
 import Paper from '@material-ui/core/Paper';
 
 // Components
+import { FormControlLabel } from '@material-ui/core';
+import { Field } from 'react-final-form';
+import { Radio } from 'final-form-material-ui';
+
 import {
   AAAPrimaryTheme,
   Button,
@@ -19,9 +23,9 @@ import {
 } from '../../src/lib/package/components';
 
 const VALIDATIONS = {
-  // firstName: {
-  //   required: 'First name is required',
-  // },
+  firstName: {
+    required: 'First name is required',
+  },
   cars: {
     required: '',
   },
@@ -44,19 +48,19 @@ class FormRadioGroupContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { selectedIds: [] };
+    this.state = { selectedId: null, selectedIds: [] };
   }
 
-  handleSelect = selectedItem => {
+  handleSelect = item => {
     const { selectedIds } = this.state;
     this.setState({
-      selectedId: selectedItem.id,
-      selectedIds: [...selectedIds, selectedItem.id],
+      selectedId: item.id,
+      selectedIds: [...selectedIds, item.id],
     });
   };
 
   render() {
-    const { selectedId, selectedIds } = this.state;
+    const { selectedId } = this.state;
     const { items } = this.props;
     return (
       <AAAPrimaryTheme>
@@ -65,36 +69,26 @@ class FormRadioGroupContainer extends Component {
             <Form
               validations={VALIDATIONS}
               onSubmit={handleFormValueSubmission}
-              render={({
-                allRequiredFieldsHaveBeenVisited,
-                invalid,
-                handleSubmit,
-                values,
-              }) => {
+              render={({ allRequiredFieldsHaveBeenVisited, handleSubmit }) => {
                 return (
                   <form onSubmit={handleSubmit}>
-                    <pre>{JSON.stringify(values, 0, 2)}</pre>
+                    <FormInput
+                      autoFocus
+                      name="firstName"
+                      id="firstName"
+                      labelName="First name"
+                      type="text"
+                    />
                     <FormGroup>
-                      <FormInput
-                        autoFocus
-                        name="firstName"
-                        id="firstName"
-                        labelName="First name"
-                        type="text"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <FormRadioGroup
-                        type="multi-select"
+                      <RadioGroup
                         name="cars"
                         id="cars"
                         instructionLabel="Choose One:"
                         items={items}
-                        selectedIds={selectedIds}
+                        selectedId={selectedId}
                         onSelect={this.handleSelect}
                       />
                     </FormGroup>
-
                     <ButtonGroup>
                       <Button
                         disabled={!allRequiredFieldsHaveBeenVisited}

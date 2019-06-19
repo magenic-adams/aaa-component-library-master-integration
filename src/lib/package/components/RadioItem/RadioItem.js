@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'clsx';
 import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
-import Radio from '@material-ui/core/Radio';
+import MUIRadio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Field } from 'react-final-form';
 
 type propTypes = {
   // Decorator Props
@@ -69,6 +70,28 @@ function isValidItem(item) {
   return true;
 }
 
+const Radio = ({ props }) => {
+  const {
+    classes: { root },
+    input: { name, onBlur, onFocus },
+    checked,
+    value,
+    onChange,
+  } = props;
+  return (
+    <MUIRadio
+      onChange={onChange}
+      classes={{ root }}
+      name={name}
+      onBlur={onBlur}
+      onFocus={onFocus}
+      checked={checked}
+      value={value}
+      color="primary"
+    />
+  );
+};
+
 function RadioItem({
   classes,
   checked,
@@ -93,7 +116,7 @@ function RadioItem({
       disabled={disabled}
       onChange={() => onSelect(item)}
       control={
-        <Radio
+        <Field
           name={name}
           key={`RadioItem-${id}`}
           classes={{
@@ -102,7 +125,9 @@ function RadioItem({
           disabled={disabled}
           checked={checked}
           color="primary"
+          item={item}
           onChange={() => onSelect(item)}
+          render={fieldProps => <Radio props={fieldProps} />}
         />
       }
       label={text}
