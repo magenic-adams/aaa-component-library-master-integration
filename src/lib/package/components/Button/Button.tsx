@@ -47,7 +47,6 @@ const styleClasses = (theme:Theme):{
       height: 48,
       lineHeight: '48px',
       boxShadow: 'none',
-      color: theme.secondaryPalette.colorVariables.WHITE,
       padding: '0 16px',
       textTransform: 'none',
       marginTop: 0,
@@ -67,6 +66,7 @@ const styleClasses = (theme:Theme):{
       fontSize: 18,
     },
     containedPrimary: {
+      ...theme.typographyElements.buttonPrimary,
       background: theme.palette.primary.main,
       '&:active,&:hover': {
         background: theme.palette.primary.dark,
@@ -75,10 +75,9 @@ const styleClasses = (theme:Theme):{
         background: theme.secondaryPalette.disabled.main,
         color: theme.secondaryPalette.colorVariables.WHITE,
       },
-      ...theme.typographyElements.buttonPrimary,
     },
     containedSecondary: {
-      color: theme.palette.primary.main,
+      ...theme.typographyElements.buttonSecondary,
       border: '1px solid',
       borderColor: theme.palette.primary.main,
       background: theme.secondaryPalette.colorVariables.TRANSPARENT,
@@ -90,7 +89,6 @@ const styleClasses = (theme:Theme):{
         borderColor: theme.secondaryPalette.disabled.main,
       },
       fontWeight: theme.typographyValues.fontWeight,
-      ...theme.typographyElements.buttonSecondary,
     },
     fadeUp: {
       transform: 'translateY(-8px)',

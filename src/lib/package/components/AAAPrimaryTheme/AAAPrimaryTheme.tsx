@@ -42,7 +42,7 @@ const theme = createStyleTheme({
       main: AAA_COLOR_MAIN_ERROR,
     },
   },
-  secondaryPalette: { // ** Client library defined **
+  secondaryPalette: { // ** Client Library Defined **
     disabled: {
       main: AAA_COLOR_MAIN_DISABLED,
     },
@@ -58,7 +58,7 @@ const theme = createStyleTheme({
       WHITE: AAA_COLOR_MAIN_WHITE,
     },
   },
-  typographyValues: { // ** Client library defined **
+  typographyValues: { // ** Client Library Defined **
     color: AAA_COLOR_MAIN_BLACK,
     fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',
     fontStyle: 'regular',
@@ -137,9 +137,9 @@ theme.typography.body2 = {
   },
 };
 
-// Client defined
+// ** Client Library Defined **
 theme.typographyElements.buttonPrimary = {
-  color: theme.typographyValues.color,
+  color: theme.secondaryPalette.colorVariables.WHITE,
   fontFamily: theme.typographyValues.fontFamily,
   fontStyle: theme.typographyValues.fontStyle,
   fontWeight: 500,
@@ -149,9 +149,9 @@ theme.typographyElements.buttonPrimary = {
     fontSize: 20,
   },
 };
-
+// ** Client Library Defined **
 theme.typographyElements.buttonSecondary = {
-  color: theme.typographyValues.color,
+  color: theme.palette.primary.main,
   fontFamily: theme.typographyValues.fontFamily,
   fontStyle: theme.typographyValues.fontStyle,
   fontWeight: theme.typographyValues.fontWeight,
