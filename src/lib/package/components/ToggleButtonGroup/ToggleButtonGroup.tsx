@@ -2,9 +2,13 @@ import React, { Fragment } from 'react';
 import { withStyles } from '@material-ui/styles';
 import invariant from 'tiny-invariant';
 import cx from 'clsx';
+
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
+// Material UI Components
 import Button from '../Button/Button';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
-
 
 interface option {
   id: string | number,
@@ -32,7 +36,7 @@ const defaultProps:OptionalProps = {
   value: '',
 };
 
-const styleClasses = (theme:any):{
+const styleClasses = (theme:Theme):{
   // CSS Classes
   root: any,
   left: any,

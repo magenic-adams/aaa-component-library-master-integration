@@ -2,6 +2,9 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import invariant from 'tiny-invariant';
 
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
 // Material Components
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -23,7 +26,7 @@ interface OptionalProps {
   classes?: any,
 }
 
-const styleClasses = (theme:any): {
+const styleClasses = (theme:Theme): {
   // CSS Classes
   root: any,
   gutters: any,
@@ -62,7 +65,7 @@ const styleClasses = (theme:any): {
 
 function checkValidity(
   item?: {id?:string|number, display?:string|number}
-  ):void {
+):void {
   if (!item){
     invariant(false, 'You have not passed an item for rendering.');
   } else {

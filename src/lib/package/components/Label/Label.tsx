@@ -3,6 +3,9 @@ import { withStyles } from '@material-ui/core/styles';
 import MUIInputLabel from '@material-ui/core/InputLabel';
 import cx from 'clsx';
 
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
 interface RequiredProps {
   classes: any, // MUI Decorator
   children: string | React.ReactElement | React.ReactHTMLElement<any>,
@@ -23,7 +26,7 @@ const defaultProps:OptionalProps = {
   focused: false,
 };
 
-const styleClasses = (theme:any): {
+const styleClasses = (theme:Theme): {
   root: any,
   formControl: any
 } => ({
@@ -31,8 +34,8 @@ const styleClasses = (theme:any): {
     color: theme.secondaryPalette.colorVariables.BLACK,
     display: 'block',
     marginBottom: -8,
-    fontFamily: theme.typography.fontFamily,
-    fontWeight: theme.typography.fontWeight,
+    fontFamily: theme.typographyValues.fontFamily,
+    fontWeight: theme.typographyValues.fontWeight,
     ...theme.typography.body1,
   },
   formControl: {

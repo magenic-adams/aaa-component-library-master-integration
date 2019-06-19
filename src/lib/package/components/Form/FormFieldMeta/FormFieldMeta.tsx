@@ -3,6 +3,9 @@ import MUIReportProblem from '@material-ui/icons/ReportProblem';
 import MUIFormHelperText from '@material-ui/core/FormHelperText';
 import { withStyles } from '@material-ui/core/styles';
 
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
 interface RequiredProps {
   id: string,
 };
@@ -20,7 +23,8 @@ const defaultProps:OptionalProps = {
   disableWarning: false,
 };
 
-const styleClasses = (theme:any): { // CSS Classes
+const styleClasses = (theme:Theme): {
+    // CSS Classes
     root: any,
     helperTextStyle: any,
     errorIcon: any,

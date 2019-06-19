@@ -1,34 +1,35 @@
-import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
+import _objectSpread from '@babel/runtime/helpers/esm/objectSpread';
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
-var defaultProps = {
-  className: ''
+
+const defaultProps = {
+  className: '',
 }; // Component styles manipulated entirely by theme
 
-var styleClasses = function styleClasses(theme) {
+const styleClasses = function styleClasses(theme) {
   return {
     root: _objectSpread({
-      color: theme.typography.color,
-      fontFamily: theme.typography.fontFamily,
-      fontWeight: theme.typography.fontWeight
-    }, theme.typography.h1)
+      color: theme.typographyValues.color,
+      fontFamily: theme.typographyValues.fontFamily,
+      fontWeight: theme.typographyValues.fontWeight,
+    }, theme.typography.h1),
   };
 };
 
-var Headline = function Headline(_ref) {
-  var children = _ref.children,
-      className = _ref.className,
-      classes = _ref.classes,
-      id = _ref.id;
-  return React.createElement("h1", {
+const Headline = function Headline(_ref) {
+  const { children } = _ref;
+      const { className } = _ref;
+      const { classes } = _ref;
+      const { id } = _ref;
+  return React.createElement('h1', {
     className: cx('Headline', classes.root, className),
-    "data-quid": "Headline-".concat(id)
+    'data-quid': 'Headline-'.concat(id),
   }, children);
 };
 
 Headline.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
   index: 0,
-  withTheme: true
+  withTheme: true,
 })(Headline);

@@ -2,6 +2,9 @@ import React from 'react';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
 // Material UI components
 import MUIInput from '@material-ui/core/Input';
 import MUIFormControl from '@material-ui/core/FormControl';
@@ -61,7 +64,7 @@ const defaultProps:OptionalProps = {
 };
 
 
-const styleClasses = (theme:any): {
+const styleClasses = (theme:Theme): {
   // CSS Classes
   root: any,
   focused: any,

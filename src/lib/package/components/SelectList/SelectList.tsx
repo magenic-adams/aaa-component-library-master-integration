@@ -4,6 +4,9 @@ import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 import List from '@material-ui/core/List';
 
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
 // Components
 import SelectListItemText from '../SelectListItemText/SelectListItemText';
 
@@ -25,7 +28,7 @@ interface OptionalProps {
   classes?: any, // MUI Decorator
 }
 
-const styleClasses = (theme:any): {
+const styleClasses = (theme:Theme): {
   // CSS Classes
   root: any,
   fullOverlay: any,
@@ -38,7 +41,7 @@ const styleClasses = (theme:any): {
     padding: '0px',
     boxShadow: `0 2px 8px 0 ${theme.secondaryPalette.colorVariables.GRAY}`,
     '& span': {
-      fontFamily: theme.typography.fontFamily,
+      fontFamily: theme.typographyValues.fontFamily,
     },
     [theme.breakpoints.down(321)]: {
       width: '100%',

@@ -2,6 +2,9 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
 interface RequiredProps {
   children: any,
 };
@@ -15,11 +18,7 @@ const defaultProps:OptionalProps = {
   className: '',
 };
 
-const styleClasses = (theme:{
-  breakpoints: {
-    up: (breakpoint:string) => string
-  }
-}): {
+const styleClasses = (theme:Theme): {
   // CSS Classes
   root: any
 } => ({

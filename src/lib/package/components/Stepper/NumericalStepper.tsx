@@ -1,7 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
+
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 // Material UI Components
 import MUIFormControl from '@material-ui/core/FormControl';
@@ -49,7 +51,7 @@ const defaultProps: OptionalProps = {
 };
 
 
-const styleClasses = (theme:any) => ({
+const styleClasses = (theme:Theme) => ({
   stepperIcon: {
     width: 24,
     height: '100%',

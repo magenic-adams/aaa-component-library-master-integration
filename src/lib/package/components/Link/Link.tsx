@@ -2,11 +2,14 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles'; // listed as a dependency
 import cx from 'clsx';
 
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
 // MaterialUI components
-import { Link as MuiLink } from '@material-ui/core'; // used the Link instead of the button
+import { Link as MuiLink } from '@material-ui/core';
 
 // Utilities
-import noop from '../../utilities/noop';
+import noop from '../../utilities/noop'; // used the Link instead of the button
 
 
 interface RequiredProps {
@@ -30,7 +33,7 @@ const defaultProps:OptionalProps = {
   onBlur: noop,
 };
 
-const styleClasses = (theme:any):{
+const styleClasses = (theme:Theme):{
   // CSS Classes
   primary: any,
   secondary: any,

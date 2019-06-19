@@ -3,6 +3,9 @@ import MUIButton from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
 interface RequiredProps {
   children: string | any,
   id: string,
@@ -29,41 +32,7 @@ const defaultProps:OptionalProps = {
   href: '',
 };
 
-const styleClasses = (theme:{
-  palette: {
-    primary: {
-      main: string,
-      dark: string,
-    },
-  },
-  secondaryPalette: {
-    colorVariables: {
-      DARKER_BLUE: string,
-      GRAY: string,
-      SECONDARY_HOVER: string,
-      TRANSPARENT: string,
-      WHITE: string,
-    },
-    disabled: {
-      main: string,
-    }
-  },
-  typography: {
-    fontWeight: number,
-    buttonPrimary: {
-      lineHeight: number,
-      fontSize: number,
-      fontWeight: number,
-    },
-    buttonSecondary: {
-      lineHeight: number,
-      fontSize: number,
-      fontWeight: number,
-    }
-  },
-  breakpoints: {
-    up: (breakpoint:string) => string,
-  }}):{
+const styleClasses = (theme:Theme):{
     root: any,
     label: any,
     containedPrimary: any,
@@ -106,7 +75,7 @@ const styleClasses = (theme:{
         background: theme.secondaryPalette.disabled.main,
         color: theme.secondaryPalette.colorVariables.WHITE,
       },
-      ...theme.typography.buttonPrimary,
+      ...theme.typographyElements.buttonPrimary,
     },
     containedSecondary: {
       color: theme.palette.primary.main,
@@ -120,8 +89,8 @@ const styleClasses = (theme:{
         background: theme.secondaryPalette.colorVariables.TRANSPARENT,
         borderColor: theme.secondaryPalette.disabled.main,
       },
-      fontWeight: theme.typography.fontWeight,
-      ...theme.typography.buttonSecondary,
+      fontWeight: theme.typographyValues.fontWeight,
+      ...theme.typographyElements.buttonSecondary,
     },
     fadeUp: {
       transform: 'translateY(-8px)',

@@ -2,6 +2,9 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
 interface RequiredProps {
   classes: any, // MUI Decorator
   id: string,
@@ -14,12 +17,12 @@ interface OptionalProps {
 }
 
 // Component styles manipulated entirely by theme
-const styleClasses = (theme:any) => {
+const styleClasses = (theme:Theme) => {
   return {
     root: {
-      color: theme.typography.color,
-      fontFamily: theme.typography.fontFamily,
-      fontWeight: theme.typography.fontWeight,
+      color: theme.typographyValues.color,
+      fontFamily: theme.typographyValues.fontFamily,
+      fontWeight: theme.typographyValues.fontWeight,
       ...theme.typography.h2,
     },
   };
