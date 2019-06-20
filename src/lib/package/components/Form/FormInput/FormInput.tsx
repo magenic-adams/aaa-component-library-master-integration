@@ -17,12 +17,12 @@ interface OptionalProps {
 
 
 /**
- * FormInput is a functional <Field> Wrapper around <BaseInput />
+ * FormInput is a  <Field> Wrapper around <BaseInput />
  * FormInput's responsibility is to 
  * 1. map ReactFinalForm's exposed "fieldProps" to <BaseInput>'s props
  * 2. Have logic to determine when an error is shown
  * 
- * By exposing the form's state via hooks, we are able to tap into custom mutators and other form state
+ * By exposing the form's state via HOC, we are able to tap into custom mutators and other form state
  * defined on our top-level <Form> component and plucked from context
  */
 class FormInput extends React.Component<RequiredProps & OptionalProps> {
@@ -77,8 +77,8 @@ class FormInput extends React.Component<RequiredProps & OptionalProps> {
    * Renders the base input field
    * NOTE: It is required to pass a named function to component
    * ... if you pass an anonymous function it will re-create the component
-   * @param  {[type]} fieldProps:any [description]
-   * @return {[type]}                [description]
+   * @param  {Object} fieldProps - react final form field props
+   * @return {React.Component}
    */
   renderFieldComponent(fieldProps:any){
     const { forwardedRef } = this.props;

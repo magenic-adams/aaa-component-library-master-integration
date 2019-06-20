@@ -14,6 +14,7 @@ import {
   Form,
   FormGroup,
   FormInput,
+  FormNumericInput,
 } from '../../src/lib/package/components';
 
 const VALIDATIONS = {
@@ -24,6 +25,9 @@ const VALIDATIONS = {
   },
   lastName: {
     alpha_dash_dot_space: 'Name can only contain letters, dashes, periods, and spaces',
+  },
+  dob: {
+    required: 'Date of birth is required',
   },
   password: {
     required: 'Password is required',
@@ -68,6 +72,16 @@ stories
                           id="lastName"
                           labelName="Last name"
                           helperText="Not required"
+                          type="text"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <FormNumericInput 
+                          name="dob"
+                          id="dob"
+                          labelName="Date of birth"
+                          mask={[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/]}
+                          helperText="mm/dd/yyyy"
                           type="text"
                         />
                       </FormGroup>
