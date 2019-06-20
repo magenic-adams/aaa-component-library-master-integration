@@ -1,17 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import _ from 'lodash';
+import { withTheme, makeStyles } from '@material-ui/core/styles';
 import MUIInputLabel from '@material-ui/core/InputLabel';
 import cx from 'clsx';
 
-const styleClasses = theme => ({
+const styleClasses = makeStyles({
   root: {
-    color: theme.palette.colorVariables.BLACK,
+    color: props =>
+      _.get(
+        props,
+        'overrides.label.color',
+        props.theme.palette.colorVariables.BLACK
+      ),
     display: 'block',
     marginBottom: -8,
-    fontFamily: theme.typography.fontFamily,
-    fontWeight: theme.typography.fontWeight,
-    ...theme.typography.body1,
+    fontFamily: props => props.theme.typography.fontFamily,
+    fontWeight: props => props.theme.typography.fontWeight,
+    ...props => props.theme.typography.body1,
   },
   formControl: {
     position: 'relative',
@@ -28,18 +34,12 @@ type propTypes = {
   disabled?: PropTypes.bool,
   error?: PropTypes.bool,
   focused?: PropTypes.bool,
-  id: PropTypes.string,
+  id: PropTypes.string
 };
 
-function Label({
-    children,
-    classes,
-    className,
-    disabled,
-    error,
-    focused,
-    id,
-  }): propTypes {
+function Label(props): propTypes {
+  const { children, className, disabled, error, focused, id } = props;
+  const classes = styleClasses(props);
   return (
     <MUIInputLabel
       className={cx('InputLabel', className)}
@@ -61,4 +61,4 @@ Label.defaultProps = {
   className: '',
 };
 
-export default withStyles(styleClasses, { index: 0, withTheme: true })(Label);
+export default withTheme(Label);
