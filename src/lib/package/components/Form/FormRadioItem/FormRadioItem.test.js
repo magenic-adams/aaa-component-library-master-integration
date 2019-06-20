@@ -122,7 +122,7 @@ describe('FormRadioItem', () => {
   });
 
   describe('event handlers', () => {
-    it('radioItemWrapper call it\'s onchange event handler', () => {
+    it('radioItemWrapper call it\'s change event handler', () => {
       radioItemWrapper
         .find('input[type="radio"]')
         .at(0)
@@ -133,6 +133,18 @@ describe('FormRadioItem', () => {
         value: 1,
         text: 'Hey',
       });
+    });
+
+    it('does NOT call it\'s change event handler when it is disabled', () => {
+      props = getFakeProps({ disabled: true });
+      radioItemWrapper = createRadioItemWithTheme(props);
+
+      radioItemWrapper
+        .find('input[type="radio"]')
+        .at(0)
+        .simulate('change');
+
+      expect(spy.calledOnce).to.equal(false);
     });
   });
 

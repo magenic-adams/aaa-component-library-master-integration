@@ -108,7 +108,7 @@ describe('FormRadioGroup', () => {
   });
 
   describe('event handlers', () => {
-    it('call it\'s click event handler when list item is clicked', () => {
+    it('call it\'s change event handler when list item is clicked', () => {
       radioGroupWrapper
         .find('input[type="radio"]')
         .at(1)
