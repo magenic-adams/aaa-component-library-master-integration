@@ -16,8 +16,6 @@ import NumericInput from '../Input/NumericInput/NumericInput';
 
 import {
   overrideStepperLabel,
-  overrideStepperIcon,
-  overrideInputWrapper,
   styleClasses,
 } from './NumericalStepperStyles';
 
@@ -75,11 +73,11 @@ const NumericalStepper = (props: propTypes) => {
           <RemoveIcon
             data-quid={`RemoveIcon-${id}`}
             disabled={disabled}
-            style={overrideStepperIcon(props).stepperIcon}
+            className={classes.stepperIcon}
           />
         </StepperButton>
 
-        <div style={overrideInputWrapper().stepperInputWrapper}>
+        <div className={classes.stepperInputWrapper}>
           <NumericInput
             id={`NumericalStepperInput-${id}`}
             centerText
@@ -99,7 +97,7 @@ const NumericalStepper = (props: propTypes) => {
         >
           <MUIAddIcon
             data-quid={`AddIcon-${id}`}
-            style={overrideStepperIcon(props).stepperIcon}
+            className={classes.stepperIcon}
           />
         </StepperButton>
       </div>

@@ -196,33 +196,20 @@ describe('Style Overrides', () => {
   it('renders correct overrides for stepper decrease button', () => {
     const decreaseStepperIcon = customizedWrapper
       .find(Button)
-      .find('ForwardRef(SvgIcon)[data-quid="RemoveIcon-1"]')
+      .find('svg[data-quid="RemoveIcon-1"]')
       .first()
       .props();
 
-    expect(decreaseStepperIcon.style.width).to.equal(24);
-    expect(decreaseStepperIcon.style.height).to.equal('100%');
-    expect(decreaseStepperIcon.style.color).to.equal(AAA_COLOR_MAIN_BLUE);
+    expect(decreaseStepperIcon.className).to.contain('makeStyles-stepperIcon');
   });
 
-  it('renders correct overrides for stepper decrease button', () => {
+  it('renders correct overrides for stepper increase button', () => {
     const increaseStepperIcon = customizedWrapper
       .find(Button)
-      .find('ForwardRef(SvgIcon)[data-quid="AddIcon-1"]')
+      .find('svg[data-quid="AddIcon-1"]')
       .first()
       .props();
 
-    expect(increaseStepperIcon.style.width).to.equal(24);
-    expect(increaseStepperIcon.style.height).to.equal('100%');
-    expect(increaseStepperIcon.style.color).to.equal(AAA_COLOR_MAIN_BLUE);
-  });
-});
-
-describe('Additional style tests : No Mounting needed', () => {
-  it('renders sets correct styling for stepper input wrapper', () => {
-    const inputWrapper = overrideInputWrapper();
-
-    expect(inputWrapper.stepperInputWrapper.display).to.equal('inline-block');
-    expect(inputWrapper.stepperInputWrapper.width).to.equal(78);
+    expect(increaseStepperIcon.className).to.contain('makeStyles-stepperIcon');
   });
 });

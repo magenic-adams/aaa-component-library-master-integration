@@ -5,6 +5,7 @@ import { AAA_CSS_INLINE, AAA_CSS_MIDDLE } from '../../constants/cssConstants';
 // If overrides need to be passed down to child components
 // extract it into a method so makeStyles dynamic class naming
 // will not be used.
+
 export const overrideStepperLabel = props => {
   return {
     label: {
@@ -22,27 +23,18 @@ export const overrideStepperLabel = props => {
   };
 };
 
-export const overrideStepperIcon = props => {
-  return {
-    stepperIcon: {
-      width: 24,
-      height: '100%',
-      color: props.theme.palette.primary.main,
-    },
-  };
-};
-
-export const overrideInputWrapper = () => {
-  return {
-    stepperInputWrapper: {
-      display: 'inline-block',
-      width: 78,
-    },
-  };
-};
 
 // IF the style is part of Material UI API keep it inside styleClasses
 export const styleClasses = makeStyles({
+  stepperInputWrapper: {
+    display: 'inline-block',
+    width: 78,
+  },
+  stepperIcon: {
+    width: 24,
+    height: '100%',
+    color: props => props.theme.palette.primary.main,
+  },
   actionWrapper: {
     margin: '16px 0 6px 0',
   },
