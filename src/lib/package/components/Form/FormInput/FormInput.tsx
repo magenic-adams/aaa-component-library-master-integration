@@ -7,14 +7,13 @@ import BaseInput from '../../Input/BaseInput/BaseInput';
 
 interface RequiredProps {
   id: string,
-  name: string,
 };
 
 interface OptionalProps {
+  initialValue?: string | number,
   formState?: any, // Decorator
   forwardedRef?: React.RefObject<any>,
 };
-
 
 /**
  * FormInput is a  <Field> Wrapper around <BaseInput />
@@ -26,6 +25,10 @@ interface OptionalProps {
  * defined on our top-level <Form> component and plucked from context
  */
 class FormInput extends React.Component<RequiredProps & OptionalProps> {
+  static defaultProps:OptionalProps = {
+    initialValue: '',
+  }
+
   constructor(props:RequiredProps & OptionalProps){
     super(props);
     this.handleFormFieldChange = this.handleFormFieldChange.bind(this);
@@ -96,15 +99,15 @@ class FormInput extends React.Component<RequiredProps & OptionalProps> {
   }
 
   render(){
-    const { name } = this.props;
+    const { id, initialValue } = this.props;
     return (
       <Field
-        name={name}
+        name={id}
+        initialValue={initialValue}
         component={this.renderFieldComponent}
       />
     );
   }
 }
-
 
 export default withFormState(FormInput);

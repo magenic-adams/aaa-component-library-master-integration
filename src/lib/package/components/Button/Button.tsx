@@ -21,6 +21,7 @@ interface OptionalProps {
   forwardedRef?: React.RefObject<any>,
   isIconButton?: boolean,
   href?: string,
+  type?: 'button' | 'submit',
 }
 
 const defaultProps:OptionalProps = {
@@ -30,6 +31,7 @@ const defaultProps:OptionalProps = {
   fadeUp: false,
   isIconButton: false,
   href: '',
+  type: 'button',
 };
 
 const styleClasses = (theme:Theme):{
@@ -133,12 +135,13 @@ const Button:React.FunctionComponent<RequiredProps & OptionalProps> = ({
   children,
   className,
   classes,
+  color,
   disabled,
   fadeUp,
-  id,
-  color,
-  href,
   forwardedRef,
+  href,
+  id,
+  type,
   onClick,
   isIconButton,
 }) => {
@@ -165,6 +168,7 @@ const Button:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       variant="contained"
       href={href}
       ref={forwardedRef}
+      type={type}
       onClick={onClick}
     >
       {children}

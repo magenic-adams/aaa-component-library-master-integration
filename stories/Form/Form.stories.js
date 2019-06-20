@@ -18,6 +18,9 @@ import {
 } from '../../src/lib/package/components';
 
 const VALIDATIONS = {
+  initialValue: {
+    required: 'This field is required',
+  },
   firstName: {
     required: 'First name is required',
     'max_length[24]': 'Too long. Do you have a nickname?',
@@ -54,13 +57,29 @@ stories
               <Form
                 validations={VALIDATIONS}
                 onSubmit={handleFormValueSubmission}
-                render={({ allRequiredFieldsHaveBeenVisited, handleSubmit }) => {
+                render={({ allRequiredFieldsHaveBeenVisitedOrHaveValues, handleSubmit }) => {
                   return (
                     <form onSubmit={handleSubmit}>
                       <FormGroup>
                         <FormInput 
+                          id="disabledInitial"
+                          disabled
+                          initialValue="some-unique-identifier-0000101"
+                          labelName="Disabled, initial value"
+                          type="text"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <FormInput 
+                          id="initialValue"
+                          initialValue="Prefilled value"
+                          labelName="Initial value"
+                          type="text"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <FormInput 
                           autoFocus
-                          name="firstName"
                           id="firstName"
                           labelName="First name"
                           type="text"
@@ -68,7 +87,6 @@ stories
                       </FormGroup>
                       <FormGroup>
                         <FormInput 
-                          name="lastName"
                           id="lastName"
                           labelName="Last name"
                           helperText="Not required"
@@ -77,7 +95,6 @@ stories
                       </FormGroup>
                       <FormGroup>
                         <FormNumericInput 
-                          name="dob"
                           id="dob"
                           labelName="Date of birth"
                           mask={[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/]}
@@ -103,8 +120,8 @@ stories
                       </FormGroup>
                       <ButtonGroup>
                         <Button
-                          disabled={!allRequiredFieldsHaveBeenVisited}
-                          fadeUp={allRequiredFieldsHaveBeenVisited}
+                          disabled={!allRequiredFieldsHaveBeenVisitedOrHaveValues}
+                          fadeUp={allRequiredFieldsHaveBeenVisitedOrHaveValues}
                           type="submit"
                         >
                           Submit

@@ -7,16 +7,17 @@ import NumericInput from '../../Input/NumericInput/NumericInput';
 
 interface RequiredProps {
   id: string,
-  name: string,
 };
 
 interface OptionalProps {
+  defaultValue?: string | number,
+  initialValue?: string | number,
   formState?: any, // Decorator
   forwardedRef?: React.RefObject<any>
 };
 
 /**
- * FormNumericInput is a  <Field> Wrapper around <BaseInput />
+ * FormNumericInput is a <Field> Wrapper around <BaseInput />
  * FormNumericInput's responsibility is to 
  * 1. map ReactFinalForm's exposed "fieldProps" to <BaseInput>'s props
  * 2. Have logic to determine when an error is shown
@@ -96,11 +97,11 @@ class FormNumericInput extends React.Component<RequiredProps & OptionalProps> {
   }
 
   render(){
-    const { name } = this.props;
+    const { id } = this.props;
 
     return (
       <Field
-        name={name}
+        name={id}
         component={this.renderFieldComponent}
       />
     );
