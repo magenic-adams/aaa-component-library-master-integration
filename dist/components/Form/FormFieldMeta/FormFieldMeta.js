@@ -3,6 +3,12 @@ import React from 'react';
 import MUIReportProblem from '@material-ui/icons/ReportProblem';
 import MUIFormHelperText from '@material-ui/core/FormHelperText';
 import { withStyles } from '@material-ui/core/styles';
+;
+var defaultProps = {
+  error: '',
+  helperText: '',
+  disableWarning: false
+};
 
 var styleClasses = function styleClasses(theme) {
   var _helperTextStyle, _errorText;
@@ -12,7 +18,7 @@ var styleClasses = function styleClasses(theme) {
       minHeight: 26
     },
     helperTextStyle: (_helperTextStyle = {
-      color: theme.palette.colorVariables.GRAY
+      color: theme.secondaryPalette.colorVariables.GRAY
     }, _defineProperty(_helperTextStyle, theme.breakpoints.up('sm'), {
       fontSize: 14
     }), _defineProperty(_helperTextStyle, theme.breakpoints.up('md'), {
@@ -40,7 +46,7 @@ var styleClasses = function styleClasses(theme) {
   };
 };
 
-function FormFieldMeta(_ref) {
+var FormFieldMeta = function FormFieldMeta(_ref) {
   var error = _ref.error,
       disableWarning = _ref.disableWarning,
       classes = _ref.classes,
@@ -63,8 +69,9 @@ function FormFieldMeta(_ref) {
     className: classes.helperTextStyle,
     error: false
   }, helperText));
-}
+};
 
+FormFieldMeta.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
   index: 0,
   withTheme: true

@@ -12,12 +12,12 @@ import theme from '../live_demos/theme';
 // CSS
 import './StoryCodePlayground.css';
 
-type propTypes = {
-  demo: {},
-  scope: {},
-};
+// type propTypes = {
+//   demo: any,
+//   scope: any,
+// };
 
-export function StoryCodePlayground({ demo, scope }:propTypes){
+export function StoryCodePlayground({ demo, scope }){
   return (
     <div className="StoryCodePlayground">
       <LiveProvider

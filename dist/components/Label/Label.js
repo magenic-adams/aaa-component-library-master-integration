@@ -1,51 +1,56 @@
-import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
+import _objectSpread from '@babel/runtime/helpers/esm/objectSpread';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MUIInputLabel from '@material-ui/core/InputLabel';
 import cx from 'clsx';
 
-var styleClasses = function styleClasses(theme) {
+;
+const defaultProps = {
+  className: '',
+  disabled: false,
+  error: '',
+  focused: false,
+};
+
+const styleClasses = function styleClasses(theme) {
   return {
     root: _objectSpread({
-      color: theme.palette.colorVariables.BLACK,
+      color: theme.secondaryPalette.colorVariables.BLACK,
       display: 'block',
       marginBottom: -8,
-      fontFamily: theme.typography.fontFamily,
-      fontWeight: theme.typography.fontWeight
+      fontFamily: theme.typographyValues.fontFamily,
+      fontWeight: theme.typographyValues.fontWeight,
     }, theme.typography.body1),
     formControl: {
       position: 'relative',
-      transform: 'unset'
-    }
+      transform: 'unset',
+    },
   };
 };
 
-function Label(_ref) {
-  var children = _ref.children,
-      classes = _ref.classes,
-      className = _ref.className,
-      disabled = _ref.disabled,
-      error = _ref.error,
-      focused = _ref.focused,
-      id = _ref.id;
+const Label = function Label(_ref) {
+  const { children } = _ref;
+      const { classes } = _ref;
+      const { className } = _ref;
+      const { disabled } = _ref;
+      const { error } = _ref;
+      const { focused } = _ref;
+      const { id } = _ref;
   return React.createElement(MUIInputLabel, {
     className: cx('InputLabel', className),
-    classes: classes,
-    disabled: disabled,
+    classes,
+    disabled,
     disableAnimation: true,
-    error: error,
-    focused: focused,
+    error: !!error,
+    focused,
     htmlFor: id,
-    "data-quid": "Label-".concat(id),
-    shrink: false
+    'data-quid': 'Label-'.concat(id),
+    shrink: false,
   }, children);
-}
-
-Label.defaultProps = {
-  className: ''
 };
+
+Label.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
   index: 0,
-  withTheme: true
+  withTheme: true,
 })(Label);

@@ -24,9 +24,9 @@ type propTypes = {
 
 const styleClasses = theme => ({
   root: {
-    width: theme.common.ELEMENT_PANEL_WIDTH_MOBILE,
-    height: theme.common.ELEMENT_PANEL_HEIGHT,
-    borderRadius: theme.common.ELEMENT_BORDER_RADIUS,
+    width: 534,
+    height: 48,
+    borderRadius: 4,
     border: `1px solid ${theme.palette.colorVariables.BLACK}`,
     background: theme.palette.colorVariables.WHITE,
     margin: '0px 0px 8px 0px',
@@ -38,10 +38,10 @@ const styleClasses = theme => ({
       background: 'none',
     },
     [theme.breakpoints.up('md')]: {
-      maxWidth: theme.common.ELEMENT_PANEL_WIDTH_MOBILE,
+      maxWidth: 534,
     },
     [theme.breakpoints.up('sm')]: {
-      width: theme.common.ELEMENT_PANEL_WIDTH_TABLET,
+      width: '100%',
     },
   },
   radio: {

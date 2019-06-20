@@ -1,5 +1,3 @@
-import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
-
 /* global
   afterEach
   describe,
@@ -12,139 +10,161 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
-import SelectList from './SelectList'; // Test Utilities
+import SelectList from './SelectList';
 
-import { getDOMNodeComputedStyle } from '../../../../../test/DOM'; // Constants
+// Test Utilities
+import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 
+// Constants
 import { AAA_COLOR_MAIN_BLUE } from '../../constants/colors';
 
 function getFakeProps(overrides) {
-  return _objectSpread({
-    items: [{
-      id: 1,
-      value: 1,
-      display: 'Iron Man'
-    }, {
-      id: 2,
-      value: 2,
-      display: 'Captain A'
-    }],
-    onSelect: jest.fn(function (v) {
-      return v;
-    })
-  }, overrides);
+  return {
+    items: [
+      { id: 1, value: 1, display: 'Iron Man' },
+      { id: 2, value: 2, display: 'Captain A' },
+    ],
+    onSelect: jest.fn(v => v),
+    ...overrides,
+  };
 }
 
 function createSelectListWithTheme(props) {
-  return mount(React.createElement(AAAThemeProvider, {
-    theme: props.theme
-  }, React.createElement(SelectList, props)));
+  return mount(
+    <AAAThemeProvider theme={props.theme}>
+      <SelectList {...props} />
+    </AAAThemeProvider>
+  );
 }
 
-describe('SelectList', function () {
-  var spy;
-  var props;
-  var selectListWrapper;
-  var listNode;
-  beforeEach(function () {
+describe('SelectList', () => {
+  let spy;
+  let props;
+  let selectListWrapper;
+  let listNode;
+
+  beforeEach(() => {
     spy = sinon.spy();
-    props = getFakeProps({
-      type: 'primary',
-      onSelect: spy
-    });
+    props = getFakeProps({ type: 'primary', onSelect: spy });
     selectListWrapper = createSelectListWithTheme(props);
     listNode = selectListWrapper.getDOMNode();
   });
-  afterEach(function () {
+
+  afterEach(() => {
     selectListWrapper.unmount();
   });
-  describe('html rendering', function () {
-    it('has one or more elements', function () {
+
+  describe('html rendering', () => {
+    it('has one or more elements', () => {
       selectListWrapper = createSelectListWithTheme(props);
-      var listItems = selectListWrapper.find('li');
+
+      const listItems = selectListWrapper.find('li');
+
       expect(listItems.length).to.be.above(0);
     });
-    it('should match primary prop to item display', function () {
+
+    it('should match primary prop to item display', () => {
       selectListWrapper = createSelectListWithTheme(props);
-      var listItems = selectListWrapper.find('li');
-      listItems.forEach(function (listItem, i) {
+
+      const listItems = selectListWrapper.find('li');
+
+      listItems.forEach((listItem, i) => {
         expect(listItem.text()).to.equal(props.items[i].display);
       });
     });
-    it('should not render items is no primary type is passed', function () {
-      props = getFakeProps({
-        type: null
-      });
+
+    it('should not render items is no primary type is passed', () => {
+      props = getFakeProps({ type: null });
       selectListWrapper = createSelectListWithTheme(props);
-      var listItems = selectListWrapper.find('li');
+
+      const listItems = selectListWrapper.find('li');
+
       expect(listItems.length).to.equal(0);
     });
-    it('should throw error if invalid items is passed', function () {
+
+    it('should throw error if invalid items is passed', () => {
       props = getFakeProps({
-        items: null
+        items: null,
       });
-      expect(function () {
+      expect(() => {
         createSelectListWithTheme(props);
       }).to.throw('Invariant failed: items array is empty');
+
       props = getFakeProps({
-        items: undefined
+        items: undefined,
       });
-      expect(function () {
+      expect(() => {
         createSelectListWithTheme(props);
       }).to.throw('Invariant failed: items array is empty');
+
       props = getFakeProps({
-        items: []
+        items: [],
       });
-      expect(function () {
+      expect(() => {
         createSelectListWithTheme(props);
       }).to.throw('Invariant failed: items array is empty');
+
       props = getFakeProps({
-        items: [{}]
+        items: [{}],
       });
-      expect(function () {
+      expect(() => {
         createSelectListWithTheme(props);
-      }).to.throw('Invariant failed: Invalid object keys are present. Keys should contain id, value and display');
+      }).to.throw(
+        'Invariant failed: Invalid object keys are present. Keys should contain id, value and display'
+      );
+
       props = getFakeProps({
-        items: [{
-          idx: 1,
-          value: 1,
-          text: '1'
-        }]
+        items: [{ idx: 1, value: 1, text: '1' }],
       });
-      expect(function () {
+      expect(() => {
         createSelectListWithTheme(props);
-      }).to.throw('Invariant failed: Invalid object keys are present. Keys should contain id, value and display');
+      }).to.throw(
+        'Invariant failed: Invalid object keys are present. Keys should contain id, value and display'
+      );
     });
-    describe('event handlers', function () {
-      it('selectListWrapper call it\'s click event handler', function () {
-        selectListWrapper.find('li').at(0).simulate('click');
+
+    describe('event handlers', () => {
+      it('selectListWrapper call it\'s click event handler', () => {
+        selectListWrapper
+          .find('li')
+          .at(0)
+          .simulate('click');
+
         expect(spy.calledOnce).to.equal(true);
         expect(spy.getCall(0).args[0]).to.deep.equal({
           id: 1,
           value: 1,
-          display: 'Iron Man'
+          display: 'Iron Man',
         });
       });
     });
-    describe('base styles', function () {
-      it('has width of 341px', function () {
-        var widthStyle = getDOMNodeComputedStyle(listNode, 'width');
+
+    describe('base styles', () => {
+      it('has width of 341px', () => {
+        const widthStyle = getDOMNodeComputedStyle(listNode, 'width');
         expect(widthStyle).to.equal('341px');
       });
-      it('has border of 2px', function () {
-        var borderWidth = getDOMNodeComputedStyle(listNode, 'border-width');
+
+      it('has border of 2px', () => {
+        const borderWidth = getDOMNodeComputedStyle(listNode, 'border-width');
         expect(borderWidth).to.equal('2px');
       });
-      it('has border color of AAA_COLOR_MAIN_BLUE', function () {
-        var borderStyle = getDOMNodeComputedStyle(listNode, 'border-color');
+
+      it('has border color of AAA_COLOR_MAIN_BLUE', () => {
+        const borderStyle = getDOMNodeComputedStyle(listNode, 'border-color');
         expect(borderStyle).to.equal(AAA_COLOR_MAIN_BLUE);
       });
-      it('has border radius of 4px', function () {
-        var borderRadiusStyle = getDOMNodeComputedStyle(listNode, 'border-radius');
+
+      it('has border radius of 4px', () => {
+        const borderRadiusStyle = getDOMNodeComputedStyle(
+          listNode,
+          'border-radius'
+        );
         expect(borderRadiusStyle).to.equal('4px');
       });
-      it('has box shadow of 0 2px 8px 0 rgb(113, 113, 116)', function () {
-        var boxShadowStyle = getDOMNodeComputedStyle(listNode, 'box-shadow');
+
+      it('has box shadow of 0 2px 8px 0 rgb(113, 113, 116)', () => {
+        const boxShadowStyle = getDOMNodeComputedStyle(listNode, 'box-shadow');
         expect(boxShadowStyle).to.equal('0 2px 8px 0 rgb(113, 113, 116)');
       });
     });

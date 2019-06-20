@@ -5,69 +5,86 @@
 */
 import React from 'react';
 import { expect } from 'chai';
-import { mount } from 'enzyme'; // Constants
+import { mount } from 'enzyme';
 
-import { AAA_COLOR_MAIN_BLACK } from '../../constants/colors'; // Test Utilities
+// Constants
+import { AAA_COLOR_MAIN_BLACK } from '../../constants/colors';
 
-import { getDOMNodeComputedStyle } from '../../../../../test/DOM'; // Components
+// Test Utilities
+import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 
+// Components
 import AAAPrimaryTheme from '../AAAPrimaryTheme/AAAPrimaryTheme';
 import Subheadline from './Subheadline';
 
-function createSubheadlineWithTheme(children) {
-  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var ThemeSubheadline = mount(React.createElement(AAAPrimaryTheme, null, React.createElement(Subheadline, props, children)));
+
+function createSubheadlineWithTheme(children, props = {}) {
+  const ThemeSubheadline = mount(
+    <AAAPrimaryTheme>
+      <Subheadline {...props}>{children}</Subheadline>
+    </AAAPrimaryTheme>
+  );
+  
   return ThemeSubheadline;
 }
 
-describe('Subheadline', function () {
-  var props = {
-    id: 'unique-identifier',
-    className: 'client-subheadline-class'
-  };
-  var SubheadlineWrapper = createSubheadlineWithTheme('Here lies a subheadline', props);
-  var SubheadlineNode = SubheadlineWrapper.getDOMNode();
-  afterAll(function () {
+describe('Subheadline', () => {
+  const props = { id: 'unique-identifier', className: 'client-subheadline-class' };
+  const SubheadlineWrapper = createSubheadlineWithTheme('Here lies a subheadline', props);
+  const SubheadlineNode = SubheadlineWrapper.getDOMNode();
+  
+  afterAll(() => {
     SubheadlineWrapper.unmount();
   });
-  describe('base styles', function () {
-    it('has a color of AAA_COLOR_MAIN_BLACK', function () {
-      var colorStyle = getDOMNodeComputedStyle(SubheadlineNode, 'color');
+
+  describe('base styles', () => {
+    it ('has a color of AAA_COLOR_MAIN_BLACK', () => {
+      const colorStyle = getDOMNodeComputedStyle(SubheadlineNode, 'color');
       expect(colorStyle).to.equal(AAA_COLOR_MAIN_BLACK);
     });
-    it('has a font family of Roboto applied first', function () {
-      var fontFamilyStyle = getDOMNodeComputedStyle(SubheadlineNode, 'font-family');
-      var robotoIndex = fontFamilyStyle.indexOf('Roboto');
+
+    it ('has a font family of Roboto applied first', () => {
+      const fontFamilyStyle = getDOMNodeComputedStyle(SubheadlineNode, 'font-family');
+      const robotoIndex = fontFamilyStyle.indexOf('Roboto');
       expect(fontFamilyStyle).to.include('Roboto');
       expect(robotoIndex).to.equal(0);
     });
-    it('is using a <h2> tag', function () {
+
+    it ('is using a <h2> tag', () => {
       expect(SubheadlineNode.tagName).to.equal('H2');
     });
-    it('has font-size of 18px', function () {
-      var fontSizeStyle = getDOMNodeComputedStyle(SubheadlineNode, 'font-size');
+
+    it ('has font-size of 18px', () => {
+      const fontSizeStyle = getDOMNodeComputedStyle(SubheadlineNode, 'font-size');
       expect(fontSizeStyle).to.equal('18px');
     });
-    it('has a line-height of 1.45', function () {
-      var lineHeightStyle = getDOMNodeComputedStyle(SubheadlineNode, 'line-height');
+
+    it ('has a line-height of 1.45', () => {
+      const lineHeightStyle = getDOMNodeComputedStyle(SubheadlineNode, 'line-height');
       expect(lineHeightStyle).to.equal('1.45');
     });
-    it('has a font-weight of 400 (regular)', function () {
-      var fontWeightStyle = getDOMNodeComputedStyle(SubheadlineNode, 'font-weight');
+
+    it ('has a font-weight of 400 (regular)', () => {
+      const fontWeightStyle = getDOMNodeComputedStyle(SubheadlineNode, 'font-weight');
       expect(fontWeightStyle).to.equal('400');
     });
+
   });
-  describe('html rendering', function () {
-    it('has rendered children as text', function () {
+  
+  describe('html rendering', () => {
+    it('has rendered children as text', () => {
       expect(SubheadlineWrapper.text()).to.equal('Here lies a subheadline');
     });
-    it('has a data attribute of data-quid passed to underlying html element', function () {
-      expect(SubheadlineNode.dataset.quid).to.equal("Subheadline-".concat(props.id));
+
+    it('has a data attribute of data-quid passed to underlying html element', () => {
+      expect(SubheadlineNode.dataset.quid).to.equal(`Subheadline-${props.id}`);
     });
-    it('has a className of Subheadline', function () {
+
+    it('has a className of Subheadline', () => {
       expect(SubheadlineNode.className).to.include('Subheadline');
     });
-    it('has a className prop attached to the DOM Node', function () {
+
+    it('has a className prop attached to the DOM Node', () => {
       expect(SubheadlineNode.className).to.include(props.className);
     });
   });

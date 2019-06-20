@@ -1,5 +1,3 @@
-import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
-
 /* global
   afterEach
   describe,
@@ -10,122 +8,142 @@ import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
-import sinon from 'sinon'; // Constants
+import sinon from 'sinon';
 
-import { AAA_COLOR_MAIN_DISABLED, AAA_COLOR_MAIN_BLUE, AAA_COLOR_MAIN_WHITE, AAA_COLOR_TRANSPARENT } from '../../constants/colors'; // Test Utilities
+// Constants
+import {
+  AAA_COLOR_MAIN_DISABLED,
+  AAA_COLOR_MAIN_BLUE,
+  AAA_COLOR_MAIN_WHITE,
+  AAA_COLOR_TRANSPARENT,
+} from '../../constants/colors';
 
-import { getDOMNodeComputedStyle } from '../../../../../test/DOM'; // Components
+// Test Utilities
+import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 
+// Components
 import AAAPrimaryTheme from '../AAAPrimaryTheme/AAAPrimaryTheme';
 import Button from './Button';
 
 function getFakeProps(overrides) {
-  return _objectSpread({
-    onClick: jest.fn(function (v) {
-      return v;
-    })
-  }, overrides);
+  return {
+    onClick: jest.fn(v => v),
+    ...overrides,
+  };
 }
 
-function createButtonWithTheme(children) {
-  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : getFakeProps;
-  var ThemeButton = mount(React.createElement(AAAPrimaryTheme, null, React.createElement(Button, props, children)));
+function createButtonWithTheme(children, props = getFakeProps) {
+  const ThemeButton = mount(
+    <AAAPrimaryTheme>
+      <Button {...props}>{children}</Button>
+    </AAAPrimaryTheme>
+  );
+  
   return ThemeButton;
 }
 
-describe('Button', function () {
-  var spy;
-  var props;
-  var ButtonWrapper;
-  var ButtonNode;
-  beforeEach(function () {
+describe('Button', () => {
+  let spy;
+  let props;
+  let ButtonWrapper;
+  let ButtonNode;
+  
+  beforeEach(() => {
     spy = sinon.spy();
     props = getFakeProps({
       className: 'user-defined-button-class',
       onClick: spy,
-      forwardedRef: React.createRef()
+      forwardedRef: React.createRef(),
     });
     ButtonWrapper = createButtonWithTheme('Here lies a button', props);
     ButtonNode = ButtonWrapper.getDOMNode();
   });
-  afterEach(function () {
+  
+  afterEach(() => {
     ButtonWrapper.unmount();
   });
-  describe('base styles', function () {
-    it('has 48px height', function () {
-      var heightStyle = getDOMNodeComputedStyle(ButtonNode, 'height');
+
+  describe('base styles', () => {
+    it ('has 48px height', () => {
+      const heightStyle = getDOMNodeComputedStyle(ButtonNode, 'height');
       expect(heightStyle).to.equal('48px');
     });
-    it('has 18px label', function () {
-      var label = ButtonWrapper.find('.MuiButton-label').getDOMNode();
-      var heightStyle = getDOMNodeComputedStyle(label, 'font-size');
+
+    it ('has 18px label', () => {
+      const label = ButtonWrapper.find('.MuiButton-label').getDOMNode();
+      const heightStyle = getDOMNodeComputedStyle(label, 'font-size');
       expect(heightStyle).to.equal('18px');
     });
   });
-  describe('rendering HTML element', function () {
-    it('includes a class name of "Button" on the HTML element', function () {
+  
+  describe('rendering HTML element', () => {
+    it('includes a class name of "Button" on the HTML element', () => {
       expect(ButtonNode.className).to.include('Button');
     });
-    it('includes an HTML class property when passed a React className prop', function () {
+
+    it('includes an HTML class property when passed a React className prop', () => {
       expect(ButtonNode.className).to.include(props.className);
     });
-    it('has rendered button text', function () {
+
+    it('has rendered button text', () => {
       expect(ButtonWrapper.text()).to.equal('Here lies a button');
     });
-    it('forwards a reference to the underlying button with forwardedRef prop', function () {
-      var ReactButton = ButtonWrapper.find(Button);
+
+    it ('forwards a reference to the underlying button with forwardedRef prop', () => {
+      const ReactButton = ButtonWrapper.find(Button);
       expect(ReactButton.props().forwardedRef.current).to.equal(ButtonWrapper.getDOMNode());
     });
   });
-  describe('event handlers', function () {
-    it('will call it\'s click event handler, propogating a React event', function () {
+  
+  describe('event handlers', () => {
+    it('will call it\'s click event handler, propogating a React event', () => {
       ButtonWrapper.simulate('click');
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.have.property('target');
     });
   });
 });
-describe('Button States', function () {
-  describe('primary state', function () {
-    var props = getFakeProps({
-      color: 'primary'
-    });
-    var PrimaryButtonWrapper = createButtonWithTheme('Here lies a primary button', props);
-    it('has text color of AAA_COLOR_MAIN_WHITE', function () {
-      var backgroundStyle = getDOMNodeComputedStyle(PrimaryButtonWrapper.getDOMNode(), 'color');
+
+describe('Button States', () => {
+  describe('primary state', () => {
+    const props = getFakeProps({ color: 'primary' });
+    const PrimaryButtonWrapper = createButtonWithTheme('Here lies a primary button', props);
+
+    it('has text color of AAA_COLOR_MAIN_WHITE', () => {
+      const backgroundStyle = getDOMNodeComputedStyle(PrimaryButtonWrapper.getDOMNode(), 'color');
       expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_WHITE);
     });
-    it('has a background color of AAA_COLOR_MAIN_BLUE', function () {
-      var backgroundStyle = getDOMNodeComputedStyle(PrimaryButtonWrapper.getDOMNode(), 'background');
+
+    it('has a background color of AAA_COLOR_MAIN_BLUE', () => {
+      const backgroundStyle = getDOMNodeComputedStyle(PrimaryButtonWrapper.getDOMNode(), 'background');
       expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_BLUE);
     });
-    it('has a background color of AAA_COLOR_MAIN_DISABLED when disabled', function () {
-      var PrimaryDisabledButtonWrapper = createButtonWithTheme('Here lies a disabled button', getFakeProps({
-        disabled: true
-      }));
-      var backgroundStyle = getDOMNodeComputedStyle(PrimaryDisabledButtonWrapper.getDOMNode(), 'background');
+
+    it('has a background color of AAA_COLOR_MAIN_DISABLED when disabled', () => {
+      const PrimaryDisabledButtonWrapper = createButtonWithTheme('Here lies a disabled button', getFakeProps({ disabled: true }));
+      const backgroundStyle = getDOMNodeComputedStyle(PrimaryDisabledButtonWrapper.getDOMNode(), 'background');
       expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
     });
+    
   });
-  describe('secondary state', function () {
-    var props = getFakeProps({
-      color: 'secondary'
-    });
-    var ButtonWrapper = createButtonWithTheme('Here lies a secondary button', props);
-    it('has a background color of AAA_COLOR_TRANSPARENT', function () {
-      var backgroundStyle = getDOMNodeComputedStyle(ButtonWrapper.getDOMNode(), 'background');
+
+  describe('secondary state', () => {
+    const props = getFakeProps({ color: 'secondary' });
+    const ButtonWrapper = createButtonWithTheme('Here lies a secondary button', props);
+
+    it('has a background color of AAA_COLOR_TRANSPARENT', () => {
+      const backgroundStyle = getDOMNodeComputedStyle(ButtonWrapper.getDOMNode(), 'background');
       expect(backgroundStyle).to.equal(AAA_COLOR_TRANSPARENT);
     });
-    it('has a border color of AAA_COLOR_MAIN_BLUE', function () {
-      var borderColorStyle = getDOMNodeComputedStyle(ButtonWrapper.getDOMNode(), 'border-top-color');
+
+    it('has a border color of AAA_COLOR_MAIN_BLUE', () => {
+      const borderColorStyle = getDOMNodeComputedStyle(ButtonWrapper.getDOMNode(), 'border-top-color');
       expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_BLUE);
     });
-    it('has a border color of AAA_COLOR_MAIN_DISABLED when disabled', function () {
-      var SecondaryDisabledButtonWrapper = createButtonWithTheme('Here lies a disabled button', getFakeProps({
-        color: 'secondary',
-        disabled: true
-      }));
-      var borderColorStyle = getDOMNodeComputedStyle(SecondaryDisabledButtonWrapper.getDOMNode(), 'border-top-color');
+
+    it('has a border color of AAA_COLOR_MAIN_DISABLED when disabled', () => {
+      const SecondaryDisabledButtonWrapper = createButtonWithTheme('Here lies a disabled button', getFakeProps({ color: 'secondary', disabled: true }));
+      const borderColorStyle = getDOMNodeComputedStyle(SecondaryDisabledButtonWrapper.getDOMNode(), 'border-top-color');
       expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
     });
   });

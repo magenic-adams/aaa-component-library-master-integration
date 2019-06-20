@@ -2,15 +2,27 @@ import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
 import { withStyles } from '@material-ui/styles'; // listed as a dependency
 
-import cx from 'clsx';
+import cx from 'clsx'; // MaterialUI components
+
 import { Link as MuiLink } from '@material-ui/core'; // used the Link instead of the button
+// Utilities
+
+import noop from '../../utilities/noop';
+;
+;
+var defaultProps = {
+  className: '',
+  href: '',
+  onClick: noop,
+  onBlur: noop
+};
 
 var styleClasses = function styleClasses(theme) {
   var _primary, _secondary;
 
   return {
     primary: (_primary = {
-      color: theme.palette.colorVariables.DARKER_BLUE,
+      color: theme.secondaryPalette.colorVariables.DARKER_BLUE,
       cursor: 'pointer',
       fontSize: 18,
       fontWeight: 'normal',
@@ -24,10 +36,10 @@ var styleClasses = function styleClasses(theme) {
       lineHeight: 3,
       padding: '13.5px 0 13.5px 0'
     }), _defineProperty(_primary, '&:hover', {
-      color: theme.palette.colorVariables.VERY_DARK_BLUE
+      color: theme.secondaryPalette.colorVariables.VERY_DARK_BLUE
     }), _primary),
     secondary: (_secondary = {
-      color: theme.palette.colorVariables.DARKER_BLUE,
+      color: theme.secondaryPalette.colorVariables.DARKER_BLUE,
       cursor: 'pointer',
       fontWeight: 500,
       fontSize: 16,
@@ -42,28 +54,31 @@ var styleClasses = function styleClasses(theme) {
       letterSpacing: 'normal',
       padding: '14.5px 0 14.5px 0'
     }), _defineProperty(_secondary, '&:hover', {
-      color: theme.palette.colorVariables.VERY_DARK_BLUE
+      color: theme.secondaryPalette.colorVariables.VERY_DARK_BLUE
     }), _secondary)
   };
 };
 
 var Link = function Link(_ref) {
   var id = _ref.id,
+      children = _ref.children,
       className = _ref.className,
-      onClick = _ref.onClick,
       classes = _ref.classes,
       href = _ref.href,
-      children = _ref.children,
+      forwardedRef = _ref.forwardedRef,
+      onClick = _ref.onClick,
       onBlur = _ref.onBlur;
   return React.createElement(MuiLink, {
     id: id,
     className: cx('Link', [className === 'primary' ? classes.primary : classes.secondary]),
     href: href,
+    ref: forwardedRef,
     onBlur: onBlur,
     onClick: onClick
   }, children);
 };
 
+Link.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
   withTheme: true
 })(Link);

@@ -3,13 +3,40 @@ import MUIReportProblem from '@material-ui/icons/ReportProblem';
 import MUIFormHelperText from '@material-ui/core/FormHelperText';
 import { withStyles } from '@material-ui/core/styles';
 
-const styleClasses = theme => {
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
+interface RequiredProps {
+  id: string,
+};
+
+interface OptionalProps {
+  classes?: any, // MUI Decorator
+  error?: string,
+  helperText?: string,
+  disableWarning?: boolean
+}
+
+const defaultProps:OptionalProps = {
+  error: '',
+  helperText: '',
+  disableWarning: false,
+};
+
+const styleClasses = (theme:Theme): {
+    // CSS Classes
+    root: any,
+    helperTextStyle: any,
+    errorIcon: any,
+    errorText: any,
+    errorTextWrapper: any,
+  } => {
   return {
     root: {
       minHeight: 26,
     },
     helperTextStyle: {
-      color: theme.palette.colorVariables.GRAY,
+      color: theme.secondaryPalette.colorVariables.GRAY,
       [theme.breakpoints.up('sm')]: {
         fontSize: 14,
       },
@@ -41,13 +68,13 @@ const styleClasses = theme => {
   };
 };
 
-function FormFieldMeta({
+const FormFieldMeta:React.FunctionComponent<RequiredProps & OptionalProps> = ({
   error,
   disableWarning,
   classes,
   helperText,
   id,
-}){
+}) => {
   if (disableWarning) return null;
   return (
     <div className={classes.root}>
@@ -78,7 +105,9 @@ function FormFieldMeta({
       )} 
     </div>
   );
-}
+};
+
+FormFieldMeta.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
   FormFieldMeta

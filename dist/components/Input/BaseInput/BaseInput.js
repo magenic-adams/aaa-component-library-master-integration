@@ -1,6 +1,5 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/core/styles'; // Material UI components
 
@@ -12,6 +11,25 @@ import MUIIconButton from '@material-ui/core/IconButton'; // Components
 
 import Label from '../../Label/Label';
 import FormFieldMeta from '../../Form/FormFieldMeta/FormFieldMeta';
+;
+var defaultProps = {
+  autoFocus: false,
+  className: '',
+  formControlClass: '',
+  centerText: false,
+  disabled: false,
+  disableWarning: false,
+  helperText: '',
+  inputComponent: undefined,
+  labelName: '',
+  placeholder: '',
+  type: 'text',
+  value: undefined,
+  onBlur: function onBlur() {},
+  onChange: function onChange() {},
+  onClear: undefined,
+  onFocus: function onFocus() {}
+};
 
 var styleClasses = function styleClasses(theme) {
   var _input, _formControlStyle;
@@ -23,20 +41,20 @@ var styleClasses = function styleClasses(theme) {
       width: '100%',
       border: 0,
       borderRadius: 4,
-      background: theme.palette.colorVariables.WHITE,
-      boxShadow: "inset 0 0 0 1px ".concat(theme.palette.colorVariables.GRAY),
+      background: theme.secondaryPalette.colorVariables.WHITE,
+      boxShadow: "inset 0 0 0 1px ".concat(theme.secondaryPalette.colorVariables.GRAY),
       '&:hover,&:active': {
-        boxShadow: "inset 0 0 0 1px ".concat(theme.palette.colorVariables.DARKER_BLUE)
+        boxShadow: "inset 0 0 0 1px ".concat(theme.secondaryPalette.colorVariables.DARKER_BLUE)
       }
     },
     focused: {
-      boxShadow: "inset 0 0 0 2px ".concat(theme.palette.colorVariables.DARKER_BLUE),
+      boxShadow: "inset 0 0 0 2px ".concat(theme.secondaryPalette.colorVariables.DARKER_BLUE),
       '&:hover': {
-        boxShadow: "inset 0 0 0 2px ".concat(theme.palette.colorVariables.DARKER_BLUE)
+        boxShadow: "inset 0 0 0 2px ".concat(theme.secondaryPalette.colorVariables.DARKER_BLUE)
       }
     },
     disabled: {
-      background: theme.palette.disabled.main,
+      background: theme.secondaryPalette.disabled.main,
       boxShadow: 'initial',
       '&:hover': {
         boxShadow: 'none'
@@ -73,9 +91,6 @@ var styleClasses = function styleClasses(theme) {
     }), _defineProperty(_formControlStyle, theme.breakpoints.up('md'), {
       maxWidth: 534
     }), _formControlStyle),
-    helperTextStyleErrorActive: {
-      marginTop: 8
-    },
     error: {
       boxShadow: "inset 0 0 0 2px ".concat(theme.palette.error.main),
       '&$focused': {
@@ -90,7 +105,7 @@ var styleClasses = function styleClasses(theme) {
   };
 };
 
-function BaseInput(_ref) {
+var BaseInput = function BaseInput(_ref) {
   var autoFocus = _ref.autoFocus,
       classes = _ref.classes,
       className = _ref.className,
@@ -119,7 +134,7 @@ function BaseInput(_ref) {
   }, labelName && React.createElement(Label, {
     id: id,
     disabled: false,
-    error: false,
+    error: error,
     focused: false
   }, labelName), React.createElement(MUIInput, {
     autoFocus: autoFocus,
@@ -153,7 +168,7 @@ function BaseInput(_ref) {
     inputRef: forwardedRef,
     inputComponent: inputComponent,
     name: name,
-    placeholder: labelName ? null : placeholder,
+    placeholder: labelName ? '' : placeholder,
     type: type,
     value: value,
     onBlur: onBlur,
@@ -165,26 +180,9 @@ function BaseInput(_ref) {
     helperText: helperText,
     id: id
   }));
-}
-
-BaseInput.defaultProps = {
-  autoFocus: false,
-  className: '',
-  formControlClass: '',
-  centerText: false,
-  disabled: false,
-  disableWarning: false,
-  helperText: null,
-  inputComponent: undefined,
-  labelName: null,
-  placeholder: '',
-  type: 'text',
-  value: undefined,
-  onBlur: function onBlur() {},
-  onChange: function onChange() {},
-  onClear: null,
-  onFocus: function onFocus() {}
 };
+
+BaseInput.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
   index: 0,
   withTheme: true

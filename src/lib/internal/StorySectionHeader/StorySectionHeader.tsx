@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import './StorySectionHeader.css';
 
 type propTypes = {
-  title: PropTypes.string,
+  title: string,
 };
 
 export function StorySectionHeader({ title }:propTypes){

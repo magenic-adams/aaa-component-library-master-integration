@@ -1,23 +1,24 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import { Field, useForm } from 'react-final-form'; // Components
 
 import NumericInput from '../../Input/NumericInput/NumericInput';
-
+;
+;
 /**
  * Form field change interceptor calls a form effect "setFieldTouched"
  * @param  {Object} options.input - fieldProps.input
  * @param  {Object} formState - global form state
  * @return {Function} decoratored onChange
  */
+
 function handleFormFieldChange(_ref, formState) {
   var input = _ref.input;
-  return function (val) {
+  return function (evt) {
     var name = input.name,
         onChange = input.onChange;
     var setFieldTouched = formState.mutators.setFieldTouched;
     setFieldTouched(name, false);
-    onChange(val);
+    onChange(evt);
   };
 }
 /**
@@ -37,7 +38,10 @@ function handleFieldClear(_ref2, formState, inputRef) {
     var setFieldTouched = formState.mutators.setFieldTouched;
     setFieldTouched(name, false);
     onChange('');
-    inputRef.current.focus();
+
+    if (inputRef) {
+      inputRef.current.focus();
+    }
   };
 }
 /**
@@ -51,7 +55,7 @@ function handleFieldClear(_ref2, formState, inputRef) {
  */
 
 
-function FormNumericInput(props) {
+var FormNumericInput = function FormNumericInput(props) {
   var forwardedRef = props.forwardedRef;
   var inputRef = forwardedRef || useRef(null);
   var formState = useForm();
@@ -68,6 +72,6 @@ function FormNumericInput(props) {
       }, props));
     }
   });
-}
+};
 
 export default FormNumericInput;

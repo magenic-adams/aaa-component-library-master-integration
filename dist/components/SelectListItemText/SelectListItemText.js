@@ -1,6 +1,5 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import invariant from 'tiny-invariant'; // Material Components
 
@@ -11,12 +10,12 @@ var styleClasses = function styleClasses(theme) {
   return {
     root: {
       height: 48,
-      background: theme.palette.colorVariables.TRANSPARENT,
+      background: theme.secondaryPalette.colorVariables.TRANSPARENT,
       '&.Mui-selected, &.Mui-selected:hover': {
-        backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER
+        backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
       },
       '&:hover': {
-        backgroundColor: theme.palette.colorVariables.SECONDARY_HOVER
+        backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
       }
     },
     gutters: {
@@ -39,32 +38,32 @@ var styleClasses = function styleClasses(theme) {
   };
 };
 
-function isValid(id, display) {
-  if (!id && !display) {
-    invariant(false, 'id and display should have value.');
-  }
+function checkValidity(item) {
+  if (!item) {
+    invariant(false, 'You have not passed an item for rendering.');
+  } else {
+    if (!item.id && !item.display) {
+      invariant(false, 'id and display should have value.');
+    }
 
-  if (!(typeof display === 'string' || typeof display === 'number')) {
-    invariant(false, 'Invalid display type. It must be string or number');
+    if (!(typeof item.display === 'string' || typeof item.display === 'number')) {
+      invariant(false, 'Invalid display type. It must be string or number');
+    }
   }
-
-  return true;
 }
 
-function SelectListItemText(_ref) {
+var SelectListItemText = function SelectListItemText(_ref) {
   var classes = _ref.classes,
       item = _ref.item,
       onSelect = _ref.onSelect;
-
-  var _ref2 = item || {},
-      display = _ref2.display,
-      id = _ref2.id;
-
+  checkValidity(item);
+  var display = item.display,
+      id = item.id;
   var divider = classes.divider,
       gutters = classes.gutters,
       primary = classes.primary,
       root = classes.root;
-  return isValid(id, display) ? React.createElement(ListItem, {
+  return React.createElement(ListItem, {
     "data-quid": "SelectListItem-".concat(id),
     classes: {
       root: root,
@@ -81,8 +80,8 @@ function SelectListItemText(_ref) {
       primary: primary
     },
     primary: display
-  })) : null;
-}
+  }));
+};
 
 export default withStyles(styleClasses, {
   withTheme: true

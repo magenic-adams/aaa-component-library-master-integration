@@ -20,10 +20,12 @@ const VALIDATIONS = {
   firstName: {
     required: 'First name is required',
     'max_length[24]': 'Too long. Do you have a nickname?',
-    alpha_dash_dot_space: 'Name can only contain letters, dashes, periods, and spaces',
+    alpha_dash_dot_space:
+      'Name can only contain letters, dashes, periods, and spaces',
   },
   lastName: {
-    alpha_dash_dot_space: 'Name can only contain letters, dashes, periods, and spaces',
+    alpha_dash_dot_space:
+      'Name can only contain letters, dashes, periods, and spaces',
   },
   password: {
     required: 'Password is required',
@@ -36,73 +38,77 @@ const VALIDATIONS = {
   },
 };
 
-function handleFormValueSubmission(vals){
+function handleFormValueSubmission(vals) {
   action(vals);
 }
 
 const stories = storiesOf('Molecules|Form', module);
-stories
-  .add('basic form', () => {
-    return (
-      <AAAPrimaryTheme>
-        <div className="u-background--gray">
-          <Paper className="u-padding--50">
-              <Form
-                validations={VALIDATIONS}
-                onSubmit={handleFormValueSubmission}
-                render={({ allRequiredFieldsHaveBeenVisited, handleSubmit }) => {
-                  return (
-                    <form onSubmit={handleSubmit}>
-                      <FormGroup>
-                        <FormInput 
-                          autoFocus
-                          name="firstName"
-                          id="firstName"
-                          labelName="First name"
-                          type="text"
-                        />
-                      </FormGroup>
-                      <FormGroup>
-                        <FormInput 
-                          name="lastName"
-                          id="lastName"
-                          labelName="Last name"
-                          helperText="Not required"
-                          type="text"
-                        />
-                      </FormGroup>
-                      <FormGroup>
-                        <FormInput 
-                          name="password"
-                          id="password"
-                          labelName="Password"
-                          type="password"
-                        />
-                      </FormGroup>
-                      <FormGroup>
-                        <FormInput 
-                          name="passwordConfirm"
-                          id="passwordConfirm"
-                          labelName="Password Confirm"
-                          type="password"
-                        />
-                      </FormGroup>
-                      <ButtonGroup>
-                        <Button
-                          disabled={!allRequiredFieldsHaveBeenVisited}
-                          fadeUp={allRequiredFieldsHaveBeenVisited}
-                          type="submit"
-                        >
-                          Submit
-                        </Button>
-                      </ButtonGroup>
-                    </form>
-                  );
-                }
-              }
-              />
-          </Paper>
-        </div>
-      </AAAPrimaryTheme>
-    );
-  });
+stories.add('basic form', () => {
+  return (
+    <AAAPrimaryTheme>
+      <div className="u-background--gray">
+        <Paper className="u-padding--50">
+          <Form
+            validations={VALIDATIONS}
+            onSubmit={handleFormValueSubmission}
+            render={({
+              allRequiredFieldsHaveBeenVisited,
+              invalid,
+              handleSubmit,
+              values,
+            }) => {
+              console.log('values 1', invalid);
+              return (
+                <form onSubmit={handleSubmit}>
+                  <FormGroup>
+                    <FormInput
+                      // autoFocus
+                      name="firstName"
+                      id="firstName"
+                      labelName="First name"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput
+                      name="lastName"
+                      id="lastName"
+                      labelName="Last name"
+                      helperText="Not required"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput
+                      name="password"
+                      id="password"
+                      labelName="Password"
+                      type="password"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput
+                      name="passwordConfirm"
+                      id="passwordConfirm"
+                      labelName="Password Confirm"
+                      type="password"
+                    />
+                  </FormGroup>
+                  <ButtonGroup>
+                    <Button
+                      disabled={!allRequiredFieldsHaveBeenVisited}
+                      fadeUp={allRequiredFieldsHaveBeenVisited}
+                      type="submit"
+                    >
+                      Submit
+                    </Button>
+                  </ButtonGroup>
+                </form>
+              );
+            }}
+          />
+        </Paper>
+      </div>
+    </AAAPrimaryTheme>
+  );
+});

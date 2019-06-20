@@ -5,7 +5,7 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js", ".jsx"]
+        "extensions": [".js", ".jsx", ".tsx"]
       }
     ],
     "react/prop-types": 0,
@@ -15,6 +15,13 @@
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "object-curly-spacing": ["error", "always", { "objectsInObjects": false }],
     "import/imports-first": ["error", "absolute-first"]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   },
   "parser": "babel-eslint",
   "env": {

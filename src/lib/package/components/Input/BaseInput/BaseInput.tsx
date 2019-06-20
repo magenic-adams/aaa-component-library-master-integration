@@ -1,7 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
+
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 // Material UI components
 import MUIInput from '@material-ui/core/Input';
@@ -14,7 +16,66 @@ import MUIIconButton from '@material-ui/core/IconButton';
 import Label from '../../Label/Label';
 import FormFieldMeta from '../../Form/FormFieldMeta/FormFieldMeta';
 
-const styleClasses = theme => {
+interface RequiredProps {
+  id: string,
+  name: string,
+};
+
+interface OptionalProps {
+  autoFocus?: boolean,
+  classes?: any, // MUI Decorator
+  className?: string,
+  centerText?: boolean,
+  formControlClass?: string,
+  disabled?: boolean,
+  disableWarning?: boolean,
+  disableErrorWarning?: boolean,
+  error?: string,
+  forwardedRef?: React.RefObject<any>,
+  helperText?: string,
+  inputComponent?: any,
+  labelName?: string,
+  placeholder?: string,
+  type?: string,
+  value?: string | number,
+  onBlur?: (evt:React.FocusEvent) => void,
+  onChange?: (evt:React.SyntheticEvent) => void,
+  onClear?: (evt:React.SyntheticEvent) => void,
+  onFocus?: (evt:React.FocusEvent) => void
+}
+
+const defaultProps:OptionalProps = {
+  autoFocus: false,
+  className: '',
+  formControlClass: '',
+  centerText: false,
+  disabled: false,
+  disableWarning: false,
+  helperText: '',
+  inputComponent: undefined,
+  labelName: '',
+  placeholder: '',
+  type: 'text',
+  value: undefined,
+  onBlur: () => {},
+  onChange: () => {},
+  onClear: undefined,
+  onFocus: () => {},
+};
+
+
+const styleClasses = (theme:Theme): {
+  // CSS Classes
+  root: any,
+  focused: any,
+  disabled: any,
+  input: any,
+  inputAdornment: any,
+  iconButton: any,
+  iconStyle: any,
+  formControlStyle: any,
+  error: any,
+} => {
   return {
     root: {
       padding: '0 12px',
@@ -22,20 +83,20 @@ const styleClasses = theme => {
       width: '100%',
       border: 0,
       borderRadius: 4,
-      background: theme.palette.colorVariables.WHITE,
-      boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.GRAY}`,
+      background: theme.secondaryPalette.colorVariables.WHITE,
+      boxShadow: `inset 0 0 0 1px ${theme.secondaryPalette.colorVariables.GRAY}`,
       '&:hover,&:active': {
-        boxShadow: `inset 0 0 0 1px ${theme.palette.colorVariables.DARKER_BLUE}`,
+        boxShadow: `inset 0 0 0 1px ${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
       },
     },
     focused: {
-      boxShadow: `inset 0 0 0 2px ${theme.palette.colorVariables.DARKER_BLUE}`,
+      boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
       '&:hover': {
-        boxShadow: `inset 0 0 0 2px ${theme.palette.colorVariables.DARKER_BLUE}`,
+        boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
       },
     },
     disabled: {
-      background: theme.palette.disabled.main,
+      background: theme.secondaryPalette.disabled.main,
       boxShadow: 'initial',
       '&:hover': {
         boxShadow: 'none',
@@ -45,7 +106,7 @@ const styleClasses = theme => {
       boxSizing: 'border-box',
       height: '100%',
       lineHeight: '100%',
-      textAlign: props => props.centerText ? 'center' : 'left',
+      textAlign: (props:{centerText: boolean}) => props.centerText ? 'center' : 'left',
       [theme.breakpoints.up('sm')]: {
         fontSize: 16,
       },
@@ -75,9 +136,6 @@ const styleClasses = theme => {
         maxWidth: 534,
       },
     },
-    helperTextStyleErrorActive: {
-      marginTop: 8,
-    },
     error: {
       boxShadow: `inset 0 0 0 2px ${theme.palette.error.main}`,
       '&$focused': { // TODO
@@ -91,31 +149,8 @@ const styleClasses = theme => {
   };
 };
 
-type propTypes = {
-  // MUI Decorator
-  classes: PropTypes.object,
-  // Passed Props
-  className?: PropTypes.string,
-  formControlClass?: PropTypes.string,
-  disabled?: PropTypes.bool,
-  disableWarning?: PropTypes.bool,
-  error?: PropTypes.string,
-  disableErrorWarning?: PropTypes.bool,
-  helperText?: PropTypes.string,
-  id: PropTypes.string,
-  inputComponent?: PropTypes.element,
-  labelName?: PropTypes.string,
-  name: PropTypes.string,
-  placeholder?: PropTypes.string,
-  type?: PropTypes.string,
-  value?: PropTypes.string,
-  onBlur?: PropTypes.func,
-  onChange?: PropTypes.func,
-  onClear?: PropTypes.func,
-  onFocus?: PropTypes.func
-};
 
-function BaseInput({
+const BaseInput:React.FunctionComponent<RequiredProps & OptionalProps> = ({
   autoFocus,
   classes,
   className,
@@ -137,7 +172,7 @@ function BaseInput({
   onChange,
   onClear,
   onFocus,
-}): propTypes {
+}) => {
   return (
     <MUIFormControl
       className={cx(classes.formControlStyle, formControlClass)}
@@ -148,7 +183,7 @@ function BaseInput({
         <Label
           id={id}
           disabled={false}
-          error={false}
+          error={error}
           focused={false}
         >
           {labelName}
@@ -195,7 +230,7 @@ function BaseInput({
         inputRef={forwardedRef}
         inputComponent={inputComponent}
         name={name}
-        placeholder={labelName ? null : placeholder}
+        placeholder={labelName ? '' : placeholder}
         type={type}
         value={value}
         onBlur={onBlur}
@@ -211,26 +246,9 @@ function BaseInput({
       />
     </MUIFormControl>
   );
-}
-
-BaseInput.defaultProps = {
-  autoFocus: false,
-  className: '',
-  formControlClass: '',
-  centerText: false,
-  disabled: false,
-  disableWarning: false,
-  helperText: null,
-  inputComponent: undefined,
-  labelName: null,
-  placeholder: '',
-  type: 'text',
-  value: undefined,
-  onBlur: () => {},
-  onChange: () => {},
-  onClear: null,
-  onFocus: () => {},
 };
+
+BaseInput.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
   BaseInput

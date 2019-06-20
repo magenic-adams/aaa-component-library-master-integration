@@ -6,7 +6,7 @@ import cx from 'clsx';
 
 const styleClasses = theme => ({
   root: {
-    color: theme.palette.colorVariables.BLACK,
+    color: theme.secondaryPalette.colorVariables.BLACK,
     display: 'block',
     marginBottom: -8,
     fontFamily: theme.typography.fontFamily,
@@ -28,7 +28,7 @@ type propTypes = {
   disabled?: PropTypes.bool,
   error?: PropTypes.bool,
   focused?: PropTypes.bool,
-  id: PropTypes.string
+  id: PropTypes.string,
 };
 
 function Label({

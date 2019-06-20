@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'clsx';
 
 // CSS
 import './StoryLayoutContainer.css';
 
 type propTypes = {
-  children: PropTypes.node,
-  verticalPadding: PropTypes.bool,
+  children: any,
+  verticalPadding: boolean,
 };
 
 export function StoryLayoutContainer({ children, verticalPadding }:propTypes){

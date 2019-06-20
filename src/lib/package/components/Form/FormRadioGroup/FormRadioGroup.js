@@ -40,15 +40,15 @@ type propTypes = {
 
 const styleClasses = theme => ({
   root: {
-    width: theme.common.ELEMENT_PANEL_WIDTH_MOBILE,
+    width: 534,
     border: 'none',
     boxShadow: 'none',
     marginTop: 16,
     [theme.breakpoints.up('md')]: {
-      maxWidth: theme.common.ELEMENT_PANEL_WIDTH_MOBILE,
+      width: 534,
     },
     [theme.breakpoints.up('sm')]: {
-      width: theme.common.ELEMENT_PANEL_WIDTH_TABLET,
+      width: '100%',
     },
   },
 });

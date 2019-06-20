@@ -1,35 +1,45 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
+import _defineProperty from '@babel/runtime/helpers/esm/defineProperty';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
-// Component styles manipulated entirely by theme
-var styleClasses = function styleClasses(theme) {
+const defaultProps = {
+  className: '',
+  secondary: false, // Component styles manipulated entirely by theme
+
+};
+
+const styleClasses = function styleClasses(theme) {
   return {
-    root: _objectSpread({
-      color: theme.typography.color,
-      fontFamily: theme.typography.fontFamily,
-      fontWeight: theme.typography.fontWeight
-    }, theme.typography.body1),
-    secondary: theme.typography.body2
+    root: {
+      color: theme.typographyValues.color,
+      fontFamily: theme.typographyValues.fontFamily,
+      fontWeight: theme.typographyValues.fontWeight,
+    },
+    primary: theme.typography.body1,
+    secondary: theme.typography.body2,
   };
 };
 
-function Body(_ref) {
-  var children = _ref.children,
-      className = _ref.className,
-      classes = _ref.classes,
-      id = _ref.id,
-      secondary = _ref.secondary;
-  return React.createElement("p", {
-    className: cx('Body', classes.root, _defineProperty({}, classes.secondary, secondary), className),
-    "data-quid": "Body-".concat(id)
-  }, children);
-}
+const Body = function Body(_ref) {
+  let _cx;
 
+  const { children } = _ref;
+      const { className } = _ref;
+      const { classes } = _ref;
+      const { id } = _ref;
+      const { secondary } = _ref;
+  return React.createElement('p', {
+    className: cx('Body', classes.root, (_cx = {}, _defineProperty(_cx, classes.primary, !secondary), _defineProperty(_cx, classes.secondary, secondary), _cx), className),
+    'data-quid': 'Body-'.concat(id),
+  }, children);
+};
+
+Body.defaultProps = {
+  className: '',
+  secondary: false,
+};
 export default withStyles(styleClasses, {
   index: 0,
-  withTheme: true
+  withTheme: true,
 })(Body);

@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/styles';
+import { withTheme } from '@material-ui/styles';
 
 // Material UI Components
 import MUIFormControl from '@material-ui/core/FormControl';
@@ -15,74 +14,41 @@ import StepperButton from '../Button/Button';
 import NumericInput from '../Input/NumericInput/NumericInput';
 
 import {
-  AAA_CSS_INLINE,
-  AAA_CSS_MIDDLE,
-} from '../../constants/cssConstants';
+  overrideStepperLabel,
+  styleClasses,
+} from './NumericalStepperStyles';
 
+interface RequiredProps {
+  id: string,
+  name: string,
+  children: string | React.ReactElement | React.ReactHTMLElement<any>,
+  onDecrease: (evt:React.SyntheticEvent) => void,
+  onIncrease: (evt:React.SyntheticEvent) => void,
+}
 
-const styleClasses = theme => ({
-  stepperIcon: {
-    width: 24,
-    height: '100%',
-    color: theme.palette.primary.main,
-  },
-  stepperInputWrapper: {
-    display: 'inline-block',
-    width: 78,
-  },
-  stepperLabel: {
-    color: theme.palette.colorVariables.BLACK,
-    marginTop: 8,
-    fontSize: '16px',
-    [theme.breakpoints.up('md')]: {
-      fontSize: '18px',
-    },
-  },
-  actionWrapper: {
-    margin: '16px 0 6px 0',
-  },
-  helperText: {
-    color: theme.palette.colorVariables.GRAY,
-    marginTop: 8,
-    '& span': {
-      fontSize: 14,
-      [theme.breakpoints.up('md')]: {
-        fontSize: 16,
-      },
-    },
-  },
-  error: {
-    color: theme.palette.error.main,
-    fontSize: 14,
-    [theme.breakpoints.up('md')]: {
-      fontSize: '16px',
-    },
-    '& svg': {
-      display: `${AAA_CSS_INLINE}`,
-      fontSize: 20,
-      marginLeft: 8,
-      marginRight: 8,
-      verticalAlign: `${AAA_CSS_MIDDLE}`,
-    },
-  },
-});
+interface OptionalProps {
+  classes?: any, // MUI Decorator
+  disabled?: boolean,
+  disableWarning?: boolean,
+  error?: string,
+  helperText?: string,
+  labelText?: string | React.ReactElement | React.ReactHTMLElement<any>,
+  mask?: string[], // Pass through
+  value?: number,
+}
 
-type propTypes = {
-  id: PropTypes.string.isRequired,
-  classes?: {},
-  disabled?: PropTypes.bool,
-  error?: PropTypes.string,
-  labelText?: PropTypes.string,
-  helperText?: PropTypes.string,
-  mask?: [], // Pass through
-  onIncrease: (React.SyntheticEvent) => void,
-  onDecrease: (React.SyntheticEvent) => void,
-  value?: PropTypes.number,
+const defaultProps:OptionalProps = {
+  classes: {},
+  disabled: false,
+  labelText: '',
+  helperText: '',
+  mask: [],
+  error: '',
+  value: 1,
 };
 
-const NumericalStepper = (props:propTypes) => {
+const NumericalStepper:React.FunctionComponent<RequiredProps & OptionalProps> = (props) => {
   const {
-    classes,
     disabled,
     disableWarning,
     error,
@@ -90,20 +56,25 @@ const NumericalStepper = (props:propTypes) => {
     id,
     labelText,
     mask,
+    name,
     onIncrease,
     onDecrease,
     value,
   } = props;
+
+  const classes = styleClasses(props);
+
   return (
     <MUIFormControl
       id={id}
       disabled={disabled}
-      classes={classes.root}
+      classes={{ root: classes.root }}
     >
       <Label
+        overrides={overrideStepperLabel(props)}
         id={`NumericalStepperLabel-${id}`}
         disabled={false}
-        error={false}
+        error={error}
         focused={false}
       >
         {labelText}
@@ -117,7 +88,6 @@ const NumericalStepper = (props:propTypes) => {
         >
           <RemoveIcon
             data-quid={`RemoveIcon-${id}`}
-            disabled={disabled}
             className={classes.stepperIcon}
           />
         </StepperButton>
@@ -125,6 +95,7 @@ const NumericalStepper = (props:propTypes) => {
         <div className={classes.stepperInputWrapper}>
           <NumericInput
             id={`NumericalStepperInput-${id}`}
+            name={name}
             centerText
             type="text"
             value={value}
@@ -146,7 +117,7 @@ const NumericalStepper = (props:propTypes) => {
           />
         </StepperButton>
       </div>
-      
+
       <FormFieldMeta
         id={`NumericalStepperMeta-${id}`}
         disableWarning={disableWarning}
@@ -157,16 +128,6 @@ const NumericalStepper = (props:propTypes) => {
   );
 };
 
-NumericalStepper.defaultProps = {
-  classes: {},
-  disabled: false,
-  labelText: '',
-  helperText: '',
-  mask: [],
-  error: false,
-  value: 1,
-};
+NumericalStepper.defaultProps = defaultProps;
 
-export default withStyles(styleClasses, { index: 0, withTheme: true })(
-  NumericalStepper
-);
+export default withTheme(NumericalStepper);

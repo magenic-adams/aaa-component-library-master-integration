@@ -15,14 +15,14 @@ import Body from '../../package/components/Body/Body';
 import './StoryUsageDescription.css';
 
 type propTypes = {
-  positive: PropTypes.bool,
-  items: [PropTypes.string],
-  usageText: PropTypes.string,
+  positive: boolean,
+  items: string[],
+  usageText: string,
 };
 
-const useStyles = props => makeStyles(theme => ({
+const useStyles = ({positive}:{positive: boolean}) => makeStyles(theme => ({
   root: {
-    color: props.positive ? 'green' : 'red',
+    color: positive ? 'green' : 'red',
     verticalAlign: 'middle',
     marginRight: 10,
   },
@@ -41,10 +41,10 @@ export function StoryUsageDescription({
   const classes = useStyles({ positive })();
   return (
     <div className="StoryUsageDescription">
-      <Subheadline>{usageText}</Subheadline>
+      <Subheadline id="StoryUsageDescription_subheadline">{usageText}</Subheadline>
       {items.map((text, i) => (
-        <Body>
-          <li key={`text-${i}`}>
+        <Body id={`Body-${i}`}>
+          <li>
             {positive
               ? <span><Checkmark classes={classes}/></span>
               : <span><Warning classes={classes}/></span>

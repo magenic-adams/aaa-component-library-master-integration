@@ -2,18 +2,26 @@ import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles'; // Material UI Components
 
 import MUIFormControl from '@material-ui/core/FormControl';
 import MUIAddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove'; // Components
+import MUIRemoveIcon from '@material-ui/icons/Remove'; // Components
 
 import FormFieldMeta from '../Form/FormFieldMeta/FormFieldMeta';
 import Label from '../Label/Label';
 import StepperButton from '../Button/Button';
 import NumericInput from '../Input/NumericInput/NumericInput';
 import { AAA_CSS_INLINE, AAA_CSS_MIDDLE } from '../../constants/cssConstants';
+var defaultProps = {
+  disabled: false,
+  disableWarning: false,
+  error: '',
+  helperText: '',
+  labelText: '',
+  mask: [],
+  value: 0
+};
 
 var styleClasses = function styleClasses(theme) {
   var _error;
@@ -29,7 +37,7 @@ var styleClasses = function styleClasses(theme) {
       width: 78
     },
     stepperLabel: _defineProperty({
-      color: theme.palette.colorVariables.BLACK,
+      color: theme.secondaryPalette.colorVariables.BLACK,
       marginTop: 8,
       fontSize: '16px'
     }, theme.breakpoints.up('md'), {
@@ -39,7 +47,7 @@ var styleClasses = function styleClasses(theme) {
       margin: '16px 0 6px 0'
     },
     helperText: {
-      color: theme.palette.colorVariables.GRAY,
+      color: theme.secondaryPalette.colorVariables.GRAY,
       marginTop: 8,
       '& span': _defineProperty({
         fontSize: 14
@@ -62,26 +70,27 @@ var styleClasses = function styleClasses(theme) {
   };
 };
 
-var NumericalStepper = function NumericalStepper(props) {
-  var classes = props.classes,
-      disabled = props.disabled,
-      disableWarning = props.disableWarning,
-      error = props.error,
-      helperText = props.helperText,
-      id = props.id,
-      labelText = props.labelText,
-      mask = props.mask,
-      onIncrease = props.onIncrease,
-      onDecrease = props.onDecrease,
-      value = props.value;
+var NumericalStepper = function NumericalStepper(_ref) {
+  var classes = _ref.classes,
+      disabled = _ref.disabled,
+      disableWarning = _ref.disableWarning,
+      error = _ref.error,
+      helperText = _ref.helperText,
+      id = _ref.id,
+      labelText = _ref.labelText,
+      mask = _ref.mask,
+      name = _ref.name,
+      onIncrease = _ref.onIncrease,
+      onDecrease = _ref.onDecrease,
+      value = _ref.value;
   return React.createElement(MUIFormControl, {
     id: id,
     disabled: disabled,
     classes: classes.root
-  }, React.createElement(Label, {
+  }, labelText && React.createElement(Label, {
     id: "NumericalStepperLabel-".concat(id),
     disabled: false,
-    error: false,
+    error: error,
     focused: false
   }, labelText), React.createElement("div", {
     className: classes.actionWrapper
@@ -90,16 +99,15 @@ var NumericalStepper = function NumericalStepper(props) {
     disabled: disabled,
     onClick: onDecrease,
     isIconButton: true
-  }, React.createElement(RemoveIcon, {
+  }, React.createElement(MUIRemoveIcon, {
     "data-quid": "RemoveIcon-".concat(id),
-    disabled: disabled,
     className: classes.stepperIcon
   })), React.createElement("div", {
     className: classes.stepperInputWrapper
   }, React.createElement(NumericInput, {
+    name: name,
     id: "NumericalStepperInput-".concat(id),
     centerText: true,
-    type: "text",
     value: value,
     error: error,
     disabled: disabled,
@@ -121,15 +129,7 @@ var NumericalStepper = function NumericalStepper(props) {
   }));
 };
 
-NumericalStepper.defaultProps = {
-  classes: {},
-  disabled: false,
-  labelText: '',
-  helperText: '',
-  mask: [],
-  error: false,
-  value: 1
-};
+NumericalStepper.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
   index: 0,
   withTheme: true

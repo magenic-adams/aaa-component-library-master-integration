@@ -4,6 +4,10 @@ exports[`Storyshots Atomic|Button all buttons 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Atomic|Button dynamic button 1`] = `ReactWrapper {}`;
 
+exports[`Storyshots Atomic|Button primary and secondary 1`] = `ReactWrapper {}`;
+
+exports[`Storyshots Atomic|Input Input 1`] = `ReactWrapper {}`;
+
 exports[`Storyshots Atomic|Input input 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Atomic|Input states 1`] = `ReactWrapper {}`;

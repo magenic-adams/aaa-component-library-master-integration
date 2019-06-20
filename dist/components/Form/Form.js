@@ -7,8 +7,9 @@ import React from 'react';
 import { Form } from 'react-final-form'; // Mutators
 // https://github.com/final-form/final-form-set-field-touched
 
-import setFieldTouched from 'final-form-set-field-touched'; // Utilities
+import setFieldTouched from 'final-form-set-field-touched'; // Types
 
+// Utilities
 import Validate from '../../utilities/validate';
 
 var FormDecorator =
@@ -29,14 +30,16 @@ function (_React$Component) {
       // but we augment functionality and encapsulate required form behaviors
       var _this$props = this.props,
           render = _this$props.render,
-          validations = _this$props.validations;
+          validations = _this$props.validations,
+          onSubmit = _this$props.onSubmit;
       return React.createElement(Form, Object.assign({
         validate: FormDecorator.handleValidate({
           validations: validations
         }),
         mutators: {
           setFieldTouched: setFieldTouched
-        }
+        },
+        onSubmit: onSubmit
       }, this.props, {
         render: FormDecorator.decorateRender(render, validations) // Render passed is always decorated
 

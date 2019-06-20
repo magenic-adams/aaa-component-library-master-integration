@@ -9,7 +9,7 @@ import { AAAPrimaryTheme, BaseInput, NumericInput } from '../src/lib/package/com
 
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
 
-const stories = storiesOf('Atomic', module);
+const stories = storiesOf('Atomic|Input', module);
 
 stories
   .addDecorator(withKnobs)

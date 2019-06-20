@@ -1,11 +1,15 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import invariant from 'tiny-invariant';
 import cx from 'clsx';
 import Button from '../Button/Button';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
+var defaultProps = {
+  className: '',
+  disabled: false,
+  value: ''
+};
 
 var styleClasses = function styleClasses(theme) {
   return {
@@ -26,7 +30,7 @@ var styleClasses = function styleClasses(theme) {
           fontWeight: '700 !important'
         },
         '&:hover': {
-          background: theme.palette.colorVariables.SECONDARY_HOVER
+          background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
         }
       }
     }),
@@ -41,36 +45,63 @@ var styleClasses = function styleClasses(theme) {
     },
     active: _defineProperty({
       background: "".concat(theme.palette.primary.dark, " !important"),
-      color: "".concat(theme.palette.colorVariables.WHITE, " !important"),
+      color: "".concat(theme.secondaryPalette.colorVariables.WHITE, " !important"),
       '&:hover': {
         background: theme.palette.primary.dark
       }
     }, theme.breakpoints.down('sm'), {
-      background: "".concat(theme.palette.colorVariables.SECONDARY_HOVER, " !important"),
+      background: "".concat(theme.secondaryPalette.colorVariables.SECONDARY_HOVER, " !important"),
       color: "".concat(theme.palette.primary.main, " !important"),
       '&:hover': {
-        background: theme.palette.colorVariables.SECONDARY_HOVER
+        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
       }
     })
   };
 };
+/**
+ * Propagates value selected to parent callback
+ * @param  {String|Number} value - value passed
+ * @param  {Function} onSelect
+ * @return {void}
+ */
 
-function handleClick(value, callback) {
-  if (callback) callback(value);
+
+function handleClick(option, onSelect) {
+  onSelect(option);
 }
+/**
+ * Checks to see if correct option keys are present
+ * @param  {Array} options
+ * @return {Boolean} isOptionsKeyPresent?
+ */
+
 
 function isOptionsKeysPresent(options) {
   return options.every(function (op) {
     return op.id && op.text;
   });
 }
+/**
+ * Returns the active CSS class if active
+ * @param  {String|Number} value - current value
+ * @param  {String|Number} id
+ * @param  {Object} classes - css classes
+ * @return {String} activeClass
+ */
+
 
 function getActiveClass(value, id, classes) {
   var active = classes.active;
   return value === id ? "".concat(active) : '';
 }
+/**
+ * Returns if the options are valid or not
+ * @param  {Array} options - passed options
+ * @return {Boolean} areOptionsValid
+ */
 
-function isOptionsValid(options) {
+
+function areOptionsValid(options) {
   if (!Array.isArray(options) || options.length < 2) {
     invariant(false, 'Invalid length of options. You must passed maximum number of two options');
   }
@@ -82,14 +113,14 @@ function isOptionsValid(options) {
   return true;
 }
 
-function ToggleButtonGroup(_ref) {
+var ToggleButtonGroup = function ToggleButtonGroup(_ref) {
   var classes = _ref.classes,
       className = _ref.className,
       disabled = _ref.disabled,
       options = _ref.options,
       value = _ref.value,
       onSelect = _ref.onSelect;
-  return React.createElement(Fragment, null, isOptionsValid(options) ? React.createElement(ButtonGroup, {
+  return React.createElement(Fragment, null, areOptionsValid(options) ? React.createElement(ButtonGroup, {
     className: cx(classes.root, className)
   }, React.createElement(Button, {
     className: cx("".concat(getActiveClass(value, options[0].id, classes), " ").concat(classes.left), className),
@@ -108,12 +139,9 @@ function ToggleButtonGroup(_ref) {
       return handleClick(options[1], onSelect);
     }
   }, options[1].text)) : null);
-}
-
-ToggleButtonGroup.defaultProps = {
-  className: '',
-  value: ''
 };
+
+ToggleButtonGroup.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
   index: 0,
   withTheme: true
