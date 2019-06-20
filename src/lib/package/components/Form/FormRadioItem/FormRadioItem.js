@@ -72,27 +72,28 @@ function isValidItem(item) {
 
 const Radio = ({ props }) => {
   const {
-    classes: { root },
-    input: { name, onBlur, onFocus },
+    id,
+    input: { name, value, onBlur, onFocus },
     checked,
-    value,
+    disabled,
     onChange,
   } = props;
   return (
     <MUIRadio
-      onChange={onChange}
-      classes={{ root }}
+      key={id}
       name={name}
-      onBlur={onBlur}
-      onFocus={onFocus}
       checked={checked}
       value={value}
+      disabled={disabled}
       color="primary"
+      onChange={onChange}
+      onBlur={onBlur}
+      onFocus={onFocus}
     />
   );
 };
 
-function RadioItem({
+function FormRadioItem({
   classes,
   checked,
   disabled,
@@ -101,7 +102,7 @@ function RadioItem({
   onSelect,
 }: propTypes) {
   const { id, value, text } = { ...item };
-  const { label, radio, root } = { ...classes };
+  const { label, root } = { ...classes };
 
   return item && isValidItem(item) ? (
     <FormControlLabel
@@ -112,20 +113,15 @@ function RadioItem({
       classes={{
         label,
       }}
-      value={value}
-      disabled={disabled}
-      onChange={() => onSelect(item)}
       control={
         <Field
+          id={id}
           name={name}
-          key={`RadioItem-${id}`}
-          classes={{
-            root: radio,
-          }}
-          disabled={disabled}
+          type="radio"
           checked={checked}
+          disabled={disabled}
           color="primary"
-          item={item}
+          value={value}
           onChange={() => onSelect(item)}
           render={fieldProps => <Radio props={fieldProps} />}
         />
@@ -135,11 +131,11 @@ function RadioItem({
   ) : null;
 }
 
-RadioItem.defaultProps = {
+FormRadioItem.defaultProps = {
   checked: false,
   disabled: false,
 };
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
-  RadioItem
+  FormRadioItem
 );

@@ -6,11 +6,6 @@ import { action } from '@storybook/addon-actions';
 // MUI Components
 import Paper from '@material-ui/core/Paper';
 
-// Components
-import { FormControlLabel } from '@material-ui/core';
-import { Field } from 'react-final-form';
-import { Radio } from 'final-form-material-ui';
-
 import {
   AAAPrimaryTheme,
   Button,
@@ -19,12 +14,11 @@ import {
   FormInput,
   FormGroup,
   FormRadioGroup,
-  RadioGroup,
 } from '../../src/lib/package/components';
 
 const VALIDATIONS = {
-  firstName: {
-    required: 'First name is required',
+  name: {
+    required: 'Name is required',
   },
   cars: {
     required: '',
@@ -74,13 +68,13 @@ class FormRadioGroupContainer extends Component {
                   <form onSubmit={handleSubmit}>
                     <FormInput
                       autoFocus
-                      name="firstName"
-                      id="firstName"
-                      labelName="First name"
+                      name="name"
+                      id="name"
+                      labelName="Name"
                       type="text"
                     />
                     <FormGroup>
-                      <RadioGroup
+                      <FormRadioGroup
                         name="cars"
                         id="cars"
                         instructionLabel="Choose One:"

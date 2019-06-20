@@ -17,9 +17,10 @@ import Form from './Form/Form';
 import FormGroup from './Form/FormGroup/FormGroup';
 import FormInput from './Form/FormInput/FormInput';
 import FormNumericInput from './Form/FormNumericInput/FormNumericInput';
+import FormRadioGroup from './Form/FormRadioGroup/FormRadioGroup';
+import FormRadioItem from './Form/FormRadioItem/FormRadioItem';
+
 import ToggleButtonGroup from './ToggleButtonGroup/ToggleButtonGroup';
-import RadioItem from './RadioItem/RadioItem';
-import RadioGroup from './RadioGroup/RadioGroup';
 import SelectList from './SelectList/SelectList';
 import SelectListItemText from './SelectListItemText/SelectListItemText';
 
@@ -33,12 +34,12 @@ export {
   FormGroup,
   FormInput,
   FormNumericInput,
+  FormRadioGroup,
   Headline,
   Label,
   Link,
   NumericInput,
-  RadioItem,
-  RadioGroup,
+  FormRadioItem,
   SelectList,
   SelectListItemText,
   Subheadline,

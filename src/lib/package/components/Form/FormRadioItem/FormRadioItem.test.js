@@ -9,11 +9,12 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
-import RadioItem from './RadioItem';
+import { Form } from 'react-final-form';
+import AAAThemeProvider from '../../AAAPrimaryTheme/AAAPrimaryTheme';
+import FormRadioItem from './FormRadioItem';
 
 // Test Utilities
-import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
+import { getDOMNodeComputedStyle } from '../../../../../../test/DOM';
 
 // Constants
 import {
@@ -22,10 +23,11 @@ import {
   AAA_COLOR_MAIN_DARKER_BLUE,
   AAA_COLOR_SECONDARY_HOVER,
   AAA_COLOR_MAIN_DISABLED,
-} from '../../constants/colors';
+} from '../../../constants/colors';
 
 function getFakeProps(overrides) {
   return {
+    name: 'radio',
     item: { id: 1, value: 1, text: 'Hey' },
     onSelect: jest.fn(v => v),
     ...overrides,
@@ -35,12 +37,15 @@ function getFakeProps(overrides) {
 function createRadioItemWithTheme(props) {
   return mount(
     <AAAThemeProvider theme={props.theme}>
-      <RadioItem {...props} />
+      <Form
+        onSubmit={() => jest.fn(v => v)}
+        render={() => <FormRadioItem {...props} />}
+      />
     </AAAThemeProvider>
   );
 }
 
-describe('RadioItem', () => {
+describe('FormRadioItem', () => {
   let spy;
   let props;
   let radioItemWrapper;
@@ -65,7 +70,15 @@ describe('RadioItem', () => {
       radioItemWrapper = createRadioItemWithTheme(props);
       expect(radioItemWrapper.text()).to.equal(props.item.text);
     });
-    it('attaches a data-quid attribute to the radio element', () => {
+    it('attaches a value attribute to the radio element', () => {
+      expect(
+        radioItemWrapper
+          .find('input[type="radio"]')
+          .at(0)
+          .getDOMNode().value
+      ).to.equal(props.item.value.toString());
+    });
+    it('attaches a data-quid attribute to the form control label element', () => {
       expect(
         radioItemWrapper
           .find('label')

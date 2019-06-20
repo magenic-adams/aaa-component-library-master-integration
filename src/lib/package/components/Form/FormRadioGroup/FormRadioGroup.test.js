@@ -9,11 +9,13 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
-import RadioGroup from './RadioGroup';
+import { Form } from 'react-final-form';
+import AAAThemeProvider from '../../AAAPrimaryTheme/AAAPrimaryTheme';
+import FormRadioGroup from './FormRadioGroup';
 
 function getFakeProps(overrides) {
   return {
+    name: 'avengers',
     items: [
       { id: 1, value: 1, text: 'Iron Man' },
       { id: 2, value: 2, text: 'Captain A' },
@@ -26,12 +28,15 @@ function getFakeProps(overrides) {
 function createRadioGroupWithTheme(props) {
   return mount(
     <AAAThemeProvider theme={props.theme}>
-      <RadioGroup {...props} />
+      <Form
+        onSubmit={() => jest.fn(v => v)}
+        render={() => <FormRadioGroup {...props} />}
+      />
     </AAAThemeProvider>
   );
 }
 
-describe('RadioGroup', () => {
+describe('FormRadioGroup', () => {
   let spy;
   let props;
   let radioGroupWrapper;
