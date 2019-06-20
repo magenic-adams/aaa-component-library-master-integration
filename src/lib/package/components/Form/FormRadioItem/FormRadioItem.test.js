@@ -142,9 +142,9 @@ describe('FormRadioItem', () => {
       expect(widthStyle).to.equal('534px');
     });
 
-    it('has width of 534px', () => {
-      const widthStyle = getDOMNodeComputedStyle(radioItemNode, 'width');
-      expect(widthStyle).to.equal('534px');
+    it('has height of 48px', () => {
+      const widthStyle = getDOMNodeComputedStyle(radioItemNode, 'height');
+      expect(widthStyle).to.equal('48px');
     });
 
     it('has border of 1px', () => {

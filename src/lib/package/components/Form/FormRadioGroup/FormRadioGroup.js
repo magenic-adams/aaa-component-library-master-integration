@@ -38,12 +38,18 @@ type propTypes = {
   onSelect: PropTypes.func
 };
 
-const styleClasses = () => ({
+const styleClasses = theme => ({
   root: {
-    width: 534,
+    width: theme.common.ELEMENT_PANEL_WIDTH_MOBILE,
     border: 'none',
     boxShadow: 'none',
     marginTop: 16,
+    [theme.breakpoints.up('md')]: {
+      maxWidth: theme.common.ELEMENT_PANEL_WIDTH_MOBILE,
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: theme.common.ELEMENT_PANEL_WIDTH_TABLET,
+    },
   },
 });
 

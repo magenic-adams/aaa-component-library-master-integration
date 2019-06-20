@@ -37,7 +37,10 @@ const styleClasses = theme => ({
       borderColor: theme.palette.disabled.main,
       background: 'none',
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.up('md')]: {
+      maxWidth: theme.common.ELEMENT_PANEL_WIDTH_MOBILE,
+    },
+    [theme.breakpoints.up('sm')]: {
       width: theme.common.ELEMENT_PANEL_WIDTH_TABLET,
     },
   },
