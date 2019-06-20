@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/styles'; // Components
 
@@ -14,7 +13,13 @@ var styleClasses = function styleClasses() {
   };
 };
 
-function FormGroup(_ref) {
+;
+;
+var defaultProps = {
+  className: ''
+};
+
+var FormGroup = function FormGroup(_ref) {
   var children = _ref.children,
       classes = _ref.classes,
       className = _ref.className;
@@ -22,10 +27,10 @@ function FormGroup(_ref) {
     className: cx('FormGroup', className),
     classes: classes
   }, children);
-}
+};
 
 FormGroup.defaultProps = {
-  className: PropTypes.string
+  className: ''
 };
 export default withStyles(styleClasses, {
   index: 0,

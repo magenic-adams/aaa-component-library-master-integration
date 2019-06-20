@@ -1,10 +1,9 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-extraneous-dependencies */
 // https://next.material-ui.com/customization/themes
 import React from 'react';
-import PropTypes from 'prop-types';
 import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
+
+// Augmented themea definition
+import createStyleTheme from '../../utilities/createStyleTheme';
 
 // Colors
 import {
@@ -22,7 +21,7 @@ import {
   AAA_COLOR_MAIN_VERY_DARK_BLUE,
 } from '../../constants/colors';
 
-const theme = createMuiTheme({
+const theme = createStyleTheme({
   breakpoints: {
     values: {
       xs: 0,
@@ -41,35 +40,42 @@ const theme = createMuiTheme({
     },
     error: {
       main: AAA_COLOR_MAIN_ERROR,
-      ERROR_HOVER: AAA_COLOR_MAIN_ERROR_HOVER,
     },
+  },
+  secondaryPalette: { // ** Client Library Defined **
     disabled: {
       main: AAA_COLOR_MAIN_DISABLED,
     },
     // These are use defined variables we can use
     colorVariables: {
-      SECONDARY_HOVER: AAA_COLOR_SECONDARY_HOVER,
-      TRANSPARENT: AAA_COLOR_TRANSPARENT,
       BLACK: AAA_COLOR_MAIN_BLACK,
+      SECONDARY_HOVER: AAA_COLOR_SECONDARY_HOVER,
+      ERROR_HOVER: AAA_COLOR_MAIN_ERROR_HOVER,
+      TRANSPARENT: AAA_COLOR_TRANSPARENT,
       DARKER_BLUE: AAA_COLOR_MAIN_DARKER_BLUE,
       VERY_DARK_BLUE: AAA_COLOR_MAIN_VERY_DARK_BLUE,
       GRAY: AAA_COLOR_MAIN_GRAY,
       WHITE: AAA_COLOR_MAIN_WHITE,
     },
   },
-  typography: {
-    fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',
-    fontWeight: 400, // Medium
+  typographyValues: { // ** Client Library Defined **
     color: AAA_COLOR_MAIN_BLACK,
+    fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',
+    fontStyle: 'regular',
+    fontWeight: 400, // Medium
   },
+  typographyElements: {},
 });
 
 // ** Typography ** //
 theme.typography.h1 = {
   // Headline
-  fontSize: 20,
-  lineHeight: 1.5,
+  color: theme.typographyValues.color,
+  fontFamily: theme.typographyValues.fontFamily,
+  fontStyle: theme.typographyValues.fontStyle,
   fontWeight: 500,
+  lineHeight: 1.5,
+  fontSize: 20,
   [theme.breakpoints.up('lg')]: {
     fontSize: 28,
     lineHeight: 1.57,
@@ -78,8 +84,12 @@ theme.typography.h1 = {
 
 theme.typography.h2 = {
   // Subheadline
-  fontSize: 18,
+  color: theme.typographyValues.color,
+  fontFamily: theme.typographyValues.fontFamily,
+  fontStyle: theme.typographyValues.fontStyle,
+  fontWeight: theme.typographyValues.fontWeight,
   lineHeight: 1.45,
+  fontSize: 18,
   [theme.breakpoints.up('lg')]: {
     fontSize: 22,
   },
@@ -87,6 +97,9 @@ theme.typography.h2 = {
 
 theme.typography.subtitle1 = {
   // Subtitle 1 / Table Header
+  color: theme.typographyValues.color,
+  fontFamily: theme.typographyValues.fontFamily,
+  fontStyle: theme.typographyValues.fontStyle,
   fontSize: 16,
   lineHeight: 1.5,
   fontWeight: 500,
@@ -98,6 +111,10 @@ theme.typography.subtitle1 = {
 
 theme.typography.body1 = {
   // Body 1 / Primary Copy
+  color: theme.typographyValues.color,
+  fontFamily: theme.typographyValues.fontFamily,
+  fontStyle: theme.typographyValues.fontStyle,
+  fontWeight: theme.typographyValues.fontWeight,
   fontSize: 16,
   lineHeight: 1.5,
   [theme.breakpoints.up('lg')]: {
@@ -108,6 +125,10 @@ theme.typography.body1 = {
 
 theme.typography.body2 = {
   // Body 2 / Primary Copy
+  color: theme.typographyValues.color,
+  fontFamily: theme.typographyValues.fontFamily,
+  fontStyle: theme.typographyValues.fontStyle,
+  fontWeight: theme.typographyValues.fontWeight,
   fontSize: 14,
   lineHeight: 1.45,
   [theme.breakpoints.up('lg')]: {
@@ -116,24 +137,29 @@ theme.typography.body2 = {
   },
 };
 
-theme.typography.buttonPrimary = {
+// ** Client Library Defined **
+theme.typographyElements.buttonPrimary = {
+  color: theme.secondaryPalette.colorVariables.WHITE,
+  fontFamily: theme.typographyValues.fontFamily,
+  fontStyle: theme.typographyValues.fontStyle,
+  fontWeight: 500,
   lineHeight: 1.45,
   fontSize: 18,
-  fontWeight: 500,
   [theme.breakpoints.up('md')]: {
     fontSize: 20,
   },
 };
-
-theme.typography.buttonSecondary = {
+// ** Client Library Defined **
+theme.typographyElements.buttonSecondary = {
+  color: theme.palette.primary.main,
+  fontFamily: theme.typographyValues.fontFamily,
+  fontStyle: theme.typographyValues.fontStyle,
+  fontWeight: theme.typographyValues.fontWeight,
   fontSize: 18,
   lineHeight: 1.45,
 };
 
-type propTypes = {
-  children: PropTypes.node
-};
 
-export default function AAAThemeProvider({ children }: propTypes) {
+export default function AAAThemeProvider({ children }:{children:any}) {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }

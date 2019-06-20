@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/styles';
 
@@ -13,7 +12,24 @@ const styleClasses = () => ({
   },
 });
 
-function FormGroup({ children, classes, className }) {
+interface RequiredProps {
+  children: any,
+};
+
+interface OptionalProps {
+  classes?: any, // MUI Decorator
+  className?: string,
+};
+
+const defaultProps:OptionalProps = {
+  className: '',
+};
+
+const FormGroup:React.FunctionComponent<RequiredProps & OptionalProps> = ({
+  children,
+  classes,
+  className,
+}) => {
   return (
     <MUIFormGroup
       className={cx('FormGroup', className)}
@@ -22,10 +38,8 @@ function FormGroup({ children, classes, className }) {
       {children}
     </MUIFormGroup>
   );
-}
-
-FormGroup.defaultProps = {
-  className: PropTypes.string,
 };
+
+FormGroup.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(FormGroup);

@@ -1,19 +1,24 @@
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 import React from 'react';
-import PropTypes from 'prop-types';
 import MaskedInput from 'react-text-mask'; // Components
 
 import BaseInput from '../BaseInput/BaseInput';
+;
+var defaultProps = {
+  centerText: false,
+  disabled: false,
+  error: '',
+  type: 'text',
+  mask: []
+};
 
 function TextMaskCustom(mask) {
   return function (props) {
-    var inputRef = props.inputRef,
-        other = _objectWithoutProperties(props, ["inputRef"]);
+    var forwardedRef = props.forwardedRef,
+        other = _objectWithoutProperties(props, ["forwardedRef"]);
 
     return React.createElement(MaskedInput, Object.assign({
-      ref: function ref(_ref) {
-        inputRef(_ref ? _ref.inputElement : null);
-      },
+      ref: forwardedRef,
       mask: mask,
       guide: false,
       autoComplete: "off"
@@ -21,14 +26,22 @@ function TextMaskCustom(mask) {
   };
 }
 
-function NumericInput(props) {
-  var mask = props.mask;
+var NumericInput = function NumericInput(props) {
+  var error = props.error,
+      id = props.id,
+      name = props.name,
+      mask = props.mask,
+      onChange = props.onChange,
+      onClear = props.onClear;
   return React.createElement(BaseInput, Object.assign({
-    inputComponent: TextMaskCustom(mask)
+    id: id,
+    name: name,
+    inputComponent: TextMaskCustom(mask),
+    error: error,
+    onChange: onChange,
+    onClear: onClear
   }, props));
-}
-
-NumericInput.defaultProps = {
-  mask: []
 };
+
+NumericInput.defaultProps = defaultProps;
 export default NumericInput;

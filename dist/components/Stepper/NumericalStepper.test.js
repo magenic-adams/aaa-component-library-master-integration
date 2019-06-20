@@ -1,91 +1,118 @@
-import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import MUIFormControl from '@material-ui/core/FormControl'; // Material UI Components
+import MUIFormControl from '@material-ui/core/FormControl';
 
+// Material UI Components
 import AAAPrimaryTheme from '../AAAPrimaryTheme/AAAPrimaryTheme';
 import NumericalStepper from './NumericalStepper';
-import NumericInput from '../Input/NumericInput/NumericInput'; // Components
+import NumericInput from '../Input/NumericInput/NumericInput';
 
+// Components
 import Button from '../Button/Button';
 import Label from '../Label/Label';
 import FormFieldMeta from '../Form/FormFieldMeta/FormFieldMeta';
 
-var createNumericalStepper = function createNumericalStepper(props) {
-  return mount(React.createElement(AAAPrimaryTheme, null, React.createElement(NumericalStepper, props)));
+const createNumericalStepper = props => {
+  return mount(
+    <AAAPrimaryTheme>
+      <NumericalStepper {...props} />
+    </AAAPrimaryTheme>
+  );
 };
-
-var onDecreaseSpy = sinon.spy();
-var onIncreaseSpy = sinon.spy();
-
-var getProps = function getProps(override) {
-  return _objectSpread({
+const onDecreaseSpy = sinon.spy();
+const onIncreaseSpy = sinon.spy();
+const getProps = override => {
+  return {
     id: '1',
     labelText: 'This is a numerical stepper',
     helperText: 'This is a helper message',
     error: 'This is an error text',
     value: 10,
     onIncrease: onIncreaseSpy,
-    onDecrease: onDecreaseSpy
-  }, override);
+    onDecrease: onDecreaseSpy,
+    ...override,
+  };
 };
 
-describe('Numerical Stepper', function () {
-  var wrapper;
-  beforeEach(function () {
+describe('Numerical Stepper', () => {
+  let wrapper;
+  beforeEach(() => {
     wrapper = createNumericalStepper(getProps());
   });
-  afterEach(function () {
+  afterEach(() => {
     wrapper.unmount();
   });
-  describe('event handlers', function () {
-    it('will call it\'s click event handler, propagating a React event', function () {
-      wrapper.find(Button).at(0).simulate('click');
+  describe('event handlers', () => {
+    it('will call it\'s click event handler, propagating a React event', () => {
+      wrapper
+        .find(Button)
+        .at(0)
+        .simulate('click');
       expect(onDecreaseSpy.calledOnce).to.equal(true);
-      wrapper.find(Button).at(1).simulate('click');
+
+      wrapper
+        .find(Button)
+        .at(1)
+        .simulate('click');
       expect(onIncreaseSpy.calledOnce).to.equal(true);
     });
   });
-  describe('HTML rendering', function () {
-    it('renders three icons', function () {
+
+  describe('HTML rendering', () => {
+    it('renders three icons', () => {
       expect(wrapper.find('svg')).to.have.lengthOf(3);
     });
-    it('renders an increase and decrease button', function () {
+
+    it('renders an increase and decrease button', () => {
       expect(wrapper.find(Button)).to.have.lengthOf(2);
       expect(wrapper.find('button[data-quid="DecreaseStepper-1"]')).to.have.lengthOf(1);
       expect(wrapper.find('button[data-quid="IncreaseStepper-1"]')).to.have.lengthOf(1);
       expect(wrapper.find('svg[data-quid="AddIcon-1"]')).to.have.lengthOf(1);
     });
-    it('renders a FormControl component', function () {
+
+    it('renders a FormControl component', () => {
       expect(wrapper.find(MUIFormControl)).to.have.lengthOf(2);
     });
-    it('renders a label', function () {
+
+    it('renders a label', () => {
       expect(wrapper.find(Label)).to.have.lengthOf(1);
     });
-    it('renders FormFieldMeta', function () {
+
+    it('renders FormFieldMeta', () => {
       expect(wrapper.find(FormFieldMeta)).to.have.lengthOf(2);
     });
-    it('renders a remove icon', function () {
+
+    it('renders a remove icon', () => {
       expect(wrapper.find('svg[data-quid="RemoveIcon-1"]')).to.have.lengthOf(1);
     });
-    it('renders a numeric input with a unique data-quid', function () {
+
+    it('renders a numeric input with a unique data-quid', () => {
       expect(wrapper.find(NumericInput)).to.have.lengthOf(1);
       expect(wrapper.find('input[data-quid="BaseInput-NumericalStepperInput-1"]')).to.have.lengthOf(1);
     });
-    it('renders an error message', function () {
+
+    it('renders an error message', () => {
       expect(wrapper.find('svg[data-quid="FormFieldMetaReportProblem-NumericalStepperMeta-1"]')).to.have.lengthOf(1);
       expect(wrapper.find('p[data-quid="FormFieldMetaErrorText-NumericalStepperMeta-1"]')).to.have.lengthOf(1);
       expect(wrapper.find('p[data-quid="FormFieldMetaErrorText-NumericalStepperMeta-1"]').text()).to.equal('This is an error text');
     });
-    it('renders a helper message', function () {
-      expect(wrapper.find('p[data-quid="FormFieldMetaHelperText-NumericalStepperMeta-1"]')).to.have.lengthOf(1);
-      expect(wrapper.find('p[data-quid="FormFieldMetaHelperText-NumericalStepperMeta-1"]').text()).to.equal('This is a helper message');
+
+    it('renders a helper message', () => {
+      expect(
+        wrapper.find('p[data-quid="FormFieldMetaHelperText-NumericalStepperMeta-1"]')
+      ).to.have.lengthOf(1);
+      expect(
+        wrapper.find('p[data-quid="FormFieldMetaHelperText-NumericalStepperMeta-1"]').text()
+      ).to.equal('This is a helper message');
     });
-    it('renders label text', function () {
+
+    it('renders label text', () => {
       expect(wrapper.find('label[data-quid="Label-NumericalStepperLabel-1"]')).to.have.lengthOf(1);
-      expect(wrapper.find('label[data-quid="Label-NumericalStepperLabel-1"]').text()).to.equal('This is a numerical stepper');
+      expect(wrapper.find('label[data-quid="Label-NumericalStepperLabel-1"]').text()).to.equal(
+        'This is a numerical stepper'
+      );
     });
   });
 });

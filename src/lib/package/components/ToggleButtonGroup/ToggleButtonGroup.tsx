@@ -1,24 +1,48 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import invariant from 'tiny-invariant';
 import cx from 'clsx';
+
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
+// Material UI Components
 import Button from '../Button/Button';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 
-type propTypes = {
-  // Decorator Props
-  classes: PropTypes.object,
-  className?: PropTypes.string,
-  // Passed Props
-  options: [
-    { id: PropTypes.number | PropTypes.string, text: PropTypes.string }
-  ],
-  onSelect: PropTypes.func,
-  value?: PropTypes.string | PropTypes.number
+interface option {
+  id: string | number,
+  text: string,
+  value: string | number
+}
+
+interface RequiredProps {
+  id: string | number,
+  children: any,
+  options: option[],
+  onSelect: (option:option) => void
+}
+
+interface OptionalProps {
+  classes?: any, // MUI Decorator
+  className?: string,
+  disabled?: boolean,
+  value?: string | number
+}
+
+const defaultProps:OptionalProps = {
+  className: '',
+  disabled: false,
+  value: '',
 };
 
-const styleClasses = theme => ({
+const styleClasses = (theme:Theme):{
+  // CSS Classes
+  root: any,
+  left: any,
+  right: any,
+  active:any,
+} => ({
   root: {
     display: 'flex',
     '& .Button': {
@@ -36,7 +60,7 @@ const styleClasses = theme => ({
           fontWeight: '700 !important',
         },
         '&:hover': {
-          background: theme.palette.colorVariables.SECONDARY_HOVER,
+          background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
         },
       },
     },
@@ -52,34 +76,65 @@ const styleClasses = theme => ({
   },
   active: {
     background: `${theme.palette.primary.dark} !important`,
-    color: `${theme.palette.colorVariables.WHITE} !important`,
+    color: `${theme.secondaryPalette.colorVariables.WHITE} !important`,
     '&:hover': {
       background: theme.palette.primary.dark,
     },
     [theme.breakpoints.down('sm')]: {
-      background: `${theme.palette.colorVariables.SECONDARY_HOVER} !important`,
+      background: `${theme.secondaryPalette.colorVariables.SECONDARY_HOVER} !important`,
       color: `${theme.palette.primary.main} !important`,
       '&:hover': {
-        background: theme.palette.colorVariables.SECONDARY_HOVER,
+        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
       },
     },
   },
 });
 
-function handleClick(value, callback) {
-  if (callback) callback(value);
+/**
+ * Propagates value selected to parent callback
+ * @param  {String|Number} option - value passed
+ * @param  {Function} onSelect
+ * @return {void}
+ */
+function handleClick(
+  opt:option,
+  onSelect:(opt:option) => void
+ ) {
+  onSelect(opt);
 }
 
-function isOptionsKeysPresent(options) {
+/**
+ * Checks to see if correct option keys are present
+ * @param  {Array} options
+ * @return {Boolean} isOptionsKeyPresent?
+ */
+function isOptionsKeysPresent(options:option[]) {
   return options.every(op => op.id && op.text);
 }
 
-function getActiveClass(value, id, classes) {
+/**
+ * Returns the active CSS class if active
+ * @param  {String|Number} value - current value
+ * @param  {String|Number} id
+ * @param  {Object} classes - css classes
+ * @return {String} activeClass
+ */
+function getActiveClass(
+  value:string|number|undefined,
+  id: string|number,
+  classes: {active: string}
+):string {
   const { active } = classes;
   return value === id ? `${active}` : '';
 }
 
-function isOptionsValid(options) {
+
+/**
+ * Returns if the options are valid or not
+ * @param  {Array} options - passed options
+ * @return {Boolean} areOptionsValid
+ */
+function areOptionsValid(options:option[]) {
   if (!Array.isArray(options) || options.length < 2) {
     invariant(
       false,
@@ -95,17 +150,18 @@ function isOptionsValid(options) {
   return true;
 }
 
-function ToggleButtonGroup({
+
+const ToggleButtonGroup:React.FunctionComponent<RequiredProps & OptionalProps> = ({
   classes,
   className,
   disabled,
   options,
   value,
   onSelect,
-}: propTypes) {
+}) => {
   return (
     <Fragment>
-      {isOptionsValid(options) ? (
+      {areOptionsValid(options) ? (
         <ButtonGroup className={cx(classes.root, className)}>
           <Button
             className={cx(
@@ -139,12 +195,9 @@ function ToggleButtonGroup({
       ) : null}
     </Fragment>
   );
-}
-
-ToggleButtonGroup.defaultProps = {
-  className: '',
-  value: '',
 };
+
+ToggleButtonGroup.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
   ToggleButtonGroup

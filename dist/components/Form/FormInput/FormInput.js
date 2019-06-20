@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import { Field, useForm } from 'react-final-form'; // Components
 
 import BaseInput from '../../Input/BaseInput/BaseInput';
@@ -12,12 +11,12 @@ import BaseInput from '../../Input/BaseInput/BaseInput';
  */
 function handleFormFieldChange(_ref, formState) {
   var input = _ref.input;
-  return function (val) {
+  return function (evt) {
     var name = input.name,
         onChange = input.onChange;
     var setFieldTouched = formState.mutators.setFieldTouched;
     setFieldTouched(name, false);
-    onChange(val);
+    onChange(evt);
   };
 }
 /**
@@ -51,7 +50,7 @@ function handleFieldClear(_ref2, formState, inputRef) {
  */
 
 
-function FormInput(props) {
+var FormInput = function FormInput(props) {
   var forwardedRef = props.forwardedRef;
   var inputRef = forwardedRef || useRef(null);
   var formState = useForm();
@@ -68,6 +67,6 @@ function FormInput(props) {
       }, props));
     }
   });
-}
+};
 
 export default FormInput;

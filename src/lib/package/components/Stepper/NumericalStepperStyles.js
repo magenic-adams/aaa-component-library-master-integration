@@ -12,7 +12,7 @@ export const overrideStepperLabel = props => {
       color: _.get(
         props,
         'overrides.label.color',
-        props.theme.palette.colorVariables.BLACK
+        props.theme.secondaryPalette.colorVariables.BLACK
       ),
       marginTop: 8,
       fontSize: 16,
@@ -39,7 +39,7 @@ export const styleClasses = makeStyles({
     margin: '16px 0 6px 0',
   },
   helperText: {
-    color: props => props.theme.palette.colorVariables.GRAY,
+    color: props => props.theme.secondaryPalette.colorVariables.GRAY,
     marginTop: 8,
     '& span': {
       fontSize: 14,

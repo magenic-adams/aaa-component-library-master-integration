@@ -1,32 +1,36 @@
-import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
+import _objectSpread from '@babel/runtime/helpers/esm/objectSpread';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
+;
+
 // Component styles manipulated entirely by theme
-var styleClasses = function styleClasses(theme) {
+const styleClasses = function styleClasses(theme) {
   return {
     root: _objectSpread({
-      color: theme.typography.color,
-      fontFamily: theme.typography.fontFamily,
-      fontWeight: theme.typography.fontWeight
-    }, theme.typography.h2)
+      color: theme.typographyValues.color,
+      fontFamily: theme.typographyValues.fontFamily,
+      fontWeight: theme.typographyValues.fontWeight,
+    }, theme.typography.h2),
   };
 };
 
-function Subheadline(_ref) {
-  var children = _ref.children,
-      className = _ref.className,
-      classes = _ref.classes,
-      id = _ref.id;
-  return React.createElement("h2", {
+const Subheadline = function Subheadline(_ref) {
+  const { children } = _ref;
+      const { className } = _ref;
+      const { classes } = _ref;
+      const { id } = _ref;
+  return React.createElement('h2', {
     className: cx('Subheadline', classes.root, className),
-    "data-quid": "Subheadline-".concat(id)
+    'data-quid': 'Subheadline-'.concat(id),
   }, children);
-}
+};
 
+Subheadline.defaultProps = {
+  className: '',
+};
 export default withStyles(styleClasses, {
   index: 0,
-  withTheme: true
+  withTheme: true,
 })(Subheadline);

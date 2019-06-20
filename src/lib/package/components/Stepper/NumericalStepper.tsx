@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withTheme } from '@material-ui/styles';
 
 // Material UI Components
@@ -19,20 +18,36 @@ import {
   styleClasses,
 } from './NumericalStepperStyles';
 
-type propTypes = {
-  id: PropTypes.string.isRequired,
-  classes?: {},
-  disabled?: PropTypes.bool,
-  error?: PropTypes.string,
-  labelText?: PropTypes.string,
-  helperText?: PropTypes.string,
-  mask?: [], // Pass through
-  onIncrease: React.SyntheticEvent => void,
-  onDecrease: React.SyntheticEvent => void,
-  value?: PropTypes.number
+interface RequiredProps {
+  id: string,
+  name: string,
+  children: string | React.ReactElement | React.ReactHTMLElement<any>,
+  onDecrease: (evt:React.SyntheticEvent) => void,
+  onIncrease: (evt:React.SyntheticEvent) => void,
+}
+
+interface OptionalProps {
+  classes?: any, // MUI Decorator
+  disabled?: boolean,
+  disableWarning?: boolean,
+  error?: string,
+  helperText?: string,
+  labelText?: string | React.ReactElement | React.ReactHTMLElement<any>,
+  mask?: string[], // Pass through
+  value?: number,
+}
+
+const defaultProps:OptionalProps = {
+  classes: {},
+  disabled: false,
+  labelText: '',
+  helperText: '',
+  mask: [],
+  error: '',
+  value: 1,
 };
 
-const NumericalStepper = (props: propTypes) => {
+const NumericalStepper:React.FunctionComponent<RequiredProps & OptionalProps> = (props) => {
   const {
     disabled,
     disableWarning,
@@ -41,6 +56,7 @@ const NumericalStepper = (props: propTypes) => {
     id,
     labelText,
     mask,
+    name,
     onIncrease,
     onDecrease,
     value,
@@ -58,7 +74,7 @@ const NumericalStepper = (props: propTypes) => {
         overrides={overrideStepperLabel(props)}
         id={`NumericalStepperLabel-${id}`}
         disabled={false}
-        error={false}
+        error={error}
         focused={false}
       >
         {labelText}
@@ -72,7 +88,6 @@ const NumericalStepper = (props: propTypes) => {
         >
           <RemoveIcon
             data-quid={`RemoveIcon-${id}`}
-            disabled={disabled}
             className={classes.stepperIcon}
           />
         </StepperButton>
@@ -80,6 +95,7 @@ const NumericalStepper = (props: propTypes) => {
         <div className={classes.stepperInputWrapper}>
           <NumericInput
             id={`NumericalStepperInput-${id}`}
+            name={name}
             centerText
             type="text"
             value={value}
@@ -112,14 +128,6 @@ const NumericalStepper = (props: propTypes) => {
   );
 };
 
-NumericalStepper.defaultProps = {
-  classes: {},
-  disabled: false,
-  labelText: '',
-  helperText: '',
-  mask: [],
-  error: false,
-  value: 1,
-};
+NumericalStepper.defaultProps = defaultProps;
 
 export default withTheme(NumericalStepper);

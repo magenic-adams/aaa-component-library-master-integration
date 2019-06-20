@@ -1,34 +1,38 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 
-type propTypes = {
-  // MUI Decorator
-  classes: PropTypes.object,
-  // Passed Props
-  className: PropTypes.string,
-  children: PropTypes.string,
-};
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
+interface RequiredProps {
+  id: string | number,
+  children: any,
+}
+
+interface OptionalProps {
+  classes?: any, // MUI Decorator
+  className?: string,
+}
 
 // Component styles manipulated entirely by theme
-const styleClasses = theme => {
+const styleClasses = (theme:Theme) => {
   return {
     root: {
-      color: theme.typography.color,
-      fontFamily: theme.typography.fontFamily,
-      fontWeight: theme.typography.fontWeight,
+      color: theme.typographyValues.color,
+      fontFamily: theme.typographyValues.fontFamily,
+      fontWeight: theme.typographyValues.fontWeight,
       ...theme.typography.subtitle1,
     },
   };
 };
 
-function Subtitle({
+const Subtitle:React.FunctionComponent<RequiredProps & OptionalProps> = ({
   children,
   className,
   classes,
   id,
-}:propTypes){
+}) => {
   return (
     <div
       className={cx('Subtitle', classes.root, className)}
@@ -37,6 +41,6 @@ function Subtitle({
       {children}
     </div>
   );
-}
+};
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(Subtitle);

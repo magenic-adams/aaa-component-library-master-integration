@@ -1,13 +1,16 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import { Field, useForm } from 'react-final-form';
 
 // Components
-import NumericInput from '../../Input/NumericInput/NumericInput';
+import BaseInput from '../../Input/BaseInput/BaseInput';
 
-type propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
+type RequiredProps = {
+  id: string,
+  name: string,
+};
+
+type OptionalProps = {
+  forwardedRef: {current: {focus: () => void}}
 };
 
 /**
@@ -16,14 +19,18 @@ type propTypes = {
  * @param  {Object} formState - global form state
  * @return {Function} decoratored onChange
  */
-function handleFormFieldChange({ input }, formState){
-  return (val) => {
+function handleFormFieldChange(
+  { input }:{input: {name: string, onChange: (evt:React.SyntheticEvent) => void}},
+  formState:any
+ ):(evt:React.SyntheticEvent) => void {
+  return (evt) => {
     const { name, onChange } = input;
     const { mutators: { setFieldTouched }} = formState;
     setFieldTouched(name, false);
-    onChange(val);
+    onChange(evt);
   };
 }
+
 
 /**
  * Handles clearing of input value
@@ -32,7 +39,11 @@ function handleFormFieldChange({ input }, formState){
  * @param  {Object} inputRef - reference to the underlying input
  * @return {Function} onClear handler
  */
-function handleFieldClear({ input }, formState, inputRef ){
+function handleFieldClear(
+  { input }:{input: {name: string, onChange: (val:string) => void}},
+  formState:any,
+  inputRef: {current: {focus: () => void}}
+  ){
   return () => {
     const { name, onChange } = input;
     const { mutators: { setFieldTouched }} = formState;
@@ -43,15 +54,15 @@ function handleFieldClear({ input }, formState, inputRef ){
 }
 
 /**
- * FormNumericInput is a functional <Field> Wrapper around <NumericInput />
- * FormNumericInput's responsibility is to 
- * 1. map ReactFinalForm's exposed "fieldProps" to <NumericInput>'s props
+ * FormInput is a functional <Field> Wrapper around <BaseInput />
+ * FormInput's responsibility is to 
+ * 1. map ReactFinalForm's exposed "fieldProps" to <BaseInput>'s props
  * 2. Have logic to determine when an error is shown
  * 
  * By exposing the form's state via hooks, we are able to tap into custom mutators and other form state
  * defined on our top-level <Form> component and plucked from context
  */
-function FormNumericInput(props:propTypes) {
+const FormInput:React.FunctionComponent<RequiredProps & OptionalProps> = (props) => {
   const { forwardedRef } = props;
   const inputRef = forwardedRef || useRef(null);
   const formState = useForm();
@@ -62,7 +73,7 @@ function FormNumericInput(props:propTypes) {
       component={(fieldProps) => {
         const { meta } = fieldProps;
         return (
-          <NumericInput
+          <BaseInput
             {...fieldProps.input}
             error={meta.touched && meta.error}
             onChange={handleFormFieldChange(fieldProps, formState)}
@@ -74,7 +85,7 @@ function FormNumericInput(props:propTypes) {
       }}
     />
   );
-}
+};
 
 
-export default FormNumericInput;
+export default FormInput;

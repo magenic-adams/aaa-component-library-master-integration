@@ -1,40 +1,47 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 import List from '@material-ui/core/List';
 
+// Types
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
 // Components
 import SelectListItemText from '../SelectListItemText/SelectListItemText';
 
-type propTypes = {
-  // Decorator Props
-  classes: PropTypes.object,
-  // Passed Props
-  items: [
-    {
-      id: PropTypes.string | PropTypes.number,
-      value: PropTypes.string | PropTypes.number,
-      display: PropTypes.string | PropTypes.number | PropTypes.node,
-      selected?: PropTypes.bool,
-      disabled?: PropTypes.bool
-    }
-  ],
-  type: PropTypes.string,
-  onSelect: PropTypes.func
+interface selectItem {
+  id: string | number,
+  value: string | number,
+  display: string | number,
+  selected?: boolean,
+  disabled?: boolean
+}
+
+interface RequiredProps {
+  items: selectItem[],
+  type: string,
+  onSelect: (item:selectItem) => void
 };
 
-const styleClasses = theme => ({
+interface OptionalProps {
+  classes?: any, // MUI Decorator
+}
+
+const styleClasses = (theme:Theme): {
+  // CSS Classes
+  root: any,
+  fullOverlay: any,
+} => ({
   root: {
     width: 341,
-    background: theme.palette.colorVariables.WHITE,
+    background: theme.secondaryPalette.colorVariables.WHITE,
     border: `2px solid ${theme.palette.primary.main}`,
     borderRadius: 4,
     padding: '0px',
-    boxShadow: `0 2px 8px 0 ${theme.palette.colorVariables.GRAY}`,
+    boxShadow: `0 2px 8px 0 ${theme.secondaryPalette.colorVariables.GRAY}`,
     '& span': {
-      fontFamily: theme.typography.fontFamily,
+      fontFamily: theme.typographyValues.fontFamily,
     },
     [theme.breakpoints.down(321)]: {
       width: '100%',
@@ -59,11 +66,11 @@ const styleClasses = theme => ({
   },
 });
 
-function areItemKeysPresent(items) {
+function areItemKeysPresent(items:selectItem[]) {
   return items.every(item => item.id && item.value && item.display);
 }
 
-function areItemsValid(items) {
+function areItemsValid(items:selectItem[]) {
   if (!Array.isArray(items) || items.length === 0) {
     invariant(false, 'items array is empty');
   }
@@ -77,7 +84,12 @@ function areItemsValid(items) {
   return true;
 }
 
-function SelectList({ classes, items, type, onSelect }: propTypes) {
+const SelectList:React.FunctionComponent<RequiredProps & OptionalProps> = ({
+  classes,
+  items,
+  type,
+  onSelect,
+}) => {
   return (
     <Fragment>
       {areItemsValid(items)
@@ -110,6 +122,6 @@ function SelectList({ classes, items, type, onSelect }: propTypes) {
         : null}
     </Fragment>
   );
-}
+};
 
 export default withStyles(styleClasses, { withTheme: true })(SelectList);
