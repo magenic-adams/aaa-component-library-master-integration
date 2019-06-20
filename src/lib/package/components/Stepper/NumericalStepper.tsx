@@ -1,14 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/styles';
-
-// Types
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
+import { withTheme } from '@material-ui/styles';
 
 // Material UI Components
 import MUIFormControl from '@material-ui/core/FormControl';
 import MUIAddIcon from '@material-ui/icons/Add';
-import MUIRemoveIcon from '@material-ui/icons/Remove';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 // Components
 import FormFieldMeta from '../Form/FormFieldMeta/FormFieldMeta';
@@ -17,9 +14,9 @@ import StepperButton from '../Button/Button';
 import NumericInput from '../Input/NumericInput/NumericInput';
 
 import {
-  AAA_CSS_INLINE,
-  AAA_CSS_MIDDLE,
-} from '../../constants/cssConstants';
+  overrideStepperLabel,
+  styleClasses,
+} from './NumericalStepperStyles';
 
 interface RequiredProps {
   id: string,
@@ -40,94 +37,48 @@ interface OptionalProps {
   value?: number,
 }
 
-const defaultProps: OptionalProps = {
+const defaultProps:OptionalProps = {
+  classes: {},
   disabled: false,
-  disableWarning: false,
-  error: '',
-  helperText: '',
   labelText: '',
+  helperText: '',
   mask: [],
-  value: 0,
+  error: '',
+  value: 1,
 };
 
+const NumericalStepper:React.FunctionComponent<RequiredProps & OptionalProps> = (props) => {
+  const {
+    disabled,
+    disableWarning,
+    error,
+    helperText,
+    id,
+    labelText,
+    mask,
+    name,
+    onIncrease,
+    onDecrease,
+    value,
+  } = props;
 
-const styleClasses = (theme:Theme) => ({
-  stepperIcon: {
-    width: 24,
-    height: '100%',
-    color: theme.palette.primary.main,
-  },
-  stepperInputWrapper: {
-    display: 'inline-block',
-    width: 78,
-  },
-  stepperLabel: {
-    color: theme.secondaryPalette.colorVariables.BLACK,
-    marginTop: 8,
-    fontSize: '16px',
-    [theme.breakpoints.up('md')]: {
-      fontSize: '18px',
-    },
-  },
-  actionWrapper: {
-    margin: '16px 0 6px 0',
-  },
-  helperText: {
-    color: theme.secondaryPalette.colorVariables.GRAY,
-    marginTop: 8,
-    '& span': {
-      fontSize: 14,
-      [theme.breakpoints.up('md')]: {
-        fontSize: 16,
-      },
-    },
-  },
-  error: {
-    color: theme.palette.error.main,
-    fontSize: 14,
-    [theme.breakpoints.up('md')]: {
-      fontSize: '16px',
-    },
-    '& svg': {
-      display: `${AAA_CSS_INLINE}`,
-      fontSize: 20,
-      marginLeft: 8,
-      marginRight: 8,
-      verticalAlign: `${AAA_CSS_MIDDLE}`,
-    },
-  },
-});
+  const classes = styleClasses(props);
 
-const NumericalStepper:React.FunctionComponent<RequiredProps & OptionalProps> = ({
-  classes,
-  disabled,
-  disableWarning,
-  error,
-  helperText,
-  id,
-  labelText,
-  mask,
-  name,
-  onIncrease,
-  onDecrease,
-  value,
-}) => {
   return (
     <MUIFormControl
       id={id}
       disabled={disabled}
-      classes={classes.root}
+      classes={{ root: classes.root }}
     >
-      {labelText && (
-        <Label
-          id={`NumericalStepperLabel-${id}`}
-          disabled={false}
-          error={error}
-          focused={false}
-        >
-          {labelText}
-        </Label>
-      )}
+      <Label
+        overrides={overrideStepperLabel(props)}
+        id={`NumericalStepperLabel-${id}`}
+        disabled={false}
+        error={error}
+        focused={false}
+      >
+        {labelText}
+      </Label>
       <div className={classes.actionWrapper}>
         <StepperButton
           id={`DecreaseStepper-${id}`}
@@ -135,7 +86,7 @@ const NumericalStepper:React.FunctionComponent<RequiredProps & OptionalProps> = 
           onClick={onDecrease}
           isIconButton
         >
-          <MUIRemoveIcon
+          <RemoveIcon
             data-quid={`RemoveIcon-${id}`}
             className={classes.stepperIcon}
           />
@@ -143,9 +94,10 @@ const NumericalStepper:React.FunctionComponent<RequiredProps & OptionalProps> = 
 
         <div className={classes.stepperInputWrapper}>
           <NumericInput
-            name={name}
             id={`NumericalStepperInput-${id}`}
+            name={name}
             centerText
+            type="text"
             value={value}
             error={error}
             disabled={disabled}
@@ -165,7 +117,7 @@ const NumericalStepper:React.FunctionComponent<RequiredProps & OptionalProps> = 
           />
         </StepperButton>
       </div>
-      
+
       <FormFieldMeta
         id={`NumericalStepperMeta-${id}`}
         disableWarning={disableWarning}
@@ -178,6 +130,4 @@ const NumericalStepper:React.FunctionComponent<RequiredProps & OptionalProps> = 
 
 NumericalStepper.defaultProps = defaultProps;
 
-export default withStyles(styleClasses, { index: 0, withTheme: true })(
-  NumericalStepper
-);
+export default withTheme(NumericalStepper);
