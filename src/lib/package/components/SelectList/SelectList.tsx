@@ -2,13 +2,12 @@ import React from 'react';
 import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
-import List from '@material-ui/core/List';
 
 // Types
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 // Components
-import SelectListItemText from '../SelectListItemText/SelectListItemText';
+import SelectListItem from '../SelectListItem/SelectListItem';
 
 interface selectItem {
   id: string | number;
@@ -26,8 +25,12 @@ interface RequiredProps {
 interface OptionalProps {
   classes?: any; // MUI Decorator
   className?: string;
-  name: string;
+  name?: string;
 }
+
+const defaultProps: OptionalProps = {
+  className: '',
+};
 
 const styleClasses = (
   theme: Theme,
@@ -45,7 +48,7 @@ const styleClasses = (
     '& span': {
       fontFamily: theme.typographyValues.fontFamily,
     },
-    [theme.breakpoints.down(321)]: {
+    [theme.breakpoints.down('sm')]: {
       width: '100%',
       border: `1px solid ${theme.palette.primary.main}`,
       boxShadow: 'none',
@@ -61,9 +64,9 @@ function areItemKeysPresent(items: selectItem[]) {
   return items.every(item => item.id && item.value && item.display);
 }
 
-function areItemsValid(items: selectItem[]) {
+function checkValidity(items: selectItem[]) {
   if (!Array.isArray(items) || items.length === 0) {
-    invariant(false, 'items array is empty');
+    invariant(false, 'items is empty');
   }
 
   if (!areItemKeysPresent(items)) {
@@ -72,22 +75,6 @@ function areItemsValid(items: selectItem[]) {
       'Invalid object keys are present. Keys should contain id, value and display',
     );
   }
-  return true;
-}
-
-function renderDefaultListItem(
-  item: selectItem,
-  onSelect: (item: selectItem) => void,
-) {
-  return (
-    item && (
-      <SelectListItemText
-        key={item.id}
-        item={item}
-        onSelect={() => onSelect(item)}
-      />
-    )
-  );
 }
 
 const SelectList: React.FunctionComponent<RequiredProps & OptionalProps> = ({
@@ -96,22 +83,25 @@ const SelectList: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   items,
   onSelect,
 }) => {
+  checkValidity(items);
+
   return (
     <div className={cx(classes.root, className)}>
-      {Array.isArray(items) &&
-        items.map(item => {
-          return item && item.display ? (
-            <div key={item.id}>{item.display}</div>
-          ) : (
-            renderDefaultListItem(item, onSelect)
-          );
-        })}
+      {items.map(item => {
+        return (
+          item.display && (
+            <SelectListItem
+              key={item.id}
+              item={item}
+              onSelect={() => onSelect(item)}
+            />
+          )
+        );
+      })}
     </div>
   );
 };
 
-SelectList.defaultProps = {
-  className: '',
-  name: '',
-};
+SelectList.defaultProps = defaultProps;
+
 export default withStyles(styleClasses, { withTheme: true })(SelectList);

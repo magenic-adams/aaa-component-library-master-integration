@@ -17,8 +17,8 @@ function getFakeProps(overrides) {
   return {
     id: 'avengers',
     items: [
-      { id: 1, value: 1, text: 'Iron Man' },
-      { id: 2, value: 2, text: 'Captain A' },
+      { id: 1, value: 1, display: 'Iron Man' },
+      { id: 2, value: 2, display: 'Captain A' },
     ],
     onSelect: jest.fn(v => v),
     ...overrides,
@@ -60,13 +60,13 @@ describe('FormRadioGroup', () => {
       expect(listItems.length).to.equal(props.items.length);
     });
 
-    it('should match listItem text to item\'s text', () => {
+    it('should match rendered listItem to item\'s display', () => {
       radioGroupWrapper = createRadioGroupWithTheme(props);
 
       const listItems = radioGroupWrapper.find('label');
 
       listItems.forEach((listItem, i) => {
-        expect(listItem.text()).to.equal(props.items[i].text);
+        expect(listItem.text()).to.equal(props.items[i].display);
       });
     });
 
@@ -92,18 +92,14 @@ describe('FormRadioGroup', () => {
 
     it('should not render radio items if no items is passed', () => {
       props = getFakeProps({ items: undefined });
-      radioGroupWrapper = createRadioGroupWithTheme(props);
-
-      let listItems = radioGroupWrapper.find('input[type="radio"]');
-
-      expect(listItems.length).to.equal(0);
+      expect(() => {
+        createRadioGroupWithTheme(props);
+      }).to.throw('Invariant failed: items is empty');
 
       props = getFakeProps({ items: null });
-      radioGroupWrapper = createRadioGroupWithTheme(props);
-
-      listItems = radioGroupWrapper.find('input[type="radio"]');
-
-      expect(listItems.length).to.equal(0);
+      expect(() => {
+        createRadioGroupWithTheme(props);
+      }).to.throw('Invariant failed: items is empty');
     });
   });
 
@@ -118,7 +114,7 @@ describe('FormRadioGroup', () => {
       expect(spy.getCall(0).args[0]).to.deep.equal({
         id: 2,
         value: 2,
-        text: 'Captain A',
+        display: 'Captain A',
       });
     });
   });

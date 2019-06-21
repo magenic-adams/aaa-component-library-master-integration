@@ -27,8 +27,8 @@ import {
 
 function getFakeProps(overrides) {
   return {
-    id: 'radio',
-    item: { id: 1, value: 1, text: 'Hey' },
+    name: 'radioGroup',
+    item: { id: 1, value: 1, display: 'Hey' },
     onSelect: jest.fn(v => v),
     ...overrides,
   };
@@ -63,12 +63,12 @@ describe('FormRadioItem', () => {
   });
 
   describe('html rendering', () => {
-    it('rendered text should match passed item text', () => {
+    it('rendered text should match passed item display', () => {
       props = getFakeProps({
-        item: { id: 1, value: 1, text: 'I am Groot' },
+        item: { id: 1, value: 1, display: 'I am Groot' },
       });
       radioItemWrapper = createRadioItemWithTheme(props);
-      expect(radioItemWrapper.text()).to.equal(props.item.text);
+      expect(radioItemWrapper.text()).to.equal(props.item.display);
     });
     it('attaches a value attribute to the radio element', () => {
       expect(
@@ -87,7 +87,7 @@ describe('FormRadioItem', () => {
       ).to.equal(`RadioItem-${props.item.id}`);
     });
 
-    it('should throw error if required keys has no value', () => {
+    it('should throw error if required item has invalid value', () => {
       props = getFakeProps({
         item: null,
       });
@@ -132,7 +132,7 @@ describe('FormRadioItem', () => {
       expect(spy.getCall(0).args[0]).to.deep.equal({
         id: 1,
         value: 1,
-        text: 'Hey',
+        display: 'Hey',
       });
     });
 
@@ -160,28 +160,24 @@ describe('FormRadioItem', () => {
       expect(widthStyle).to.equal('48px');
     });
 
-    it('has border of 1px', () => {
-      const borderWidth = getDOMNodeComputedStyle(
-        radioItemNode,
-        'border-width',
-      );
-      expect(borderWidth).to.equal('1px');
-    });
-
-    it('has border color of 1px AAA_COLOR_MAIN_BLACK', () => {
-      const borderColor = getDOMNodeComputedStyle(
-        radioItemNode,
-        'border-color',
-      );
-      expect(borderColor).to.equal(AAA_COLOR_MAIN_BLACK);
-    });
-
     it('has border radius of 4px', () => {
       const borderRadius = getDOMNodeComputedStyle(
         radioItemNode,
         'border-radius',
       );
       expect(borderRadius).to.equal('4px');
+    });
+
+    it('should have 1px inset AAA_COLOR_MAIN_BLACK box-shadow', () => {
+      radioItemWrapper = createRadioItemWithTheme(props);
+      radioItemNode = radioItemWrapper.getDOMNode();
+      const boxShadowStyle = getDOMNodeComputedStyle(
+        radioItemNode,
+        'box-shadow',
+      );
+      expect(boxShadowStyle).to.equal(
+        `inset 0 0 0 1px ${AAA_COLOR_MAIN_BLACK}`,
+      );
     });
 
     it('has background of AAA_COLOR_MAIN_WHITE', () => {
@@ -200,28 +196,17 @@ describe('FormRadioItem', () => {
 
     describe('radio item states', () => {
       describe('selected', () => {
-        it('has border color of AAA_COLOR_MAIN_DARKER_BLUE', () => {
+        it('should have 2px inset AAA_COLOR_MAIN_DARKER_BLUE box-shadow', () => {
           props = getFakeProps({ checked: true });
           radioItemWrapper = createRadioItemWithTheme(props);
           radioItemNode = radioItemWrapper.getDOMNode();
-
-          const borderColor = getDOMNodeComputedStyle(
+          const boxShadowStyle = getDOMNodeComputedStyle(
             radioItemNode,
-            'border-color',
+            'box-shadow',
           );
-          expect(borderColor).to.equal(AAA_COLOR_MAIN_DARKER_BLUE);
-        });
-
-        it('has border width of 2px', () => {
-          props = getFakeProps({ checked: true });
-          radioItemWrapper = createRadioItemWithTheme(props);
-          radioItemNode = radioItemWrapper.getDOMNode();
-
-          const borderWidth = getDOMNodeComputedStyle(
-            radioItemNode,
-            'border-width',
+          expect(boxShadowStyle).to.equal(
+            `inset 0 0 0 2px ${AAA_COLOR_MAIN_DARKER_BLUE}`,
           );
-          expect(borderWidth).to.equal('2px');
         });
 
         it('has background color of AAA_COLOR_SECONDARY_HOVER', () => {

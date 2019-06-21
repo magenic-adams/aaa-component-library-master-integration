@@ -10,7 +10,7 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
-import SelectListItemText from './SelectListItemText';
+import SelectListItem from './SelectListItem';
 
 // Test Utilities
 import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
@@ -20,21 +20,21 @@ import { AAA_COLOR_TRANSPARENT } from '../../constants/colors';
 
 function getFakeProps(overrides) {
   return {
-    item: { id: 1, value: 1, text: 'Yes' },
+    item: { id: 1, value: 1, display: 'Yes' },
     onSelect: jest.fn(v => v),
     ...overrides,
   };
 }
 
-function createSelectListItemTextWithTheme(props) {
+function createSelectListItemWithTheme(props) {
   return mount(
     <AAAThemeProvider theme={props.theme}>
-      <SelectListItemText {...props} />
-    </AAAThemeProvider>
+      <SelectListItem {...props} />
+    </AAAThemeProvider>,
   );
 }
 
-describe('SelectListItemText', () => {
+describe('SelectListItem', () => {
   let spy;
   let props;
   let listItemTextWrapper;
@@ -43,7 +43,7 @@ describe('SelectListItemText', () => {
   beforeEach(() => {
     spy = sinon.spy();
     props = getFakeProps({ onSelect: spy });
-    listItemTextWrapper = createSelectListItemTextWithTheme(props);
+    listItemTextWrapper = createSelectListItemWithTheme(props);
     listItemNode = listItemTextWrapper.getDOMNode();
   });
 
@@ -54,12 +54,12 @@ describe('SelectListItemText', () => {
   describe('html rendering', () => {
     it('rendered text should match passed options text', () => {
       props = getFakeProps({
-        item: { id: 1, value: 1, text: 'I am Iron Man' },
+        item: { id: 1, value: 1, display: 'I am Iron Man' },
       });
 
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
+      listItemTextWrapper = createSelectListItemWithTheme(props);
 
-      expect(listItemTextWrapper.text()).to.equal(props.item.text);
+      expect(listItemTextWrapper.text()).to.equal(props.item.display);
     });
 
     it('attaches a data-quid attribute to listItem element', () => {
@@ -67,7 +67,7 @@ describe('SelectListItemText', () => {
         listItemTextWrapper
           .find('li')
           .at(0)
-          .getDOMNode().dataset.quid
+          .getDOMNode().dataset.quid,
       ).to.equal(`SelectListItem-${props.item.id}`);
     });
 
@@ -76,41 +76,44 @@ describe('SelectListItemText', () => {
         listItemTextWrapper
           .find('li')
           .at(0)
-          .getDOMNode().value
+          .getDOMNode().value,
       ).to.equal(props.item.value);
     });
 
-    it('should not render list item if invalid item is passed', () => {
+    it('should throw error if required item has invalid value', () => {
       props = getFakeProps({
         item: null,
       });
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      listItemNode = listItemTextWrapper.getDOMNode();
-
-      expect(listItemNode).to.equal(null);
+      expect(() => {
+        createSelectListItemWithTheme(props);
+      }).to.throw(
+        'Invariant failed: You have not passed an item for rendering.',
+      );
 
       props = getFakeProps({
         item: undefined,
       });
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      listItemNode = listItemTextWrapper.getDOMNode();
-
-      expect(listItemNode).to.equal(null);
+      expect(() => {
+        createSelectListItemWithTheme(props);
+      }).to.throw(
+        'Invariant failed: You have not passed an item for rendering.',
+      );
 
       props = getFakeProps({
         item: '',
       });
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      listItemNode = listItemTextWrapper.getDOMNode();
-
-      expect(listItemNode).to.equal(null);
+      expect(() => {
+        createSelectListItemWithTheme(props);
+      }).to.throw(
+        'Invariant failed: You have not passed an item for rendering.',
+      );
 
       props = getFakeProps({
         item: {},
       });
       expect(() => {
-        createSelectListItemTextWithTheme(props);
-      }).to.throw('id or value is empty.');
+        createSelectListItemWithTheme(props);
+      }).to.throw('Invariant failed: id and display should have value.');
     });
   });
 
@@ -122,7 +125,7 @@ describe('SelectListItemText', () => {
       expect(spy.getCall(0).args[0]).to.deep.equal({
         id: 1,
         value: 1,
-        text: 'Yes',
+        display: 'Yes',
       });
     });
   });
@@ -136,22 +139,9 @@ describe('SelectListItemText', () => {
     it('has a transparent background', () => {
       const borderColorStyle = getDOMNodeComputedStyle(
         listItemTextWrapper.getDOMNode(),
-        'background'
+        'background',
       );
       expect(borderColorStyle).to.equal(AAA_COLOR_TRANSPARENT);
-    });
-  });
-
-  describe('list item states', () => {
-    it('has selected className if selected', () => {
-      props = getFakeProps({
-        item: { id: 1, value: 1, display: 'I am Iron Man', selected: true },
-      });
-
-      listItemTextWrapper = createSelectListItemTextWithTheme(props);
-      const listItem = listItemTextWrapper.find('li').get(0);
-
-      expect(listItem.props.className).to.contains('selected');
     });
   });
 });

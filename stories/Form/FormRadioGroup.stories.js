@@ -26,12 +26,12 @@ const VALIDATIONS = {
 };
 
 const cars = [
-  { id: 1, value: 1, text: 'Honda' },
-  { id: 2, value: 2, text: 'Toyota' },
-  { id: 3, value: 3, text: 'Mitsubishi' },
-  { id: 4, value: 4, text: 'Ford' },
-  { id: 5, value: 5, text: 'Suzuki' },
-  { id: 6, value: 6, text: 'Chev' },
+  { id: 1, value: 1, display: 'Honda' },
+  { id: 2, value: 2, display: 'Toyota' },
+  { id: 3, value: 3, display: 'Mitsubishi' },
+  { id: 4, value: 4, display: 'Ford' },
+  { id: 5, value: 5, display: 'Suzuki' },
+  { id: 6, value: 6, display: 'Chev' },
 ];
 
 function handleFormValueSubmission(vals) {
@@ -42,14 +42,12 @@ class FormRadioGroupContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { selectedId: null, selectedIds: [] };
+    this.state = { selectedId: null };
   }
 
   handleSelect = item => {
-    const { selectedIds } = this.state;
     this.setState({
       selectedId: item.id,
-      // selectedIds: [...selectedIds, item.id],
     });
   };
 
@@ -75,7 +73,6 @@ class FormRadioGroupContainer extends Component {
                     />
                     <FormGroup>
                       <FormRadioGroup
-                        name="cars"
                         id="cars"
                         instructionLabel="Choose One:"
                         items={items}

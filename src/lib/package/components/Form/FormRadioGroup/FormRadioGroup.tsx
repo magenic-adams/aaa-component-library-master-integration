@@ -1,18 +1,18 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/styles';
 
 // Types
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
-//Components
+// Components
 import Label from '../../Label/Label';
 import FormRadioItem from '../FormRadioItem/FormRadioItem';
 import SelectList from '../../SelectList/SelectList';
 
 // Types
 import SelectItem from '../../../types/SelectItem';
+import { NONAME } from 'dns';
 
 interface RequiredProps {
   id: string;
@@ -55,6 +55,14 @@ const styleClasses = (theme: Theme): { root: any } => ({
     border: 'none',
     boxShadow: 'none',
     marginTop: 16,
+    '& li': {
+      border: 'none',
+      padding: 0,
+      marginBottom: 4,
+      '&:active,&:hover': {
+        background: 'none',
+      },
+    },
     [theme.breakpoints.up('md')]: {
       width: 534,
     },
@@ -63,6 +71,15 @@ const styleClasses = (theme: Theme): { root: any } => ({
     },
   },
 });
+
+function isInArray(ids: string[] | number[] | undefined, id: string | number) {
+  if (Array.isArray(ids)) {
+    for (let i = 0; i < ids.length; i += 1) {
+      if (ids[i] === id) return true;
+    }
+  }
+  return false;
+}
 
 function isSelected(
   type: string | undefined,
@@ -74,15 +91,6 @@ function isSelected(
     return isInArray(selectedIds, id);
   }
   return id === selectedId;
-}
-
-function isInArray(ids: string[] | number[] | undefined, id: string | number) {
-  if (Array.isArray(ids)) {
-    for (var i = 0; i < ids.length; i++) {
-      if (ids[i] === id) return true;
-    }
-  }
-  return false;
 }
 
 function constructDisplayItems(
@@ -106,7 +114,7 @@ function constructDisplayItems(
         key: `RadioItem-${item.id}`,
         display: (
           <FormRadioItem
-            id={id}
+            name={id}
             item={item}
             checked={checked}
             disabled={disabled}
@@ -154,7 +162,6 @@ const FormRadioGroup: React.FunctionComponent<
       )}
       <SelectList
         className={cx('RadioGroup', classes.root)}
-        name={name}
         items={newItems}
         onSelect={() => onSelect}
       />

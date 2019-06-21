@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'clsx';
 import invariant from 'tiny-invariant';
 
@@ -15,7 +14,7 @@ import { Theme } from '@material-ui/core';
 import SelectItem from '../../../types/SelectItem';
 
 interface RequiredProps {
-  id: string;
+  name: string;
   item: SelectItem;
   onSelect: (item: SelectItem) => void;
 }
@@ -40,8 +39,9 @@ const styleClasses = (
     width: 534,
     height: 48,
     borderRadius: 4,
-    border: `1px solid ${theme.secondaryPalette.colorVariables.BLACK}`,
+    border: 0,
     background: theme.secondaryPalette.colorVariables.WHITE,
+    boxShadow: `inset 0 0 0 1px ${theme.secondaryPalette.colorVariables.BLACK}`,
     margin: '0px 0px 8px 0px',
     '&:hover': {
       background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
@@ -58,7 +58,10 @@ const styleClasses = (
     },
   },
   selected: {
-    border: `2px solid ${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
+    border: 0,
+    boxShadow: `inset 0 0 0 2px ${
+      theme.secondaryPalette.colorVariables.DARKER_BLUE
+    }`,
     fontWeight: 500,
     background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
     '&.Mui-disabled, &.Mui-disabled:hover': {
@@ -76,10 +79,9 @@ const styleClasses = (
 function checkValidity(item: SelectItem) {
   if (!item) {
     invariant(false, 'You have not passed an item for rendering.');
-  } else {
-    if (!item.id && !item.value) {
-      invariant(false, 'id and value are empty.');
-    }
+  }
+  if (!item.id && !item.value) {
+    invariant(false, 'id and value are empty.');
   }
 }
 
@@ -111,7 +113,7 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   checked,
   disabled,
   item,
-  id,
+  name,
   onSelect,
 }) => {
   checkValidity(item);
@@ -129,7 +131,7 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
         control={
           <Field
             itemId={item.id}
-            name={id}
+            name={name}
             type="radio"
             checked={checked}
             disabled={disabled}
@@ -139,7 +141,7 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
             component={Radio}
           />
         }
-        label={item.text}
+        label={item.display}
       />
     )
   );
