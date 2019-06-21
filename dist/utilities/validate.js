@@ -168,8 +168,6 @@ const Validate = {
   },
 
   greater_than(value, param) {
-    console.log('value', value);
-    console.log('param', param);
     if (!Validate.regex.decimalRegex.test(value)) {
       return false;
     }

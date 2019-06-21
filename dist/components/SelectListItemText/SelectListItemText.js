@@ -1,8 +1,9 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
-import invariant from 'tiny-invariant'; // Material Components
+import invariant from 'tiny-invariant'; // Types
 
+// Material Components
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
