@@ -1,125 +1,75 @@
-import _defineProperty from '@babel/runtime/helpers/esm/defineProperty';
-import React, { Fragment } from 'react';
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
+import React from 'react';
 import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
-import cx from 'clsx';
-import List from '@material-ui/core/List'; // Components
+import cx from 'clsx'; // Types
 
-import SelectListItemText from '../SelectListItemText/SelectListItemText';
+// Components
+import SelectListItem from '../SelectListItem/SelectListItem';
+var defaultProps = {
+  className: ''
+};
 
-const styleClasses = function styleClasses(theme) {
+var styleClasses = function styleClasses(theme) {
   return {
-    root: _defineProperty(
-      {
-        width: 341,
-        background: theme.secondaryPalette.colorVariables.WHITE,
-        border: '2px solid '.concat(theme.palette.primary.main),
-        borderRadius: 4,
-        padding: '0px',
-        boxShadow: '0 2px 8px 0 '.concat(
-          theme.secondaryPalette.colorVariables.GRAY
-        ),
-        '& span': {
-          fontFamily: theme.typographyValues.fontFamily,
-        },
-      },
-      theme.breakpoints.down(321),
-      {
-        width: '100%',
-        border: '1px solid '.concat(theme.palette.primary.main),
-        boxShadow: 'none',
-        borderRadius: 0,
-        '& span': {
-          fontSize: 16,
-        },
+    root: _defineProperty({
+      width: 341,
+      background: theme.secondaryPalette.colorVariables.WHITE,
+      border: "2px solid ".concat(theme.palette.primary.main),
+      borderRadius: 4,
+      padding: '0px',
+      boxShadow: "0 2px 8px 0 ".concat(theme.secondaryPalette.colorVariables.GRAY),
+      '& span': {
+        fontFamily: theme.typographyValues.fontFamily
       }
-    ),
-    fullOverlay: _defineProperty({}, theme.breakpoints.down(415), {
+    }, theme.breakpoints.down('sm'), {
       width: '100%',
-      border: '1px solid '.concat(theme.palette.primary.main),
+      border: "1px solid ".concat(theme.palette.primary.main),
       boxShadow: 'none',
       borderRadius: 0,
       '& span': {
-        fontSize: 16,
-      },
-    }),
+        fontSize: 16
+      }
+    })
   };
 };
 
 function areItemKeysPresent(items) {
-  return items.every(function(item) {
+  return items.every(function (item) {
     return item.id && item.value && item.display;
   });
 }
 
-function areItemsValid(items) {
+function checkValidity(items) {
   if (!Array.isArray(items) || items.length === 0) {
-    invariant(false, 'items array is empty');
+    invariant(false, 'items is empty');
   }
 
   if (!areItemKeysPresent(items)) {
-    invariant(
-      false,
-      'Invalid object keys are present. Keys should contain id, value and display'
-    );
+    invariant(false, 'Invalid object keys are present. Keys should contain id, value and display');
   }
-
-  return true;
 }
 
-const SelectList = function SelectList(_ref) {
-  const { classes } = _ref;
-  const { items } = _ref;
-  const { type } = _ref;
-  const _onSelect = _ref.onSelect;
-  return React.createElement(
-    Fragment,
-    null,
-    areItemsValid(items)
-      ? (function() {
-          switch (type) {
-            case 'primary':
-              return React.createElement(
-                List,
-                {
-                  dense: true,
-                  className: cx(
-                    'List',
-                    classes.root,
-                    _defineProperty({}, classes.fullOverlay, items.length > 6)
-                  ),
-                },
-                items.map(function(item) {
-                  return React.createElement(SelectListItemText, {
-                    key: item.id,
-                    item,
-                    onSelect: function onSelect() {
-                      return _onSelect(item);
-                    },
-                  });
-                })
-              );
-
-            case 'single-select-radio':
-            case 'multi-select-radio':
-              return React.createElement(
-                'div',
-                {
-                  className: cx(classes.radioGroup),
-                },
-                items.map(function(item) {
-                  return item.display;
-                })
-              );
-
-            default:
-              return null;
-          }
-        })()
-      : null
-  );
+var SelectList = function SelectList(_ref) {
+  var classes = _ref.classes,
+      className = _ref.className,
+      items = _ref.items,
+      _onSelect = _ref.onSelect;
+  checkValidity(items);
+  return React.createElement("div", {
+    className: cx(classes.root, className)
+  }, items.map(function (item) {
+    return item.display && React.createElement(SelectListItem, {
+      key: item.id,
+      item: item,
+      onSelect: function onSelect() {
+        return _onSelect(item);
+      }
+    });
+  }));
 };
 
+SelectList.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
-  withTheme: true,
+  withTheme: true
 })(SelectList);
