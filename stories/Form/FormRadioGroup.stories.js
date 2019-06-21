@@ -49,7 +49,7 @@ class FormRadioGroupContainer extends Component {
     const { selectedIds } = this.state;
     this.setState({
       selectedId: item.id,
-      selectedIds: [...selectedIds, item.id],
+      // selectedIds: [...selectedIds, item.id],
     });
   };
 

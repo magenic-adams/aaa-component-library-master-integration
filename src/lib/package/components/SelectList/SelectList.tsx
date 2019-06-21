@@ -26,6 +26,7 @@ interface RequiredProps {
 interface OptionalProps {
   classes?: any; // MUI Decorator
   className?: string;
+  name: string;
 }
 
 const styleClasses = (
@@ -111,5 +112,6 @@ const SelectList: React.FunctionComponent<RequiredProps & OptionalProps> = ({
 
 SelectList.defaultProps = {
   className: '',
+  name: '',
 };
 export default withStyles(styleClasses, { withTheme: true })(SelectList);

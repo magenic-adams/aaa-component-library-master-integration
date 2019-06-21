@@ -41,7 +41,7 @@ function createRadioItemWithTheme(props) {
         onSubmit={() => jest.fn(v => v)}
         render={() => <FormRadioItem {...props} />}
       />
-    </AAAThemeProvider>
+    </AAAThemeProvider>,
   );
 }
 
@@ -75,7 +75,7 @@ describe('FormRadioItem', () => {
         radioItemWrapper
           .find('input[type="radio"]')
           .at(0)
-          .getDOMNode().value
+          .getDOMNode().value,
       ).to.equal(props.item.value.toString());
     });
     it('attaches a data-quid attribute to the form control label element', () => {
@@ -83,28 +83,29 @@ describe('FormRadioItem', () => {
         radioItemWrapper
           .find('label')
           .at(0)
-          .getDOMNode().dataset.quid
+          .getDOMNode().dataset.quid,
       ).to.equal(`RadioItem-${props.item.id}`);
     });
-    it('should not render radio item if invalid item is passed', () => {
+
+    it('should throw error if required keys has no value', () => {
       props = getFakeProps({
         item: null,
       });
-      radioItemWrapper = createRadioItemWithTheme(props);
-      expect(radioItemWrapper.find('input[type="radio"]').get(0)).to.equal(
-        undefined
+      expect(() => {
+        createRadioItemWithTheme(props);
+      }).to.throw(
+        'Invariant failed: You have not passed an item for rendering.',
       );
 
       props = getFakeProps({
         item: undefined,
       });
-      radioItemWrapper = createRadioItemWithTheme(props);
-      expect(radioItemWrapper.find('input[type="radio"]').get(0)).to.equal(
-        undefined
+      expect(() => {
+        createRadioItemWithTheme(props);
+      }).to.throw(
+        'Invariant failed: You have not passed an item for rendering.',
       );
-    });
 
-    it('should throw error if required keys has no value', () => {
       props = getFakeProps({
         item: {},
       });
@@ -162,7 +163,7 @@ describe('FormRadioItem', () => {
     it('has border of 1px', () => {
       const borderWidth = getDOMNodeComputedStyle(
         radioItemNode,
-        'border-width'
+        'border-width',
       );
       expect(borderWidth).to.equal('1px');
     });
@@ -170,7 +171,7 @@ describe('FormRadioItem', () => {
     it('has border color of 1px AAA_COLOR_MAIN_BLACK', () => {
       const borderColor = getDOMNodeComputedStyle(
         radioItemNode,
-        'border-color'
+        'border-color',
       );
       expect(borderColor).to.equal(AAA_COLOR_MAIN_BLACK);
     });
@@ -178,7 +179,7 @@ describe('FormRadioItem', () => {
     it('has border radius of 4px', () => {
       const borderRadius = getDOMNodeComputedStyle(
         radioItemNode,
-        'border-radius'
+        'border-radius',
       );
       expect(borderRadius).to.equal('4px');
     });
@@ -206,7 +207,7 @@ describe('FormRadioItem', () => {
 
           const borderColor = getDOMNodeComputedStyle(
             radioItemNode,
-            'border-color'
+            'border-color',
           );
           expect(borderColor).to.equal(AAA_COLOR_MAIN_DARKER_BLUE);
         });
@@ -218,7 +219,7 @@ describe('FormRadioItem', () => {
 
           const borderWidth = getDOMNodeComputedStyle(
             radioItemNode,
-            'border-width'
+            'border-width',
           );
           expect(borderWidth).to.equal('2px');
         });
@@ -230,7 +231,7 @@ describe('FormRadioItem', () => {
 
           const background = getDOMNodeComputedStyle(
             radioItemNode,
-            'background'
+            'background',
           );
           expect(background).to.equal(AAA_COLOR_SECONDARY_HOVER);
         });
@@ -242,7 +243,7 @@ describe('FormRadioItem', () => {
 
           const fontWeight = getDOMNodeComputedStyle(
             radioItemNode,
-            'font-weight'
+            'font-weight',
           );
           expect(fontWeight).to.equal('500');
         });
@@ -256,7 +257,7 @@ describe('FormRadioItem', () => {
 
           const borderColor = getDOMNodeComputedStyle(
             radioItemNode,
-            'border-color'
+            'border-color',
           );
           expect(borderColor).to.equal(AAA_COLOR_MAIN_DISABLED);
         });
@@ -268,7 +269,7 @@ describe('FormRadioItem', () => {
 
           const background = getDOMNodeComputedStyle(
             radioItemNode,
-            'background'
+            'background',
           );
           expect(background).to.equal('none');
         });
