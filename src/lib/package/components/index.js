@@ -23,9 +23,11 @@ import SelectListItemText from './SelectListItemText/SelectListItemText';
 
 // Icons
 import RightArrowIcon from '../icons/RightArrowIcon';
+import AddIcon from '../icons/AddIcon';
 
 export {
   AAAPrimaryTheme,
+  AddIcon,
   BaseInput,
   Body,
   Button,
