@@ -10,7 +10,6 @@ interface RequiredProps {
 };
 
 interface OptionalProps {
-  defaultValue?: string | number,
   initialValue?: string | number,
   formState?: any, // Decorator
   forwardedRef?: React.RefObject<any>
