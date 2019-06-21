@@ -25,15 +25,26 @@ interface OptionalProps {
  * defined on our top-level <Form> component and plucked from context
  */
 class FormInput extends React.Component<RequiredProps & OptionalProps> {
+  inputRef:React.RefObject<any> = React.createRef();
+
   static defaultProps:OptionalProps = {
     initialValue: '',
   }
 
   constructor(props:RequiredProps & OptionalProps){
     super(props);
+    this.getInputRef = this.getInputRef.bind(this);
     this.handleFormFieldChange = this.handleFormFieldChange.bind(this);
     this.handleFieldClear = this.handleFieldClear.bind(this);
     this.renderFieldComponent = this.renderFieldComponent.bind(this);
+  }
+
+  /**
+   * Receives the ref for the underlying input
+   * @return {React.RefObject<any>}
+   */
+  getInputRef(){
+    return this.props.forwardedRef || this.inputRef;
   }
 
   /**
@@ -62,16 +73,18 @@ class FormInput extends React.Component<RequiredProps & OptionalProps> {
    */
   handleFieldClear(
     { input }:{input: {name: string, onChange: (val:string) => void}},
-    inputRef?: {current: {focus: () => void}}
-    ){
+    inputRef: React.RefObject<any>,
+  ){
     return () => {
       const { formState } = this.props;
       const { name, onChange } = input;
       const { mutators: { setFieldTouched }} = formState;
+      const ref = this.getInputRef();
+
       setFieldTouched(name, false);
       onChange('');
-      if (inputRef && inputRef.current){
-        inputRef.current.focus();
+      if (ref && ref.current){
+        ref.current.focus();
       }
     };
   }
@@ -84,15 +97,16 @@ class FormInput extends React.Component<RequiredProps & OptionalProps> {
    * @return {React.Component}
    */
   renderFieldComponent(fieldProps:any){
-    const { forwardedRef } = this.props;
+    const ref = this.getInputRef();
     const { meta } = fieldProps;
+    
     return (
       <BaseInput
         {...fieldProps.input}
         error={meta.touched && meta.error}
         onChange={this.handleFormFieldChange(fieldProps)}
-        onClear={this.handleFieldClear(fieldProps, forwardedRef)}
-        forwardedRef={forwardedRef}
+        onClear={this.handleFieldClear(fieldProps, ref)}
+        forwardedRef={ref}
         {...this.props} // Passed props take highest priority
       />
     );

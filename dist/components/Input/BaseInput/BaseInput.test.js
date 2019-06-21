@@ -19,7 +19,7 @@ import BaseInput from './BaseInput';
 import AAAPrimaryTheme from '../../AAAPrimaryTheme/AAAPrimaryTheme';
 
 // Test Utilities
-import { getDOMNodeComputedStyle } from '../../../../../../test/DOM';
+import { getDOMNodeComputedStyle } from '../../../../test/DOM';
 
 // Constants
 import {
