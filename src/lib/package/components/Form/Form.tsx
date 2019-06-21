@@ -19,34 +19,25 @@ interface RequiredProps {
 
 class FormDecorator extends React.Component<RequiredProps> {
   /**
-   * A UX requirement to check there is at least some value in all fields
-   * @param  {Function} options.formRenderProps.form.getRegisteredFields - the form field names
-   * @param  {Object} options.values - current key/values of form state
-   * @return {Boolean}
-   */
-  static allFieldsHaveValues({ formRenderProps }: {formRenderProps:FormRenderProps}){
-    const { form, values } = formRenderProps;
-    const registeredFields = form.getRegisteredFields();
-    return registeredFields.every(fieldKey => !!values[fieldKey]);
-  }
-
-  /**
-   * A UX requirement to check that all required fields have been visited
+   * A UX requirement to check that all required fields have been visited or have values
    * @param  {Function} options.formRenderProps.form.getRegisteredFields - the form field names
    * @param  {Function} options.validations - the form field names
    * @param  {Object} options.values - current key/values of form state
    * @return {Boolean}
    */
-  static allRequiredFieldsHaveBeenVisited(
+  static allRequiredFieldsHaveBeenVisitedOrHaveValues(
     { formRenderProps, validations }
     : {formRenderProps:FormRenderProps, validations: any })
   {
-    const { visited } = formRenderProps;
+    const { values, visited } = formRenderProps;
     const validationFields = Object.keys(validations);
     const requiredFields = validationFields.filter(fieldKey => {
       return Object.prototype.hasOwnProperty.call(validations[fieldKey], 'required');
     });
-    return requiredFields.every(fieldKey => !!visited[fieldKey]);
+
+    return requiredFields.every(fieldKey => {
+      return !!values[fieldKey] || !!visited[fieldKey];
+    });
   }
 
   /**
@@ -60,8 +51,7 @@ class FormDecorator extends React.Component<RequiredProps> {
     : {formRenderProps:FormRenderProps, validations: any})
   {
     return Object.assign({}, formRenderProps, {
-      allFieldsHaveValues: this.allFieldsHaveValues({ formRenderProps }),
-      allRequiredFieldsHaveBeenVisited: this.allRequiredFieldsHaveBeenVisited({ formRenderProps, validations }),
+      allRequiredFieldsHaveBeenVisitedOrHaveValues: this.allRequiredFieldsHaveBeenVisitedOrHaveValues({ formRenderProps, validations }),
     });
   }
 
@@ -73,13 +63,11 @@ class FormDecorator extends React.Component<RequiredProps> {
 
   static decorateRender(
     renderFn:(decorator:any) => {
-      allFieldsHaveValues: boolean,
-      allRequiredFieldsHaveBeenVisited: boolean,
+      allRequiredFieldsHaveBeenVisitedOrHaveValues: boolean,
     },
     validations:any
    ):(formRenderProps:any) => {
-      allFieldsHaveValues: boolean,
-      allRequiredFieldsHaveBeenVisited: boolean,
+      allRequiredFieldsHaveBeenVisitedOrHaveValues: boolean,
     }{
     return (formRenderProps) => {
       // Form Render Props are passed to the render method of the Form

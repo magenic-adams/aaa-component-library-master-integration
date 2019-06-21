@@ -67,7 +67,6 @@ const Label:React.FunctionComponent<RequiredProps & OptionalProps> = ({
     focused,
     id,
   }) => {
-  console.log('children', children);
   return (
     <MUIInputLabel
       className={cx('InputLabel', className)}
