@@ -39,15 +39,48 @@ export const demo = `class FormDemo extends React.Component {
           <Form
             validations={FormDemo.validations()}
             onSubmit={FormDemo.handleFormValueSubmission}
-            render={({ allRequiredFieldsHaveBeenVisited, handleSubmit }) => {
+            render={({ allRequiredFieldsHaveBeenVisitedOrHaveValues, handleSubmit }) => {
               return (
                 <form onSubmit={handleSubmit}>
                   <FormGroup>
                     <FormInput 
-                      name="firstName"
+                      id="disabledInitial"
+                      disabled
+                      initialValue="some-unique-identifier-0000101"
+                      labelName="Disabled, initial value"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput 
+                      id="initialValue"
+                      initialValue="Prefilled value"
+                      labelName="Initial value"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput 
+                      autoFocus
                       id="firstName"
                       labelName="First name"
-                      helperText="If you have a first name, please enter it here"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput 
+                      id="lastName"
+                      labelName="Last name"
+                      helperText="Not required"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormNumericInput 
+                      id="dob"
+                      labelName="Date of birth"
+                      mask={[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/]}
+                      helperText="mm/dd/yyyy"
                       type="text"
                     />
                   </FormGroup>
@@ -69,8 +102,8 @@ export const demo = `class FormDemo extends React.Component {
                   </FormGroup>
                   <ButtonGroup>
                     <Button
-                      disabled={!allRequiredFieldsHaveBeenVisited}
-                      fadeUp={allRequiredFieldsHaveBeenVisited}
+                      disabled={!allRequiredFieldsHaveBeenVisitedOrHaveValues}
+                      fadeUp={allRequiredFieldsHaveBeenVisitedOrHaveValues}
                       type="submit"
                     >
                       Submit
