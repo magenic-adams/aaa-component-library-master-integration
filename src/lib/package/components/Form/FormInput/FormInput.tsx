@@ -44,7 +44,8 @@ class FormInput extends React.Component<RequiredProps & OptionalProps> {
    * @return {React.RefObject<any>}
    */
   getInputRef(){
-    return this.props.forwardedRef || this.inputRef;
+    const { forwardedRef } = this.props;
+    return forwardedRef || this.inputRef;
   }
 
   /**
@@ -73,13 +74,12 @@ class FormInput extends React.Component<RequiredProps & OptionalProps> {
    */
   handleFieldClear(
     { input }:{input: {name: string, onChange: (val:string) => void}},
-    inputRef: React.RefObject<any>,
+    ref: React.RefObject<any>,
   ){
     return () => {
       const { formState } = this.props;
       const { name, onChange } = input;
       const { mutators: { setFieldTouched }} = formState;
-      const ref = this.getInputRef();
 
       setFieldTouched(name, false);
       onChange('');

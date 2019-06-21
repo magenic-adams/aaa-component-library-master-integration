@@ -24,13 +24,13 @@ function renderInputWithProps(props){
 
 function createFormAndFormInputWithTheme(props) {
   return mount(
-      <AAAPrimaryTheme>
-        <Form
-          onSubmit={() => {}}
-          validations={{}}
-          render={renderInputWithProps(props)}
-        />
-      </AAAPrimaryTheme>
+    <AAAPrimaryTheme>
+      <Form
+        onSubmit={() => {}}
+        validations={{}}
+        render={renderInputWithProps(props)}
+      />
+    </AAAPrimaryTheme>
   );
 }
 
