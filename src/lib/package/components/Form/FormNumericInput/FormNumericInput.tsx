@@ -17,9 +17,9 @@ interface OptionalProps {
 };
 
 /**
- * FormNumericInput is a <Field> Wrapper around <BaseInput />
+ * FormNumericInput is a <Field> Wrapper around <NumericInput />
  * FormNumericInput's responsibility is to 
- * 1. map ReactFinalForm's exposed "fieldProps" to <BaseInput>'s props
+ * 1. map ReactFinalForm's exposed "fieldProps" to <NumericInput>'s props
  * 2. Have logic to determine when an error is shown
  * 
  * By exposing the form's state via HOC, we are able to tap into custom mutators and other form state
