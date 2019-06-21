@@ -15,7 +15,7 @@ import { Theme } from '@material-ui/core';
 import SelectItem from '../../../types/SelectItem';
 
 interface RequiredProps {
-  name: string;
+  id: string;
   item: SelectItem;
   onSelect: (item: SelectItem) => void;
 }
@@ -85,7 +85,7 @@ function checkValidity(item: SelectItem) {
 
 const Radio = (fieldProps: any) => {
   const {
-    id,
+    itemId,
     input: { name, value, onBlur, onFocus },
     checked,
     disabled,
@@ -93,7 +93,7 @@ const Radio = (fieldProps: any) => {
   }: any = { ...fieldProps };
   return (
     <MUIRadio
-      key={id}
+      key={itemId}
       name={name}
       checked={checked}
       value={value}
@@ -111,7 +111,7 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   checked,
   disabled,
   item,
-  name,
+  id,
   onSelect,
 }) => {
   checkValidity(item);
@@ -128,8 +128,8 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
         }}
         control={
           <Field
-            id={item.id}
-            name={name}
+            itemId={item.id}
+            name={id}
             type="radio"
             checked={checked}
             disabled={disabled}

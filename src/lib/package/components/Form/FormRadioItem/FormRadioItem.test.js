@@ -27,7 +27,7 @@ import {
 
 function getFakeProps(overrides) {
   return {
-    name: 'radio',
+    id: 'radio',
     item: { id: 1, value: 1, text: 'Hey' },
     onSelect: jest.fn(v => v),
     ...overrides,

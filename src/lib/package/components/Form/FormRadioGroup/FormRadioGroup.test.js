@@ -15,7 +15,7 @@ import FormRadioGroup from './FormRadioGroup';
 
 function getFakeProps(overrides) {
   return {
-    name: 'avengers',
+    id: 'avengers',
     items: [
       { id: 1, value: 1, text: 'Iron Man' },
       { id: 2, value: 2, text: 'Captain A' },
@@ -32,7 +32,7 @@ function createRadioGroupWithTheme(props) {
         onSubmit={() => jest.fn(v => v)}
         render={() => <FormRadioGroup {...props} />}
       />
-    </AAAThemeProvider>
+    </AAAThemeProvider>,
   );
 }
 
@@ -72,7 +72,7 @@ describe('FormRadioGroup', () => {
 
     it('has a default rendering of a RadioGroup without a label', () => {
       expect(
-        radioGroupWrapper.find(`label[htmlFor="${props.id}"]`).exists()
+        radioGroupWrapper.find(`label[htmlFor="${props.id}"]`).exists(),
       ).to.equal(false);
 
       expect(radioGroupWrapper.find('.RadioGroup').exists()).to.equal(true);
@@ -86,7 +86,7 @@ describe('FormRadioGroup', () => {
       radioGroupWrapper = createRadioGroupWithTheme(props);
 
       expect(
-        radioGroupWrapper.find(`label[htmlFor="${props.id}"]`).exists()
+        radioGroupWrapper.find(`label[htmlFor="${props.id}"]`).exists(),
       ).to.equal(true);
     });
 
@@ -135,7 +135,7 @@ describe('FormRadioGroup', () => {
             .find(`label[data-quid="RadioItem-${selectedId}"]`)
             .find('span')
             .at(0)
-            .getDOMNode().className
+            .getDOMNode().className,
         ).to.contains('checked');
       });
 
@@ -150,7 +150,7 @@ describe('FormRadioGroup', () => {
             item
               .find('span')
               .at(0)
-              .getDOMNode().className
+              .getDOMNode().className,
           ).to.not.contains('checked');
         });
 
@@ -164,7 +164,7 @@ describe('FormRadioGroup', () => {
             item
               .find('span')
               .at(0)
-              .getDOMNode().className
+              .getDOMNode().className,
           ).to.not.contains('checked');
         });
       });
@@ -182,7 +182,7 @@ describe('FormRadioGroup', () => {
             item
               .find('span')
               .at(0)
-              .getDOMNode().className
+              .getDOMNode().className,
           ).to.contains('checked');
         });
       });
@@ -198,7 +198,7 @@ describe('FormRadioGroup', () => {
             item
               .find('span')
               .at(0)
-              .getDOMNode().className
+              .getDOMNode().className,
           ).to.not.contains('checked');
         });
 
@@ -212,7 +212,7 @@ describe('FormRadioGroup', () => {
             item
               .find('span')
               .at(0)
-              .getDOMNode().className
+              .getDOMNode().className,
           ).to.not.contains('checked');
         });
       });
@@ -230,7 +230,7 @@ describe('FormRadioGroup', () => {
           .find('label[data-quid="RadioItem-1"]')
           .find('span')
           .at(0)
-          .getDOMNode().className
+          .getDOMNode().className,
       ).to.contains('disabled');
 
       const radioElement = radioGroupWrapper.find('input[type="radio"]').at(0);

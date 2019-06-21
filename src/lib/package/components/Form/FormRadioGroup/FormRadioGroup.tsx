@@ -16,7 +16,6 @@ import SelectItem from '../../../types/SelectItem';
 
 interface RequiredProps {
   id: string;
-  name: string;
   items: SelectItem[];
   onSelect: (item: SelectItem) => void;
 }
@@ -87,7 +86,7 @@ function isInArray(ids: string[] | number[] | undefined, id: string | number) {
 }
 
 function constructDisplayItems(
-  name: string,
+  id: string,
   type: string | undefined,
   items: SelectItem[],
   selectedId: string | number | undefined,
@@ -99,16 +98,15 @@ function constructDisplayItems(
   return (
     Array.isArray(items) &&
     items.map(item => {
-      const { id } = item;
-      const checked = isSelected(type, id, selectedId, selectedIds);
-      const disabled = !!disableAll || isInArray(disabledIds, id);
+      const checked = isSelected(type, item.id, selectedId, selectedIds);
+      const disabled = !!disableAll || isInArray(disabledIds, item.id);
 
       return {
         ...item,
-        key: `RadioItem-${id}`,
+        key: `RadioItem-${item.id}`,
         display: (
           <FormRadioItem
-            name={name}
+            id={id}
             item={item}
             checked={checked}
             disabled={disabled}
@@ -131,14 +129,13 @@ const FormRadioGroup: React.FunctionComponent<
   id,
   items,
   instructionLabel,
-  name,
   selectedId,
   selectedIds,
   type,
   onSelect,
 }) => {
   const newItems = constructDisplayItems(
-    name,
+    id,
     type,
     items,
     selectedId,
