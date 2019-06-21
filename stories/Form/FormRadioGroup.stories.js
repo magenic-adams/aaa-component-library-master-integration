@@ -61,7 +61,10 @@ class FormRadioGroupContainer extends Component {
             <Form
               validations={VALIDATIONS}
               onSubmit={handleFormValueSubmission}
-              render={({ allRequiredFieldsHaveBeenVisited, handleSubmit }) => {
+              render={({
+                allRequiredFieldsHaveBeenVisitedOrHaveValues,
+                handleSubmit,
+              }) => {
                 return (
                   <form onSubmit={handleSubmit}>
                     <FormInput
@@ -82,8 +85,8 @@ class FormRadioGroupContainer extends Component {
                     </FormGroup>
                     <ButtonGroup>
                       <Button
-                        disabled={!allRequiredFieldsHaveBeenVisited}
-                        fadeUp={allRequiredFieldsHaveBeenVisited}
+                        disabled={!allRequiredFieldsHaveBeenVisitedOrHaveValues}
+                        fadeUp={allRequiredFieldsHaveBeenVisitedOrHaveValues}
                         type="submit"
                       >
                         Submit

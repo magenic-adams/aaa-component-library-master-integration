@@ -14,9 +14,13 @@ import {
   Form,
   FormGroup,
   FormInput,
+  FormNumericInput,
 } from '../../src/lib/package/components';
 
 const VALIDATIONS = {
+  initialValue: {
+    required: 'This field is required',
+  },
   firstName: {
     required: 'First name is required',
     'max_length[24]': 'Too long. Do you have a nickname?',
@@ -26,6 +30,9 @@ const VALIDATIONS = {
   lastName: {
     alpha_dash_dot_space:
       'Name can only contain letters, dashes, periods, and spaces',
+  },
+  dob: {
+    required: 'Date of birth is required',
   },
   password: {
     required: 'Password is required',
@@ -52,18 +59,31 @@ stories.add('basic form', () => {
             validations={VALIDATIONS}
             onSubmit={handleFormValueSubmission}
             render={({
-              allRequiredFieldsHaveBeenVisited,
-              invalid,
+              allRequiredFieldsHaveBeenVisitedOrHaveValues,
               handleSubmit,
-              values,
             }) => {
-              console.log('values 1', invalid);
               return (
                 <form onSubmit={handleSubmit}>
                   <FormGroup>
                     <FormInput
-                      // autoFocus
-                      name="firstName"
+                      id="disabledInitial"
+                      disabled
+                      initialValue="some-unique-identifier-0000101"
+                      labelName="Disabled, initial value"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput
+                      id="initialValue"
+                      initialValue="Prefilled value"
+                      labelName="Initial value"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput
+                      autoFocus
                       id="firstName"
                       labelName="First name"
                       type="text"
@@ -71,10 +91,33 @@ stories.add('basic form', () => {
                   </FormGroup>
                   <FormGroup>
                     <FormInput
-                      name="lastName"
                       id="lastName"
                       labelName="Last name"
                       helperText="Not required"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormNumericInput
+                      id="dob"
+                      labelName="Date of birth"
+                      mask={[
+                        /\d/,
+                        /\d/,
+                        ' ',
+                        '/',
+                        ' ',
+                        /\d/,
+                        /\d/,
+                        ' ',
+                        '/',
+                        ' ',
+                        /\d/,
+                        /\d/,
+                        /\d/,
+                        /\d/,
+                      ]}
+                      helperText="mm/dd/yyyy"
                       type="text"
                     />
                   </FormGroup>
@@ -96,8 +139,8 @@ stories.add('basic form', () => {
                   </FormGroup>
                   <ButtonGroup>
                     <Button
-                      disabled={!allRequiredFieldsHaveBeenVisited}
-                      fadeUp={allRequiredFieldsHaveBeenVisited}
+                      disabled={!allRequiredFieldsHaveBeenVisitedOrHaveValues}
+                      fadeUp={allRequiredFieldsHaveBeenVisitedOrHaveValues}
                       type="submit"
                     >
                       Submit
