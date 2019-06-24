@@ -1,0 +1,11 @@
+.StoryLayoutContainer {
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+  background: white;
+}
+
+.StoryLayoutContainer--vertical-padding {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}

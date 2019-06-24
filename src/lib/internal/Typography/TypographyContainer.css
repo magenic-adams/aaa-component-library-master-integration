@@ -1,0 +1,17 @@
+.TypographyContainer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.TypographyContainer__type {
+  padding-bottom: 20px;
+}
+
+.TypographyContainer__sizes {
+  line-height: 1.5;
+  padding: 10px 0;
+}
+
+.TypographyContainer__name {
+  min-width: 300px;
+}

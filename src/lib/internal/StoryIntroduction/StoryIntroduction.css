@@ -1,0 +1,19 @@
+.StoryIntroduction {
+  width: 100%;
+  background: white;
+  border-bottom: 2px solid gainsboro;
+  padding-bottom: 20px;
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
+
+.StoryIntroduction__title {
+  font-weight: 600;
+  font-size: 54px;
+  line-height: 1.7;
+}
+
+.StoryIntroduction__subtitle {
+  font-size: 30px;
+  line-height: 44px;
+}
