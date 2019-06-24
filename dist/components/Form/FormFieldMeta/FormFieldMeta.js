@@ -2,7 +2,8 @@ import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
 import MUIReportProblem from '@material-ui/icons/ReportProblem';
 import MUIFormHelperText from '@material-ui/core/FormHelperText';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'; // Types
+
 ;
 var defaultProps = {
   error: '',

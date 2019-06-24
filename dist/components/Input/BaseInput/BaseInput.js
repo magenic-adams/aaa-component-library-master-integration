@@ -1,8 +1,9 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
 import cx from 'clsx';
-import { withStyles } from '@material-ui/core/styles'; // Material UI components
+import { withStyles } from '@material-ui/core/styles'; // Types
 
+// Material UI components
 import MUIInput from '@material-ui/core/Input';
 import MUIFormControl from '@material-ui/core/FormControl';
 import MUIClear from '@material-ui/icons/Clear';

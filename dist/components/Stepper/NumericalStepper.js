@@ -1,93 +1,47 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { withStyles } from '@material-ui/styles'; // Material UI Components
+import { withTheme } from '@material-ui/styles'; // Material UI Components
 
 import MUIFormControl from '@material-ui/core/FormControl';
 import MUIAddIcon from '@material-ui/icons/Add';
-import MUIRemoveIcon from '@material-ui/icons/Remove'; // Components
+import RemoveIcon from '@material-ui/icons/Remove'; // Components
 
 import FormFieldMeta from '../Form/FormFieldMeta/FormFieldMeta';
 import Label from '../Label/Label';
 import StepperButton from '../Button/Button';
 import NumericInput from '../Input/NumericInput/NumericInput';
-import { AAA_CSS_INLINE, AAA_CSS_MIDDLE } from '../../constants/cssConstants';
+import { overrideStepperLabel, styleClasses } from './NumericalStepperStyles';
 var defaultProps = {
+  classes: {},
   disabled: false,
-  disableWarning: false,
-  error: '',
-  helperText: '',
   labelText: '',
+  helperText: '',
   mask: [],
-  value: 0
+  error: '',
+  value: 1
 };
 
-var styleClasses = function styleClasses(theme) {
-  var _error;
-
-  return {
-    stepperIcon: {
-      width: 24,
-      height: '100%',
-      color: theme.palette.primary.main
-    },
-    stepperInputWrapper: {
-      display: 'inline-block',
-      width: 78
-    },
-    stepperLabel: _defineProperty({
-      color: theme.secondaryPalette.colorVariables.BLACK,
-      marginTop: 8,
-      fontSize: '16px'
-    }, theme.breakpoints.up('md'), {
-      fontSize: '18px'
-    }),
-    actionWrapper: {
-      margin: '16px 0 6px 0'
-    },
-    helperText: {
-      color: theme.secondaryPalette.colorVariables.GRAY,
-      marginTop: 8,
-      '& span': _defineProperty({
-        fontSize: 14
-      }, theme.breakpoints.up('md'), {
-        fontSize: 16
-      })
-    },
-    error: (_error = {
-      color: theme.palette.error.main,
-      fontSize: 14
-    }, _defineProperty(_error, theme.breakpoints.up('md'), {
-      fontSize: '16px'
-    }), _defineProperty(_error, '& svg', {
-      display: "".concat(AAA_CSS_INLINE),
-      fontSize: 20,
-      marginLeft: 8,
-      marginRight: 8,
-      verticalAlign: "".concat(AAA_CSS_MIDDLE)
-    }), _error)
-  };
-};
-
-var NumericalStepper = function NumericalStepper(_ref) {
-  var classes = _ref.classes,
-      disabled = _ref.disabled,
-      disableWarning = _ref.disableWarning,
-      error = _ref.error,
-      helperText = _ref.helperText,
-      id = _ref.id,
-      labelText = _ref.labelText,
-      mask = _ref.mask,
-      name = _ref.name,
-      onIncrease = _ref.onIncrease,
-      onDecrease = _ref.onDecrease,
-      value = _ref.value;
+var NumericalStepper = function NumericalStepper(props) {
+  var disabled = props.disabled,
+      disableWarning = props.disableWarning,
+      error = props.error,
+      helperText = props.helperText,
+      id = props.id,
+      labelText = props.labelText,
+      mask = props.mask,
+      name = props.name,
+      onIncrease = props.onIncrease,
+      onDecrease = props.onDecrease,
+      value = props.value;
+  var classes = styleClasses(props);
   return React.createElement(MUIFormControl, {
     id: id,
     disabled: disabled,
-    classes: classes.root
-  }, labelText && React.createElement(Label, {
+    classes: {
+      root: classes.root
+    }
+  }, React.createElement(Label, {
+    overrides: overrideStepperLabel(props),
     id: "NumericalStepperLabel-".concat(id),
     disabled: false,
     error: error,
@@ -99,15 +53,16 @@ var NumericalStepper = function NumericalStepper(_ref) {
     disabled: disabled,
     onClick: onDecrease,
     isIconButton: true
-  }, React.createElement(MUIRemoveIcon, {
+  }, React.createElement(RemoveIcon, {
     "data-quid": "RemoveIcon-".concat(id),
     className: classes.stepperIcon
   })), React.createElement("div", {
     className: classes.stepperInputWrapper
   }, React.createElement(NumericInput, {
-    name: name,
     id: "NumericalStepperInput-".concat(id),
+    name: name,
     centerText: true,
+    type: "text",
     value: value,
     error: error,
     disabled: disabled,
@@ -130,7 +85,4 @@ var NumericalStepper = function NumericalStepper(_ref) {
 };
 
 NumericalStepper.defaultProps = defaultProps;
-export default withStyles(styleClasses, {
-  index: 0,
-  withTheme: true
-})(NumericalStepper);
+export default withTheme(NumericalStepper);
