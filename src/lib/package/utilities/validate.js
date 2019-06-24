@@ -8,6 +8,7 @@
 // This is a modified, lean version of the library validate.js
 // Check documentation for validate.js to see validation values
 import objValues from 'lodash/values';
+import regex from './regex';
 
 const Validate = {
   validateForm(formVals, validations) {
@@ -60,10 +61,9 @@ const Validate = {
     let isValid = true; // Assume validity
     let rule = r;
     let param = null;
-    const parts = Validate.regex.ruleRegex.exec(rule);
+    const parts = regex.ruleRegex.exec(rule);
 
     if (parts) { // If the rule has a parameter, i.e. matches[param], split it out
-      /* eslint-disable prefer-destructuring */
       rule = parts[1];
       param = parts[2];
     }
@@ -88,29 +88,6 @@ const Validate = {
   },
 
   /**
-   * Defines the regular expressions that will be used
-   */
-  regex: {
-    ruleRegex: /^(.+?)\[(.+)\]$/,
-    numericRegex: /^[0-9]+([.,][0-9]+)?$/,
-    integerRegex: /^-?[0-9]+$/,
-    decimalRegex: /^\-?[0-9]*\.?[0-9]+$/,
-    emailRegex: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, // `<-- to fix syntax highlighting
-    alphaRegex: /^[a-z]+$/i,
-    alphaNumericRegex: /^[a-z0-9]+$/i,
-    alphaDashRegex: /^[a-z0-9_]+$/i,
-    alphaDashSpaceRegex: /^[a-z\s\-]+$/i,
-    alphaDashDotSpaceRegex: /^[a-z\.\s\-]+$/i,
-    alphaNameRegex: /^[a-zA-Z\-\']+$/i,
-    naturalRegex: /^[0-9]+$/i,
-    naturalNoZeroRegex: /^[1-9][0-9]*$/i,
-    ipRegex: /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})$/i,
-    base64Regex: /[^a-zA-Z0-9\/\+=]/i,
-    numericDashRegex: /^[\d\-\s]+$/,
-    urlRegex: /^((http|https):\/\/(\w+:{0,1}\w*@)?(\S+)|)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/,
-  },
-
-  /**
      * Methods to validate regex
      */
   required(val) {
@@ -128,14 +105,14 @@ const Validate = {
   },
 
   valid_email(value) {
-    return Validate.regex.emailRegex.test(value);
+    return regex.emailRegex.test(value);
   },
 
   valid_emails(value) {
     const result = value.split(',');
 
     for (let i = 0, resultLength = result.length; i < resultLength; i += 1) {
-      if (!Validate.regex.emailRegex.test(result[i])) {
+      if (!regex.emailRegex.test(result[i])) {
         return false;
       }
     }
@@ -144,7 +121,7 @@ const Validate = {
   },
 
   min_length(value, length) {
-    if (!Validate.regex.integerRegex.test(length)) {
+    if (!regex.integerRegex.test(length)) {
       return false;
     }
 
@@ -152,7 +129,7 @@ const Validate = {
   },
 
   max_length(value, length) {
-    if (!Validate.regex.integerRegex.test(length)) {
+    if (!regex.integerRegex.test(length)) {
       return false;
     }
 
@@ -160,7 +137,7 @@ const Validate = {
   },
 
   exact_length(value, length) {
-    if (!Validate.regex.integerRegex.test(length)) {
+    if (!regex.integerRegex.test(length)) {
       return false;
     }
 
@@ -168,7 +145,7 @@ const Validate = {
   },
 
   greater_than(value, param) {
-    if (!Validate.regex.decimalRegex.test(value)) {
+    if (!regex.decimalRegex.test(value)) {
       return false;
     }
 
@@ -177,7 +154,7 @@ const Validate = {
 
   less_than(val, param) {
     const value = val || 0;
-    if (!Validate.regex.decimalRegex.test(value)) {
+    if (!regex.decimalRegex.test(value)) {
       return false;
     }
 
@@ -185,59 +162,59 @@ const Validate = {
   },
 
   alpha(value) {
-    return (Validate.regex.alphaRegex.test(value));
+    return (regex.alphaRegex.test(value));
   },
 
   alpha_numeric(value) {
-    return (Validate.regex.alphaNumericRegex.test(value));
+    return (regex.alphaNumericRegex.test(value));
   },
 
   alpha_dash(value) {
-    return (Validate.regex.alphaDashRegex.test(value));
+    return (regex.alphaDashRegex.test(value));
   },
 
   alpha_dash_space(value) {
-    return (Validate.regex.alphaDashSpaceRegex.test(value));
+    return (regex.alphaDashSpaceRegex.test(value));
   },
 
   alpha_dash_dot_space(value) {
-    return (Validate.regex.alphaDashDotSpaceRegex.test(value));
+    return (regex.alphaDashDotSpaceRegex.test(value));
   },
 
   alpha_name(value) {
-    return (Validate.regex.alphaNameRegex.test(value));
+    return (regex.alphaNameRegex.test(value));
   },
 
   numeric(value) {
-    return (Validate.regex.numericRegex.test(value || ''));
+    return (regex.numericRegex.test(value || ''));
   },
 
   integer(value) {
-    return (Validate.regex.integerRegex.test(value));
+    return (regex.integerRegex.test(value));
   },
 
   decimal(value) {
-    return (Validate.regex.decimalRegex.test(value));
+    return (regex.decimalRegex.test(value));
   },
 
   is_natural(value) {
-    return (Validate.regex.naturalRegex.test(value));
+    return (regex.naturalRegex.test(value));
   },
 
   is_natural_no_zero(value) {
-    return (Validate.regex.naturalNoZeroRegex.test(value));
+    return (regex.naturalNoZeroRegex.test(value));
   },
 
   valid_ip(value) {
-    return (Validate.regex.ipRegex.test(value));
+    return (regex.ipRegex.test(value));
   },
 
   valid_base64(value) {
-    return (Validate.regex.base64Regex.test(value));
+    return (regex.base64Regex.test(value));
   },
 
   valid_url(value) {
-    return (Validate.regex.urlRegex.test(value));
+    return (regex.urlRegex.test(value));
   },
 
   valid_date(value) {
@@ -256,7 +233,7 @@ const Validate = {
   valid_credit_card(value) {
     // Luhn Check Code from https://gist.github.com/4075533
     // accept only digits, dashes or spaces
-    if (!Validate.regex.numericDashRegex.test(value)) return false;
+    if (!regex.numericDashRegex.test(value)) return false;
 
     // The Luhn Algorithm.
     let nCheck = 0;
