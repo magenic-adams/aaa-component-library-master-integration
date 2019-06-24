@@ -29,11 +29,11 @@ interface OptionalProps {
 const defaultProps: OptionalProps = {
   className: '',
   checked: false,
-  disabled: false,
+  disabled: false
 };
 
 const styleClasses = (
-  theme: Theme,
+  theme: Theme
 ): { root: any; selected: any; label: any } => ({
   root: {
     width: 534,
@@ -44,36 +44,34 @@ const styleClasses = (
     boxShadow: `inset 0 0 0 1px ${theme.secondaryPalette.colorVariables.BLACK}`,
     margin: '0px 0px 8px 0px',
     '&:hover': {
-      background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
+      background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
     },
     '&.Mui-disabled, &.Mui-disabled:hover': {
       borderColor: theme.secondaryPalette.disabled.main,
-      background: 'none',
+      background: 'none'
     },
     [theme.breakpoints.up('md')]: {
-      maxWidth: 534,
+      width: 534
     },
-    [theme.breakpoints.up('sm')]: {
-      width: '100%',
-    },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
+    }
   },
   selected: {
     border: 0,
-    boxShadow: `inset 0 0 0 2px ${
-      theme.secondaryPalette.colorVariables.DARKER_BLUE
-    }`,
+    boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
     fontWeight: 500,
     background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
     '&.Mui-disabled, &.Mui-disabled:hover': {
       borderColor: theme.secondaryPalette.disabled.main,
-      background: 'none',
-    },
+      background: 'none'
+    }
   },
   label: {
     fontFamily: theme.typography.fontFamily,
     fontSize: 16,
-    paddingRight: 16,
-  },
+    paddingRight: 16
+  }
 });
 
 function checkValidity(item: SelectItem) {
@@ -91,7 +89,7 @@ const Radio = (fieldProps: any) => {
     input: { name, value, onBlur, onFocus },
     checked,
     disabled,
-    onChange,
+    onChange
   }: any = { ...fieldProps };
   return (
     <MUIRadio
@@ -114,7 +112,7 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   disabled,
   item,
   name,
-  onSelect,
+  onSelect
 }) => {
   checkValidity(item);
 
@@ -123,10 +121,10 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
       <FormControlLabel
         data-quid={`RadioItem-${item.id}`}
         className={cx('Radio', classes.root, {
-          [classes.selected]: checked,
+          [classes.selected]: checked
         })}
         classes={{
-          label: classes.label,
+          label: classes.label
         }}
         control={
           <Field
@@ -150,5 +148,5 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
 FormRadioItem.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
-  FormRadioItem,
+  FormRadioItem
 );

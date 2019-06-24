@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/styles';
-
-// Types
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 // Components
@@ -12,7 +10,6 @@ import SelectList from '../../SelectList/SelectList';
 
 // Types
 import SelectItem from '../../../types/SelectItem';
-import { NONAME } from 'dns';
 
 interface RequiredProps {
   id: string;
@@ -46,12 +43,11 @@ const defaultProps: OptionalProps = {
   selectedId: '',
   selectedIds: [],
   disableAll: false,
-  disabledIds: [],
+  disabledIds: []
 };
 
 const styleClasses = (theme: Theme): { root: any } => ({
   root: {
-    width: 534,
     border: 'none',
     boxShadow: 'none',
     marginTop: 16,
@@ -60,16 +56,19 @@ const styleClasses = (theme: Theme): { root: any } => ({
       padding: 0,
       marginBottom: 4,
       '&:active,&:hover': {
-        background: 'none',
+        background: 'none'
       },
-    },
-    [theme.breakpoints.up('md')]: {
-      width: 534,
-    },
-    [theme.breakpoints.up('sm')]: {
-      width: '100%',
-    },
+      [theme.breakpoints.up('md')]: {
+        width: 534
+      }
+    }
   },
+  [theme.breakpoints.up('md')]: {
+    width: 534
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: '100%'
+  }
 });
 
 function isInArray(ids: string[] | number[] | undefined, id: string | number) {
@@ -85,7 +84,7 @@ function isSelected(
   type: string | undefined,
   id: string | number,
   selectedId: string | number | undefined,
-  selectedIds: string[] | number[] | undefined,
+  selectedIds: string[] | number[] | undefined
 ) {
   if (type === 'multi-select') {
     return isInArray(selectedIds, id);
@@ -101,7 +100,7 @@ function constructDisplayItems(
   selectedIds: string[] | number[] | undefined,
   disableAll: boolean | undefined,
   disabledIds: string[] | number[] | undefined,
-  onSelect: (item: SelectItem) => void,
+  onSelect: (item: SelectItem) => void
 ): any {
   return (
     Array.isArray(items) &&
@@ -122,7 +121,7 @@ function constructDisplayItems(
               typeof onSelect === 'function' ? onSelect(item) : null
             }
           />
-        ),
+        )
       };
     })
   );
@@ -140,7 +139,7 @@ const FormRadioGroup: React.FunctionComponent<
   selectedId,
   selectedIds,
   type,
-  onSelect,
+  onSelect
 }) => {
   const newItems = constructDisplayItems(
     id,
@@ -150,7 +149,7 @@ const FormRadioGroup: React.FunctionComponent<
     selectedIds,
     disableAll,
     disabledIds,
-    onSelect,
+    onSelect
   );
 
   return (
@@ -172,5 +171,5 @@ const FormRadioGroup: React.FunctionComponent<
 FormRadioGroup.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
-  FormRadioGroup,
+  FormRadioGroup
 );

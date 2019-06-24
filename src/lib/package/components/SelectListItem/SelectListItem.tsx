@@ -1,11 +1,7 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
 import invariant from 'tiny-invariant';
-
-// Types
+import { withStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
-
-// Material Components
 import ListItem from '@material-ui/core/ListItem';
 
 // Types
@@ -21,7 +17,7 @@ interface OptionalProps {
 }
 
 const styleClasses = (
-  theme: Theme,
+  theme: Theme
 ): {
   // CSS Classes
   root: any;
@@ -37,24 +33,24 @@ const styleClasses = (
     lineHeight: 1.5,
     fontFamily: theme.typography.fontFamily,
     [theme.breakpoints.between('xs', 'sm')]: {
-      fontSize: 16,
+      fontSize: 16
     },
     '&.Mui-selected, &.Mui-selected:hover': {
-      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
+      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
     },
     '&:hover': {
-      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
-    },
+      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
+    }
   },
   gutters: {
-    padding: '0 13px 0 13px',
+    padding: '0 13px 0 13px'
   },
   divider: {
     borderBottom: `1px solid ${theme.palette.primary.main}`,
     '&:last-child': {
-      borderBottom: 'none',
-    },
-  },
+      borderBottom: 'none'
+    }
+  }
 });
 
 function checkValidity(item: {
@@ -90,4 +86,6 @@ const SelectListItem: React.FunctionComponent<
   );
 };
 
-export default withStyles(styleClasses, { withTheme: true })(SelectListItem);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(
+  SelectListItem
+);

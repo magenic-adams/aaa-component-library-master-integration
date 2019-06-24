@@ -2,9 +2,7 @@ import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
 import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
-import cx from 'clsx'; // Types
-
-// Components
+import cx from 'clsx';
 import SelectListItem from '../SelectListItem/SelectListItem';
 var defaultProps = {
   className: ''

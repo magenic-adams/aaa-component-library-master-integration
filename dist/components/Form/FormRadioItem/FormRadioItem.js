@@ -34,8 +34,8 @@ var styleClasses = function styleClasses(theme) {
         background: 'none'
       }
     }, _defineProperty(_root, theme.breakpoints.up('md'), {
-      maxWidth: 534
-    }), _defineProperty(_root, theme.breakpoints.up('sm'), {
+      width: 534
+    }), _defineProperty(_root, theme.breakpoints.down('sm'), {
       width: '100%'
     }), _root),
     selected: {

@@ -2,11 +2,7 @@ import React from 'react';
 import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
-
-// Types
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
-
-// Components
 import SelectListItem from '../SelectListItem/SelectListItem';
 
 interface selectItem {
@@ -29,11 +25,11 @@ interface OptionalProps {
 }
 
 const defaultProps: OptionalProps = {
-  className: '',
+  className: ''
 };
 
 const styleClasses = (
-  theme: Theme,
+  theme: Theme
 ): {
   // CSS Classes
   root: any;
@@ -46,7 +42,7 @@ const styleClasses = (
     padding: '0px',
     boxShadow: `0 2px 8px 0 ${theme.secondaryPalette.colorVariables.GRAY}`,
     '& span': {
-      fontFamily: theme.typographyValues.fontFamily,
+      fontFamily: theme.typographyValues.fontFamily
     },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
@@ -54,10 +50,10 @@ const styleClasses = (
       boxShadow: 'none',
       borderRadius: 0,
       '& span': {
-        fontSize: 16,
-      },
-    },
-  },
+        fontSize: 16
+      }
+    }
+  }
 });
 
 function areItemKeysPresent(items: selectItem[]) {
@@ -72,7 +68,7 @@ function checkValidity(items: selectItem[]) {
   if (!areItemKeysPresent(items)) {
     invariant(
       false,
-      'Invalid object keys are present. Keys should contain id, value and display',
+      'Invalid object keys are present. Keys should contain id, value and display'
     );
   }
 }
@@ -81,7 +77,7 @@ const SelectList: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   classes,
   className,
   items,
-  onSelect,
+  onSelect
 }) => {
   checkValidity(items);
 

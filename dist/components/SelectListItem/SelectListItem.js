@@ -1,9 +1,7 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
+import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
-import invariant from 'tiny-invariant'; // Types
-
-// Material Components
 import ListItem from '@material-ui/core/ListItem'; // Types
 
 var styleClasses = function styleClasses(theme) {
@@ -74,5 +72,6 @@ var SelectListItem = function SelectListItem(_ref) {
 };
 
 export default withStyles(styleClasses, {
+  index: 0,
   withTheme: true
 })(SelectListItem);
