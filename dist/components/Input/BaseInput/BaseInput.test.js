@@ -19,7 +19,7 @@ import BaseInput from './BaseInput';
 import AAAPrimaryTheme from '../../AAAPrimaryTheme/AAAPrimaryTheme';
 
 // Test Utilities
-import { getDOMNodeComputedStyle } from '../../../../test/DOM';
+import { getDOMNodeComputedStyle } from '../../../../../../test/DOM';
 
 // Constants
 import {
@@ -36,8 +36,7 @@ function createInput(props) {
 
 function getFakeProps(override) {
   return { // Required
-    id: 'input-unique-identifier', // used for unique identifier and data tracking
-    name: 'input-unique-name', // used for form value
+    id: 'input-unique-identifier', // used for form value name & unique identifier for data-tracking
     ...override,
   };
 }

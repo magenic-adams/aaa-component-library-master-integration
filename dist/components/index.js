@@ -24,8 +24,13 @@ import ToggleButtonGroup from './ToggleButtonGroup/ToggleButtonGroup';
 import SelectList from './SelectList/SelectList';
 import SelectListItem from './SelectListItem/SelectListItem';
 
+// Icons
+import RightArrowIcon from '../icons/RightArrowIcon';
+import AddIcon from '../icons/AddIcon';
+
 export {
   AAAPrimaryTheme,
+  AddIcon,
   BaseInput,
   Body,
   Button,
@@ -40,6 +45,7 @@ export {
   Label,
   Link,
   NumericInput,
+  RightArrowIcon,
   SelectList,
   SelectListItem,
   Subheadline,

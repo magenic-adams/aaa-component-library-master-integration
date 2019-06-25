@@ -46,43 +46,26 @@ function (_React$Component) {
       }));
     }
   }], [{
-    key: "allFieldsHaveValues",
+    key: "allRequiredFieldsHaveBeenVisitedOrHaveValues",
 
     /**
-     * A UX requirement to check there is at least some value in all fields
-     * @param  {Function} options.formRenderProps.form.getRegisteredFields - the form field names
-     * @param  {Object} options.values - current key/values of form state
-     * @return {Boolean}
-     */
-    value: function allFieldsHaveValues(_ref) {
-      var formRenderProps = _ref.formRenderProps;
-      var form = formRenderProps.form,
-          values = formRenderProps.values;
-      var registeredFields = form.getRegisteredFields();
-      return registeredFields.every(function (fieldKey) {
-        return !!values[fieldKey];
-      });
-    }
-    /**
-     * A UX requirement to check that all required fields have been visited
+     * A UX requirement to check that all required fields have been visited or have values
      * @param  {Function} options.formRenderProps.form.getRegisteredFields - the form field names
      * @param  {Function} options.validations - the form field names
      * @param  {Object} options.values - current key/values of form state
      * @return {Boolean}
      */
-
-  }, {
-    key: "allRequiredFieldsHaveBeenVisited",
-    value: function allRequiredFieldsHaveBeenVisited(_ref2) {
-      var formRenderProps = _ref2.formRenderProps,
-          validations = _ref2.validations;
-      var visited = formRenderProps.visited;
+    value: function allRequiredFieldsHaveBeenVisitedOrHaveValues(_ref) {
+      var formRenderProps = _ref.formRenderProps,
+          validations = _ref.validations;
+      var values = formRenderProps.values,
+          visited = formRenderProps.visited;
       var validationFields = Object.keys(validations);
       var requiredFields = validationFields.filter(function (fieldKey) {
         return Object.prototype.hasOwnProperty.call(validations[fieldKey], 'required');
       });
       return requiredFields.every(function (fieldKey) {
-        return !!visited[fieldKey];
+        return !!values[fieldKey] || !!visited[fieldKey];
       });
     }
     /**
@@ -94,14 +77,11 @@ function (_React$Component) {
 
   }, {
     key: "decorateFormRenderProps",
-    value: function decorateFormRenderProps(_ref3) {
-      var formRenderProps = _ref3.formRenderProps,
-          validations = _ref3.validations;
+    value: function decorateFormRenderProps(_ref2) {
+      var formRenderProps = _ref2.formRenderProps,
+          validations = _ref2.validations;
       return Object.assign({}, formRenderProps, {
-        allFieldsHaveValues: this.allFieldsHaveValues({
-          formRenderProps: formRenderProps
-        }),
-        allRequiredFieldsHaveBeenVisited: this.allRequiredFieldsHaveBeenVisited({
+        allRequiredFieldsHaveBeenVisitedOrHaveValues: this.allRequiredFieldsHaveBeenVisitedOrHaveValues({
           formRenderProps: formRenderProps,
           validations: validations
         })
@@ -109,8 +89,8 @@ function (_React$Component) {
     }
   }, {
     key: "handleValidate",
-    value: function handleValidate(_ref4) {
-      var validations = _ref4.validations;
+    value: function handleValidate(_ref3) {
+      var validations = _ref3.validations;
       return function (values) {
         return Validate.validateForm(values, validations);
       };

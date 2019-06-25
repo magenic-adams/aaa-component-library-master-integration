@@ -2,7 +2,9 @@ import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React, { Fragment } from 'react';
 import { withStyles } from '@material-ui/styles';
 import invariant from 'tiny-invariant';
-import cx from 'clsx';
+import cx from 'clsx'; // Types
+
+// Material UI Components
 import Button from '../Button/Button';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 var defaultProps = {
@@ -60,14 +62,14 @@ var styleClasses = function styleClasses(theme) {
 };
 /**
  * Propagates value selected to parent callback
- * @param  {String|Number} value - value passed
+ * @param  {String|Number} option - value passed
  * @param  {Function} onSelect
  * @return {void}
  */
 
 
-function handleClick(option, onSelect) {
-  onSelect(option);
+function handleClick(opt, onSelect) {
+  onSelect(opt);
 }
 /**
  * Checks to see if correct option keys are present

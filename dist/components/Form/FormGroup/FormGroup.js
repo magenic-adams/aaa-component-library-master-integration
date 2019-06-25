@@ -29,9 +29,7 @@ var FormGroup = function FormGroup(_ref) {
   }, children);
 };
 
-FormGroup.defaultProps = {
-  className: ''
-};
+FormGroup.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
   index: 0,
   withTheme: true

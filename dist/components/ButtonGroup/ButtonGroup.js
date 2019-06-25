@@ -1,7 +1,8 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
-import cx from 'clsx';
+import cx from 'clsx'; // Types
+
 ;
 ;
 var defaultProps = {
@@ -32,9 +33,7 @@ var ButtonGroup = function ButtonGroup(_ref) {
   }, children);
 };
 
-ButtonGroup.defaultProps = {
-  className: ''
-};
+ButtonGroup.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
   index: 0,
   withTheme: true
