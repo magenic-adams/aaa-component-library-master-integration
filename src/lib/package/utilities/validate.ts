@@ -1,12 +1,29 @@
 import objValues from 'lodash/values';
+import assign from 'lodash/assign';
 import regex from './regex';
+
+interface FormValues {
+  [id:string]: string
+}
+
+interface Validation {
+  [validation:string]: string
+}
+
+interface FieldValidations {
+  [fieldKey:string]: Validation
+}
+
+interface Error {
+  [fieldKey:string]: string
+}
 
 /**
  * "alpha" checks if a value matches the alpha regex
  * @param  {string} value - field value
  * @return {boolean} isValid?
  */
-export function alpha(value) {
+export function alpha(value:string):boolean {
   return (regex.alphaRegex.test(value));
 }
 
@@ -15,7 +32,7 @@ export function alpha(value) {
  * @param  {string} value - field value
  * @return {boolean} isValid?
  */
-export function alpha_dash(value) {
+export function alpha_dash(value:string):boolean {
   return (regex.alphaDashRegex.test(value));
 }
 
@@ -24,7 +41,7 @@ export function alpha_dash(value) {
  * @param  {string} value - field value
  * @return {boolean} isValid?
  */
-export function alpha_dash_dot_space(value) {
+export function alpha_dash_dot_space(value:string):boolean {
   return (regex.alphaDashDotSpaceRegex.test(value));
 }
 
@@ -33,7 +50,7 @@ export function alpha_dash_dot_space(value) {
  * @param  {string} value - field value
  * @return {boolean} isValid?
  */
-export function alpha_dash_space(value) {
+export function alpha_dash_space(value:string):boolean {
   return (regex.alphaDashSpaceRegex.test(value));
 }
 
@@ -43,7 +60,7 @@ export function alpha_dash_space(value) {
  * @param  {string} value - field value
  * @return {boolean} isValid?
  */
-export function alpha_name(value) {
+export function alpha_name(value:string):boolean {
   return (regex.alphaNameRegex.test(value));
 }
 
@@ -52,7 +69,7 @@ export function alpha_name(value) {
  * @param  {string} value - field value
  * @return {boolean} isValid?
  */
-export function alpha_numeric(value) {
+export function alpha_numeric(value:string):boolean {
   return (regex.alphaNumericRegex.test(value));
 }
 
@@ -61,17 +78,17 @@ export function alpha_numeric(value) {
  * @param  {string|number} value
  * @return {boolean} isValid?
  */
-export function decimal(value) {
+export function decimal(value:string):boolean {
   return (regex.decimalRegex.test(value));
 }
 
 /**
  * "exact_length[parameter]" checks if a string is exactly "param" amount of characters
  * @param  {string} value
- * @param  {number} length
+ * @param  {string} length
  * @return {boolean} isValid?
  */
-export function exact_length(value, length) {
+export function exact_length(value:string, length:string):boolean {
   if (!regex.integerRegex.test(length)) {
     return false;
   }
@@ -81,11 +98,11 @@ export function exact_length(value, length) {
 
 /**
  * "greater_than[parameter]" checks if a value is greater than a parameter
- * @param  {string|number} value - field value
+ * @param  {string} value - field value
  * @param  {string} param
  * @return {boolean} isValid?
  */
-export function greater_than(value, param) {
+export function greater_than(value:string, param:string):boolean {
   if (!regex.decimalRegex.test(value)) {
     return false;
   }
@@ -95,29 +112,29 @@ export function greater_than(value, param) {
 
 /**
  * "integer" checks if a value is integer
- * @param  {string|number} value
+ * @param  {string} value
  * @return {boolean} isValid?
  */
-export function integer(value) {
+export function integer(value:string):boolean {
   return (regex.integerRegex.test(value));
 }
 
 /**
  * "is_array" checks to see if a value is an array
- * @param  {array}  value
+ * @param  {array} value
  * @return {boolean} isValid?
  */
-export function is_array(value) {
+export function is_array(value?:Array<any>):boolean {
   return Array.isArray(value);
 }
 
 /**
  * "is_exact_value" checks if value is an exact match for a parameter
- * @param  {string|number|array} value - field value
- * @param  {string|number} param
+ * @param  {string} value - field value
+ * @param  {string} param
  * @return {boolean} isValid?
  */
-export function is_exact_value(value, param) {
+export function is_exact_value(value:string, param:string):boolean {
   return value === param;
 }
 
@@ -127,7 +144,7 @@ export function is_exact_value(value, param) {
  * @param  {string} type - comma separated string values
  * @return {boolean} isValid?
  */
-export function is_file_type(value, type) {
+export function is_file_type(value:string, type:string):boolean {
   const ext = value.substr((value.lastIndexOf('.') + 1));
   const typeArray = type.split(',');
   let inArray = false;
@@ -143,30 +160,30 @@ export function is_file_type(value, type) {
 
 /**
  * "is_natural" checks if a number is natural (whole, non-negative numbers)
- * @param  {string|number} value - field value
+ * @param  {string} value - field value
  * @return {boolean} isValid?
  */
-export function is_natural(value) {
+export function is_natural(value:string):boolean {
   return (regex.naturalRegex.test(value));
 }
 
 
 /**
  * "is_natural_no_zero" checks if a number is natural (whole, non-negative numbers excluding zero)
- * @param  {string|number} value - field value
+ * @param  {string} value - field value
  * @return {boolean} isValid?
  */
-export function is_natural_no_zero(value) {
+export function is_natural_no_zero(value:string):boolean {
   return (regex.naturalNoZeroRegex.test(value));
 }
 
 /**
  * "less_then[param]" checks if a field value is less than it's parameter
- * @param  {string|number} value - field value
+ * @param  {string} value - field value
  * @param  {string} param
  * @return {boolean} isValid?
  */
-export function less_than(value = 0, param) {
+export function less_than(value:string = '0', param:string):boolean {
   if (!regex.decimalRegex.test(value)) {
     return false;
   }
@@ -176,12 +193,12 @@ export function less_than(value = 0, param) {
 
 /**
  * "matches" checks to see if a field is an exact match for another field's value
- * @param  {string|number|array} value - field value
+ * @param  {string|array} value - field value
  * @param  {string} key
  * @param  {object} formVals - form value state
  * @return {boolean} isValid?
  */
-export function matches(value, key, formVals) {
+export function matches(value:string|Array<any>, key:string, formVals:FormValues):boolean {
   const matchValue = formVals[key];
   return value === matchValue;
 }
@@ -189,10 +206,10 @@ export function matches(value, key, formVals) {
 /**
  * "max_length[parameter]" checks if a string is under a maximum threshold
  * @param  {string} value
- * @param  {number} length - string length
+ * @param  {string} length - string length
  * @return {boolean} isValid?
  */
-export function max_length(value, length) {
+export function max_length(value:string, length:string):boolean {
   if (!regex.integerRegex.test(length)) {
     return false;
   }
@@ -202,11 +219,11 @@ export function max_length(value, length) {
 
 /**
  * "min_length[parameter]" checks to see if a value has reached a minimum threshold
- * @param  {number} value - field value
+ * @param  {string} value - field value
  * @param  {string} length
  * @return {boolean} isValid?
  */
-export function min_length(value, length) {
+export function min_length(value:string, length:string):boolean {
   if (!regex.integerRegex.test(length)) {
     return false;
   }
@@ -216,10 +233,10 @@ export function min_length(value, length) {
 
 /**
  * "numeric" checks if a value is numeric
- * @param  {string|number} value
+ * @param  {string} value
  * @return {boolean} isValid?
  */
-export function numeric(value) {
+export function numeric(value:string):boolean {
   return (regex.numericRegex.test(value || ''));
 }
 
@@ -228,7 +245,7 @@ export function numeric(value) {
  * @param  {string|number|array} val
  * @return {boolean} isValid?
  */
-export function required(val) {
+export function required(val:string|number|Array<any>):boolean {
   if (Array.isArray(val)) { return (val.length > 0); }
   return (val !== undefined && val !== null && val !== '');
 }
@@ -238,7 +255,7 @@ export function required(val) {
  * @param  {string} value
  * @return {boolean} isValid?
  */
-export function valid_credit_card(value) {
+export function valid_credit_card(value:string):boolean {
   // Luhn Check Code from https://gist.github.com/4075533
   // accept only digits, dashes or spaces
   if (!regex.numericDashRegex.test(value)) return false;
@@ -269,7 +286,7 @@ export function valid_credit_card(value) {
  * @param  {string|DateTime} value
  * @return {boolean} isValid?
  */
-export function valid_date(value) {
+export function valid_date(value:string|Date):boolean {
   const time = new Date(value).getTime();
   return !Number.isNaN(time);
 }
@@ -279,7 +296,7 @@ export function valid_date(value) {
  * @param  {string} value - field value
  * @return {boolean} isValid?
  */
-export function valid_email(value) {
+export function valid_email(value:string):boolean {
   return regex.emailRegex.test(value);
 }
 
@@ -288,7 +305,7 @@ export function valid_email(value) {
  * @param  {string} value
  * @return {boolean} isValid?
  */
-export function valid_url(value) {
+export function valid_url(value:string):boolean {
   return (regex.urlRegex.test(value));
 }
 
@@ -300,64 +317,17 @@ export function valid_url(value) {
  * @param  {object} formVals - form value state
  * @return {boolean}
  */
-export function is_unique(value = '', param, formVals) {
-  const checkVal = val.toLowerCase();
+export function is_unique(
+  value:string = '',
+  param:string|number|Array<any>,
+  formVals:FormValues
+) {
+  const checkVal = value.toLowerCase();
   const allVals = objValues(formVals);
   // There should not be more than 1.
   const matches = allVals.filter(v => v.toLowerCase() === checkVal);
   return matches.length === 1;
 }
-
-/**
- * Validate form takes all form values and the validation object and validates each field
- * @param  {object} formVals
- * @param  {objet} validations
- * @return {object{[key:string]: message:string}}
- */
-export function validateForm(formVals, validations) {
-  const fieldValidations = Object.keys(validations);
-  const validationObj = fieldValidations
-    .map((field) => {
-      let validity = null; // Our object to return
-      const validationsToTest = Object.keys(validations[field]);
-
-      // Loop over each validation tied to a specific field
-      validationsToTest.forEach((rule) => { // key is the rule
-        const hasPassedUniqueValidation = Validate.validateFieldValue(
-          formVals[field],
-          rule,
-          formVals,
-        );
-
-        // If we haven't passed, construct the validation object with this validation
-        if (!hasPassedUniqueValidation) {
-          if (validity !== null) {
-            validity[rule] = validations[field][rule];
-          } else {
-            validity = { [rule]: validations[field][rule] };
-          }
-        }
-      });
-
-      return { [field]: validity || true };
-    })
-    // Turn the array back into the highest priority message for each field
-    .reduce((accum, fieldValidation) => {
-      const fieldName = Object.keys(fieldValidation)[0];
-      let firstErrorMessage = null;
-      // Some sort of error is present, let's take the top priority
-      if (fieldValidation[fieldName]) {
-        const firstErrorRuleKey = Object.keys(fieldValidation[fieldName])[0];
-        firstErrorMessage = fieldValidation[fieldName][firstErrorRuleKey];
-      }
-
-      // eslint-disable-next-line
-      accum[fieldName] = firstErrorMessage;
-      return accum;
-    }, {});
-
-  return validationObj;
-};
 
 /**
  * Validates an individual field value
@@ -387,3 +357,57 @@ export function validateFieldValue(val, ruleKey, formVals) {
 
   return isValid;
 }
+
+/**
+ * Validate form takes all form values and the validation object and validates each field
+ * @param  {FormValues} formVals
+ * @param  {object} validations
+ * @return {object{[key:string]: message:string}}
+ */
+export function validateForm(formVals:FormValues, validations:FieldValidations) {
+  const fieldValidations = Object.keys(validations);
+  const validationObj = fieldValidations
+    .map((field) => {
+      let validity:null|Error = null; // Our object to return
+      const validationsToTest = Object.keys(validations[field]);
+
+      // Loop over each validation tied to a specific field
+      validationsToTest.forEach((rule) => { // key is the rule
+        const hasPassedUniqueValidation = validateFieldValue(
+          formVals[field],
+          rule,
+          formVals,
+        );
+
+        // If we haven't passed, construct the validation object with this validation
+        if (!hasPassedUniqueValidation) {
+          if (validity !== null) {
+            validity[rule] = validations[field][rule];
+          } else {
+            validity = { [rule]: validations[field][rule] };
+          }
+        }
+      });
+
+      return { [field]: validity || true };
+    })
+    // Turn the array back into the highest priority message for each field
+    .reduce((
+      accum:Error,
+      fieldValidation:{[fieldName:string]: any}
+    ):Error => {
+      const fieldName = Object.keys(fieldValidation)[0];
+      let firstErrorMessage = null;
+      // Some sort of error is present, let's take the top priority
+      if (fieldValidation[fieldName]) {
+        const firstErrorRuleKey = Object.keys(fieldValidation[fieldName])[0];
+        firstErrorMessage = fieldValidation[fieldName][firstErrorRuleKey];
+      }
+
+      return assign({}, accum, {
+        [fieldName]: firstErrorMessage,
+      });
+    }, {});
+
+  return validationObj;
+};
