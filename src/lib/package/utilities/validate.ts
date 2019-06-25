@@ -301,6 +301,16 @@ export function valid_email(value:string):boolean {
 }
 
 /**
+ * "valid_regex[param]" checks to see if string passes url validation regex
+ * @param  {string} value
+ * @param  {string} regexParam
+ * @return {boolean} isValid?
+ */
+export function valid_regex(value:string, regexParam:string):boolean {
+  return RegExp(regexParam).test(value);
+}
+
+/**
  * "valid_url" checks to see if string passes url validation regex
  * @param  {string} value
  * @return {boolean} isValid?
@@ -343,16 +353,14 @@ export function validateFieldValue(val, ruleKey, formVals) {
   let param = null;
   const parts = regex.ruleRegex.exec(rule);
 
-  if (parts) { // If the rule has a parameter, i.e. matches[param], split it out
+  if (parts) {
+    // If the rule has a parameter, i.e. matches[param], split it out
     rule = parts[1];
     param = parts[2];
   }
 
-  if (typeof Validate[rule] === 'function') { // we have a method that matches Validate rule
-    // If we don't pass validations, flip the validation
-    if (!Validate[rule].call(this, val, param, formVals)) {
-      isValid = false;
-    }
+  if (typeof module.exports[rule] === 'function') { // we have a known method that matches the rule key
+    isValid = module.exports[rule](val, param, formVals);
   }
 
   return isValid;
@@ -364,7 +372,7 @@ export function validateFieldValue(val, ruleKey, formVals) {
  * @param  {object} validations
  * @return {object{[key:string]: message:string}}
  */
-export function validateForm(formVals:FormValues, validations:FieldValidations) {
+export function validateForm(formVals:FormValues, validations:FieldValidations):Error {
   const fieldValidations = Object.keys(validations);
   const validationObj = fieldValidations
     .map((field) => {
