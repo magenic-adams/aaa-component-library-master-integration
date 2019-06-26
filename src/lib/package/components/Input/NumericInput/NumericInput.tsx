@@ -7,7 +7,6 @@ import BaseInput from '../BaseInput/BaseInput';
 interface RequiredProps {
   id: string;
   name: string;
-  mask: RegExp[];
 }
 
 interface OptionalProps {
@@ -23,16 +22,17 @@ interface OptionalProps {
   onClear?: (evt: any) => void;
 }
 
-const defaultProps: OptionalProps = {
-  centerText: false,
-  disabled: false,
-  error: '',
-  type: 'text'
-};
+class NumericInput extends React.Component<RequiredProps & OptionalProps> {
+  constructor(props: RequiredProps & OptionalProps) {
+    super(props);
+    this.renderTextMaskCustomComponent = this.renderTextMaskCustomComponent.bind(
+      this
+    );
+  }
 
-function TextMaskCustom(mask: RegExp[]) {
-  return (props: OptionalProps) => {
-    const { forwardedRef, ...other } = props;
+  renderTextMaskCustomComponent(otherProps: any) {
+    const { forwardedRef, ...other } = otherProps;
+    const { mask } = this.props;
     return (
       <MaskedInput
         ref={forwardedRef}
@@ -42,27 +42,24 @@ function TextMaskCustom(mask: RegExp[]) {
         {...other}
       />
     );
-  };
+  }
+
+  render() {
+    const { error, id, name, onChange, onClear, onBlur } = this.props;
+
+    return (
+      <BaseInput
+        id={id}
+        name={name}
+        inputComponent={this.renderTextMaskCustomComponent}
+        error={error}
+        onChange={onChange}
+        onClear={onClear}
+        onBlur={onBlur}
+        {...this.props}
+      />
+    );
+  }
 }
-
-const NumericInput: React.FunctionComponent<
-  RequiredProps & OptionalProps
-> = props => {
-  const { error, id, name, mask, onChange, onClear, onBlur } = props;
-  return (
-    <BaseInput
-      id={id}
-      name={name}
-      inputComponent={TextMaskCustom(mask)}
-      error={error}
-      onChange={onChange}
-      onClear={onClear}
-      onBlur={onBlur}
-      {...props}
-    />
-  );
-};
-
-NumericInput.defaultProps = defaultProps;
 
 export default NumericInput;
