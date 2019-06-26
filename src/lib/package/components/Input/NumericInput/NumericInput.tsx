@@ -5,34 +5,34 @@ import MaskedInput from 'react-text-mask';
 import BaseInput from '../BaseInput/BaseInput';
 
 interface RequiredProps {
-  id: string,
-  name: string,
+  id: string;
+  name: string;
 }
 
 interface OptionalProps {
-  centerText?: boolean,
-  disabled?: boolean,
-  disableWarning?: boolean,
-  error?: string,
-  forwardedRef?: React.RefObject<any>,
-  mask?: string[],
-  type?: string,
-  value?: number,
-  onChange?: (evt:any) => void,
-  onClear?: (evt:any) => void,
-};
+  centerText?: boolean;
+  disabled?: boolean;
+  disableWarning?: boolean;
+  error?: string;
+  forwardedRef?: React.RefObject<any>;
+  mask?: string[];
+  type?: string;
+  value?: number;
+  onChange?: (evt: any) => void;
+  onClear?: (evt: any) => void;
+}
 
-const defaultProps:OptionalProps = {
-  centerText: false,
-  disabled: false,
-  error: '',
-  type: 'text',
-  mask: [],
-};
+class NumericInput extends React.Component<RequiredProps & OptionalProps> {
+  constructor(props: RequiredProps & OptionalProps) {
+    super(props);
+    this.renderTextMaskCustomComponent = this.renderTextMaskCustomComponent.bind(
+      this
+    );
+  }
 
-function TextMaskCustom(mask?:string[]) {
-  return (props:OptionalProps) => {
-    const { forwardedRef, ...other } = props;
+  renderTextMaskCustomComponent(otherProps: any) {
+    const { forwardedRef, ...other } = otherProps;
+    const { mask } = this.props;
     return (
       <MaskedInput
         ref={forwardedRef}
@@ -42,31 +42,23 @@ function TextMaskCustom(mask?:string[]) {
         {...other}
       />
     );
-  };
+  }
+
+  render() {
+    const { error, id, name, onChange, onClear } = this.props;
+
+    return (
+      <BaseInput
+        id={id}
+        name={name}
+        inputComponent={this.renderTextMaskCustomComponent}
+        error={error}
+        onChange={onChange}
+        onClear={onClear}
+        {...this.props}
+      />
+    );
+  }
 }
-
-const NumericInput:React.FunctionComponent<RequiredProps & OptionalProps> = (props) => {
-  const {
-    error,
-    id,
-    name,
-    mask,
-    onChange,
-    onClear,
-  } = props;
-  return (
-    <BaseInput
-      id={id}
-      name={name}
-      inputComponent={TextMaskCustom(mask)}
-      error={error}
-      onChange={onChange}
-      onClear={onClear}
-      {...props}
-    />
-  );
- };
-
-NumericInput.defaultProps = defaultProps;
 
 export default NumericInput;
