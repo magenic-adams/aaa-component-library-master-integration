@@ -7,6 +7,7 @@ import BaseInput from '../BaseInput/BaseInput';
 interface RequiredProps {
   id: string;
   name: string;
+  mask: RegExp[];
 }
 
 interface OptionalProps {

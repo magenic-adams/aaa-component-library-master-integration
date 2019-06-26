@@ -20,6 +20,7 @@ import FormNumericInput from './Form/FormNumericInput/FormNumericInput';
 import ToggleButtonGroup from './ToggleButtonGroup/ToggleButtonGroup';
 import SelectList from './SelectList/SelectList';
 import SelectListItemText from './SelectListItemText/SelectListItemText';
+import FormNumericalStepper from './Form/FormNumericalStepper/FormNumericalStepper';
 
 // Icons
 import RightArrowIcon from '../icons/RightArrowIcon';
@@ -46,4 +47,5 @@ export {
   Subheadline,
   Subtitle,
   ToggleButtonGroup,
+  FormNumericalStepper,
 };
