@@ -19,17 +19,8 @@ interface Props {
  * defined on our top-level <Form> component and plucked from context
  */
 class FormNumericalStepper extends React.Component<any> {
-  // inputRef:React.RefObject<any> = React.createRef();
-
-  // static defaultProps:OptionalProps = {
-  //   initialValue: '',
-  // }
-
   constructor(props: Props) {
     super(props);
-    // this.getInputRef = this.getInputRef.bind(this);
-    // this.handleFormFieldChange = this.handleFormFieldChange.bind(this);
-    // this.handleFieldClear = this.handleFieldClear.bind(this);
     this.renderFieldComponent = this.renderFieldComponent.bind(this);
   }
 
