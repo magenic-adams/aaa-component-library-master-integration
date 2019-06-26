@@ -204,6 +204,23 @@ export function matches(value:string|Array<any>, key:string, formVals:FormValues
 }
 
 /**
+ * "max_date[parameter]" checks to see if a value has not exceeded a maximum threshold
+ * @param  {string|Date} value - field value
+ * @param  {string} dateParam
+ * @return {boolean} isValid?
+ */
+export function max_date(value:string|Date, dateParam:string):boolean {
+  const formValueDate = new Date(value);
+  const validationDate = new Date(dateParam);
+  if (isNaN(formValueDate.getTime()) || isNaN(validationDate.getTime())) {
+    // one of the dates is not valid, => not valid
+    return false;
+  }
+
+  return formValueDate.getTime() <= validationDate.getTime();
+}
+
+/**
  * "max_length[parameter]" checks if a string is under a maximum threshold
  * @param  {string} value
  * @param  {string} length - string length
@@ -215,6 +232,23 @@ export function max_length(value:string, length:string):boolean {
   }
 
   return (value ? (`${value}`) : '').length <= parseInt(length, 10);
+}
+
+/**
+ * "min_date[parameter]" checks to see if a value has not exceeded a minimum threshold
+ * @param  {string|Date} value - field value
+ * @param  {string} dateParam
+ * @return {boolean} isValid?
+ */
+export function min_date(value:string|Date, dateParam:string):boolean {
+  const formValueDate = new Date(value);
+  const validationDate = new Date(dateParam);
+  if (isNaN(formValueDate.getTime()) || isNaN(validationDate.getTime())) {
+    // one of the dates is not valid, => not valid
+    return false;
+  }
+
+  return formValueDate.getTime() >= validationDate.getTime();
 }
 
 /**
@@ -301,12 +335,12 @@ export function valid_email(value:string):boolean {
 }
 
 /**
- * "valid_regex[param]" checks to see if string passes url validation regex
+ * "matches_regex[param]" checks to see if string passes url validation regex
  * @param  {string} value
  * @param  {string} regexParam
  * @return {boolean} isValid?
  */
-export function valid_regex(value:string, regexParam:string):boolean {
+export function matches_regex(value:string, regexParam:string):boolean {
   return RegExp(regexParam).test(value);
 }
 
