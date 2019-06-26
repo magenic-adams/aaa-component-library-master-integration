@@ -75,6 +75,38 @@ export function alpha_numeric(value:string):boolean {
 }
 
 /**
+ * "at_least[parameter]" checks if a value is greater than or equal to a parameter
+ * NOTE: Empty values are not validated by at_least
+ * @param  {string} value - field value
+ * @param  {string} param
+ * @return {boolean} isValid?
+ */
+export function at_least(value:string, param:string):boolean {
+  if (is_empty(value)){ return true; }
+  if (!regex.decimalRegex.test(value)) {
+    return false;
+  }
+
+  return (parseFloat(value) >= parseFloat(param));
+}
+
+/**
+ * "at_most[param]" checks if a field value is less than or equal to it's parameter
+ * NOTE: Empty values are not validated by at_most
+ * @param  {string} value - field value
+ * @param  {string} param
+ * @return {boolean} isValid?
+ */
+export function at_most(value:string, param:string):boolean {
+  if (is_empty(value)){ return true; }
+  if (!regex.decimalRegex.test(value)) {
+    return false;
+  }
+
+  return (parseFloat(value) <= parseFloat(param));
+}
+
+/**
  * "decimal" checks if a value is decimal
  * @param  {string|number} value
  * @return {boolean} isValid?
@@ -98,20 +130,6 @@ export function exact_length(value:string, length:string):boolean {
 }
 
 /**
- * "greater_than[parameter]" checks if a value is greater than a parameter
- * @param  {string} value - field value
- * @param  {string} param
- * @return {boolean} isValid?
- */
-export function greater_than(value:string, param:string):boolean {
-  if (!regex.decimalRegex.test(value)) {
-    return false;
-  }
-
-  return (parseFloat(value) > parseFloat(param));
-}
-
-/**
  * "integer" checks if a value is integer
  * @param  {string} value
  * @return {boolean} isValid?
@@ -127,6 +145,27 @@ export function integer(value:string):boolean {
  */
 export function is_array(value?:Array<any>):boolean {
   return Array.isArray(value);
+}
+
+/**
+ * "is_empty" checks to see if a value is empty
+ * @param  {string|number|Array<any>|undefined} value?
+ * @return {boolean}
+ */
+export function is_empty(value?:string|number|Array<any>):boolean{
+  if (Array.isArray(value)) {
+    return value.length === 0;
+  }
+
+  if (typeof value === 'string'){
+    return regex.emptyStringRegex.test(value);
+  }
+
+  if (value === undefined || value === null){
+    return true;
+  }
+
+  return false;
 }
 
 /**
@@ -176,20 +215,6 @@ export function is_natural(value:string):boolean {
  */
 export function is_natural_no_zero(value:string):boolean {
   return (regex.naturalNoZeroRegex.test(value));
-}
-
-/**
- * "less_then[param]" checks if a field value is less than it's parameter
- * @param  {string} value - field value
- * @param  {string} param
- * @return {boolean} isValid?
- */
-export function less_than(value:string = '0', param:string):boolean {
-  if (!regex.decimalRegex.test(value)) {
-    return false;
-  }
-
-  return (parseFloat(value) < parseFloat(param));
 }
 
 /**
@@ -291,8 +316,7 @@ export function numeric(value:string):boolean {
  * @return {boolean} isValid?
  */
 export function required(val:string|number|Array<any>):boolean {
-  if (Array.isArray(val)) { return (val.length > 0); }
-  return (val !== undefined && val !== null && val !== '');
+  return !is_empty(val);
 }
 
 /**

@@ -1,15 +1,15 @@
 import regex from './regex';
 
 const dynamicErrors:{[rule:string]: (param:string) => string} = {
-  greater_than: (param:string) => `This amount must be greater than ${param}`,
-  less_than: (param:string) => `This amount must be less than ${param}`,
+  at_least: (param:string) => `This amount must be at least ${param}`,
+  at_most: (param:string) => `This amount must be less than or equal to ${param}`,
 };
 
 
 // TODO: create generic errors for non-param cases
 const staticErrors:{[rule:string]: string} = {
-  greater_than: 'This field has minimum validation error',
-  less_than: 'This field has maxiumum validation error',
+  at_least: 'This field has minimum validation error',
+  at_most: 'This field has maxiumum validation error',
 };
 
 /**

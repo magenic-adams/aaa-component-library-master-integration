@@ -490,33 +490,105 @@ describe('Date: 📅 "min_date" and "max_date"', () => {
 });
 
 
-// *** greater_than & less_than *** //
+// *** at_least & at_most *** //
 // 
 // NOTE: This is used in questions like "Age first licensed"
 // minValue: 16,
 // maxValue: 100,
 // 
 // in validation object: {
-//   greater_than[parameter(minValue)]: message? (string),
+//   at_least[parameter(minValue)]: message? (string),
 //   les_than[parameter(maxValue)]: message? (string)
 // }
-describe('Min / Max: ≦ "greater_than" and "less_than"', () => {
+describe('Min / Max: `≧v≦ "at_least" and "at_most"', () => {
+  const MIN_VALUE_MESSAGE = 'This value is too low';
+  const MAX_VALUE_MESSAGE = 'This value is too high';
+  function generateMinMaxValidation(min, max){
+    return {
+      [`at_least[${min}]`]: MIN_VALUE_MESSAGE,
+      [`at_most[${max}]`]: MAX_VALUE_MESSAGE,
+    };
+  }
+  describe('Base cases', () => {
+    const MIN_VALUE_PARAM = 16;
+    const MAX_VALUE_PARAM = 100;
+
+    it('has an undefined error message when within the min/max range', () => {
+      const VALID_AMOUNT = 18;
+      const MIN_MAX_VALIDATION = generateMinMaxValidation(MIN_VALUE_PARAM, MAX_VALUE_PARAM);
+
+      const error = validate.validateForm(
+        { amountFieldId: VALID_AMOUNT },
+        { amountFieldId: MIN_MAX_VALIDATION },
+      );
+      expect(error.amountFieldId).to.equal(undefined);
+    });
+
+    it('has an undefined error message when an empty string is entered', () => {
+      const VALID_AMOUNT_NO_ENTRY = '';
+      const MIN_MAX_VALIDATION = generateMinMaxValidation(MIN_VALUE_PARAM, MAX_VALUE_PARAM);
+
+      const isValidLessThan = validate.at_most(
+        VALID_AMOUNT_NO_ENTRY,
+        MAX_VALUE_PARAM,
+      );
+
+      const isValidGreaterThan = validate.at_least(
+        VALID_AMOUNT_NO_ENTRY,
+        MIN_VALUE_PARAM,
+      );
+
+      const error = validate.validateForm(
+        { amountFieldId: VALID_AMOUNT_NO_ENTRY },
+        { amountFieldId: MIN_MAX_VALIDATION },
+      );
+
+      expect(isValidLessThan).to.equal(true);
+      expect(isValidGreaterThan).to.equal(true);
+      expect(error.amountFieldId).to.equal(undefined);
+    });
+
+    it('has an undefined error message when a large empty string is entered', () => {
+      const VALID_AMOUNT_NO_ENTRY = '         ';
+      const MIN_MAX_VALIDATION = generateMinMaxValidation(MIN_VALUE_PARAM, MAX_VALUE_PARAM);
+
+      const isValidLessThan = validate.at_most(
+        VALID_AMOUNT_NO_ENTRY,
+        MAX_VALUE_PARAM,
+      );
+
+      const isValidGreaterThan = validate.at_least(
+        VALID_AMOUNT_NO_ENTRY,
+        MIN_VALUE_PARAM,
+      );
+
+      const error = validate.validateForm(
+        { amountFieldId: VALID_AMOUNT_NO_ENTRY },
+        { amountFieldId: MIN_MAX_VALIDATION },
+      );
+
+      expect(isValidLessThan).to.equal(true);
+      expect(isValidGreaterThan).to.equal(true);
+      expect(error.amountFieldId).to.equal(undefined);
+    });
+  }); // end Min/Max:Base
+  
   describe('Generic error messages', () => {
+    const MIN_VALUE_PARAM = 16;
+    const MAX_VALUE_PARAM = 100;
     // Generic error messages for min and max are surfaced when undefined is passed for a message
     function generateMinMaxValidationWithoutMessages(min, max){
       return {
-        [`greater_than[${min}]`]: undefined,
-        [`less_than[${max}]`]: undefined,
+        [`at_least[${min}]`]: undefined,
+        [`at_most[${max}]`]: undefined,
       };
     }
 
-    it('surfaces a "greater_than" validation error with a dynamic generic message', () => {
+    it('surfaces a "at_least" validation error with a dynamic generic message', () => {
       const INVALID_UNDER_MINIMUM_AMOUNT = 15;
-      const MIN_VALUE_PARAM = 16;
-      const MAX_VALUE_PARAM = 100;
       const MIN_MAX_VALIDATION = generateMinMaxValidationWithoutMessages(MIN_VALUE_PARAM, MAX_VALUE_PARAM);
 
-      const isValid = validate.greater_than(
+      const isValid = validate.at_least(
         INVALID_UNDER_MINIMUM_AMOUNT,
         MAX_VALUE_PARAM,
       );
@@ -527,15 +599,67 @@ describe('Min / Max: ≦ "greater_than" and "less_than"', () => {
       );
 
       expect(isValid).to.equal(false);
-      expect(error.amountFieldId).to.equal(`This amount must be greater than ${MIN_VALUE_PARAM}`);
+      expect(error.amountFieldId).to.equal(`This amount must be at least ${MIN_VALUE_PARAM}`);
     });
 
-    it('surfaces a "less_than" validation error with a dynamic generic message', () => {
+    it('surfaces a "at_most" validation error with a dynamic generic message', () => {
+      const INVALID_OVER_MAXIMUM_AMOUNT = 120;
+      const MIN_MAX_VALIDATION = generateMinMaxValidationWithoutMessages(MIN_VALUE_PARAM, MAX_VALUE_PARAM);
 
+      const isValid = validate.at_most(
+        INVALID_OVER_MAXIMUM_AMOUNT,
+        MAX_VALUE_PARAM,
+      );
+
+      const error = validate.validateForm(
+        { amountFieldId: INVALID_OVER_MAXIMUM_AMOUNT },
+        { amountFieldId: MIN_MAX_VALIDATION },
+      );
+
+      expect(isValid).to.equal(false);
+      expect(error.amountFieldId).to.equal(`This amount must be less than or equal to ${MAX_VALUE_PARAM}`);
     });
 
   }); // end Min/Max:Generic
 
   describe('VALID cases', () => {
+    const MIN_VALUE_PARAM = 16;
+    const MAX_VALUE_PARAM = 100;
+
+    it ('is valid when in the inclusive min value', () => {
+      const VALID_MIN_INCLUSIVE_AMOUNT = 16;
+      const MIN_MAX_VALIDATION = generateMinMaxValidation(MIN_VALUE_PARAM, MAX_VALUE_PARAM);
+
+      const isValid = validate.at_least(
+        VALID_MIN_INCLUSIVE_AMOUNT,
+        MIN_VALUE_PARAM
+      );
+
+      const error = validate.validateForm(
+        { amountFieldId: VALID_MIN_INCLUSIVE_AMOUNT },
+        { amountFieldId: MIN_MAX_VALIDATION },
+      );
+
+      expect(isValid).to.equal(true);
+      expect(error.amountFieldId).to.equal(undefined);
+    });
+
+    it ('is valid when in the inclusive max value', () => {
+      const VALID_MAX_INCLUSIVE_AMOUNT = 100;
+      const MIN_MAX_VALIDATION = generateMinMaxValidation(MIN_VALUE_PARAM, MAX_VALUE_PARAM);
+
+      const isValid = validate.at_most(
+        VALID_MAX_INCLUSIVE_AMOUNT,
+        MAX_VALUE_PARAM
+      );
+
+      const error = validate.validateForm(
+        { amountFieldId: VALID_MAX_INCLUSIVE_AMOUNT },
+        { amountFieldId: MIN_MAX_VALIDATION },
+      );
+
+      expect(isValid).to.equal(true);
+      expect(error.amountFieldId).to.equal(undefined);
+    });
   }); // end Min/Max:VALID cases
 });
