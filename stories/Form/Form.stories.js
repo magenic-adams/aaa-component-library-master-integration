@@ -24,10 +24,12 @@ const VALIDATIONS = {
   firstName: {
     required: 'First name is required',
     'max_length[24]': 'Too long. Do you have a nickname?',
-    alpha_dash_dot_space: 'Name can only contain letters, dashes, periods, and spaces',
+    alpha_dash_dot_space:
+      'Name can only contain letters, dashes, periods, and spaces',
   },
   lastName: {
-    alpha_dash_dot_space: 'Name can only contain letters, dashes, periods, and spaces',
+    alpha_dash_dot_space:
+      'Name can only contain letters, dashes, periods, and spaces',
   },
   dob: {
     required: 'Date of birth is required',

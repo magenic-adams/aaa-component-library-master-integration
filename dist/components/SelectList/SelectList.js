@@ -1,13 +1,12 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-import React, { Fragment } from 'react';
+import React from 'react';
 import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
-import List from '@material-ui/core/List'; // Types
-
-// Components
-import SelectListItemText from '../SelectListItemText/SelectListItemText';
-;
+import SelectListItem from '../SelectListItem/SelectListItem';
+var defaultProps = {
+  className: ''
+};
 
 var styleClasses = function styleClasses(theme) {
   return {
@@ -21,16 +20,7 @@ var styleClasses = function styleClasses(theme) {
       '& span': {
         fontFamily: theme.typographyValues.fontFamily
       }
-    }, theme.breakpoints.down(321), {
-      width: '100%',
-      border: "1px solid ".concat(theme.palette.primary.main),
-      boxShadow: 'none',
-      borderRadius: 0,
-      '& span': {
-        fontSize: 16
-      }
-    }),
-    fullOverlay: _defineProperty({}, theme.breakpoints.down(415), {
+    }, theme.breakpoints.down('sm'), {
       width: '100%',
       border: "1px solid ".concat(theme.palette.primary.main),
       boxShadow: 'none',
@@ -48,49 +38,36 @@ function areItemKeysPresent(items) {
   });
 }
 
-function areItemsValid(items) {
+function checkValidity(items) {
   if (!Array.isArray(items) || items.length === 0) {
-    invariant(false, 'items array is empty');
+    invariant(false, 'items is empty');
   }
 
   if (!areItemKeysPresent(items)) {
     invariant(false, 'Invalid object keys are present. Keys should contain id, value and display');
   }
-
-  return true;
 }
 
 var SelectList = function SelectList(_ref) {
   var classes = _ref.classes,
+      className = _ref.className,
       items = _ref.items,
-      type = _ref.type,
       _onSelect = _ref.onSelect;
-  return React.createElement(Fragment, null, areItemsValid(items) ? function () {
-    switch (type) {
-      case 'primary':
-        return React.createElement(List, {
-          dense: true,
-          className: cx('List', classes.root, _defineProperty({}, classes.fullOverlay, items.length > 6))
-        }, items.map(function (item) {
-          return React.createElement(SelectListItemText, {
-            key: item.id,
-            item: item,
-            onSelect: function onSelect() {
-              return _onSelect(item);
-            }
-          });
-        }));
-
-      case 'radioGroup':
-        // TODO: ACL-19 Radio Group
-        return null;
-
-      default:
-        return null;
-    }
-  }() : null);
+  checkValidity(items);
+  return React.createElement("div", {
+    className: cx(classes.root, className)
+  }, items.map(function (item) {
+    return item.display && React.createElement(SelectListItem, {
+      key: item.id,
+      item: item,
+      onSelect: function onSelect() {
+        return _onSelect(item);
+      }
+    });
+  }));
 };
 
+SelectList.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
   withTheme: true
 })(SelectList);
