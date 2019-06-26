@@ -1,13 +1,14 @@
 import objValues from 'lodash/values';
 import assign from 'lodash/assign';
 import regex from './regex';
+import generateDefaultErrorRule from './defaultError';
 
 interface FormValues {
   [id:string]: string
 }
 
 interface Validation {
-  [validation:string]: string
+  [ruleKey:string]: string
 }
 
 interface FieldValidations {
@@ -374,6 +375,24 @@ export function is_unique(
 }
 
 /**
+ * Generate an error message for this failed validation
+ * @param {object} fieldValidationErrorMessages [description]
+ * @param {string} ruleKey         [description]
+ */
+export function generateErrorMessage(
+  fieldValidationErrorMessages: {[ruleKey:string]: string},
+  ruleKey:string
+):string {
+  if (fieldValidationErrorMessages[ruleKey]){
+    // An error message has been passed by client, surface it
+    return fieldValidationErrorMessages[ruleKey];
+  }
+
+  // Let's check our registry for a default error
+  return generateDefaultErrorRule(ruleKey);
+}
+
+/**
  * Validates an individual field value
  * @param  {string|number|array|object} val
  * @param  {string} ruleKey
@@ -397,7 +416,8 @@ export function validateFieldValue(
     param = parts[2];
   }
 
-  if (typeof module.exports[rule] === 'function') { // we have a known method that matches the rule key
+  // We have a known method that matches the rule key
+  if (typeof module.exports[rule] === 'function') {
     isValid = module.exports[rule](value, param, formVals);
   }
 
@@ -414,7 +434,7 @@ export function validateForm(formVals:FormValues, validations:FieldValidations):
   const fieldValidations = Object.keys(validations);
   const validationObj = fieldValidations
     .map((field) => {
-      let validity:null|Error = null; // Our object to return
+      let validity:undefined|Error; // Our object to return
       const validationsToTest = Object.keys(validations[field]);
 
       // Loop over each validation tied to a specific field
@@ -427,7 +447,7 @@ export function validateForm(formVals:FormValues, validations:FieldValidations):
 
         // If we haven't passed, construct the validation object with this validation
         if (!hasPassedUniqueValidation) {
-          if (validity !== null) {
+          if (validity !== undefined) {
             validity[rule] = validations[field][rule];
           } else {
             validity = { [rule]: validations[field][rule] };
@@ -435,7 +455,7 @@ export function validateForm(formVals:FormValues, validations:FieldValidations):
         }
       });
 
-      return { [field]: validity || true };
+      return { [field]: validity };
     })
     // Turn the array back into the highest priority message for each field
     .reduce((
@@ -443,11 +463,12 @@ export function validateForm(formVals:FormValues, validations:FieldValidations):
       fieldValidation:{[fieldName:string]: any}
     ):Error => {
       const fieldName = Object.keys(fieldValidation)[0];
-      let firstErrorMessage = null;
-      // Some sort of error is present, let's take the top priority
+      let firstErrorMessage;
+
+      // Some sort of error is present, let's surface an error for the first
       if (fieldValidation[fieldName]) {
         const firstErrorRuleKey = Object.keys(fieldValidation[fieldName])[0];
-        firstErrorMessage = fieldValidation[fieldName][firstErrorRuleKey];
+        firstErrorMessage = generateErrorMessage(fieldValidation[fieldName], firstErrorRuleKey);
       }
 
       return assign({}, accum, {

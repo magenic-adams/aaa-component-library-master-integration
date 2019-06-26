@@ -488,3 +488,54 @@ describe('Date: 📅 "min_date" and "max_date"', () => {
     }); // End DATE:VALID cases
   });
 });
+
+
+// *** greater_than & less_than *** //
+// 
+// NOTE: This is used in questions like "Age first licensed"
+// minValue: 16,
+// maxValue: 100,
+// 
+// in validation object: {
+//   greater_than[parameter(minValue)]: message? (string),
+//   les_than[parameter(maxValue)]: message? (string)
+// }
+describe('Min / Max: ≦ "greater_than" and "less_than"', () => {
+  describe('Generic error messages', () => {
+    // Generic error messages for min and max are surfaced when undefined is passed for a message
+    function generateMinMaxValidationWithoutMessages(min, max){
+      return {
+        [`greater_than[${min}]`]: undefined,
+        [`less_than[${max}]`]: undefined,
+      };
+    }
+
+    it('surfaces a "greater_than" validation error with a dynamic generic message', () => {
+      const INVALID_UNDER_MINIMUM_AMOUNT = 15;
+      const MIN_VALUE_PARAM = 16;
+      const MAX_VALUE_PARAM = 100;
+      const MIN_MAX_VALIDATION = generateMinMaxValidationWithoutMessages(MIN_VALUE_PARAM, MAX_VALUE_PARAM);
+
+      const isValid = validate.greater_than(
+        INVALID_UNDER_MINIMUM_AMOUNT,
+        MAX_VALUE_PARAM,
+      );
+
+      const error = validate.validateForm(
+        { amountFieldId: INVALID_UNDER_MINIMUM_AMOUNT },
+        { amountFieldId: MIN_MAX_VALIDATION },
+      );
+
+      expect(isValid).to.equal(false);
+      expect(error.amountFieldId).to.equal(`This amount must be greater than ${MIN_VALUE_PARAM}`);
+    });
+
+    it('surfaces a "less_than" validation error with a dynamic generic message', () => {
+
+    });
+
+  }); // end Min/Max:Generic
+
+  describe('VALID cases', () => {
+  }); // end Min/Max:VALID cases
+});
