@@ -204,6 +204,16 @@ export function matches(value:string|Array<any>, key:string, formVals:FormValues
 }
 
 /**
+ * "matches_regex[param]" checks to see if string passes url validation regex
+ * @param  {string} value
+ * @param  {string} regexParam
+ * @return {boolean} isValid?
+ */
+export function matches_regex(value:string, regexParam:string):boolean {
+  return RegExp(regexParam).test(value);
+}
+
+/**
  * "max_date[parameter]" checks to see if a value has not exceeded a maximum threshold
  * @param  {string|Date} value - field value
  * @param  {string} dateParam
@@ -335,16 +345,6 @@ export function valid_email(value:string):boolean {
 }
 
 /**
- * "matches_regex[param]" checks to see if string passes url validation regex
- * @param  {string} value
- * @param  {string} regexParam
- * @return {boolean} isValid?
- */
-export function matches_regex(value:string, regexParam:string):boolean {
-  return RegExp(regexParam).test(value);
-}
-
-/**
  * "valid_url" checks to see if string passes url validation regex
  * @param  {string} value
  * @return {boolean} isValid?
@@ -380,7 +380,11 @@ export function is_unique(
  * @param  {object} formVals
  * @return {object}
  */
-export function validateFieldValue(val, ruleKey, formVals) {
+export function validateFieldValue(
+  value:string|number|Array<any>|object,
+  ruleKey:string,
+  formVals:FormValues
+) {
   if (!ruleKey) { return true; }
   let isValid = true; // Assume validity
   let rule = ruleKey;
@@ -394,7 +398,7 @@ export function validateFieldValue(val, ruleKey, formVals) {
   }
 
   if (typeof module.exports[rule] === 'function') { // we have a known method that matches the rule key
-    isValid = module.exports[rule](val, param, formVals);
+    isValid = module.exports[rule](value, param, formVals);
   }
 
   return isValid;
