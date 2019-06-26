@@ -84,12 +84,12 @@ const App = () => {
       />
       <br />
       <br />
-      <TextLink className="primary" onClick={() => {}}>
+      <TextLink color="primary" onClick={() => {}}>
         Primary enabled Link
       </TextLink>
       <br />
       <br />
-      <TextLink className="secondary" onClick={() => {}}>
+      <TextLink color="secondary" target='_blank' onClick={() => {}}>
         Secondary enabled Link
       </TextLink>
       <SelectList

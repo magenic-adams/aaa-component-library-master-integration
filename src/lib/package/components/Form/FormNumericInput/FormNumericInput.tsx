@@ -6,26 +6,26 @@ import withFormState from '../withFormState';
 import NumericInput from '../../Input/NumericInput/NumericInput';
 
 interface RequiredProps {
-  id: string,
-};
+  id: string;
+}
 
 interface OptionalProps {
-  initialValue?: string | number,
-  formState?: any, // Decorator
-  forwardedRef?: React.RefObject<any>
-};
+  initialValue?: string | number;
+  formState?: any; // Decorator
+  forwardedRef?: React.RefObject<any>;
+}
 
 /**
  * FormNumericInput is a <Field> Wrapper around <NumericInput />
- * FormNumericInput's responsibility is to 
+ * FormNumericInput's responsibility is to
  * 1. map ReactFinalForm's exposed "fieldProps" to <NumericInput>'s props
  * 2. Have logic to determine when an error is shown
- * 
+ *
  * By exposing the form's state via HOC, we are able to tap into custom mutators and other form state
  * defined on our top-level <Form> component and plucked from context
  */
 class FormNumericInput extends React.Component<RequiredProps & OptionalProps> {
-  constructor(props:RequiredProps & OptionalProps){
+  constructor(props: RequiredProps & OptionalProps) {
     super(props);
     this.handleFormFieldChange = this.handleFormFieldChange.bind(this);
     this.handleFieldClear = this.handleFieldClear.bind(this);
@@ -38,13 +38,17 @@ class FormNumericInput extends React.Component<RequiredProps & OptionalProps> {
    * @param  {Object} formState - global form state
    * @return {Function} decoratored onChange
    */
-  handleFormFieldChange(
-    { input }:{input: {name: string, onChange: (evt:React.SyntheticEvent) => void}},
-   ):(evt:React.SyntheticEvent) => void {
-    return (evt) => {
+  handleFormFieldChange({
+    input
+  }: {
+    input: { name: string; onChange: (evt: React.SyntheticEvent) => void };
+  }): (evt: React.SyntheticEvent) => void {
+    return evt => {
       const { formState } = this.props;
       const { name, onChange } = input;
-      const { mutators: { setFieldTouched }} = formState;
+      const {
+        mutators: { setFieldTouched }
+      } = formState;
       setFieldTouched(name, false);
       onChange(evt);
     };
@@ -58,16 +62,18 @@ class FormNumericInput extends React.Component<RequiredProps & OptionalProps> {
    * @return {Function} onClear handler
    */
   handleFieldClear(
-    { input }:{input: {name: string, onChange: (val:string) => void}},
+    { input }: { input: { name: string; onChange: (val: string) => void } },
     inputRef?: React.RefObject<any>
-    ) {
+  ) {
     return () => {
       const { formState } = this.props;
       const { name, onChange } = input;
-      const { mutators: { setFieldTouched }} = formState;
+      const {
+        mutators: { setFieldTouched }
+      } = formState;
       setFieldTouched(name, false);
       onChange('');
-      if (inputRef){
+      if (inputRef) {
         inputRef.current.focus();
       }
     };
@@ -80,7 +86,7 @@ class FormNumericInput extends React.Component<RequiredProps & OptionalProps> {
    * @param  {Object} fieldProps - react final form field props
    * @return {React.Component}
    */
-  renderFieldComponent(fieldProps:any){
+  renderFieldComponent(fieldProps: any) {
     const { forwardedRef } = this.props;
     const { meta } = fieldProps;
     return (
@@ -95,17 +101,11 @@ class FormNumericInput extends React.Component<RequiredProps & OptionalProps> {
     );
   }
 
-  render(){
+  render() {
     const { id } = this.props;
 
-    return (
-      <Field
-        name={id}
-        component={this.renderFieldComponent}
-      />
-    );
+    return <Field name={id} component={this.renderFieldComponent} />;
   }
 }
-
 
 export default withFormState(FormNumericInput);

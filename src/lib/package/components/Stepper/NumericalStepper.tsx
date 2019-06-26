@@ -13,41 +13,40 @@ import Label from '../Label/Label';
 import StepperButton from '../Button/Button';
 import NumericInput from '../Input/NumericInput/NumericInput';
 
-import {
-  overrideStepperLabel,
-  styleClasses,
-} from './NumericalStepperStyles';
+import { overrideStepperLabel, styleClasses } from './NumericalStepperStyles';
 
 interface RequiredProps {
-  id: string,
-  name: string,
-  children: string | React.ReactElement | React.ReactHTMLElement<any>,
-  onDecrease: (evt:React.SyntheticEvent) => void,
-  onIncrease: (evt:React.SyntheticEvent) => void,
+  id: string;
+  name: string;
+  onDecrease: (evt: React.SyntheticEvent) => void;
+  onIncrease: (evt: React.SyntheticEvent) => void;
+  onBlur: (evt: React.SyntheticEvent) => void;
+  onChange: (evt: React.SyntheticEvent) => void;
+  mask: RegExp[];
 }
 
 interface OptionalProps {
-  classes?: any, // MUI Decorator
-  disabled?: boolean,
-  disableWarning?: boolean,
-  error?: string,
-  helperText?: string,
-  labelText?: string | React.ReactElement | React.ReactHTMLElement<any>,
-  mask?: string[], // Pass through
-  value?: number,
+  classes?: any; // MUI Decorator
+  disabled?: boolean;
+  disableWarning?: boolean;
+  error?: string;
+  helperText?: string;
+  labelText?: string | React.ReactElement | React.ReactHTMLElement<any>;
+  value?: number;
 }
 
-const defaultProps:OptionalProps = {
+const defaultProps: OptionalProps = {
   classes: {},
   disabled: false,
   labelText: '',
   helperText: '',
-  mask: [],
   error: '',
-  value: 1,
+  value: 1
 };
 
-const NumericalStepper:React.FunctionComponent<RequiredProps & OptionalProps> = (props) => {
+const NumericalStepper: React.FunctionComponent<
+  RequiredProps & OptionalProps
+> = props => {
   const {
     disabled,
     disableWarning,
@@ -59,11 +58,12 @@ const NumericalStepper:React.FunctionComponent<RequiredProps & OptionalProps> = 
     name,
     onIncrease,
     onDecrease,
-    value,
+    onBlur,
+    onChange,
+    value
   } = props;
 
   const classes = styleClasses(props);
-
   return (
     <MUIFormControl
       id={id}
@@ -102,6 +102,8 @@ const NumericalStepper:React.FunctionComponent<RequiredProps & OptionalProps> = 
             error={error}
             disabled={disabled}
             mask={mask}
+            onBlur={onBlur}
+            onChange={onChange}
             disableWarning
           />
         </div>
