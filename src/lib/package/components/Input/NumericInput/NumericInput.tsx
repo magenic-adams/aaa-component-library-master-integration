@@ -15,10 +15,10 @@ interface OptionalProps {
   disableWarning?: boolean;
   error?: string;
   forwardedRef?: React.RefObject<any>;
-  mask?: string[];
   type?: string;
   value?: number;
   onChange?: (evt: any) => void;
+  onBlur?: (evt: any) => void;
   onClear?: (evt: any) => void;
 }
 
@@ -45,7 +45,7 @@ class NumericInput extends React.Component<RequiredProps & OptionalProps> {
   }
 
   render() {
-    const { error, id, name, onChange, onClear } = this.props;
+    const { error, id, name, onChange, onClear, onBlur } = this.props;
 
     return (
       <BaseInput
@@ -55,6 +55,7 @@ class NumericInput extends React.Component<RequiredProps & OptionalProps> {
         error={error}
         onChange={onChange}
         onClear={onClear}
+        onBlur={onBlur}
         {...this.props}
       />
     );
