@@ -42,11 +42,6 @@ class FormNumericalStepper extends React.Component<any> {
     };
   }
 
-  constructor(props: Props) {
-    super(props);
-    this.renderFieldComponent = this.renderFieldComponent.bind(this);
-  }
-
   handleFormFieldChange({
     input,
   }: {
