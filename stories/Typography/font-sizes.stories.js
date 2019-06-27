@@ -9,9 +9,9 @@ import Subtitle from '../../src/lib/package/components/Subtitle/Subtitle';
 import Body from '../../src/lib/package/components/Body/Body';
 
 // Internal
-import { StoryLayoutContainer } from '../../src/lib/internal/StoryLayoutContainer/StoryLayoutContainer';
-import { StoryIntroduction } from '../../src/lib/internal/StoryIntroduction/StoryIntroduction';
-import { TypographyContainer } from '../../src/lib/internal/Typography/TypographyContainer';
+import StoryLayoutContainer from '../../src/lib/internal/StoryLayoutContainer/StoryLayoutContainer';
+import StoryIntroduction from '../../src/lib/internal/StoryIntroduction/StoryIntroduction';
+import TypographyContainer from '../../src/lib/internal/Typography/TypographyContainer';
 
 // CodePlayground Demos
 import { demo as headlineDemo, scope as headlineScope } from '../../src/lib/internal/live_demos/Headline';

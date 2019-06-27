@@ -20,6 +20,4 @@ export function StoryLayoutContainer({ children, verticalPadding }:propTypes){
   );
 }
 
-export default {
-  StoryLayoutContainer,
-};
+export default StoryLayoutContainer;

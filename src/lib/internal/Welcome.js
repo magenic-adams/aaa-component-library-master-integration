@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { StoryIntroduction } from './StoryIntroduction/StoryIntroduction';
+import StoryIntroduction from './StoryIntroduction/StoryIntroduction';
 import { AAAPrimaryTheme, Body } from '../package/components';
 
-export default function Welcome(){
+function Welcome(){
   return (
     <AAAPrimaryTheme>
       <div className="u-padding--50">
@@ -24,3 +24,5 @@ export default function Welcome(){
     </AAAPrimaryTheme>
   );
 }
+
+export default Welcome;

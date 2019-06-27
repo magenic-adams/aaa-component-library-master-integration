@@ -16,6 +16,4 @@ export function StorySectionHeader({ title }:propTypes){
   );
 }
 
-export default {
-  StorySectionHeader,
-};
+export default StorySectionHeader;

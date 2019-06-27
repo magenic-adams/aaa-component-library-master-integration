@@ -1,12 +1,12 @@
 import React from 'react';
 
 // Components
-import { StoryCodePlayground } from '../StoryCodePlayground/StoryCodePlayground';
+import StoryCodePlayground from '../StoryCodePlayground/StoryCodePlayground';
 
 // CSS
 import './TypographyContainer.css';
 
-export function TypographyContainer({
+function TypographyContainer({
   description,
   demo,
   scope,
@@ -34,6 +34,4 @@ export function TypographyContainer({
   );
 }
 
-export default {
-  TypographyContainer,
-};
+export default TypographyContainer;

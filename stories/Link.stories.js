@@ -10,10 +10,10 @@ import { AAAPrimaryTheme, Link as TextLink } from '../src/lib/package/components
 
 // Internal
 // Internal
-import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
-import { StoryIntroduction } from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
-import { StoryLayoutContainer } from '../src/lib/internal/StoryLayoutContainer/StoryLayoutContainer';
-import { StoryUsageDescription } from '../src/lib/internal/StoryUsageDescription/StoryUsageDescription';
+import ElementContainer from '../src/lib/internal/ElementContainer/ElementContainer';
+import StoryIntroduction from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
+import StoryLayoutContainer from '../src/lib/internal/StoryLayoutContainer/StoryLayoutContainer';
+import StoryUsageDescription from '../src/lib/internal/StoryUsageDescription/StoryUsageDescription';
 
 const stories = storiesOf('Atomic|Link', module);
 

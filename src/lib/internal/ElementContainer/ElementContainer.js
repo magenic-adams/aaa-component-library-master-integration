@@ -3,15 +3,17 @@ import cx from 'clsx';
 
 import './ElementContainer.css';
 
-export function ElementContainer({children, shouldCenter = true}){
+function ElementContainer({ children, shouldCenter = true }){
   return (
     <div className="ElementContainer">
       <div className={cx(
-        "u-flex",
-        {'u-flex--center': shouldCenter}
+        'u-flex',
+        { 'u-flex--center': shouldCenter }
       )}>
         {children}
       </div>
     </div>
   );
 }
+
+export default ElementContainer;

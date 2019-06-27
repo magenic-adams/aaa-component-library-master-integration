@@ -249,7 +249,7 @@ const Validations:any = {
   max_date(value:string|Date, dateParam:string):boolean {
     const formValueDate = new Date(value);
     const validationDate = new Date(dateParam);
-    if (isNaN(formValueDate.getTime()) || isNaN(validationDate.getTime())) {
+    if (Number.isNaN(formValueDate.getTime()) || Number.isNaN(validationDate.getTime())) {
       // one of the dates is not valid, => not valid
       return false;
     }
@@ -280,7 +280,7 @@ const Validations:any = {
   min_date(value:string|Date, dateParam:string):boolean {
     const formValueDate = new Date(value);
     const validationDate = new Date(dateParam);
-    if (isNaN(formValueDate.getTime()) || isNaN(validationDate.getTime())) {
+    if (Number.isNaN(formValueDate.getTime()) || Number.isNaN(validationDate.getTime())) {
       // one of the dates is not valid, => not valid
       return false;
     }
@@ -425,7 +425,7 @@ const Validations:any = {
    * @return {object}
    */
   validateFieldValue(
-    value:string|number|Array<any>|object,
+    value:string|number|Array<any>|Date,
     ruleKey:string,
     formVals:FormValues
   ) {
@@ -437,8 +437,7 @@ const Validations:any = {
 
     if (parts) {
       // If the rule has a parameter, i.e. matches[param], split it out
-      rule = parts[1];
-      param = parts[2];
+      [, rule, param] = parts;
     }
 
     // We have a known method that matches the rule key

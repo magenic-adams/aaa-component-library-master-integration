@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 // Components
 import { AAAPrimaryTheme, Button, ButtonGroup } from '../src/lib/package/components';
-import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
+import ElementContainer from '../src/lib/internal/ElementContainer/ElementContainer';
 
 const stories = storiesOf('Molecules|ButtonGroup', module);
 stories

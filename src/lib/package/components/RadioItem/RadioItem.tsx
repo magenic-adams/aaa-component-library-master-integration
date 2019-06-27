@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/styles';
 import MUIRadio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import { Field } from 'react-final-form';
+// import { Field } from 'react-final-form';
 import { Theme } from '@material-ui/core';
 
 // Types
@@ -29,7 +29,7 @@ interface OptionalProps {
 const defaultProps: OptionalProps = {
   className: '',
   checked: false,
-  disabled: false
+  disabled: false,
 };
 
 const styleClasses = (
@@ -44,18 +44,18 @@ const styleClasses = (
     boxShadow: `inset 0 0 0 1px ${theme.secondaryPalette.colorVariables.BLACK}`,
     margin: '0px 0px 8px 0px',
     '&:hover': {
-      background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
+      background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
     },
     '&.Mui-disabled, &.Mui-disabled:hover': {
       boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.disabled.main}`,
-      background: 'none'
+      background: 'none',
     },
     [theme.breakpoints.up('md')]: {
-      width: 534
+      width: 534,
     },
     [theme.breakpoints.down('sm')]: {
-      width: '100%'
-    }
+      width: '100%',
+    },
   },
   selected: {
     border: 0,
@@ -66,18 +66,18 @@ const styleClasses = (
     background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
     '&.Mui-disabled, &.Mui-disabled:hover': {
       boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.disabled.main}`,
-      background: 'none'
-    }
+      background: 'none',
+    },
   },
   label: {
     fontFamily: theme.typography.fontFamily,
     fontSize: 16,
-    paddingRight: 16
+    paddingRight: 16,
   },
   disabled: {
     boxShadow: `inset 0 0 0 1px ${theme.secondaryPalette.disabled.main}`,
-    background: 'none'
-  }
+    background: 'none',
+  },
 });
 
 function checkValidity(item: SelectItem) {
@@ -94,7 +94,7 @@ const Radio = (props: any) => {
   return (
     <MUIRadio
       key={itemId}
-      name={name}
+      name={itemId}
       checked={checked}
       value={value}
       disabled={disabled}
@@ -110,7 +110,7 @@ const RadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   disabled,
   item,
   name,
-  onSelect
+  onSelect,
 }) => {
   checkValidity(item);
 
@@ -120,10 +120,10 @@ const RadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
         data-quid={`RadioItem-${item.id}`}
         className={cx('Radio', classes.root, {
           [classes.selected]: checked,
-          [classes.disabled]: disabled
+          [classes.disabled]: disabled,
         })}
         classes={{
-          label: classes.label
+          label: classes.label,
         }}
         control={
           <Radio

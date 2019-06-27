@@ -7,7 +7,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import { AAAPrimaryTheme } from '../src/lib/package/components';
 import NumericalStepper from '../src/lib/package/components/Stepper/NumericalStepper';
 // Internal
-import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
+import ElementContainer from '../src/lib/internal/ElementContainer/ElementContainer';
 
 const stories = storiesOf('Molecules|Stepper', module);
 

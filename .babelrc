@@ -4,8 +4,10 @@
       "@babel/typescript",
       ["react-app", { "absoluteRuntime": false }]
     ],
-  "plugins": ["@babel/plugin-transform-modules-umd"],
   "env": {
+    "production": {
+      "plugins": ["@babel/plugin-transform-modules-umd"]
+    },
     "test": {
       "plugins": ["require-context-hook"]
     }
