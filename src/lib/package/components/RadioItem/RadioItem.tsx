@@ -11,7 +11,7 @@ import { Field } from 'react-final-form';
 import { Theme } from '@material-ui/core';
 
 // Types
-import SelectItem from '../../../types/SelectItem';
+import SelectItem from '../../types/SelectItem';
 
 interface RequiredProps {
   name: string;
@@ -59,7 +59,9 @@ const styleClasses = (
   },
   selected: {
     border: 0,
-    boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
+    boxShadow: `inset 0 0 0 2px ${
+      theme.secondaryPalette.colorVariables.DARKER_BLUE
+    }`,
     fontWeight: 500,
     background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
     '&.Mui-disabled, &.Mui-disabled:hover': {
@@ -83,14 +85,8 @@ function checkValidity(item: SelectItem) {
   }
 }
 
-const Radio = (fieldProps: any) => {
-  const {
-    itemId,
-    input: { name, value, onBlur, onFocus },
-    checked,
-    disabled,
-    onChange
-  }: any = { ...fieldProps };
+const Radio = (props: any) => {
+  const { itemId, checked, disabled, value, onChange }: any = { ...props };
   return (
     <MUIRadio
       key={itemId}
@@ -100,13 +96,11 @@ const Radio = (fieldProps: any) => {
       disabled={disabled}
       color="primary"
       onChange={onChange}
-      onBlur={onBlur}
-      onFocus={onFocus}
     />
   );
 };
 
-const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
+const RadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   classes,
   checked,
   disabled,
@@ -127,7 +121,7 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
           label: classes.label
         }}
         control={
-          <Field
+          <Radio
             itemId={item.id}
             name={name}
             type="radio"
@@ -136,7 +130,6 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
             color="primary"
             value={item.value}
             onChange={() => onSelect(item)}
-            component={Radio}
           />
         }
         label={item.display}
@@ -145,8 +138,8 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   );
 };
 
-FormRadioItem.defaultProps = defaultProps;
+RadioItem.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
-  FormRadioItem
+  RadioItem
 );
