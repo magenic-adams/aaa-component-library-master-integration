@@ -8,7 +8,6 @@ import Label from './Label/Label';
 import Link from './Link/Link';
 import ToggleButtonGroup from './ToggleButtonGroup/ToggleButtonGroup';
 import SelectList from './SelectList/SelectList';
-import SelectListItemText from './SelectListItemText/SelectListItemText';
 import SelectListItem from './SelectListItem/SelectListItem';
 
 // Typography
@@ -51,7 +50,6 @@ export {
   RightArrowIcon,
   SelectList,
   SelectListItem,
-  SelectListItemText,
   Subheadline,
   Subtitle,
   ToggleButtonGroup,
