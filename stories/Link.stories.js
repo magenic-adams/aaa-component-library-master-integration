@@ -9,7 +9,11 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { AAAPrimaryTheme, Link as TextLink } from '../src/lib/package/components';
 
 // Internal
+// Internal
 import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
+import { StoryIntroduction } from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
+import { StoryLayoutContainer } from '../src/lib/internal/StoryLayoutContainer/StoryLayoutContainer';
+import { StoryUsageDescription } from '../src/lib/internal/StoryUsageDescription/StoryUsageDescription';
 
 const stories = storiesOf('Atomic|Link', module);
 
@@ -18,47 +22,72 @@ stories
   
   .add('text link', () => (
     <AAAPrimaryTheme>
-    <div>
-      <h2>Primary</h2>
-      <div>
-        <h4>Use primary link</h4>
-        <ul>
-          <li>when a primary submit action is needed on the form</li>
-          <li>for an action to take to begin a new task</li>
-          <li>for an action to specificy a new or next step in the process</li>
-        </ul>
-        <h4>DO NOT use a primary link</h4>
-        <ul>
-          <li>for a secondary action on the form</li>
-          <li>for a guidance or little descriptive link</li>
-        </ul>
+      <StoryLayoutContainer>
+        <StoryIntroduction
+          elementName="Link"
+          subtitle="Primary and Secondary"
+        />
+      </StoryLayoutContainer>
+
+      <StoryLayoutContainer>
+        <StoryUsageDescription
+          positive
+          usageText="Primary Link usage"
+          items={[
+            'when a primary submit action is needed on the form',
+            'for an action to take to begin a new task',
+            'for an action to specificy a new or next step in the process',
+          ]}
+        />
+
+        <StoryUsageDescription
+          positive={false}
+          usageText="Primary Link DON'Ts"
+          items={[
+            'for a secondary action on the form',
+            'for a guidance or little descriptive link',
+          ]}
+        />
+      </StoryLayoutContainer>
+
+      <ElementContainer>
+        <div>
+          <TextLink
+            className="primary"
+            onClick={action('clicked')}
+          >
+              Primary
+          </TextLink>
+        </div>
+      </ElementContainer>
+
+      <div className="u-mt--50">
+        <StoryLayoutContainer>
+          <StoryUsageDescription
+            positive
+            usageText="Secondary Link usage"
+            items={[
+              'when the action is important but not the primary action on the page',
+              'for a skip function paired with a primary link',
+            ]}
+          />
+
+          <StoryUsageDescription
+            positive={false}
+            usageText="Secondary Link DON'Ts"
+            items={[
+              'as the primary action',
+              'by itself. Always need to pair with primary link',
+            ]}
+          />
+        </StoryLayoutContainer>
       </div>
       <ElementContainer>
         <div>
-          <TextLink className="primary" onClick={action('clicked')}>Primary</TextLink>
+          <TextLink className="secondary" onClick={action('clicked')}>Secondary</TextLink>
         </div>
       </ElementContainer>
-    </div>
 
-    <h2>Secondary</h2>
-    <div>
-      <h4>Use secondary link</h4>
-      <ul>
-        <li>when the action is important but not the primary action on the page</li>
-        <li>for a skip function paired with a primary link</li>
-      </ul>
-      <h4>DO NOT use a secondary link</h4>
-      <ul>
-        <li>as the primary action</li>
-        <li>by itself. Always need to pair with primary link</li>
-      </ul>
-    </div>
-    <ElementContainer>
-      <div>
-        <TextLink className="secondary" onClick={action('clicked')}>Secondary</TextLink>
-      </div>
-    </ElementContainer>
-
-  </AAAPrimaryTheme>
+    </AAAPrimaryTheme>
   )
 );
