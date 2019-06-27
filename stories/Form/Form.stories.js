@@ -15,6 +15,7 @@ import {
   FormGroup,
   FormInput,
   FormNumericInput,
+  FormNumericalStepper,
 } from '../../src/lib/package/components';
 
 const VALIDATIONS = {
@@ -43,6 +44,9 @@ const VALIDATIONS = {
     required: 'Password confirmation is required',
     'matches[password]': 'This does not match',
   },
+  stepper: {
+    required: 'Stepper value is required',
+  },
 };
 
 function handleFormValueSubmission(vals) {
@@ -50,92 +54,115 @@ function handleFormValueSubmission(vals) {
 }
 
 const stories = storiesOf('Molecules|Form', module);
-stories
-  .add('basic form', () => {
-    return (
-      <AAAPrimaryTheme>
-        <div className="u-background--gray">
-          <Paper className="u-padding--50">
-            <Form
-              validations={VALIDATIONS}
-              onSubmit={handleFormValueSubmission}
-              render={({ allRequiredFieldsHaveBeenVisitedOrHaveValues, handleSubmit }) => {
-                return (
-                  <form onSubmit={handleSubmit}>
-                    <FormGroup>
-                      <FormInput
-                        id="disabledInitial"
-                        disabled
-                        initialValue="some-unique-identifier-0000101"
-                        labelName="Disabled, initial value"
-                        type="text"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <FormInput
-                        id="initialValue"
-                        initialValue="Prefilled value"
-                        labelName="Initial value"
-                        type="text"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <FormInput
-                        autoFocus
-                        id="firstName"
-                        labelName="First name"
-                        type="text"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <FormInput
-                        id="lastName"
-                        labelName="Last name"
-                        helperText="Not required"
-                        type="text"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <FormNumericInput
-                        id="dob"
-                        labelName="Date of birth"
-                        mask={[/\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, ' ', '/', ' ', /\d/, /\d/, /\d/, /\d/]}
-                        helperText="mm/dd/yyyy"
-                        type="text"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <FormInput
-                        name="password"
-                        id="password"
-                        labelName="Password"
-                        type="password"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <FormInput
-                        name="passwordConfirm"
-                        id="passwordConfirm"
-                        labelName="Password Confirm"
-                        type="password"
-                      />
-                    </FormGroup>
-                    <ButtonGroup>
-                      <Button
-                        disabled={!allRequiredFieldsHaveBeenVisitedOrHaveValues}
-                        fadeUp={allRequiredFieldsHaveBeenVisitedOrHaveValues}
-                        type="submit"
-                      >
-                        Submit
-                        </Button>
-                    </ButtonGroup>
-                  </form>
-                );
-              }
-              }
-            />
-          </Paper>
-        </div>
-      </AAAPrimaryTheme>
-    );
-  });
+stories.add('basic form', () => {
+  return (
+    <AAAPrimaryTheme>
+      <div className="u-background--gray">
+        <Paper className="u-padding--50">
+          <Form
+            validations={VALIDATIONS}
+            onSubmit={handleFormValueSubmission}
+            render={({
+              allRequiredFieldsHaveBeenVisitedOrHaveValues,
+              handleSubmit,
+            }) => {
+              return (
+                <form onSubmit={handleSubmit}>
+                  <FormGroup>
+                    <FormInput
+                      id="disabledInitial"
+                      disabled
+                      initialValue="some-unique-identifier-0000101"
+                      labelName="Disabled, initial value"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput
+                      id="initialValue"
+                      initialValue="Prefilled value"
+                      labelName="Initial value"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput
+                      autoFocus
+                      id="firstName"
+                      labelName="First name"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput
+                      id="lastName"
+                      labelName="Last name"
+                      helperText="Not required"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormNumericInput
+                      id="dob"
+                      labelName="Date of birth"
+                      mask={[
+                        /\d/,
+                        /\d/,
+                        ' ',
+                        '/',
+                        ' ',
+                        /\d/,
+                        /\d/,
+                        ' ',
+                        '/',
+                        ' ',
+                        /\d/,
+                        /\d/,
+                        /\d/,
+                        /\d/,
+                      ]}
+                      helperText="mm/dd/yyyy"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput
+                      name="password"
+                      id="password"
+                      labelName="Password"
+                      type="password"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormInput
+                      name="passwordConfirm"
+                      id="passwordConfirm"
+                      labelName="Password Confirm"
+                      type="password"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormNumericalStepper
+                      id="stepper"
+                      labelName="Stepper Label"
+                      type="text"
+                    />
+                  </FormGroup>
+                  <ButtonGroup>
+                    <Button
+                      disabled={!allRequiredFieldsHaveBeenVisitedOrHaveValues}
+                      fadeUp={allRequiredFieldsHaveBeenVisitedOrHaveValues}
+                      type="submit"
+                    >
+                      Submit
+                    </Button>
+                  </ButtonGroup>
+                </form>
+              );
+            }}
+          />
+        </Paper>
+      </div>
+    </AAAPrimaryTheme>
+  );
+});

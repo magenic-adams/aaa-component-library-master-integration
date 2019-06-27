@@ -22,7 +22,6 @@ interface RequiredProps {
   onIncrease: (evt: React.SyntheticEvent) => void;
   onBlur: (evt: React.SyntheticEvent) => void;
   onChange: (evt: React.SyntheticEvent) => void;
-  mask: RegExp[];
 }
 
 interface OptionalProps {
@@ -32,6 +31,7 @@ interface OptionalProps {
   error?: string;
   helperText?: string;
   labelText?: string | React.ReactElement | React.ReactHTMLElement<any>;
+  mask?: RegExp[];
   value?: number;
 }
 
@@ -41,7 +41,7 @@ const defaultProps: OptionalProps = {
   labelText: '',
   helperText: '',
   error: '',
-  value: 1
+  value: 1,
 };
 
 const NumericalStepper: React.FunctionComponent<
@@ -60,7 +60,7 @@ const NumericalStepper: React.FunctionComponent<
     onDecrease,
     onBlur,
     onChange,
-    value
+    value,
   } = props;
 
   const classes = styleClasses(props);
