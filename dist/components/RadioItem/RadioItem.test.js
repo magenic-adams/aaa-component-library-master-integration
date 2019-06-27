@@ -235,16 +235,18 @@ describe('RadioItem', () => {
       });
 
       describe('disabled', () => {
-        it('has border color of AAA_COLOR_MAIN_DISABLED', () => {
+        it('has box shadow of inset 0 0 0 1px AAA_COLOR_MAIN_DISABLED', () => {
           props = getFakeProps({ disabled: true });
           radioItemWrapper = createRadioItemWithTheme(props);
           radioItemNode = radioItemWrapper.getDOMNode();
 
-          const borderColor = getDOMNodeComputedStyle(
+          const boxShadow = getDOMNodeComputedStyle(
             radioItemNode,
-            'border-color'
+            'box-shadow'
           );
-          expect(borderColor).to.equal(AAA_COLOR_MAIN_DISABLED);
+          expect(boxShadow).to.equal(
+            `inset 0 0 0 1px ${AAA_COLOR_MAIN_DISABLED}`
+          );
         });
 
         it('has no background color', () => {

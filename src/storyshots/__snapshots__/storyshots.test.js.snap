@@ -28,6 +28,8 @@ exports[`Storyshots Molecules|Form form radio group 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Molecules|Radio Group Radio group 1`] = `ReactWrapper {}`;
 
+exports[`Storyshots Molecules|Radio Group Usage and States 1`] = `ReactWrapper {}`;
+
 exports[`Storyshots Molecules|Stepper numerical  1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Molecules|ToggleButtonGroup Usage and States 1`] = `ReactWrapper {}`;

@@ -29,7 +29,7 @@ var styleClasses = function styleClasses(theme) {
         background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
       },
       '&.Mui-disabled, &.Mui-disabled:hover': {
-        borderColor: theme.secondaryPalette.disabled.main,
+        boxShadow: "inset 0 0 0 2px ".concat(theme.secondaryPalette.disabled.main),
         background: 'none'
       }
     }, _defineProperty(_root, theme.breakpoints.up('md'), {
@@ -43,7 +43,7 @@ var styleClasses = function styleClasses(theme) {
       fontWeight: 500,
       background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
       '&.Mui-disabled, &.Mui-disabled:hover': {
-        borderColor: theme.secondaryPalette.disabled.main,
+        boxShadow: "inset 0 0 0 2px ".concat(theme.secondaryPalette.disabled.main),
         background: 'none'
       }
     },
@@ -51,6 +51,10 @@ var styleClasses = function styleClasses(theme) {
       fontFamily: theme.typography.fontFamily,
       fontSize: 16,
       paddingRight: 16
+    },
+    disabled: {
+      boxShadow: "inset 0 0 0 1px ".concat(theme.secondaryPalette.disabled.main),
+      background: 'none'
     }
   };
 };
@@ -85,6 +89,8 @@ var Radio = function Radio(props) {
 };
 
 var RadioItem = function RadioItem(_ref) {
+  var _cx;
+
   var classes = _ref.classes,
       checked = _ref.checked,
       disabled = _ref.disabled,
@@ -94,7 +100,7 @@ var RadioItem = function RadioItem(_ref) {
   checkValidity(item);
   return !!item && React.createElement(FormControlLabel, {
     "data-quid": "RadioItem-".concat(item.id),
-    className: cx('Radio', classes.root, _defineProperty({}, classes.selected, checked)),
+    className: cx('Radio', classes.root, (_cx = {}, _defineProperty(_cx, classes.selected, checked), _defineProperty(_cx, classes.disabled, disabled), _cx)),
     classes: {
       label: classes.label
     },

@@ -34,7 +34,7 @@ const defaultProps: OptionalProps = {
 
 const styleClasses = (
   theme: Theme
-): { root: any; selected: any; label: any } => ({
+): { root: any; selected: any; disabled: any; label: any } => ({
   root: {
     width: 534,
     height: 48,
@@ -47,7 +47,7 @@ const styleClasses = (
       background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
     },
     '&.Mui-disabled, &.Mui-disabled:hover': {
-      borderColor: theme.secondaryPalette.disabled.main,
+      boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.disabled.main}`,
       background: 'none'
     },
     [theme.breakpoints.up('md')]: {
@@ -65,7 +65,7 @@ const styleClasses = (
     fontWeight: 500,
     background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
     '&.Mui-disabled, &.Mui-disabled:hover': {
-      borderColor: theme.secondaryPalette.disabled.main,
+      boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.disabled.main}`,
       background: 'none'
     }
   },
@@ -73,6 +73,10 @@ const styleClasses = (
     fontFamily: theme.typography.fontFamily,
     fontSize: 16,
     paddingRight: 16
+  },
+  disabled: {
+    boxShadow: `inset 0 0 0 1px ${theme.secondaryPalette.disabled.main}`,
+    background: 'none'
   }
 });
 
@@ -115,7 +119,8 @@ const RadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
       <FormControlLabel
         data-quid={`RadioItem-${item.id}`}
         className={cx('Radio', classes.root, {
-          [classes.selected]: checked
+          [classes.selected]: checked,
+          [classes.disabled]: disabled
         })}
         classes={{
           label: classes.label
