@@ -19,8 +19,6 @@ import StoryUsageDescription from '../src/lib/internal/StoryUsageDescription/Sto
 import StorySectionHeader from '../src/lib/internal/StorySectionHeader/StorySectionHeader';
 import StoryCodePlayground from '../src/lib/internal/StoryCodePlayground/StoryCodePlayground';
 
-console.log('ElementContainer', ElementContainer);
-
 const stories = storiesOf('Atomic|Button', module);
 
 stories
