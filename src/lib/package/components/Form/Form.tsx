@@ -9,7 +9,7 @@ import setFieldTouched from 'final-form-set-field-touched';
 import { FormRenderProps } from '../../types/form/FormRenderProps';
 
 // Utilities
-import Validate from '../../utilities/validate';
+import { validateForm } from '../../utilities/validations/validate';
 
 interface RequiredProps {
   render: () => any,
@@ -57,7 +57,7 @@ class FormDecorator extends React.Component<RequiredProps> {
 
   static handleValidate({ validations }:{validations:any}){
     return (values:any) => {
-      return Validate.validateForm(values, validations);
+      return validateForm(values, validations);
     };
   }
 
