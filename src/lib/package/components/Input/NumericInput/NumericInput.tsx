@@ -7,7 +7,6 @@ import BaseInput from '../BaseInput/BaseInput';
 interface RequiredProps {
   id: string;
   name: string;
-  mask: RegExp[];
 }
 
 interface OptionalProps {
@@ -27,12 +26,25 @@ interface OptionalProps {
 class NumericInput extends React.Component<RequiredProps & OptionalProps> {
   constructor(props: RequiredProps & OptionalProps) {
     super(props);
+    this.determineInputComponent = this.determineInputComponent.bind(this);
     this.renderTextMaskCustomComponent = this.renderTextMaskCustomComponent.bind(this);
+  }
+
+  determineInputComponent(){
+    const { mask } = this.props;
+    if (!mask){
+      return {};
+    }
+
+    return {
+      inputComponent: this.renderTextMaskCustomComponent,
+    };
   }
 
   renderTextMaskCustomComponent(otherProps: any) {
     const { forwardedRef, ...other } = otherProps;
     const { mask } = this.props;
+    if (!mask) () => undefined;
     return (
       <MaskedInput
         ref={forwardedRef}
@@ -51,11 +63,11 @@ class NumericInput extends React.Component<RequiredProps & OptionalProps> {
       <BaseInput
         id={id}
         name={name}
-        inputComponent={this.renderTextMaskCustomComponent}
         error={error}
         onChange={onChange}
         onClear={onClear}
         onBlur={onBlur}
+        {...this.determineInputComponent()}
         {...this.props}
       />
     );
