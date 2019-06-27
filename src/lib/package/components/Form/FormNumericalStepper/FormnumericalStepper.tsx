@@ -48,7 +48,7 @@ class FormNumericalStepper extends React.Component<any> {
   }
 
   handleFormFieldChange({
-    input
+    input,
   }: {
     input: { name: string; onChange: (evt: React.SyntheticEvent) => void };
   }): (evt: React.SyntheticEvent) => void {
@@ -56,7 +56,7 @@ class FormNumericalStepper extends React.Component<any> {
       const { formState } = this.props;
       const { name, onChange } = input;
       const {
-        mutators: { setFieldTouched }
+        mutators: { setFieldTouched },
       } = formState;
       setFieldTouched(name, false);
       onChange(evt);
@@ -78,17 +78,13 @@ class FormNumericalStepper extends React.Component<any> {
       <NumericalStepper
         id={this.props.id}
         name={this.props.id}
-        error={
-          fieldRenderProps.input.value <= 0
-            ? 'Invalid numerical stepper value'
-            : ''
-        }
+        error={meta.touched && meta.error}
         onBlur={this.handleBlur(fieldRenderProps)}
         onChange={this.handleFormFieldChange(fieldRenderProps)}
         onDecrease={this.handleDecrease(fieldRenderProps)}
         onIncrease={this.handleIncrease(fieldRenderProps)}
         value={fieldRenderProps.input.value}
-        mask={[/\d/, /\d/]}
+        {...this.props} // Passed props take highest priority
       />
     );
   };
