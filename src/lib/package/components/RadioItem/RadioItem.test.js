@@ -10,11 +10,11 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import { Form } from 'react-final-form';
-import AAAThemeProvider from '../../AAAPrimaryTheme/AAAPrimaryTheme';
-import FormRadioItem from './FormRadioItem';
+import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
+import RadioItem from './RadioItem';
 
 // Test Utilities
-import { getDOMNodeComputedStyle } from '../../../../../../test/DOM';
+import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 
 // Constants
 import {
@@ -23,7 +23,7 @@ import {
   AAA_COLOR_MAIN_DARKER_BLUE,
   AAA_COLOR_SECONDARY_HOVER,
   AAA_COLOR_MAIN_DISABLED,
-} from '../../../constants/colors';
+} from '../../constants/colors';
 
 function getFakeProps(overrides) {
   return {
@@ -39,13 +39,13 @@ function createRadioItemWithTheme(props) {
     <AAAThemeProvider theme={props.theme}>
       <Form
         onSubmit={() => jest.fn(v => v)}
-        render={() => <FormRadioItem {...props} />}
+        render={() => <RadioItem {...props} />}
       />
-    </AAAThemeProvider>,
+    </AAAThemeProvider>
   );
 }
 
-describe('FormRadioItem', () => {
+describe('RadioItem', () => {
   let spy;
   let props;
   let radioItemWrapper;
@@ -75,7 +75,7 @@ describe('FormRadioItem', () => {
         radioItemWrapper
           .find('input[type="radio"]')
           .at(0)
-          .getDOMNode().value,
+          .getDOMNode().value
       ).to.equal(props.item.value.toString());
     });
     it('attaches a data-quid attribute to the form control label element', () => {
@@ -83,7 +83,7 @@ describe('FormRadioItem', () => {
         radioItemWrapper
           .find('label')
           .at(0)
-          .getDOMNode().dataset.quid,
+          .getDOMNode().dataset.quid
       ).to.equal(`RadioItem-${props.item.id}`);
     });
 
@@ -94,7 +94,7 @@ describe('FormRadioItem', () => {
       expect(() => {
         createRadioItemWithTheme(props);
       }).to.throw(
-        'Invariant failed: You have not passed an item for rendering.',
+        'Invariant failed: You have not passed an item for rendering.'
       );
 
       props = getFakeProps({
@@ -103,7 +103,7 @@ describe('FormRadioItem', () => {
       expect(() => {
         createRadioItemWithTheme(props);
       }).to.throw(
-        'Invariant failed: You have not passed an item for rendering.',
+        'Invariant failed: You have not passed an item for rendering.'
       );
 
       props = getFakeProps({
@@ -163,7 +163,7 @@ describe('FormRadioItem', () => {
     it('has border radius of 4px', () => {
       const borderRadius = getDOMNodeComputedStyle(
         radioItemNode,
-        'border-radius',
+        'border-radius'
       );
       expect(borderRadius).to.equal('4px');
     });
@@ -173,10 +173,10 @@ describe('FormRadioItem', () => {
       radioItemNode = radioItemWrapper.getDOMNode();
       const boxShadowStyle = getDOMNodeComputedStyle(
         radioItemNode,
-        'box-shadow',
+        'box-shadow'
       );
       expect(boxShadowStyle).to.equal(
-        `inset 0 0 0 1px ${AAA_COLOR_MAIN_BLACK}`,
+        `inset 0 0 0 1px ${AAA_COLOR_MAIN_BLACK}`
       );
     });
 
@@ -202,10 +202,10 @@ describe('FormRadioItem', () => {
           radioItemNode = radioItemWrapper.getDOMNode();
           const boxShadowStyle = getDOMNodeComputedStyle(
             radioItemNode,
-            'box-shadow',
+            'box-shadow'
           );
           expect(boxShadowStyle).to.equal(
-            `inset 0 0 0 2px ${AAA_COLOR_MAIN_DARKER_BLUE}`,
+            `inset 0 0 0 2px ${AAA_COLOR_MAIN_DARKER_BLUE}`
           );
         });
 
@@ -216,7 +216,7 @@ describe('FormRadioItem', () => {
 
           const background = getDOMNodeComputedStyle(
             radioItemNode,
-            'background',
+            'background'
           );
           expect(background).to.equal(AAA_COLOR_SECONDARY_HOVER);
         });
@@ -228,23 +228,25 @@ describe('FormRadioItem', () => {
 
           const fontWeight = getDOMNodeComputedStyle(
             radioItemNode,
-            'font-weight',
+            'font-weight'
           );
           expect(fontWeight).to.equal('500');
         });
       });
 
       describe('disabled', () => {
-        it('has border color of AAA_COLOR_MAIN_DISABLED', () => {
+        it('has box shadow of inset 0 0 0 1px AAA_COLOR_MAIN_DISABLED', () => {
           props = getFakeProps({ disabled: true });
           radioItemWrapper = createRadioItemWithTheme(props);
           radioItemNode = radioItemWrapper.getDOMNode();
 
-          const borderColor = getDOMNodeComputedStyle(
+          const boxShadow = getDOMNodeComputedStyle(
             radioItemNode,
-            'border-color',
+            'box-shadow'
           );
-          expect(borderColor).to.equal(AAA_COLOR_MAIN_DISABLED);
+          expect(boxShadow).to.equal(
+            `inset 0 0 0 1px ${AAA_COLOR_MAIN_DISABLED}`
+          );
         });
 
         it('has no background color', () => {
@@ -254,7 +256,7 @@ describe('FormRadioItem', () => {
 
           const background = getDOMNodeComputedStyle(
             radioItemNode,
-            'background',
+            'background'
           );
           expect(background).to.equal('none');
         });

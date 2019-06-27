@@ -11,7 +11,7 @@ import { Field } from 'react-final-form';
 import { Theme } from '@material-ui/core';
 
 // Types
-import SelectItem from '../../../types/SelectItem';
+import SelectItem from '../../types/SelectItem';
 
 interface RequiredProps {
   name: string;
@@ -34,7 +34,7 @@ const defaultProps: OptionalProps = {
 
 const styleClasses = (
   theme: Theme
-): { root: any; selected: any; label: any } => ({
+): { root: any; selected: any; disabled: any; label: any } => ({
   root: {
     width: 534,
     height: 48,
@@ -47,7 +47,7 @@ const styleClasses = (
       background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
     },
     '&.Mui-disabled, &.Mui-disabled:hover': {
-      borderColor: theme.secondaryPalette.disabled.main,
+      boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.disabled.main}`,
       background: 'none'
     },
     [theme.breakpoints.up('md')]: {
@@ -59,11 +59,13 @@ const styleClasses = (
   },
   selected: {
     border: 0,
-    boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
+    boxShadow: `inset 0 0 0 2px ${
+      theme.secondaryPalette.colorVariables.DARKER_BLUE
+    }`,
     fontWeight: 500,
     background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
     '&.Mui-disabled, &.Mui-disabled:hover': {
-      borderColor: theme.secondaryPalette.disabled.main,
+      boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.disabled.main}`,
       background: 'none'
     }
   },
@@ -71,6 +73,10 @@ const styleClasses = (
     fontFamily: theme.typography.fontFamily,
     fontSize: 16,
     paddingRight: 16
+  },
+  disabled: {
+    boxShadow: `inset 0 0 0 1px ${theme.secondaryPalette.disabled.main}`,
+    background: 'none'
   }
 });
 
@@ -83,14 +89,8 @@ function checkValidity(item: SelectItem) {
   }
 }
 
-const Radio = (fieldProps: any) => {
-  const {
-    itemId,
-    input: { name, value, onBlur, onFocus },
-    checked,
-    disabled,
-    onChange
-  }: any = { ...fieldProps };
+const Radio = (props: any) => {
+  const { itemId, checked, disabled, value, onChange }: any = { ...props };
   return (
     <MUIRadio
       key={itemId}
@@ -100,13 +100,11 @@ const Radio = (fieldProps: any) => {
       disabled={disabled}
       color="primary"
       onChange={onChange}
-      onBlur={onBlur}
-      onFocus={onFocus}
     />
   );
 };
 
-const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
+const RadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   classes,
   checked,
   disabled,
@@ -121,13 +119,14 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
       <FormControlLabel
         data-quid={`RadioItem-${item.id}`}
         className={cx('Radio', classes.root, {
-          [classes.selected]: checked
+          [classes.selected]: checked,
+          [classes.disabled]: disabled
         })}
         classes={{
           label: classes.label
         }}
         control={
-          <Field
+          <Radio
             itemId={item.id}
             name={name}
             type="radio"
@@ -136,7 +135,6 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
             color="primary"
             value={item.value}
             onChange={() => onSelect(item)}
-            component={Radio}
           />
         }
         label={item.display}
@@ -145,8 +143,8 @@ const FormRadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   );
 };
 
-FormRadioItem.defaultProps = defaultProps;
+RadioItem.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
-  FormRadioItem
+  RadioItem
 );

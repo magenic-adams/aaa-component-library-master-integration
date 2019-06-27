@@ -4,9 +4,9 @@ import React, { Fragment } from 'react';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/styles';
 // Components
-import Label from '../../Label/Label';
-import FormRadioItem from '../FormRadioItem/FormRadioItem';
-import SelectList from '../../SelectList/SelectList'; // Types
+import Label from '../Label/Label';
+import RadioItem from '../RadioItem/RadioItem';
+import SelectList from '../SelectList/SelectList'; // Types
 
 var defaultProps = {
   type: '',
@@ -67,7 +67,7 @@ function constructDisplayItems(id, type, items, selectedId, selectedIds, disable
     var disabled = !!disableAll || isInArray(disabledIds, item.id);
     return _objectSpread({}, item, {
       key: "RadioItem-".concat(item.id),
-      display: React.createElement(FormRadioItem, {
+      display: React.createElement(RadioItem, {
         name: id,
         item: item,
         checked: checked,
@@ -80,7 +80,7 @@ function constructDisplayItems(id, type, items, selectedId, selectedIds, disable
   });
 }
 
-var FormRadioGroup = function FormRadioGroup(_ref2) {
+var RadioGroup = function RadioGroup(_ref2) {
   var classes = _ref2.classes,
       disableAll = _ref2.disableAll,
       disabledIds = _ref2.disabledIds,
@@ -105,8 +105,8 @@ var FormRadioGroup = function FormRadioGroup(_ref2) {
   }));
 };
 
-FormRadioGroup.defaultProps = defaultProps;
+RadioGroup.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
   index: 0,
   withTheme: true
-})(FormRadioGroup);
+})(RadioGroup);

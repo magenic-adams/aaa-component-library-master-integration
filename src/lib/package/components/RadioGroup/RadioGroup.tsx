@@ -4,12 +4,12 @@ import { withStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 // Components
-import Label from '../../Label/Label';
-import FormRadioItem from '../FormRadioItem/FormRadioItem';
-import SelectList from '../../SelectList/SelectList';
+import Label from '../Label/Label';
+import RadioItem from '../RadioItem/RadioItem';
+import SelectList from '../SelectList/SelectList';
 
 // Types
-import SelectItem from '../../../types/SelectItem';
+import SelectItem from '../../types/SelectItem';
 
 interface RequiredProps {
   id: string;
@@ -112,7 +112,7 @@ function constructDisplayItems(
         ...item,
         key: `RadioItem-${item.id}`,
         display: (
-          <FormRadioItem
+          <RadioItem
             name={id}
             item={item}
             checked={checked}
@@ -127,9 +127,7 @@ function constructDisplayItems(
   );
 }
 
-const FormRadioGroup: React.FunctionComponent<
-  RequiredProps & OptionalProps
-> = ({
+const RadioGroup: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   classes,
   disableAll,
   disabledIds,
@@ -168,8 +166,8 @@ const FormRadioGroup: React.FunctionComponent<
   );
 };
 
-FormRadioGroup.defaultProps = defaultProps;
+RadioGroup.defaultProps = defaultProps;
 
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
-  FormRadioGroup
+  RadioGroup
 );

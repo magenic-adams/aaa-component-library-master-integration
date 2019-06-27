@@ -7,7 +7,6 @@ import invariant from 'tiny-invariant'; // Material UI
 import { withStyles } from '@material-ui/styles';
 import MUIRadio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { Field } from 'react-final-form';
 var defaultProps = {
   className: '',
   checked: false,
@@ -30,7 +29,7 @@ var styleClasses = function styleClasses(theme) {
         background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
       },
       '&.Mui-disabled, &.Mui-disabled:hover': {
-        borderColor: theme.secondaryPalette.disabled.main,
+        boxShadow: "inset 0 0 0 2px ".concat(theme.secondaryPalette.disabled.main),
         background: 'none'
       }
     }, _defineProperty(_root, theme.breakpoints.up('md'), {
@@ -44,7 +43,7 @@ var styleClasses = function styleClasses(theme) {
       fontWeight: 500,
       background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
       '&.Mui-disabled, &.Mui-disabled:hover': {
-        borderColor: theme.secondaryPalette.disabled.main,
+        boxShadow: "inset 0 0 0 2px ".concat(theme.secondaryPalette.disabled.main),
         background: 'none'
       }
     },
@@ -52,6 +51,10 @@ var styleClasses = function styleClasses(theme) {
       fontFamily: theme.typography.fontFamily,
       fontSize: 16,
       paddingRight: 16
+    },
+    disabled: {
+      boxShadow: "inset 0 0 0 1px ".concat(theme.secondaryPalette.disabled.main),
+      background: 'none'
     }
   };
 };
@@ -66,17 +69,13 @@ function checkValidity(item) {
   }
 }
 
-var Radio = function Radio(fieldProps) {
-  var _fieldProps = _objectSpread({}, fieldProps),
-      itemId = _fieldProps.itemId,
-      _fieldProps$input = _fieldProps.input,
-      name = _fieldProps$input.name,
-      value = _fieldProps$input.value,
-      onBlur = _fieldProps$input.onBlur,
-      onFocus = _fieldProps$input.onFocus,
-      checked = _fieldProps.checked,
-      disabled = _fieldProps.disabled,
-      onChange = _fieldProps.onChange;
+var Radio = function Radio(props) {
+  var _props = _objectSpread({}, props),
+      itemId = _props.itemId,
+      checked = _props.checked,
+      disabled = _props.disabled,
+      value = _props.value,
+      onChange = _props.onChange;
 
   return React.createElement(MUIRadio, {
     key: itemId,
@@ -85,13 +84,13 @@ var Radio = function Radio(fieldProps) {
     value: value,
     disabled: disabled,
     color: "primary",
-    onChange: onChange,
-    onBlur: onBlur,
-    onFocus: onFocus
+    onChange: onChange
   });
 };
 
-var FormRadioItem = function FormRadioItem(_ref) {
+var RadioItem = function RadioItem(_ref) {
+  var _cx;
+
   var classes = _ref.classes,
       checked = _ref.checked,
       disabled = _ref.disabled,
@@ -101,11 +100,11 @@ var FormRadioItem = function FormRadioItem(_ref) {
   checkValidity(item);
   return !!item && React.createElement(FormControlLabel, {
     "data-quid": "RadioItem-".concat(item.id),
-    className: cx('Radio', classes.root, _defineProperty({}, classes.selected, checked)),
+    className: cx('Radio', classes.root, (_cx = {}, _defineProperty(_cx, classes.selected, checked), _defineProperty(_cx, classes.disabled, disabled), _cx)),
     classes: {
       label: classes.label
     },
-    control: React.createElement(Field, {
+    control: React.createElement(Radio, {
       itemId: item.id,
       name: name,
       type: "radio",
@@ -115,15 +114,14 @@ var FormRadioItem = function FormRadioItem(_ref) {
       value: item.value,
       onChange: function onChange() {
         return onSelect(item);
-      },
-      component: Radio
+      }
     }),
     label: item.display
   });
 };
 
-FormRadioItem.defaultProps = defaultProps;
+RadioItem.defaultProps = defaultProps;
 export default withStyles(styleClasses, {
   index: 0,
   withTheme: true
-})(FormRadioItem);
+})(RadioItem);
