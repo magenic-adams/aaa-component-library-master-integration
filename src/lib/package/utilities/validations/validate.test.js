@@ -3,7 +3,7 @@
 // import React from 'react';
 import { expect } from 'chai';
 
-import * as validate from './validate';
+import validate from './validate';
 
 // *** matches_regex *** //
 // NOTE: This is the most important case as it will take a majority of backend passed error validations

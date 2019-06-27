@@ -442,8 +442,8 @@ const Validations = {
     }
 
     // We have a known method that matches the rule key
-    if (module && module.exports && typeof module.exports[rule] === 'function') {
-      isValid = module.exports[rule](value, param, formVals);
+    if (typeof Validations[rule] === 'function') {
+      isValid = Validations[rule](value, param, formVals);
     }
 
     return isValid;
