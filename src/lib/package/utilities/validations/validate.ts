@@ -19,7 +19,7 @@ interface Error {
   [fieldKey:string]: string
 }
 
-const Validations = {
+const Validations:any = {
   /**
    * "alpha" checks if a value matches the alpha regex
    * @param  {string} value - field value
