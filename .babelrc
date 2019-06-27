@@ -4,6 +4,7 @@
       "@babel/typescript",
       ["react-app", { "absoluteRuntime": false }]
     ],
+  "plugins": ["@babel/plugin-transform-modules-umd"],
   "env": {
     "test": {
       "plugins": ["require-context-hook"]
