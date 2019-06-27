@@ -441,7 +441,7 @@ export function validateFieldValue(
   }
 
   // We have a known method that matches the rule key
-  if (typeof module.exports[rule] === 'function') {
+  if (module && module.exports && typeof module.exports[rule] === 'function') {
     isValid = module.exports[rule](value, param, formVals);
   }
 
