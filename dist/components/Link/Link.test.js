@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import { Link as TextLink, AAAPrimaryTheme } from '..';
 
 // Test Utilities
-import { getDOMNodeComputedStyle } from '../../../../../../test/DOM';
+import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 
 describe('Link', () => {
   let isTriggered = false;
@@ -57,22 +57,14 @@ describe('Link', () => {
   describe('Styles testing', () => {
 
     it('primary styles', () => {
-      const cursorStyle = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'cursor');
-      const fontSize = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'font-size');
-      // const padding = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'padding');
-      const fontStyle = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'font-style');
-      const fontWeight = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'font-weight');
-      const lineHeight  = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'line-height');
-      const letterSpacing = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'letter-spacing');
-      const fontStretch = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'font-stretch');
-      expect(cursorStyle).to.equal('pointer');
-      expect(fontSize).to.equal('18px');
-      // expect(padding).to.equal('12px 0px 12px 0px');
-      expect(fontStyle).to.equal('normal');
-      expect(fontWeight).to.equal('normal');
-      expect(lineHeight).to.equal('2.67');
-      expect(letterSpacing).to.equal('normal');
-      expect(fontStretch).to.equal('normal');
+        const cursorStyle = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'cursor');
+        const fontSize = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'font-size');
+        const fontWeight = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'font-weight');
+        const lineHeight  = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'line-height');
+        expect(cursorStyle).to.equal('pointer');
+        expect(fontSize).to.equal('16px');
+        expect(fontWeight).to.equal('400');
+        expect(lineHeight).to.equal('1.45');
     });
 
     it('secondary styles', () => {
@@ -81,20 +73,12 @@ describe('Link', () => {
 
       const cursorStyle = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'cursor');
       const fontSize = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'font-size');
-      // const padding = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'padding');
-      const fontStyle = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'font-style');
       const fontWeight = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'font-weight');
       const lineHeight  = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'line-height');
-      const letterSpacing = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'letter-spacing');
-      const fontStretch = getDOMNodeComputedStyle(componentLink.getDOMNode(), 'font-stretch');
       expect(cursorStyle).to.equal('pointer');
       expect(fontSize).to.equal('16px');
-      // expect(padding).to.equal('13.5px 0px 13.5px 0px');
-      expect(fontStyle).to.equal('normal');
-      expect(fontWeight).to.equal('500');
-      expect(lineHeight).to.equal('2.75');
-      expect(letterSpacing).to.equal('normal');
-      expect(fontStretch).to.equal('normal');
+      expect(fontWeight).to.equal('400');
+      expect(lineHeight).to.equal('1.45');
     });
   });
 });

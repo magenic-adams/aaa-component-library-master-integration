@@ -11,7 +11,7 @@
     "deploy-storybook": "storybook-to-ghpages",
     "build-examples": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "build": "rimraf dist && NODE_ENV=production babel src/lib/package --out-dir dist --copy-files --extensions .ts,.tsx --ignore src/**/*.test.js,__snapshots__",
+    "build": "rimraf dist && NODE_ENV=production babel src/lib/package --out-dir dist --copy-files --extensions .ts,.tsx --ignore src/**/*.test.js,__snapshots__ --plugins transform-es2015-modules-umd",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

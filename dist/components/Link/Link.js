@@ -1,85 +1,91 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-import React from 'react';
-import { withStyles } from '@material-ui/styles'; // listed as a dependency
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(["exports", "@babel/runtime/helpers/esm/objectSpread", "react", "@material-ui/styles", "@material-ui/core", "../../utilities/noop"], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require("@babel/runtime/helpers/esm/objectSpread"), require("react"), require("@material-ui/styles"), require("@material-ui/core"), require("../../utilities/noop"));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.objectSpread, global.react, global.styles, global.core, global.noop);
+    global.undefined = mod.exports;
+  }
+})(this, function (exports, _objectSpread2, _react, _styles, _core, _noop) {
+  "use strict";
 
-import cx from 'clsx'; // Types
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
 
-// MaterialUI components
-import { Link as MuiLink } from '@material-ui/core'; // Utilities
+  var _objectSpread3 = _interopRequireDefault(_objectSpread2);
 
-import noop from '../../utilities/noop'; // used the Link instead of the button
+  var _react2 = _interopRequireDefault(_react);
 
-;
-;
-var defaultProps = {
-  className: '',
-  href: '',
-  onClick: noop,
-  onBlur: noop
-};
+  var _noop2 = _interopRequireDefault(_noop);
 
-var styleClasses = function styleClasses(theme) {
-  var _primary, _secondary;
-
-  return {
-    primary: (_primary = {
-      color: theme.secondaryPalette.colorVariables.DARKER_BLUE,
-      cursor: 'pointer',
-      fontSize: 18,
-      fontWeight: 'normal',
-      fontStyle: 'normal',
-      fontStretch: 'normal',
-      lineHeight: 2.67,
-      letterSpacing: 'normal',
-      padding: '12px 0 12px 0'
-    }, _defineProperty(_primary, theme.breakpoints.down('md'), {
-      fontSize: 16,
-      lineHeight: 3,
-      padding: '13.5px 0 13.5px 0'
-    }), _defineProperty(_primary, '&:hover', {
-      color: theme.secondaryPalette.colorVariables.VERY_DARK_BLUE
-    }), _primary),
-    secondary: (_secondary = {
-      color: theme.secondaryPalette.colorVariables.DARKER_BLUE,
-      cursor: 'pointer',
-      fontWeight: 500,
-      fontSize: 16,
-      fontStyle: 'normal',
-      fontStretch: 'normal',
-      lineHeight: 2.75,
-      letterSpacing: 'normal',
-      padding: '13.5px 0 13.5px 0'
-    }, _defineProperty(_secondary, theme.breakpoints.down('md'), {
-      fontSize: 14,
-      lineHeight: 3.14,
-      letterSpacing: 'normal',
-      padding: '14.5px 0 14.5px 0'
-    }), _defineProperty(_secondary, '&:hover', {
-      color: theme.secondaryPalette.colorVariables.VERY_DARK_BLUE
-    }), _secondary)
+  import _interopRequireDefault from "@babel/runtime/helpers/esm/interopRequireDefault";
+  // MaterialUI components
+  // Utilities
+  ;
+  ;
+  var defaultProps = {
+    className: '',
+    href: '',
+    color: 'primary',
+    onClick: _noop2.default,
+    onBlur: _noop2.default,
+    rel: 'noopener',
+    target: '_blank'
   };
-};
 
-var Link = function Link(_ref) {
-  var id = _ref.id,
-      children = _ref.children,
-      className = _ref.className,
-      classes = _ref.classes,
-      href = _ref.href,
-      forwardedRef = _ref.forwardedRef,
-      onClick = _ref.onClick,
-      onBlur = _ref.onBlur;
-  return React.createElement(MuiLink, {
-    id: id,
-    className: cx('Link', [className === 'primary' ? classes.primary : classes.secondary]),
-    href: href,
-    ref: forwardedRef,
-    onBlur: onBlur,
-    onClick: onClick
-  }, children);
-};
+  var styleClasses = function styleClasses(theme) {
+    return {
+      root: {
+        cursor: 'pointer'
+      },
+      colorPrimary: (0, _objectSpread3.default)({}, theme.typographyElements.linkPrimary, {
+        '&:hover': {
+          color: theme.secondaryPalette.colorVariables.VERY_DARK_BLUE
+        }
+      }),
+      colorSecondary: (0, _objectSpread3.default)({
+        color: theme.secondaryPalette.colorVariables.DARKER_BLUE
+      }, theme.typographyElements.linkSecondary, {
+        padding: '13.5px 0 13.5px 0',
+        '&:hover': {
+          color: theme.secondaryPalette.colorVariables.VERY_DARK_BLUE
+        }
+      })
+    };
+  };
 
-Link.defaultProps = defaultProps;
-export default withStyles(styleClasses, {
-  withTheme: true
-})(Link);
+  var Link = function Link(_ref) {
+    var children = _ref.children,
+        className = _ref.className,
+        classes = _ref.classes,
+        color = _ref.color,
+        href = _ref.href,
+        id = _ref.id,
+        onBlur = _ref.onBlur,
+        onClick = _ref.onClick,
+        rel = _ref.rel,
+        target = _ref.target;
+    return _react2.default.createElement(_core.Link, {
+      className: className,
+      color: color,
+      id: id,
+      href: href,
+      onBlur: onBlur,
+      onClick: onClick,
+      rel: rel,
+      target: target,
+      underline: "always",
+      TypographyClasses: classes
+    }, children);
+  };
+
+  Link.defaultProps = defaultProps;
+  exports.default = (0, _styles.withStyles)(styleClasses, {
+    withTheme: true
+  })(Link);
+});
