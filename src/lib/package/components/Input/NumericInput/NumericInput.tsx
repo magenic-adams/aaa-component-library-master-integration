@@ -16,6 +16,7 @@ interface OptionalProps {
   disableWarning?: boolean;
   error?: string;
   forwardedRef?: React.RefObject<any>;
+  mask?: RegExp[];
   type?: string;
   value?: number;
   onChange?: (evt: any) => void;
@@ -26,9 +27,7 @@ interface OptionalProps {
 class NumericInput extends React.Component<RequiredProps & OptionalProps> {
   constructor(props: RequiredProps & OptionalProps) {
     super(props);
-    this.renderTextMaskCustomComponent = this.renderTextMaskCustomComponent.bind(
-      this
-    );
+    this.renderTextMaskCustomComponent = this.renderTextMaskCustomComponent.bind(this);
   }
 
   renderTextMaskCustomComponent(otherProps: any) {

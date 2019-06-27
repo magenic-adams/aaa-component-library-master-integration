@@ -24,6 +24,8 @@ exports[`Storyshots Molecules|Form basic form + code demo 1`] = `ReactWrapper {}
 
 exports[`Storyshots Molecules|Form basic form 1`] = `ReactWrapper {}`;
 
+exports[`Storyshots Molecules|Form form radio group 1`] = `ReactWrapper {}`;
+
 exports[`Storyshots Molecules|Stepper numerical  1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Molecules|ToggleButtonGroup Usage and States 1`] = `ReactWrapper {}`;

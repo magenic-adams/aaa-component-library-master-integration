@@ -13,28 +13,25 @@ const styleClasses = () => ({
 });
 
 interface RequiredProps {
-  children: any,
-};
+  children: any;
+}
 
 interface OptionalProps {
-  classes?: any, // MUI Decorator
-  className?: string,
-};
+  classes?: any; // MUI Decorator
+  className?: string;
+}
 
-const defaultProps:OptionalProps = {
+const defaultProps: OptionalProps = {
   className: '',
 };
 
-const FormGroup:React.FunctionComponent<RequiredProps & OptionalProps> = ({
+const FormGroup: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   children,
   classes,
   className,
 }) => {
   return (
-    <MUIFormGroup
-      className={cx('FormGroup', className)}
-      classes={classes}
-    >
+    <MUIFormGroup className={cx('FormGroup', className)} classes={classes}>
       {children}
     </MUIFormGroup>
   );
@@ -42,4 +39,6 @@ const FormGroup:React.FunctionComponent<RequiredProps & OptionalProps> = ({
 
 FormGroup.defaultProps = defaultProps;
 
-export default withStyles(styleClasses, { index: 0, withTheme: true })(FormGroup);
+export default withStyles(styleClasses, { index: 0, withTheme: true })(
+  FormGroup,
+);
