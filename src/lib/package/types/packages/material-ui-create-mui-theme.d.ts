@@ -27,6 +27,8 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     typographyElements: {
       buttonPrimary: TypographyStyle,
       buttonSecondary: TypographyStyle,
+      linkPrimary: TypographyStyle,
+      linkSecondary: TypographyStyle,
     }
   }
   // allow configuration using `createMuiTheme`
