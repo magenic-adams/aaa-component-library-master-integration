@@ -65,9 +65,6 @@
         var forwardedRef = otherProps.forwardedRef,
             other = (0, _objectWithoutProperties2.default)(otherProps, ["forwardedRef"]);
         var mask = this.props.mask;
-        if (!mask) (function () {
-          return undefined;
-        });
         return _react.default.createElement(_reactTextMask.default, Object.assign({
           ref: forwardedRef,
           mask: mask,

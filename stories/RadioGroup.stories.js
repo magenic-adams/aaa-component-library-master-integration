@@ -10,7 +10,7 @@ import {
   Subtitle,
 } from '../src/lib/package/components';
 
-import { StoryIntroduction } from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
+import StoryIntroduction from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
 
 const cars = [
   { id: 1, value: 1, display: 'Honda' },

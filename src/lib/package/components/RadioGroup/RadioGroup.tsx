@@ -43,7 +43,7 @@ const defaultProps: OptionalProps = {
   selectedId: '',
   selectedIds: [],
   disableAll: false,
-  disabledIds: []
+  disabledIds: [],
 };
 
 const styleClasses = (theme: Theme): { root: any } => ({
@@ -56,19 +56,19 @@ const styleClasses = (theme: Theme): { root: any } => ({
       padding: 0,
       marginBottom: 4,
       '&:active,&:hover': {
-        background: 'none'
+        background: 'none',
       },
       [theme.breakpoints.up('md')]: {
-        width: 534
-      }
-    }
+        width: 534,
+      },
+    },
   },
   [theme.breakpoints.up('md')]: {
-    width: 534
+    width: 534,
   },
   [theme.breakpoints.down('sm')]: {
-    width: '100%'
-  }
+    width: '100%',
+  },
 });
 
 function isInArray(ids: string[] | number[] | undefined, id: string | number) {
@@ -121,7 +121,7 @@ function constructDisplayItems(
               typeof onSelect === 'function' ? onSelect(item) : null
             }
           />
-        )
+        ),
       };
     })
   );
@@ -137,7 +137,7 @@ const RadioGroup: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   selectedId,
   selectedIds,
   type,
-  onSelect
+  onSelect,
 }) => {
   const newItems = constructDisplayItems(
     id,

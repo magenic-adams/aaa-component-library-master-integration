@@ -17,7 +17,7 @@ import './StoryCodePlayground.css';
 //   scope: any,
 // };
 
-export function StoryCodePlayground({ demo, scope }){
+function StoryCodePlayground({ demo, scope }){
   return (
     <div className="StoryCodePlayground">
       <LiveProvider
@@ -39,6 +39,4 @@ export function StoryCodePlayground({ demo, scope }){
   );
 }
 
-export default {
-  StoryCodePlayground,
-};
+export default StoryCodePlayground;

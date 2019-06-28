@@ -8,12 +8,12 @@ import { AAAPrimaryTheme, SelectList } from '../src/lib/package/components';
 import { demo, scope } from '../src/lib/internal/live_demos/SelectList';
 
 // Internal
-import { StoryIntroduction } from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
-import { StoryCodePlayground } from '../src/lib/internal/StoryCodePlayground/StoryCodePlayground';
-import { StoryLayoutContainer } from '../src/lib/internal/StoryLayoutContainer/StoryLayoutContainer';
-import { StoryUsageDescription } from '../src/lib/internal/StoryUsageDescription/StoryUsageDescription';
+import StoryIntroduction from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
+import StoryCodePlayground from '../src/lib/internal/StoryCodePlayground/StoryCodePlayground';
+import StoryLayoutContainer from '../src/lib/internal/StoryLayoutContainer/StoryLayoutContainer';
+import StoryUsageDescription from '../src/lib/internal/StoryUsageDescription/StoryUsageDescription';
 import { StorySectionHeader } from '../src/lib/internal/StorySectionHeader/StorySectionHeader';
-import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
+import ElementContainer from '../src/lib/internal/ElementContainer/ElementContainer';
 
 const stories = storiesOf('Atomic|SelectList', module);
 const items = [

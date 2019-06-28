@@ -39,7 +39,7 @@ class FormNumericInput extends React.Component<RequiredProps & OptionalProps> {
    * @return {Function} decoratored onChange
    */
   handleFormFieldChange({
-    input
+    input,
   }: {
     input: { name: string; onChange: (evt: React.SyntheticEvent) => void };
   }): (evt: React.SyntheticEvent) => void {
@@ -47,7 +47,7 @@ class FormNumericInput extends React.Component<RequiredProps & OptionalProps> {
       const { formState } = this.props;
       const { name, onChange } = input;
       const {
-        mutators: { setFieldTouched }
+        mutators: { setFieldTouched },
       } = formState;
       setFieldTouched(name, false);
       onChange(evt);
@@ -69,7 +69,7 @@ class FormNumericInput extends React.Component<RequiredProps & OptionalProps> {
       const { formState } = this.props;
       const { name, onChange } = input;
       const {
-        mutators: { setFieldTouched }
+        mutators: { setFieldTouched },
       } = formState;
       setFieldTouched(name, false);
       onChange('');

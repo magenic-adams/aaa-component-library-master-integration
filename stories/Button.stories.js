@@ -12,12 +12,12 @@ import {
 import { demo, scope } from '../src/lib/internal/live_demos/Button';
 
 // Internal
-import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
-import { StoryIntroduction } from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
-import { StoryLayoutContainer } from '../src/lib/internal/StoryLayoutContainer/StoryLayoutContainer';
-import { StoryUsageDescription } from '../src/lib/internal/StoryUsageDescription/StoryUsageDescription';
-import { StorySectionHeader } from '../src/lib/internal/StorySectionHeader/StorySectionHeader';
-import { StoryCodePlayground } from '../src/lib/internal/StoryCodePlayground/StoryCodePlayground';
+import ElementContainer from '../src/lib/internal/ElementContainer/ElementContainer';
+import StoryIntroduction from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
+import StoryLayoutContainer from '../src/lib/internal/StoryLayoutContainer/StoryLayoutContainer';
+import StoryUsageDescription from '../src/lib/internal/StoryUsageDescription/StoryUsageDescription';
+import StorySectionHeader from '../src/lib/internal/StorySectionHeader/StorySectionHeader';
+import StoryCodePlayground from '../src/lib/internal/StoryCodePlayground/StoryCodePlayground';
 
 const stories = storiesOf('Atomic|Button', module);
 

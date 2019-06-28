@@ -99,7 +99,7 @@
 
     return _react.default.createElement(_Radio.default, {
       key: itemId,
-      name: name,
+      name: itemId,
       checked: checked,
       value: value,
       disabled: disabled,

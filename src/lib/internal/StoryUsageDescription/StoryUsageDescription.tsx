@@ -20,7 +20,7 @@ type propTypes = {
   usageText: string,
 };
 
-const useStyles = ({positive}:{positive: boolean}) => makeStyles(theme => ({
+const useStyles = ({ positive }:{positive: boolean}) => makeStyles(theme => ({
   root: {
     color: positive ? 'green' : 'red',
     verticalAlign: 'middle',
@@ -57,6 +57,4 @@ export function StoryUsageDescription({
   );
 }
 
-export default {
-  StoryUsageDescription,
-};
+export default StoryUsageDescription;

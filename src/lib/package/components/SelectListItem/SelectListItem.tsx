@@ -33,24 +33,24 @@ const styleClasses = (
     lineHeight: 1.5,
     fontFamily: theme.typography.fontFamily,
     [theme.breakpoints.between('xs', 'sm')]: {
-      fontSize: 16
+      fontSize: 16,
     },
     '&.Mui-selected, &.Mui-selected:hover': {
-      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
+      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
     },
     '&:hover': {
-      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
-    }
+      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
+    },
   },
   gutters: {
-    padding: '0 13px 0 13px'
+    padding: '0 13px 0 13px',
   },
   divider: {
     borderBottom: `1px solid ${theme.palette.primary.main}`,
     '&:last-child': {
-      borderBottom: 'none'
-    }
-  }
+      borderBottom: 'none',
+    },
+  },
 });
 
 function checkValidity(item: {

@@ -19,12 +19,7 @@ interface Props {
  * defined on our top-level <Form> component and plucked from context
  */
 class FormNumericalStepper extends React.Component<any> {
-  constructor(props: Props) {
-    super(props);
-    this.renderFieldComponent = this.renderFieldComponent.bind(this);
-  }
-
-  handleDecrease(fieldRenderProps: any) {
+  static handleDecrease(fieldRenderProps: any) {
     return () => {
       if (!(fieldRenderProps.input.value <= 0)) {
         const { value, onChange } = fieldRenderProps.input;
@@ -33,14 +28,14 @@ class FormNumericalStepper extends React.Component<any> {
     };
   }
 
-  handleIncrease(fieldRenderProps: any) {
+  static handleIncrease(fieldRenderProps: any) {
     return () => {
       const { value, onChange } = fieldRenderProps.input;
       onChange(value + 1);
     };
   }
 
-  handleBlur(fieldRenderProps: any) {
+  static handleBlur(fieldRenderProps: any) {
     return () => {
       const { value, onChange } = fieldRenderProps.input;
       onChange(value);
@@ -72,17 +67,18 @@ class FormNumericalStepper extends React.Component<any> {
    */
   renderFieldComponent = (fieldRenderProps: any) => {
     // const ref = this.getInputRef();
+    const { id } = this.props;
     const { meta } = fieldRenderProps;
 
     return (
       <NumericalStepper
-        id={this.props.id}
-        name={this.props.id}
+        id={id}
+        name={id}
         error={meta.touched && meta.error}
-        onBlur={this.handleBlur(fieldRenderProps)}
+        onBlur={FormNumericalStepper.handleBlur(fieldRenderProps)}
         onChange={this.handleFormFieldChange(fieldRenderProps)}
-        onDecrease={this.handleDecrease(fieldRenderProps)}
-        onIncrease={this.handleIncrease(fieldRenderProps)}
+        onDecrease={FormNumericalStepper.handleDecrease(fieldRenderProps)}
+        onIncrease={FormNumericalStepper.handleIncrease(fieldRenderProps)}
         value={fieldRenderProps.input.value}
         {...this.props} // Passed props take highest priority
       />

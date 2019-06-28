@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["exports", "@babel/runtime/helpers/esm/defineProperty", "lodash/values", "lodash/assign", "./regex", "./defaultError"], factory);
+    define(["exports", "@babel/runtime/helpers/esm/defineProperty", "@babel/runtime/helpers/esm/slicedToArray", "lodash/values", "lodash/assign", "./regex", "./defaultError"], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require("@babel/runtime/helpers/esm/defineProperty"), require("lodash/values"), require("lodash/assign"), require("./regex"), require("./defaultError"));
+    factory(exports, require("@babel/runtime/helpers/esm/defineProperty"), require("@babel/runtime/helpers/esm/slicedToArray"), require("lodash/values"), require("lodash/assign"), require("./regex"), require("./defaultError"));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.defineProperty, global.values, global.assign, global.regex, global.defaultError);
+    factory(mod.exports, global.defineProperty, global.slicedToArray, global.values, global.assign, global.regex, global.defaultError);
     global.validate = mod.exports;
   }
-})(this, function (_exports, _defineProperty2, _values, _assign2, _regex, _defaultError) {
+})(this, function (_exports, _defineProperty2, _slicedToArray2, _values, _assign2, _regex, _defaultError) {
   "use strict";
 
   var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -20,6 +20,7 @@
   });
   _exports.default = void 0;
   _defineProperty2 = _interopRequireDefault(_defineProperty2);
+  _slicedToArray2 = _interopRequireDefault(_slicedToArray2);
   _values = _interopRequireDefault(_values);
   _assign2 = _interopRequireDefault(_assign2);
   _regex = _interopRequireDefault(_regex);
@@ -259,7 +260,7 @@
       var formValueDate = new Date(value);
       var validationDate = new Date(dateParam);
 
-      if (isNaN(formValueDate.getTime()) || isNaN(validationDate.getTime())) {
+      if (Number.isNaN(formValueDate.getTime()) || Number.isNaN(validationDate.getTime())) {
         // one of the dates is not valid, => not valid
         return false;
       }
@@ -291,7 +292,7 @@
       var formValueDate = new Date(value);
       var validationDate = new Date(dateParam);
 
-      if (isNaN(formValueDate.getTime()) || isNaN(validationDate.getTime())) {
+      if (Number.isNaN(formValueDate.getTime()) || Number.isNaN(validationDate.getTime())) {
         // one of the dates is not valid, => not valid
         return false;
       }
@@ -446,8 +447,10 @@
 
       if (parts) {
         // If the rule has a parameter, i.e. matches[param], split it out
-        rule = parts[1];
-        param = parts[2];
+        var _parts = (0, _slicedToArray2.default)(parts, 3);
+
+        rule = _parts[1];
+        param = _parts[2];
       } // We have a known method that matches the rule key
 
 

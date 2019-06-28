@@ -25,7 +25,7 @@ interface OptionalProps {
 }
 
 const defaultProps: OptionalProps = {
-  className: ''
+  className: '',
 };
 
 const styleClasses = (
@@ -42,7 +42,7 @@ const styleClasses = (
     padding: '0px',
     boxShadow: `0 2px 8px 0 ${theme.secondaryPalette.colorVariables.GRAY}`,
     '& span': {
-      fontFamily: theme.typographyValues.fontFamily
+      fontFamily: theme.typographyValues.fontFamily,
     },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
@@ -50,10 +50,10 @@ const styleClasses = (
       boxShadow: 'none',
       borderRadius: 0,
       '& span': {
-        fontSize: 16
-      }
-    }
-  }
+        fontSize: 16,
+      },
+    },
+  },
 });
 
 function areItemKeysPresent(items: selectItem[]) {
@@ -77,7 +77,7 @@ const SelectList: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   classes,
   className,
   items,
-  onSelect
+  onSelect,
 }) => {
   checkValidity(items);
 

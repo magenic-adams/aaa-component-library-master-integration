@@ -21,6 +21,4 @@ export function StoryIntroduction({ elementName, subtitle }:propTypes){
   );
 }
 
-export default {
-  StoryIntroduction,
-};
+export default StoryIntroduction;

@@ -7,7 +7,7 @@ import '../src/css/helpers.css';
 // Components
 import { AAAPrimaryTheme, BaseInput, NumericInput } from '../src/lib/package/components';
 
-import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
+import ElementContainer from '../src/lib/internal/ElementContainer/ElementContainer';
 
 const stories = storiesOf('Atomic|Input', module);
 

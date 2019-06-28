@@ -23,7 +23,7 @@ import Form from './Form/Form';
 import FormGroup from './Form/FormGroup/FormGroup';
 import FormInput from './Form/FormInput/FormInput';
 import FormNumericInput from './Form/FormNumericInput/FormNumericInput';
-import FormNumericalStepper from './Form/FormNumericalStepper/FormNumericalStepper';
+import FormNumericalStepper from './Form/FormNumericalStepper/FormnumericalStepper';
 
 // Icons
 import RightArrowIcon from '../icons/RightArrowIcon';

@@ -44,7 +44,6 @@ class NumericInput extends React.Component<RequiredProps & OptionalProps> {
   renderTextMaskCustomComponent(otherProps: any) {
     const { forwardedRef, ...other } = otherProps;
     const { mask } = this.props;
-    if (!mask) () => undefined;
     return (
       <MaskedInput
         ref={forwardedRef}

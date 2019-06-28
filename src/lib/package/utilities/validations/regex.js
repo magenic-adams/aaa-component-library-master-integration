@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /**
  * Defines the regular expressions that will be used for validations
  */

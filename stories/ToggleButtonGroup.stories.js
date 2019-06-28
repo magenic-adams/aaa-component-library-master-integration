@@ -8,8 +8,8 @@ import { AAAPrimaryTheme, Subheadline, Subtitle } from '../src/lib/package/compo
 
 // Internal
 import ToggleButtonGroupContainer from '../src/lib/internal/ToggleButtonGroupContainer/ToggleButtonGroupContainer';
-import { ElementContainer } from '../src/lib/internal/ElementContainer/ElementContainer';
-import { StoryIntroduction } from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
+import ElementContainer from '../src/lib/internal/ElementContainer/ElementContainer';
+import StoryIntroduction from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
 
 const stories = storiesOf('Molecules|ToggleButtonGroup', module);
 const options = [{ id: 1, text: 'Yes' }, { id: 2, text: 'No' }];

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ToggleButtonGroup } from '../../package/components';
 
-export default function ToggleButtonGroupContainer({
+function ToggleButtonGroupContainer({
   disabled,
   options,
   value,
@@ -23,3 +23,5 @@ export default function ToggleButtonGroupContainer({
     />
   );
 }
+
+export default ToggleButtonGroupContainer;
