@@ -144,7 +144,7 @@ stories.add('basic form', () => {
                   <FormGroup>
                     <FormNumericalStepper
                       id="stepper"
-                      labelName="Stepper Label"
+                      labelText="Stepper Label"
                       type="text"
                     />
                   </FormGroup>
