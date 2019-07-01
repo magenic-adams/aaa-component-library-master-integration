@@ -23,7 +23,7 @@ class FormNumericalStepper extends React.Component<any> {
     return () => {
       if (!(fieldRenderProps.input.value <= 0)) {
         const { value, onChange } = fieldRenderProps.input;
-        const newValue = Number.isNaN(parseInt(value)) ? 1 : parseInt(value) - 1;
+        const newValue = Number.isNaN(parseInt(value, 10)) ? 1 : parseInt(value, 10) - 1;
         onChange(newValue);
       }
     };
@@ -32,7 +32,7 @@ class FormNumericalStepper extends React.Component<any> {
   static handleIncrease(fieldRenderProps: any) {
     return () => {
       const { value, onChange } = fieldRenderProps.input;
-        const newValue = Number.isNaN(parseInt(value)) ? 1 : parseInt(value) + 1;
+        const newValue = Number.isNaN(parseInt(value, 10)) ? 1 : parseInt(value, 10) + 1;
         onChange(newValue);
     };
   }
