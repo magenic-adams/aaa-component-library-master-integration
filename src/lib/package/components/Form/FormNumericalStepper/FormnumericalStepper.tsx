@@ -23,7 +23,8 @@ class FormNumericalStepper extends React.Component<any> {
     return () => {
       if (!(fieldRenderProps.input.value <= 0)) {
         const { value, onChange } = fieldRenderProps.input;
-        onChange(value - 1);
+        const newValue = Number.isNaN(parseInt(value, 10)) ? 1 : parseInt(value, 10) - 1;
+        onChange(newValue);
       }
     };
   }
@@ -31,8 +32,8 @@ class FormNumericalStepper extends React.Component<any> {
   static handleIncrease(fieldRenderProps: any) {
     return () => {
       const { value, onChange } = fieldRenderProps.input;
-      const newValue = isNaN(parseInt(value)) ? 1 : parseInt(value) + 1;
-      onChange(newValue);
+        const newValue = Number.isNaN(parseInt(value, 10)) ? 1 : parseInt(value, 10) + 1;
+        onChange(newValue);
     };
   }
 
@@ -43,8 +44,14 @@ class FormNumericalStepper extends React.Component<any> {
     };
   }
 
+  constructor(props: Props) {
+    super(props);
+    this.renderFieldComponent = this.renderFieldComponent.bind(this);
+  }
+
+
   handleFormFieldChange({
-    input
+    input,
   }: {
     input: { name: string; onChange: (evt: React.SyntheticEvent) => void };
   }): (evt: React.SyntheticEvent) => void {
@@ -52,7 +59,7 @@ class FormNumericalStepper extends React.Component<any> {
       const { formState } = this.props;
       const { name, onChange } = input;
       const {
-        mutators: { setFieldTouched }
+        mutators: { setFieldTouched },
       } = formState;
       setFieldTouched(name, false);
       onChange(evt);
@@ -68,8 +75,8 @@ class FormNumericalStepper extends React.Component<any> {
    */
   renderFieldComponent = (fieldRenderProps: any) => {
     // const ref = this.getInputRef();
-    const { id } = this.props;
     const { meta } = fieldRenderProps;
+    const { id } = this.props;
 
     return (
       <NumericalStepper
