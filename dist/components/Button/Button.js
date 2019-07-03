@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -13,14 +13,14 @@ var _styles = require("@material-ui/styles");
 
 var _clsx = _interopRequireDefault(require("clsx"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 ;
-var defaultProps = {
+const defaultProps = {
   color: 'primary',
   className: '',
   disabled: false,
@@ -30,11 +30,9 @@ var defaultProps = {
   type: 'button'
 };
 
-var styleClasses = function styleClasses(theme) {
-  var _root;
-
+const styleClasses = theme => {
   return {
-    root: (_root = {
+    root: {
       display: 'block',
       border: 0,
       height: 48,
@@ -45,12 +43,14 @@ var styleClasses = function styleClasses(theme) {
       marginTop: 0,
       transition: '300ms transform ease-in-out',
       transform: 'translateY(0)',
-      width: '100%'
-    }, _defineProperty(_root, theme.breakpoints.up('md'), {
-      width: 314
-    }), _defineProperty(_root, '&:disabled', {
-      cursor: 'not-allowed'
-    }), _root),
+      width: '100%',
+      [theme.breakpoints.up('md')]: {
+        width: 314
+      },
+      '&:disabled': {
+        cursor: 'not-allowed'
+      }
+    },
     label: {
       lineHeight: '48px',
       height: '100%',
@@ -118,23 +118,26 @@ var styleClasses = function styleClasses(theme) {
   };
 };
 
-var Button = function Button(_ref) {
-  var _cx;
-
-  var children = _ref.children,
-      className = _ref.className,
-      classes = _ref.classes,
-      color = _ref.color,
-      disabled = _ref.disabled,
-      fadeUp = _ref.fadeUp,
-      forwardedRef = _ref.forwardedRef,
-      href = _ref.href,
-      id = _ref.id,
-      type = _ref.type,
-      onClick = _ref.onClick,
-      isIconButton = _ref.isIconButton;
-  return _react["default"].createElement(_Button["default"], {
-    className: (0, _clsx["default"])('Button', (_cx = {}, _defineProperty(_cx, classes.fadeUp, fadeUp), _defineProperty(_cx, classes.iconButton, isIconButton), _cx), className),
+const Button = (_ref) => {
+  let {
+    children,
+    className,
+    classes,
+    color,
+    disabled,
+    fadeUp,
+    forwardedRef,
+    href,
+    id,
+    type,
+    onClick,
+    isIconButton
+  } = _ref;
+  return _react.default.createElement(_Button.default, {
+    className: (0, _clsx.default)('Button', {
+      [classes.fadeUp]: fadeUp,
+      [classes.iconButton]: isIconButton
+    }, className),
     classes: {
       root: classes.root,
       containedPrimary: classes.containedPrimary,
@@ -160,4 +163,4 @@ var _default = (0, _styles.withStyles)(styleClasses, {
   withTheme: true
 })(Button);
 
-exports["default"] = _default;
+exports.default = _default;

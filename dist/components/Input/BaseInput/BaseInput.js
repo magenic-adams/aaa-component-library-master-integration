@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -25,12 +25,12 @@ var _Label = _interopRequireDefault(require("../../Label/Label"));
 
 var _FormFieldMeta = _interopRequireDefault(require("../../Form/FormFieldMeta/FormFieldMeta"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+// Material UI components
+// Components
 ;
-var defaultProps = {
+const defaultProps = {
   autoFocus: false,
   className: '',
   formControlClass: '',
@@ -43,15 +43,13 @@ var defaultProps = {
   placeholder: '',
   type: 'text',
   value: undefined,
-  onBlur: function onBlur() {},
-  onChange: function onChange() {},
+  onBlur: () => {},
+  onChange: () => {},
   onClear: undefined,
-  onFocus: function onFocus() {}
+  onFocus: () => {}
 };
 
-var styleClasses = function styleClasses(theme) {
-  var _input, _formControlStyle;
-
+const styleClasses = theme => {
   return {
     root: {
       padding: '0 12px',
@@ -78,18 +76,18 @@ var styleClasses = function styleClasses(theme) {
         boxShadow: 'none'
       }
     },
-    input: (_input = {
+    input: {
       boxSizing: 'border-box',
       height: '100%',
       lineHeight: '100%',
-      textAlign: function textAlign(props) {
-        return props.centerText ? 'center' : 'left';
+      textAlign: props => props.centerText ? 'center' : 'left',
+      [theme.breakpoints.up('sm')]: {
+        fontSize: 16
+      },
+      [theme.breakpoints.up('md')]: {
+        fontSize: 18
       }
-    }, _defineProperty(_input, theme.breakpoints.up('sm'), {
-      fontSize: 16
-    }), _defineProperty(_input, theme.breakpoints.up('md'), {
-      fontSize: 18
-    }), _input),
+    },
     inputAdornment: {
       marginRight: -10
     },
@@ -104,11 +102,14 @@ var styleClasses = function styleClasses(theme) {
       fontSize: 20,
       color: theme.palette.primary.main
     },
-    formControlStyle: (_formControlStyle = {}, _defineProperty(_formControlStyle, theme.breakpoints.up('sm'), {
-      width: '100%'
-    }), _defineProperty(_formControlStyle, theme.breakpoints.up('md'), {
-      maxWidth: 534
-    }), _formControlStyle),
+    formControlStyle: {
+      [theme.breakpoints.up('sm')]: {
+        width: '100%'
+      },
+      [theme.breakpoints.up('md')]: {
+        maxWidth: 534
+      }
+    },
     error: {
       boxShadow: "inset 0 0 0 2px ".concat(theme.palette.error.main),
       '&$focused': {
@@ -123,38 +124,40 @@ var styleClasses = function styleClasses(theme) {
   };
 };
 
-var BaseInput = function BaseInput(_ref) {
-  var autoFocus = _ref.autoFocus,
-      classes = _ref.classes,
-      className = _ref.className,
-      centerText = _ref.centerText,
-      forwardedRef = _ref.forwardedRef,
-      formControlClass = _ref.formControlClass,
-      disabled = _ref.disabled,
-      disableWarning = _ref.disableWarning,
-      error = _ref.error,
-      helperText = _ref.helperText,
-      id = _ref.id,
-      inputComponent = _ref.inputComponent,
-      labelName = _ref.labelName,
-      name = _ref.name,
-      placeholder = _ref.placeholder,
-      type = _ref.type,
-      value = _ref.value,
-      onBlur = _ref.onBlur,
-      onChange = _ref.onChange,
-      onClear = _ref.onClear,
-      onFocus = _ref.onFocus;
-  return _react["default"].createElement(_FormControl["default"], {
-    className: (0, _clsx["default"])(classes.formControlStyle, formControlClass),
+const BaseInput = (_ref) => {
+  let {
+    autoFocus,
+    classes,
+    className,
+    centerText,
+    forwardedRef,
+    formControlClass,
+    disabled,
+    disableWarning,
+    error,
+    helperText,
+    id,
+    inputComponent,
+    labelName,
+    name,
+    placeholder,
+    type,
+    value,
+    onBlur,
+    onChange,
+    onClear,
+    onFocus
+  } = _ref;
+  return _react.default.createElement(_FormControl.default, {
+    className: (0, _clsx.default)(classes.formControlStyle, formControlClass),
     error: !!error,
     disabled: disabled
-  }, labelName && _react["default"].createElement(_Label["default"], {
+  }, labelName && _react.default.createElement(_Label.default, {
     id: id,
     disabled: false,
     error: error,
     focused: false
-  }, labelName), _react["default"].createElement(_Input["default"], {
+  }, labelName), _react.default.createElement(_Input.default, {
     autoFocus: autoFocus,
     autoComplete: "off",
     classes: {
@@ -164,19 +167,21 @@ var BaseInput = function BaseInput(_ref) {
       error: classes.error,
       input: classes.input
     },
-    className: (0, _clsx["default"])('BaseInput', className, _defineProperty({}, classes.centerText, centerText)),
+    className: (0, _clsx.default)('BaseInput', className, {
+      [classes.centerText]: centerText
+    }),
     disableUnderline: true,
-    endAdornment: onClear && value && _react["default"].createElement(_InputAdornment["default"], {
+    endAdornment: onClear && value && _react.default.createElement(_InputAdornment.default, {
       className: classes.inputAdornment,
       position: "end"
-    }, _react["default"].createElement(_IconButton["default"], {
+    }, _react.default.createElement(_IconButton.default, {
       disableRipple: true,
       "aria-label": "Clear text",
       onClick: onClear,
       disabled: disabled,
       color: "inherit",
       className: classes.iconButton
-    }, _react["default"].createElement(_Clear["default"], {
+    }, _react.default.createElement(_Clear.default, {
       className: classes.iconStyle
     }))),
     id: id,
@@ -192,7 +197,7 @@ var BaseInput = function BaseInput(_ref) {
     onBlur: onBlur,
     onChange: onChange,
     onFocus: onFocus
-  }), _react["default"].createElement(_FormFieldMeta["default"], {
+  }), _react.default.createElement(_FormFieldMeta.default, {
     disableWarning: disableWarning,
     error: error,
     helperText: helperText,
@@ -207,4 +212,4 @@ var _default = (0, _styles.withStyles)(styleClasses, {
   withTheme: true
 })(BaseInput);
 
-exports["default"] = _default;
+exports.default = _default;

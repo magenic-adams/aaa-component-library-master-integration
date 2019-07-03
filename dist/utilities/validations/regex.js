@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports.default = void 0;
 
 /* eslint-disable no-useless-escape */
 
@@ -29,4 +29,4 @@ var _default = {
   ruleRegex: /^(.+?)\[(.+)\]$/,
   urlRegex: /^((http|https):\/\/(\w+:{0,1}\w*@)?(\S+)|)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/
 };
-exports["default"] = _default;
+exports.default = _default;

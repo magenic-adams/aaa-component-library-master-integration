@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = AAAThemeProvider;
+exports.default = AAAThemeProvider;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -13,11 +13,12 @@ var _createStyleTheme = _interopRequireDefault(require("../../utilities/createSt
 
 var _colors = require("../../constants/colors");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var theme = (0, _createStyleTheme["default"])({
+// https://next.material-ui.com/customization/themes
+// Augmented themea definition
+// Colors
+const theme = (0, _createStyleTheme.default)({
   breakpoints: {
     values: {
       xs: 0,
@@ -66,76 +67,82 @@ var theme = (0, _createStyleTheme["default"])({
   typographyElements: {}
 }); // ** Typography ** //
 
-theme.typography.h1 = _defineProperty({
+theme.typography.h1 = {
   // Headline
   color: theme.typographyValues.color,
   fontFamily: theme.typographyValues.fontFamily,
   fontStyle: theme.typographyValues.fontStyle,
   fontWeight: 500,
   lineHeight: 1.5,
-  fontSize: 20
-}, theme.breakpoints.up('lg'), {
-  fontSize: 28,
-  lineHeight: 1.57
-});
-theme.typography.h2 = _defineProperty({
+  fontSize: 20,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 28,
+    lineHeight: 1.57
+  }
+};
+theme.typography.h2 = {
   // Subheadline
   color: theme.typographyValues.color,
   fontFamily: theme.typographyValues.fontFamily,
   fontStyle: theme.typographyValues.fontStyle,
   fontWeight: theme.typographyValues.fontWeight,
   lineHeight: 1.45,
-  fontSize: 18
-}, theme.breakpoints.up('lg'), {
-  fontSize: 22
-});
-theme.typography.subtitle1 = _defineProperty({
+  fontSize: 18,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 22
+  }
+};
+theme.typography.subtitle1 = {
   // Subtitle 1 / Table Header
   color: theme.typographyValues.color,
   fontFamily: theme.typographyValues.fontFamily,
   fontStyle: theme.typographyValues.fontStyle,
   fontSize: 16,
   lineHeight: 1.5,
-  fontWeight: 500
-}, theme.breakpoints.up('lg'), {
-  fontSize: 18,
-  lineHeight: 1.45
-});
-theme.typography.body1 = _defineProperty({
+  fontWeight: 500,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 18,
+    lineHeight: 1.45
+  }
+};
+theme.typography.body1 = {
   // Body 1 / Primary Copy
   color: theme.typographyValues.color,
   fontFamily: theme.typographyValues.fontFamily,
   fontStyle: theme.typographyValues.fontStyle,
   fontWeight: theme.typographyValues.fontWeight,
   fontSize: 16,
-  lineHeight: 1.5
-}, theme.breakpoints.up('lg'), {
-  fontSize: 18,
-  lineHeight: 1.45
-});
-theme.typography.body2 = _defineProperty({
+  lineHeight: 1.5,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 18,
+    lineHeight: 1.45
+  }
+};
+theme.typography.body2 = {
   // Body 2 / Primary Copy
   color: theme.typographyValues.color,
   fontFamily: theme.typographyValues.fontFamily,
   fontStyle: theme.typographyValues.fontStyle,
   fontWeight: theme.typographyValues.fontWeight,
   fontSize: 14,
-  lineHeight: 1.45
-}, theme.breakpoints.up('lg'), {
-  fontSize: 16,
-  lineHeight: 1.5
-}); // ** Client Library Defined **
+  lineHeight: 1.45,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 16,
+    lineHeight: 1.5
+  }
+}; // ** Client Library Defined **
 
-theme.typographyElements.buttonPrimary = _defineProperty({
+theme.typographyElements.buttonPrimary = {
   color: theme.secondaryPalette.colorVariables.WHITE,
   fontFamily: theme.typographyValues.fontFamily,
   fontStyle: theme.typographyValues.fontStyle,
   fontWeight: 500,
   lineHeight: 1.45,
-  fontSize: 18
-}, theme.breakpoints.up('lg'), {
-  fontSize: 20
-}); // ** Client Library Defined **
+  fontSize: 18,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 20
+  }
+}; // ** Client Library Defined **
 
 theme.typographyElements.buttonSecondary = {
   color: theme.palette.primary.main,
@@ -146,30 +153,34 @@ theme.typographyElements.buttonSecondary = {
   lineHeight: 1.45
 }; // ** Client Library Defined **
 
-theme.typographyElements.linkPrimary = _defineProperty({
+theme.typographyElements.linkPrimary = {
   color: theme.secondaryPalette.colorVariables.DARKER_BLUE,
   fontFamily: theme.typographyValues.fontFamily,
   fontStyle: theme.typographyValues.fontStyle,
   fontWeight: theme.typographyValues.fontWeight,
   fontSize: 16,
-  lineHeight: 1.45
-}, theme.breakpoints.up('lg'), {
-  fontSize: 18
-});
-theme.typographyElements.linkSecondary = _defineProperty({
+  lineHeight: 1.45,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 18
+  }
+};
+theme.typographyElements.linkSecondary = {
   color: theme.secondaryPalette.colorVariables.DARKER_BLUE,
   fontFamily: theme.typographyValues.fontFamily,
   fontStyle: theme.typographyValues.fontStyle,
   fontWeight: theme.typographyValues.fontWeight,
   fontSize: 16,
-  lineHeight: 1.45
-}, theme.breakpoints.up('lg'), {
-  fontSize: 18
-});
+  lineHeight: 1.45,
+  [theme.breakpoints.up('lg')]: {
+    fontSize: 18
+  }
+};
 
 function AAAThemeProvider(_ref) {
-  var children = _ref.children;
-  return _react["default"].createElement(_styles.ThemeProvider, {
+  let {
+    children
+  } = _ref;
+  return _react.default.createElement(_styles.ThemeProvider, {
     theme: theme
   }, children);
 }

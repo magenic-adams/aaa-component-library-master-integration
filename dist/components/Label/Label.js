@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -15,26 +15,24 @@ var _clsx = _interopRequireDefault(require("clsx"));
 
 var _lodash = require("lodash");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 ;
-var defaultProps = {
+const defaultProps = {
   className: '',
   disabled: false,
   error: '',
   focused: false
 };
 
-var styleClasses = function styleClasses(theme) {
+const styleClasses = theme => {
   return {
     root: _objectSpread({
-      color: function color(props) {
-        return (0, _lodash.get)(props, 'overrides.label.color', theme.secondaryPalette.colorVariables.BLACK);
-      },
+      color: props => (0, _lodash.get)(props, 'overrides.label.color', theme.secondaryPalette.colorVariables.BLACK),
       display: 'block',
       marginBottom: -8,
       fontFamily: theme.typographyValues.fontFamily,
@@ -47,16 +45,18 @@ var styleClasses = function styleClasses(theme) {
   };
 };
 
-var Label = function Label(_ref) {
-  var children = _ref.children,
-      classes = _ref.classes,
-      className = _ref.className,
-      disabled = _ref.disabled,
-      error = _ref.error,
-      focused = _ref.focused,
-      id = _ref.id;
-  return _react["default"].createElement(_InputLabel["default"], {
-    className: (0, _clsx["default"])('InputLabel', className),
+const Label = (_ref) => {
+  let {
+    children,
+    classes,
+    className,
+    disabled,
+    error,
+    focused,
+    id
+  } = _ref;
+  return _react.default.createElement(_InputLabel.default, {
+    className: (0, _clsx.default)('InputLabel', className),
     classes: classes,
     disabled: disabled,
     disableAnimation: true,
@@ -75,4 +75,4 @@ var _default = (0, _styles.withStyles)(styleClasses, {
   withTheme: true
 })(Label);
 
-exports["default"] = _default;
+exports.default = _default;
