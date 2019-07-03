@@ -1,8 +1,16 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
 /* eslint-disable no-useless-escape */
+
 /**
  * Defines the regular expressions that will be used for validations
  */
-export default {
+var _default = {
   alphaRegex: /^[a-z]+$/i,
   alphaNumericRegex: /^[a-z0-9]+$/i,
   alphaDashRegex: /^[a-z0-9_]+$/i,
@@ -19,5 +27,6 @@ export default {
   numericDashRegex: /^[\d\-\s]+$/,
   numericRegex: /^[0-9]+([.,][0-9]+)?$/,
   ruleRegex: /^(.+?)\[(.+)\]$/,
-  urlRegex: /^((http|https):\/\/(\w+:{0,1}\w*@)?(\S+)|)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/,
+  urlRegex: /^((http|https):\/\/(\w+:{0,1}\w*@)?(\S+)|)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/
 };
+exports["default"] = _default;

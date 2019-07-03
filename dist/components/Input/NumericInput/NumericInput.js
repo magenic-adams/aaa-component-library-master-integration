@@ -1,100 +1,108 @@
-(function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(["exports", "@babel/runtime/helpers/esm/objectWithoutProperties", "@babel/runtime/helpers/esm/classCallCheck", "@babel/runtime/helpers/esm/createClass", "@babel/runtime/helpers/esm/possibleConstructorReturn", "@babel/runtime/helpers/esm/getPrototypeOf", "@babel/runtime/helpers/esm/assertThisInitialized", "@babel/runtime/helpers/esm/inherits", "react", "react-text-mask", "../BaseInput/BaseInput"], factory);
-  } else if (typeof exports !== "undefined") {
-    factory(exports, require("@babel/runtime/helpers/esm/objectWithoutProperties"), require("@babel/runtime/helpers/esm/classCallCheck"), require("@babel/runtime/helpers/esm/createClass"), require("@babel/runtime/helpers/esm/possibleConstructorReturn"), require("@babel/runtime/helpers/esm/getPrototypeOf"), require("@babel/runtime/helpers/esm/assertThisInitialized"), require("@babel/runtime/helpers/esm/inherits"), require("react"), require("react-text-mask"), require("../BaseInput/BaseInput"));
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory(mod.exports, global.objectWithoutProperties, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.getPrototypeOf, global.assertThisInitialized, global.inherits, global.react, global.reactTextMask, global.BaseInput);
-    global.NumericInput = mod.exports;
-  }
-})(this, function (_exports, _objectWithoutProperties2, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _getPrototypeOf2, _assertThisInitialized2, _inherits2, _react, _reactTextMask, _BaseInput) {
-  "use strict";
+"use strict";
 
-  var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
-  });
-  _exports.default = void 0;
-  _objectWithoutProperties2 = _interopRequireDefault(_objectWithoutProperties2);
-  _classCallCheck2 = _interopRequireDefault(_classCallCheck2);
-  _createClass2 = _interopRequireDefault(_createClass2);
-  _possibleConstructorReturn2 = _interopRequireDefault(_possibleConstructorReturn2);
-  _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf2);
-  _assertThisInitialized2 = _interopRequireDefault(_assertThisInitialized2);
-  _inherits2 = _interopRequireDefault(_inherits2);
-  _react = _interopRequireDefault(_react);
-  _reactTextMask = _interopRequireDefault(_reactTextMask);
-  _BaseInput = _interopRequireDefault(_BaseInput);
-
-  // Components
-  var NumericInput =
-  /*#__PURE__*/
-  function (_React$Component) {
-    (0, _inherits2.default)(NumericInput, _React$Component);
-
-    function NumericInput(props) {
-      var _this;
-
-      (0, _classCallCheck2.default)(this, NumericInput);
-      _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(NumericInput).call(this, props));
-      _this.determineInputComponent = _this.determineInputComponent.bind((0, _assertThisInitialized2.default)(_this));
-      _this.renderTextMaskCustomComponent = _this.renderTextMaskCustomComponent.bind((0, _assertThisInitialized2.default)(_this));
-      return _this;
-    }
-
-    (0, _createClass2.default)(NumericInput, [{
-      key: "determineInputComponent",
-      value: function determineInputComponent() {
-        var mask = this.props.mask;
-
-        if (!mask) {
-          return {};
-        }
-
-        return {
-          inputComponent: this.renderTextMaskCustomComponent
-        };
-      }
-    }, {
-      key: "renderTextMaskCustomComponent",
-      value: function renderTextMaskCustomComponent(otherProps) {
-        var forwardedRef = otherProps.forwardedRef,
-            other = (0, _objectWithoutProperties2.default)(otherProps, ["forwardedRef"]);
-        var mask = this.props.mask;
-        return _react.default.createElement(_reactTextMask.default, Object.assign({
-          ref: forwardedRef,
-          mask: mask,
-          guide: false,
-          autoComplete: "off"
-        }, other));
-      }
-    }, {
-      key: "render",
-      value: function render() {
-        var _this$props = this.props,
-            error = _this$props.error,
-            id = _this$props.id,
-            name = _this$props.name,
-            onChange = _this$props.onChange,
-            onClear = _this$props.onClear,
-            onBlur = _this$props.onBlur;
-        return _react.default.createElement(_BaseInput.default, Object.assign({
-          id: id,
-          name: name,
-          error: error,
-          onChange: onChange,
-          onClear: onClear,
-          onBlur: onBlur
-        }, this.determineInputComponent(), this.props));
-      }
-    }]);
-    return NumericInput;
-  }(_react.default.Component);
-
-  var _default = NumericInput;
-  _exports.default = _default;
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
+exports["default"] = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactTextMask = _interopRequireDefault(require("react-text-mask"));
+
+var _BaseInput = _interopRequireDefault(require("../BaseInput/BaseInput"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var NumericInput =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(NumericInput, _React$Component);
+
+  function NumericInput(props) {
+    var _this;
+
+    _classCallCheck(this, NumericInput);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(NumericInput).call(this, props));
+    _this.determineInputComponent = _this.determineInputComponent.bind(_assertThisInitialized(_this));
+    _this.renderTextMaskCustomComponent = _this.renderTextMaskCustomComponent.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(NumericInput, [{
+    key: "determineInputComponent",
+    value: function determineInputComponent() {
+      var mask = this.props.mask;
+
+      if (!mask) {
+        return {};
+      }
+
+      return {
+        inputComponent: this.renderTextMaskCustomComponent
+      };
+    }
+  }, {
+    key: "renderTextMaskCustomComponent",
+    value: function renderTextMaskCustomComponent(otherProps) {
+      var forwardedRef = otherProps.forwardedRef,
+          other = _objectWithoutProperties(otherProps, ["forwardedRef"]);
+
+      var mask = this.props.mask;
+      return _react["default"].createElement(_reactTextMask["default"], _extends({
+        ref: forwardedRef,
+        mask: mask,
+        guide: false,
+        autoComplete: "off"
+      }, other));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          error = _this$props.error,
+          id = _this$props.id,
+          name = _this$props.name,
+          onChange = _this$props.onChange,
+          onClear = _this$props.onClear,
+          onBlur = _this$props.onBlur;
+      return _react["default"].createElement(_BaseInput["default"], _extends({
+        id: id,
+        name: name,
+        error: error,
+        onChange: onChange,
+        onClear: onClear,
+        onBlur: onBlur
+      }, this.determineInputComponent(), this.props));
+    }
+  }]);
+
+  return NumericInput;
+}(_react["default"].Component);
+
+var _default = NumericInput;
+exports["default"] = _default;

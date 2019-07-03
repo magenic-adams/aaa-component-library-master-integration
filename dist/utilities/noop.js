@@ -1,1 +1,10 @@
-export default function(){ return null; }
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = _default;
+
+function _default() {
+  return null;
+}

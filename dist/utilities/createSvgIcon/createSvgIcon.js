@@ -1,41 +1,30 @@
-(function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(["exports", "react", "@material-ui/core/SvgIcon"], factory);
-  } else if (typeof exports !== "undefined") {
-    factory(exports, require("react"), require("@material-ui/core/SvgIcon"));
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory(mod.exports, global.react, global.SvgIcon);
-    global.createSvgIcon = mod.exports;
-  }
-})(this, function (_exports, _react, _SvgIcon) {
-  "use strict";
+"use strict";
 
-  var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
-  });
-  _exports.default = createSvgIcon;
-  _react = _interopRequireDefault(_react);
-  _SvgIcon = _interopRequireDefault(_SvgIcon);
-
-  // createSvgIcon taken from Material UI utilities
-  function createSvgIcon(path, displayName) {
-    var Component = _react.default.memo(_react.default.forwardRef(function (props, ref) {
-      return _react.default.createElement(_SvgIcon.default, Object.assign({
-        "data-mui-test": "".concat(displayName, "Icon"),
-        ref: ref
-      }, props), path);
-    }));
-
-    if (process.env.NODE_ENV !== 'production') {
-      Component.displayName = "".concat(displayName, "Icon");
-    } // Component.muiName = SvgIcon.muiName;
-
-
-    return Component;
-  }
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
+exports["default"] = createSvgIcon;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _SvgIcon = _interopRequireDefault(require("@material-ui/core/SvgIcon"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function createSvgIcon(path, displayName) {
+  var Component = _react["default"].memo(_react["default"].forwardRef(function (props, ref) {
+    return _react["default"].createElement(_SvgIcon["default"], _extends({
+      "data-mui-test": "".concat(displayName, "Icon"),
+      ref: ref
+    }, props), path);
+  }));
+
+  if (process.env.NODE_ENV !== 'production') {
+    Component.displayName = "".concat(displayName, "Icon");
+  } // Component.muiName = SvgIcon.muiName;
+
+
+  return Component;
+}

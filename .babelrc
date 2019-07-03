@@ -1,12 +1,27 @@
 {
-  "presets":
-    [ 
-      "@babel/typescript",
-      ["react-app", { "absoluteRuntime": false }]
-    ],
+  "presets": ["@babel/typescript"],
   "env": {
+    "development": {
+      "presets": [ 
+        ["react-app", {
+          "absoluteRuntime": false,
+          "typescript": true
+        }]
+      ],
+    },
     "production": {
-      "plugins": ["@babel/plugin-transform-modules-umd"]
+      "plugins": [
+        "@babel/plugin-proposal-class-properties"
+      ],
+      "presets": [
+        ["@babel/preset-env", {
+          "targets": {
+            "esmodules": true
+          },
+          "forceAllTransforms": true
+        }],
+        "@babel/preset-react",
+      ],
     },
     "test": {
       "plugins": ["require-context-hook"]
