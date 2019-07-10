@@ -9,7 +9,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEThemeProvider from '../ACEPrimaryTheme/ACEPrimaryTheme';
 import SelectList from './SelectList';
 
 // Test Utilities
@@ -17,8 +17,8 @@ import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 
 // Constants
 import {
-  AAA_COLOR_MAIN_BLUE,
-  AAA_COLOR_MAIN_GRAY,
+  ACE_COLOR_MAIN_BLUE,
+  ACE_COLOR_MAIN_GRAY,
 } from '../../constants/colors';
 
 function getFakeProps(overrides) {
@@ -34,9 +34,9 @@ function getFakeProps(overrides) {
 
 function createSelectListWithTheme(props) {
   return mount(
-    <AAAThemeProvider theme={props.theme}>
+    <ACEThemeProvider theme={props.theme}>
       <SelectList {...props} />
-    </AAAThemeProvider>,
+    </ACEThemeProvider>,
   );
 }
 
@@ -68,9 +68,9 @@ describe('SelectList', () => {
       expect(borderWidth).to.equal('2px');
     });
 
-    it('has border color of AAA_COLOR_MAIN_BLUE', () => {
+    it('has border color of ACE_COLOR_MAIN_BLUE', () => {
       const borderStyle = getDOMNodeComputedStyle(listNode, 'border-color');
-      expect(borderStyle).to.equal(AAA_COLOR_MAIN_BLUE);
+      expect(borderStyle).to.equal(ACE_COLOR_MAIN_BLUE);
     });
 
     it('has border radius of 4px', () => {
@@ -81,9 +81,9 @@ describe('SelectList', () => {
       expect(borderRadiusStyle).to.equal('4px');
     });
 
-    it('has box shadow of 0 2px 8px 0 AAA_COLOR_MAIN_GRAY', () => {
+    it('has box shadow of 0 2px 8px 0 ACE_COLOR_MAIN_GRAY', () => {
       const boxShadowStyle = getDOMNodeComputedStyle(listNode, 'box-shadow');
-      expect(boxShadowStyle).to.equal(`0 2px 8px 0 ${AAA_COLOR_MAIN_GRAY}`);
+      expect(boxShadowStyle).to.equal(`0 2px 8px 0 ${ACE_COLOR_MAIN_GRAY}`);
     });
   });
 

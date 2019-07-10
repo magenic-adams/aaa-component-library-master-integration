@@ -1,5 +1,5 @@
 import {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Subheadline,
 } from '../../package/components';
 
@@ -7,17 +7,17 @@ export const demo = `class SubheadlineDemo extends React.Component {
   render(){
     return (
       <div>
-        <AAAPrimaryTheme>
+        <ACEPrimaryTheme>
           <Subheadline>
             > Edit Subheadline
           </Subheadline>
-        </AAAPrimaryTheme>
+        </ACEPrimaryTheme>
       </div>
     );
   }
 }`;
 
 export const scope = {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Subheadline,
 };

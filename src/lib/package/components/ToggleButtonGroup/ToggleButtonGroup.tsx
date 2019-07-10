@@ -7,58 +7,58 @@ import cx from 'clsx';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 // Material UI Components
-import Button from '../Button/Button';
+import Button, { ButtonStylesOverride } from '../Button/Button';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
+import {
+  ACE_COLOR_MAIN_WHITE,
+  ACE_COLOR_MAIN_BLUE,
+  ACE_COLOR_TRANSPARENT,
+} from '../../constants/colors';
 
 interface option {
-  id: string | number,
-  text: string,
-  value: string | number
+  id: string | number;
+  text: string;
+  value: string | number;
 }
 
 interface RequiredProps {
-  id: string | number,
-  children: any,
-  options: option[],
-  onSelect: (option:option) => void
+  id: string | number;
+  children: any;
+  options: option[];
+  onSelect: (option: option) => void;
 }
 
 interface OptionalProps {
-  classes?: any, // MUI Decorator
-  className?: string,
-  disabled?: boolean,
-  value?: string | number
+  classes?: any; // MUI Decorator
+  className?: string;
+  disabled?: boolean;
+  value?: string | number;
 }
 
-const defaultProps:OptionalProps = {
+const defaultProps: OptionalProps = {
   className: '',
   disabled: false,
   value: '',
 };
 
-const styleClasses = (theme:Theme):{
+const styleClasses = (
+  theme: Theme
+): {
   // CSS Classes
-  root: any,
-  left: any,
-  right: any,
-  active:any,
+  root: any;
+  left: any;
+  right: any;
+  active: any;
 } => ({
   root: {
     display: 'flex',
     '& .Button': {
       width: '157px',
       height: '48px',
-      '& span': {
-        fontSize: '18px',
-      },
     },
     [theme.breakpoints.down('sm')]: {
       '& .Button': {
         width: '50%',
-        '& span': {
-          fontSize: '16px !important',
-          fontWeight: '700 !important',
-        },
         '&:hover': {
           background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
         },
@@ -68,27 +68,26 @@ const styleClasses = (theme:Theme):{
   left: {
     borderTopRightRadius: '0px',
     borderBottomRightRadius: '0px',
-    borderRightStyle: 'none !important',
   },
   right: {
     borderTopLeftRadius: '0px',
     borderBottomLeftRadius: '0px',
   },
   active: {
-    background: `${theme.palette.primary.dark} !important`,
-    color: `${theme.secondaryPalette.colorVariables.WHITE} !important`,
     '&:hover': {
       background: theme.palette.primary.dark,
     },
-    [theme.breakpoints.down('sm')]: {
-      background: `${theme.secondaryPalette.colorVariables.SECONDARY_HOVER} !important`,
-      color: `${theme.palette.primary.main} !important`,
-      '&:hover': {
-        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
-      },
-    },
   },
 });
+
+const leftButtonOverrides: ButtonStylesOverride = {
+  borderRightStyle: 'none',
+  activeColor: ACE_COLOR_MAIN_BLUE,
+};
+
+const rightButtonOverrides: ButtonStylesOverride = {
+  activeColor: ACE_COLOR_MAIN_BLUE,
+};
 
 /**
  * Propagates value selected to parent callback
@@ -97,9 +96,21 @@ const styleClasses = (theme:Theme):{
  * @return {void}
  */
 function handleClick(
-  opt:option,
-  onSelect:(opt:option) => void
- ) {
+  position: string,
+  opt: option,
+  onSelect: (opt: option) => void
+) {
+  if (position === 'left') {
+    leftButtonOverrides.activeColor = ACE_COLOR_MAIN_WHITE;
+    leftButtonOverrides.background = ACE_COLOR_MAIN_BLUE;
+    rightButtonOverrides.activeColor = ACE_COLOR_MAIN_BLUE;
+    rightButtonOverrides.background = ACE_COLOR_TRANSPARENT;
+  } else {
+    leftButtonOverrides.activeColor = ACE_COLOR_MAIN_BLUE;
+    leftButtonOverrides.background = ACE_COLOR_TRANSPARENT;
+    rightButtonOverrides.activeColor = ACE_COLOR_MAIN_WHITE;
+    rightButtonOverrides.background = ACE_COLOR_MAIN_BLUE;
+  }
   onSelect(opt);
 }
 
@@ -108,7 +119,7 @@ function handleClick(
  * @param  {Array} options
  * @return {Boolean} isOptionsKeyPresent?
  */
-function isOptionsKeysPresent(options:option[]) {
+function isOptionsKeysPresent(options: option[]) {
   return options.every(op => op.id && op.text);
 }
 
@@ -120,21 +131,24 @@ function isOptionsKeysPresent(options:option[]) {
  * @return {String} activeClass
  */
 function getActiveClass(
-  value:string|number|undefined,
-  id: string|number,
-  classes: {active: string}
-):string {
+  value: string | number | undefined,
+  id: string | number,
+  classes: { active: string }
+): string {
+  let activeClass = '';
   const { active } = classes;
-  return value === id ? `${active}` : '';
+  if (value === id) {
+    activeClass = `${active}`;
+  }
+  return activeClass;
 }
-
 
 /**
  * Returns if the options are valid or not
  * @param  {Array} options - passed options
  * @return {Boolean} areOptionsValid
  */
-function areOptionsValid(options:option[]) {
+function areOptionsValid(options: option[]) {
   if (!Array.isArray(options) || options.length < 2) {
     invariant(
       false,
@@ -150,15 +164,9 @@ function areOptionsValid(options:option[]) {
   return true;
 }
 
-
-const ToggleButtonGroup:React.FunctionComponent<RequiredProps & OptionalProps> = ({
-  classes,
-  className,
-  disabled,
-  options,
-  value,
-  onSelect,
-}) => {
+const ToggleButtonGroup: React.FunctionComponent<
+  RequiredProps & OptionalProps
+> = ({ classes, className, disabled, options, value, onSelect }) => {
   return (
     <Fragment>
       {areOptionsValid(options) ? (
@@ -173,7 +181,8 @@ const ToggleButtonGroup:React.FunctionComponent<RequiredProps & OptionalProps> =
             color="secondary"
             id={`ToggleButton-${options[0].id}`}
             disabled={disabled}
-            onClick={() => handleClick(options[0], onSelect)}
+            onClick={() => handleClick('left', options[0], onSelect)}
+            overrides={leftButtonOverrides}
           >
             {options[0].text}
           </Button>
@@ -187,7 +196,8 @@ const ToggleButtonGroup:React.FunctionComponent<RequiredProps & OptionalProps> =
             color="secondary"
             id={`ToggleButton-${options[1].id}`}
             disabled={disabled}
-            onClick={() => handleClick(options[1], onSelect)}
+            onClick={() => handleClick('right', options[1], onSelect)}
+            overrides={rightButtonOverrides}
           >
             {options[1].text}
           </Button>

@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import { Field } from 'react-final-form';
 
 // Components
-import AAAPrimaryTheme from '../../AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEPrimaryTheme from '../../ACEPrimaryTheme/ACEPrimaryTheme';
 import BaseInput from '../../Input/BaseInput/BaseInput';
 import Form from '../Form';
 import FormInput from './FormInput';
@@ -24,13 +24,13 @@ function renderInputWithProps(props){
 
 function createFormAndFormInputWithTheme(props) {
   return mount(
-    <AAAPrimaryTheme>
+    <ACEPrimaryTheme>
       <Form
         onSubmit={() => {}}
         validations={{}}
         render={renderInputWithProps(props)}
       />
-    </AAAPrimaryTheme>
+    </ACEPrimaryTheme>
   );
 }
 

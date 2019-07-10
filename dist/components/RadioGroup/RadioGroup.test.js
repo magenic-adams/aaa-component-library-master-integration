@@ -10,7 +10,7 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import { Form } from 'react-final-form';
-import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEThemeProvider from '../ACEPrimaryTheme/ACEPrimaryTheme';
 import RadioGroup from './RadioGroup';
 
 function getFakeProps(overrides) {
@@ -27,12 +27,12 @@ function getFakeProps(overrides) {
 
 function createRadioGroupWithTheme(props) {
   return mount(
-    <AAAThemeProvider theme={props.theme}>
+    <ACEThemeProvider theme={props.theme}>
       <Form
         onSubmit={() => jest.fn(v => v)}
         render={() => <RadioGroup {...props} />}
       />
-    </AAAThemeProvider>
+    </ACEThemeProvider>
   );
 }
 

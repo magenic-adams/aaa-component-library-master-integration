@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 
 import { action } from '@storybook/addon-actions';
 import { text, withKnobs } from '@storybook/addon-knobs';
-import { AAAPrimaryTheme } from '../src/lib/package/components';
+import { ACEPrimaryTheme } from '../src/lib/package/components';
 import NumericalStepper from '../src/lib/package/components/Stepper/NumericalStepper';
 // Internal
 import ElementContainer from '../src/lib/internal/ElementContainer/ElementContainer';
@@ -13,7 +13,7 @@ const stories = storiesOf('Molecules|Stepper', module);
 
 stories.addDecorator(withKnobs).add('numerical ', () => {
   return (
-    <AAAPrimaryTheme>
+    <ACEPrimaryTheme>
       <div style={{ textAlign: 'center' }}>
         <h2>Numerical Stepper with Helper Text</h2>
       </div>
@@ -58,6 +58,6 @@ stories.addDecorator(withKnobs).add('numerical ', () => {
           disabled
         />
       </ElementContainer>
-    </AAAPrimaryTheme>
+    </ACEPrimaryTheme>
   );
 });

@@ -7,15 +7,15 @@ import { mount } from 'enzyme';
 import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 
 // Components
-import AAAPrimaryTheme from '../AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEPrimaryTheme from '../ACEPrimaryTheme/ACEPrimaryTheme';
 import Button from '../Button/Button';
 import ButtonGroup from './ButtonGroup';
 
 function createButtonGroupWithTheme(props) {
   return mount(
-      <AAAPrimaryTheme>
+      <ACEPrimaryTheme>
         <ButtonGroup {...props} />
-      </AAAPrimaryTheme>
+      </ACEPrimaryTheme>
   );
 }
 

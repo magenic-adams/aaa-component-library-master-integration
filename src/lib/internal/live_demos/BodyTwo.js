@@ -1,5 +1,5 @@
 import {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Body,
 } from '../../package/components';
 
@@ -7,17 +7,17 @@ export const demo = `class BodyTwoDemo extends React.Component {
   render(){
     return (
       <div>
-        <AAAPrimaryTheme>
+        <ACEPrimaryTheme>
           <Body secondary>
             > Edit Body 2
           </Body>
-        </AAAPrimaryTheme>
+        </ACEPrimaryTheme>
       </div>
     );
   }
 }`;
 
 export const scope = {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Body,
 };

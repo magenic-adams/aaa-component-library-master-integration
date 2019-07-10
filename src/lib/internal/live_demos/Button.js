@@ -1,5 +1,5 @@
 import {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Button,
 } from '../../package/components';
 
@@ -20,7 +20,7 @@ export const demo = `class ButtonDemo extends React.Component {
 
   render(){
     return (
-      <AAAPrimaryTheme>
+      <ACEPrimaryTheme>
         <Button
           id="main-btn"
           className="my-class-name"
@@ -37,12 +37,12 @@ export const demo = `class ButtonDemo extends React.Component {
         >
           Secondary button
         </Button>
-      </AAAPrimaryTheme>  
+      </ACEPrimaryTheme>  
     );
   }
 }`;
 
 export const scope = {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Button,
 };

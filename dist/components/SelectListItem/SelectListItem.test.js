@@ -9,14 +9,14 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEThemeProvider from '../ACEPrimaryTheme/ACEPrimaryTheme';
 import SelectListItem from './SelectListItem';
 
 // Test Utilities
 import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 
 // Constants
-import { AAA_COLOR_TRANSPARENT } from '../../constants/colors';
+import { ACE_COLOR_TRANSPARENT } from '../../constants/colors';
 
 function getFakeProps(overrides) {
   return {
@@ -28,9 +28,9 @@ function getFakeProps(overrides) {
 
 function createSelectListItemWithTheme(props) {
   return mount(
-    <AAAThemeProvider theme={props.theme}>
+    <ACEThemeProvider theme={props.theme}>
       <SelectListItem {...props} />
-    </AAAThemeProvider>,
+    </ACEThemeProvider>,
   );
 }
 
@@ -141,7 +141,7 @@ describe('SelectListItem', () => {
         listItemTextWrapper.getDOMNode(),
         'background',
       );
-      expect(borderColorStyle).to.equal(AAA_COLOR_TRANSPARENT);
+      expect(borderColorStyle).to.equal(ACE_COLOR_TRANSPARENT);
     });
   });
 });

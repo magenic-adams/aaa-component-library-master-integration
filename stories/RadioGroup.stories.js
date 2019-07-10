@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 
 // Components
 import {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   RadioGroup,
   Subheadline,
   Subtitle,
@@ -45,7 +45,7 @@ class RadioGroupContainer extends Component {
     const { selectedId, selectedIds } = this.state;
     const { items } = this.props;
     return (
-      <AAAPrimaryTheme>
+      <ACEPrimaryTheme>
         <div className="u-padding--50">
           <StoryIntroduction elementName="Single-Select/Multi-Select RadioGroup" />
         </div>
@@ -90,7 +90,7 @@ class RadioGroupContainer extends Component {
             />
           </div>
         </div>
-      </AAAPrimaryTheme>
+      </ACEPrimaryTheme>
     );
   }
 }

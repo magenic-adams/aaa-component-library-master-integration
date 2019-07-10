@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { makeStyles } from '@material-ui/styles';
-import { AAA_CSS_INLINE, AAA_CSS_MIDDLE } from '../../constants/cssConstants';
+import { ACE_CSS_INLINE, ACE_CSS_MIDDLE } from '../../constants/cssConstants';
 
 // If overrides need to be passed down to child components
 // extract it into a method so makeStyles dynamic class naming
@@ -55,11 +55,11 @@ export const styleClasses = makeStyles({
       fontSize: '16px',
     },
     '& svg': {
-      display: `${AAA_CSS_INLINE}`,
+      display: `${ACE_CSS_INLINE}`,
       fontSize: 20,
       marginLeft: 8,
       marginRight: 8,
-      verticalAlign: `${AAA_CSS_MIDDLE}`,
+      verticalAlign: `${ACE_CSS_MIDDLE}`,
     },
   },
 });

@@ -16,22 +16,22 @@ import MUIIconButton from '@material-ui/core/IconButton';
 
 // Components
 import BaseInput from './BaseInput';
-import AAAPrimaryTheme from '../../AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEPrimaryTheme from '../../ACEPrimaryTheme/ACEPrimaryTheme';
 
 // Test Utilities
 import { getDOMNodeComputedStyle } from '../../../../../../test/DOM';
 
 // Constants
 import {
-  AAA_COLOR_MAIN_DISABLED,
-  AAA_COLOR_MAIN_ERROR,
-  AAA_COLOR_MAIN_GRAY,
-  AAA_COLOR_MAIN_WHITE,
-  // AAA_COLOR_TRANSPARENT,
+  ACE_COLOR_MAIN_DISABLED,
+  ACE_COLOR_MAIN_ERROR,
+  ACE_COLOR_MAIN_GRAY,
+  ACE_COLOR_MAIN_WHITE,
+  // ACE_COLOR_TRANSPARENT,
 } from '../../../constants/colors';
 
 function createInput(props) {
-  return mount(<AAAPrimaryTheme><BaseInput {...props} /></AAAPrimaryTheme>);
+  return mount(<ACEPrimaryTheme><BaseInput {...props} /></ACEPrimaryTheme>);
 }
 
 function getFakeProps(override) {
@@ -196,9 +196,9 @@ describe('Input', () => {
     //   const FocusedInputWrapper = createInput(focusProps);
     //   const FocusedBaseInputWrapper = FocusedInputWrapper.find(MUIInput);
 
-    //   it ('should have 2px AAA_COLOR_MAIN_DARKER_BLUE inset box-shadow', () => {
+    //   it ('should have 2px ACE_COLOR_MAIN_DARKER_BLUE inset box-shadow', () => {
     //     const boxShadowStyle = getDOMNodeComputedStyle(FocusedBaseInputWrapper.getDOMNode(), 'box-shadow');
-    //     expect(boxShadowStyle).to.equal(`inset 0 0 0 2px ${AAA_COLOR_MAIN_DARKER_BLUE}`);
+    //     expect(boxShadowStyle).to.equal(`inset 0 0 0 2px ${ACE_COLOR_MAIN_DARKER_BLUE}`);
     //   });
     // });
 
@@ -211,9 +211,9 @@ describe('Input', () => {
         expect(DisabledInputWrapper.find(`input#${props.id}`).get(0).props.disabled).to.equal(true);
       });
 
-      it ('should have AAA_COLOR_MAIN_DISABLED background-color', () => {
+      it ('should have ACE_COLOR_MAIN_DISABLED background-color', () => {
         const backgroundColorStyle = getDOMNodeComputedStyle(DisabledMUIInputNode, 'background-color');
-        expect(backgroundColorStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
+        expect(backgroundColorStyle).to.equal(ACE_COLOR_MAIN_DISABLED);
       });
 
       it ('should have initial box-shadow property', () => {
@@ -259,9 +259,9 @@ describe('Input', () => {
       });
 
       describe('error styles', () => {
-        it ('should have an 1px inset AAA_COLOR_MAIN_ERROR box-shadow property', () => {
+        it ('should have an 1px inset ACE_COLOR_MAIN_ERROR box-shadow property', () => {
           const boxShadowStyle = getDOMNodeComputedStyle(ErrorMUIInputNode, 'box-shadow');
-          expect(boxShadowStyle).to.equal(`inset 0 0 0 2px ${AAA_COLOR_MAIN_ERROR}`);
+          expect(boxShadowStyle).to.equal(`inset 0 0 0 2px ${ACE_COLOR_MAIN_ERROR}`);
         });
       });
     });
@@ -287,14 +287,14 @@ describe('Input', () => {
         expect(borderRadiusStyle).to.equal('4px');
       });
 
-      it ('should have AAA_COLOR_MAIN_WHITE background color', () => {
+      it ('should have ACE_COLOR_MAIN_WHITE background color', () => {
         const backgroundColorStyle = getDOMNodeComputedStyle(MUIInputNode, 'background-color');
-        expect(backgroundColorStyle).to.equal(AAA_COLOR_MAIN_WHITE);
+        expect(backgroundColorStyle).to.equal(ACE_COLOR_MAIN_WHITE);
       });
 
-      it ('should have 1px inset AAA_COLOR_MAIN_GRAY box-shadow', () => {
+      it ('should have 1px inset ACE_COLOR_MAIN_GRAY box-shadow', () => {
         const boxShadowStyle = getDOMNodeComputedStyle(MUIInputNode, 'box-shadow');
-        expect(boxShadowStyle).to.equal(`inset 0 0 0 1px ${AAA_COLOR_MAIN_GRAY}`);
+        expect(boxShadowStyle).to.equal(`inset 0 0 0 1px ${ACE_COLOR_MAIN_GRAY}`);
       });
     });
   });

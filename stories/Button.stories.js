@@ -3,9 +3,12 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
+// Assets
+import phoneImage from '../src/Images/phone.svg';
+
 // Components
 import {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Button,
   ButtonGroup,
 } from '../src/lib/package/components';
@@ -24,7 +27,7 @@ const stories = storiesOf('Atomic|Button', module);
 stories
   .addDecorator(withKnobs)
   .add('primary and secondary', () => (
-    <AAAPrimaryTheme>
+    <ACEPrimaryTheme>
       <StoryLayoutContainer>
         <StoryIntroduction
           elementName="Button"
@@ -58,9 +61,12 @@ stories
           <ButtonGroup>
             <Button color="primary" onClick={action('clicked')}>Primary</Button>
             <Button color="primary" disabled onClick={action('clicked')}>Primary disabled</Button>
+            <Button color="primary" leftIcon={phoneImage}>With left icon</Button>
           </ButtonGroup>
         </div>
       </ElementContainer>
+
+      
 
       <div className="u-mt--50">
         <StoryLayoutContainer>
@@ -97,5 +103,5 @@ stories
         <StoryCodePlayground demo={demo} scope={scope} />
       </StoryLayoutContainer>
 
-    </AAAPrimaryTheme>
+    </ACEPrimaryTheme>
   ));

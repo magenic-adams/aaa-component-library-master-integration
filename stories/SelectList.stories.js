@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
 // Components
-import { AAAPrimaryTheme, SelectList } from '../src/lib/package/components';
+import { ACEPrimaryTheme, SelectList } from '../src/lib/package/components';
 import { demo, scope } from '../src/lib/internal/live_demos/SelectList';
 
 // Internal
@@ -28,7 +28,7 @@ const items = [
 
 stories.add('Usage and States', () => {
   return (
-    <AAAPrimaryTheme>
+    <ACEPrimaryTheme>
       <StoryLayoutContainer>
         <StoryIntroduction
           elementName="SelectList"
@@ -68,6 +68,6 @@ stories.add('Usage and States', () => {
         <StorySectionHeader title="Code examples" />
         <StoryCodePlayground demo={demo} scope={scope} />
       </StoryLayoutContainer>
-    </AAAPrimaryTheme>
+    </ACEPrimaryTheme>
   );
 });

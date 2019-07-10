@@ -1,11 +1,12 @@
 // Main
-import AAAPrimaryTheme from './AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEPrimaryTheme from './ACEPrimaryTheme/ACEPrimaryTheme';
 import Button from './Button/Button';
 import ButtonGroup from './ButtonGroup/ButtonGroup';
 import NumericInput from './Input/NumericInput/NumericInput';
 import BaseInput from './Input/BaseInput/BaseInput';
 import Label from './Label/Label';
 import Link from './Link/Link';
+import Tooltip from './Tooltip/Tooltip';
 import ToggleButtonGroup from './ToggleButtonGroup/ToggleButtonGroup';
 import RadioGroup from './RadioGroup/RadioGroup';
 import RadioItem from './RadioItem/RadioItem';
@@ -30,7 +31,7 @@ import RightArrowIcon from '../icons/RightArrowIcon';
 import AddIcon from '../icons/AddIcon';
 
 export {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   AddIcon,
   BaseInput,
   Body,
@@ -53,4 +54,5 @@ export {
   Subheadline,
   Subtitle,
   ToggleButtonGroup,
+  Tooltip,
 };

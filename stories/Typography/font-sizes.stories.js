@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // Components
-import { AAAPrimaryTheme } from '../../src/lib/package/components';
+import { ACEPrimaryTheme } from '../../src/lib/package/components';
 import Headline from '../../src/lib/package/components/Headline/Headline';
 import Subheadline from '../../src/lib/package/components/Subheadline/Subheadline';
 import Subtitle from '../../src/lib/package/components/Subtitle/Subtitle';
@@ -24,7 +24,7 @@ const stories = storiesOf('Atomic|Typography', module);
 
 stories
   .add('Text sizes', () => (
-    <AAAPrimaryTheme>
+    <ACEPrimaryTheme>
       <StoryLayoutContainer>
         <StoryIntroduction
           elementName="Typography"
@@ -149,5 +149,5 @@ stories
           scope={bodyTwoScope}
         />
       </StoryLayoutContainer>
-    </AAAPrimaryTheme>
+    </ACEPrimaryTheme>
   ));

@@ -17,6 +17,8 @@ var _Button = _interopRequireDefault(require("../Button/Button"));
 
 var _ButtonGroup = _interopRequireDefault(require("../ButtonGroup/ButtonGroup"));
 
+var _colors = require("../../constants/colors");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -33,18 +35,11 @@ const styleClasses = theme => ({
     display: 'flex',
     '& .Button': {
       width: '157px',
-      height: '48px',
-      '& span': {
-        fontSize: '18px'
-      }
+      height: '48px'
     },
     [theme.breakpoints.down('sm')]: {
       '& .Button': {
         width: '50%',
-        '& span': {
-          fontSize: '16px !important',
-          fontWeight: '700 !important'
-        },
         '&:hover': {
           background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
         }
@@ -53,28 +48,26 @@ const styleClasses = theme => ({
   },
   left: {
     borderTopRightRadius: '0px',
-    borderBottomRightRadius: '0px',
-    borderRightStyle: 'none !important'
+    borderBottomRightRadius: '0px'
   },
   right: {
     borderTopLeftRadius: '0px',
     borderBottomLeftRadius: '0px'
   },
   active: {
-    background: "".concat(theme.palette.primary.dark, " !important"),
-    color: "".concat(theme.secondaryPalette.colorVariables.WHITE, " !important"),
     '&:hover': {
       background: theme.palette.primary.dark
-    },
-    [theme.breakpoints.down('sm')]: {
-      background: "".concat(theme.secondaryPalette.colorVariables.SECONDARY_HOVER, " !important"),
-      color: "".concat(theme.palette.primary.main, " !important"),
-      '&:hover': {
-        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
-      }
     }
   }
 });
+
+const leftButtonOverrides = {
+  borderRightStyle: 'none',
+  activeColor: _colors.ACE_COLOR_MAIN_BLUE
+};
+const rightButtonOverrides = {
+  activeColor: _colors.ACE_COLOR_MAIN_BLUE
+};
 /**
  * Propagates value selected to parent callback
  * @param  {String|Number} option - value passed
@@ -82,8 +75,19 @@ const styleClasses = theme => ({
  * @return {void}
  */
 
+function handleClick(position, opt, onSelect) {
+  if (position === 'left') {
+    leftButtonOverrides.activeColor = _colors.ACE_COLOR_MAIN_WHITE;
+    leftButtonOverrides.background = _colors.ACE_COLOR_MAIN_BLUE;
+    rightButtonOverrides.activeColor = _colors.ACE_COLOR_MAIN_BLUE;
+    rightButtonOverrides.background = _colors.ACE_COLOR_TRANSPARENT;
+  } else {
+    leftButtonOverrides.activeColor = _colors.ACE_COLOR_MAIN_BLUE;
+    leftButtonOverrides.background = _colors.ACE_COLOR_TRANSPARENT;
+    rightButtonOverrides.activeColor = _colors.ACE_COLOR_MAIN_WHITE;
+    rightButtonOverrides.background = _colors.ACE_COLOR_MAIN_BLUE;
+  }
 
-function handleClick(opt, onSelect) {
   onSelect(opt);
 }
 /**
@@ -106,10 +110,16 @@ function isOptionsKeysPresent(options) {
 
 
 function getActiveClass(value, id, classes) {
+  let activeClass = '';
   const {
     active
   } = classes;
-  return value === id ? "".concat(active) : '';
+
+  if (value === id) {
+    activeClass = "".concat(active);
+  }
+
+  return activeClass;
 }
 /**
  * Returns if the options are valid or not
@@ -146,13 +156,15 @@ const ToggleButtonGroup = (_ref) => {
     color: "secondary",
     id: "ToggleButton-".concat(options[0].id),
     disabled: disabled,
-    onClick: () => handleClick(options[0], onSelect)
+    onClick: () => handleClick('left', options[0], onSelect),
+    overrides: leftButtonOverrides
   }, options[0].text), _react.default.createElement(_Button.default, {
     className: (0, _clsx.default)("".concat(getActiveClass(value, options[1].id, classes), " ").concat(classes.right), className),
     color: "secondary",
     id: "ToggleButton-".concat(options[1].id),
     disabled: disabled,
-    onClick: () => handleClick(options[1], onSelect)
+    onClick: () => handleClick('right', options[1], onSelect),
+    overrides: rightButtonOverrides
   }, options[1].text)) : null);
 };
 

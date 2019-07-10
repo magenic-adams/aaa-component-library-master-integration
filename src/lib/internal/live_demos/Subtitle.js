@@ -1,5 +1,5 @@
 import {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Subtitle,
 } from '../../package/components';
 
@@ -7,17 +7,17 @@ export const demo = `class SubtitleDemo extends React.Component {
   render(){
     return (
       <div>
-        <AAAPrimaryTheme>
+        <ACEPrimaryTheme>
           <Subtitle>
             > Edit Subtitle
           </Subtitle>
-        </AAAPrimaryTheme>
+        </ACEPrimaryTheme>
       </div>
     );
   }
 }`;
 
 export const scope = {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Subtitle,
 };

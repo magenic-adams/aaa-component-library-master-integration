@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
-import { Link as TextLink, AAAPrimaryTheme } from '..';
+import { Link as TextLink, ACEPrimaryTheme } from '..';
 
 // Test Utilities
 import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
@@ -20,7 +20,7 @@ describe('Link', () => {
   };
 
   function createLink(children, className) {
-    return mount(<AAAPrimaryTheme><TextLink className={className} onClick={SampleClick} onBlur={SampleBlur}>{children}</TextLink></AAAPrimaryTheme>);
+    return mount(<ACEPrimaryTheme><TextLink className={className} onClick={SampleClick} onBlur={SampleBlur}>{children}</TextLink></ACEPrimaryTheme>);
   }
 
   beforeEach(() => {

@@ -8,10 +8,10 @@ import { mount } from 'enzyme';
 // Components
 import NumericInput from './NumericInput';
 // import BaseInput from '../BaseInput/BaseInput';
-import AAAPrimaryTheme from '../../AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEPrimaryTheme from '../../ACEPrimaryTheme/ACEPrimaryTheme';
 
 function createInput(props) {
-  return mount(<AAAPrimaryTheme><NumericInput {...props} /></AAAPrimaryTheme>);
+  return mount(<ACEPrimaryTheme><NumericInput {...props} /></ACEPrimaryTheme>);
 }
 
 function getFakeProps(override) {

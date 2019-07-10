@@ -1,11 +1,11 @@
 import React from 'react';
 
 import StoryIntroduction from './StoryIntroduction/StoryIntroduction';
-import { AAAPrimaryTheme, Body } from '../package/components';
+import { ACEPrimaryTheme, Body } from '../package/components';
 
 function Welcome(){
   return (
-    <AAAPrimaryTheme>
+    <ACEPrimaryTheme>
       <div className="u-padding--50">
         <StoryIntroduction elementName="Welcome to storybook"></StoryIntroduction>
         <div className="u-mt--20">
@@ -21,7 +21,7 @@ function Welcome(){
           <Body>See these sample stories for a component called <b>Button</b>.</Body>
         </div>
       </div>
-    </AAAPrimaryTheme>
+    </ACEPrimaryTheme>
   );
 }
 

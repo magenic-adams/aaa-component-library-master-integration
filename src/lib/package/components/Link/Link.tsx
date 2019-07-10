@@ -14,6 +14,7 @@ import noop from '../../utilities/noop'; // used the Link instead of the button
 interface RequiredProps {
   id: string;
   children: string;
+  component: 'a' | 'button';
 };
 
 interface OptionalProps {
@@ -68,6 +69,7 @@ const Link: React.FunctionComponent < RequiredProps & OptionalProps > = ({
   className,
   classes,
   color,
+  component,
   href,
   id,
   onBlur,
@@ -78,6 +80,7 @@ const Link: React.FunctionComponent < RequiredProps & OptionalProps > = ({
   <MuiLink 
     className={className}
     color={color}
+    component={component}
     id={id}
     href={href}
     onBlur={onBlur}

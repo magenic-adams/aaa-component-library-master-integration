@@ -15,6 +15,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         DARKER_BLUE: string,
         VERY_DARK_BLUE: string,
         GRAY: string,
+        VERY_LIGHT_GRAY: string,
         WHITE: string,
       }
     },
@@ -45,6 +46,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         DARKER_BLUE?: string,
         VERY_DARK_BLUE?: string,
         GRAY?: string,
+        VERY_LIGHT_GRAY?: string,
         WHITE?: string,
       }
     },

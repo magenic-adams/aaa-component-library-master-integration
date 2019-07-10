@@ -1,72 +1,80 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = AAAThemeProvider;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _styles = require("@material-ui/styles");
-
-var _createStyleTheme = _interopRequireDefault(require("../../utilities/createStyleTheme"));
-
-var _colors = require("../../constants/colors");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 // https://next.material-ui.com/customization/themes
+import React from 'react';
+import { ThemeProvider } from '@material-ui/styles';
+
 // Augmented themea definition
+import createStyleTheme from '../../utilities/createStyleTheme';
+
 // Colors
-const theme = (0, _createStyleTheme.default)({
+import {
+  ACE_COLOR_MAIN_ERROR,
+  ACE_COLOR_MAIN_BLACK,
+  ACE_COLOR_MAIN_BLUE,
+  ACE_COLOR_MAIN_DISABLED,
+  ACE_COLOR_MAIN_DARK_BLUE,
+  ACE_COLOR_MAIN_DARKER_BLUE,
+  ACE_COLOR_MAIN_ERROR_HOVER,
+  ACE_COLOR_MAIN_GRAY,
+  ACE_COLOR_MAIN_VERY_LIGHT_GRAY,
+  ACE_COLOR_MAIN_WHITE,
+  ACE_COLOR_SECONDARY_HOVER,
+  ACE_COLOR_TRANSPARENT,
+  ACE_COLOR_MAIN_VERY_DARK_BLUE,
+} from '../../constants/colors';
+
+const theme = createStyleTheme({
   breakpoints: {
     values: {
       xs: 0,
       sm: 320,
       md: 768,
       lg: 1024,
-      xl: 1440
-    }
+      xl: 1440,
+    },
   },
   palette: {
     primary: {
       // NOTE: when not specifying other values like "light", they will
       // be calculated from palette.primary.main,
-      main: _colors.AAA_COLOR_MAIN_BLUE,
-      dark: _colors.AAA_COLOR_MAIN_DARK_BLUE
+      main: ACE_COLOR_MAIN_BLUE,
+      dark: ACE_COLOR_MAIN_DARK_BLUE,
     },
     error: {
-      main: _colors.AAA_COLOR_MAIN_ERROR
-    }
+      main: ACE_COLOR_MAIN_ERROR,
+    },
   },
   secondaryPalette: {
     // ** Client Library Defined **
     disabled: {
-      main: _colors.AAA_COLOR_MAIN_DISABLED
+      main: ACE_COLOR_MAIN_DISABLED,
     },
     // These are use defined variables we can use
     colorVariables: {
-      BLACK: _colors.AAA_COLOR_MAIN_BLACK,
-      SECONDARY_HOVER: _colors.AAA_COLOR_SECONDARY_HOVER,
-      ERROR_HOVER: _colors.AAA_COLOR_MAIN_ERROR_HOVER,
-      TRANSPARENT: _colors.AAA_COLOR_TRANSPARENT,
-      DARKER_BLUE: _colors.AAA_COLOR_MAIN_DARKER_BLUE,
-      VERY_DARK_BLUE: _colors.AAA_COLOR_MAIN_VERY_DARK_BLUE,
-      GRAY: _colors.AAA_COLOR_MAIN_GRAY,
-      WHITE: _colors.AAA_COLOR_MAIN_WHITE
-    }
+      BLACK: ACE_COLOR_MAIN_BLACK,
+      SECONDARY_HOVER: ACE_COLOR_SECONDARY_HOVER,
+      ERROR_HOVER: ACE_COLOR_MAIN_ERROR_HOVER,
+      TRANSPARENT: ACE_COLOR_TRANSPARENT,
+      DARKER_BLUE: ACE_COLOR_MAIN_DARKER_BLUE,
+      VERY_DARK_BLUE: ACE_COLOR_MAIN_VERY_DARK_BLUE,
+      GRAY: ACE_COLOR_MAIN_GRAY,
+      VERY_LIGHT_GRAY: ACE_COLOR_MAIN_VERY_LIGHT_GRAY,
+      WHITE: ACE_COLOR_MAIN_WHITE,
+    },
   },
+  
   typographyValues: {
     // ** Client Library Defined **
-    color: _colors.AAA_COLOR_MAIN_BLACK,
+    color: ACE_COLOR_MAIN_BLACK,
     fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',
     fontStyle: 'regular',
-    fontWeight: 400 // Medium
-
+    fontWeight: 400, // Medium
   },
-  typographyElements: {}
-}); // ** Typography ** //
+  typographyElements: {},
+});
 
+
+
+// ** Typography ** //
 theme.typography.h1 = {
   // Headline
   color: theme.typographyValues.color,
@@ -77,9 +85,10 @@ theme.typography.h1 = {
   fontSize: 20,
   [theme.breakpoints.up('lg')]: {
     fontSize: 28,
-    lineHeight: 1.57
-  }
+    lineHeight: 1.57,
+  },
 };
+
 theme.typography.h2 = {
   // Subheadline
   color: theme.typographyValues.color,
@@ -89,9 +98,10 @@ theme.typography.h2 = {
   lineHeight: 1.45,
   fontSize: 18,
   [theme.breakpoints.up('lg')]: {
-    fontSize: 22
-  }
+    fontSize: 22,
+  },
 };
+
 theme.typography.subtitle1 = {
   // Subtitle 1 / Table Header
   color: theme.typographyValues.color,
@@ -102,9 +112,10 @@ theme.typography.subtitle1 = {
   fontWeight: 500,
   [theme.breakpoints.up('lg')]: {
     fontSize: 18,
-    lineHeight: 1.45
-  }
+    lineHeight: 1.45,
+  },
 };
+
 theme.typography.body1 = {
   // Body 1 / Primary Copy
   color: theme.typographyValues.color,
@@ -115,9 +126,10 @@ theme.typography.body1 = {
   lineHeight: 1.5,
   [theme.breakpoints.up('lg')]: {
     fontSize: 18,
-    lineHeight: 1.45
-  }
+    lineHeight: 1.45,
+  },
 };
+
 theme.typography.body2 = {
   // Body 2 / Primary Copy
   color: theme.typographyValues.color,
@@ -128,10 +140,11 @@ theme.typography.body2 = {
   lineHeight: 1.45,
   [theme.breakpoints.up('lg')]: {
     fontSize: 16,
-    lineHeight: 1.5
-  }
-}; // ** Client Library Defined **
+    lineHeight: 1.5,
+  },
+};
 
+// ** Client Library Defined **
 theme.typographyElements.buttonPrimary = {
   color: theme.secondaryPalette.colorVariables.WHITE,
   fontFamily: theme.typographyValues.fontFamily,
@@ -140,19 +153,19 @@ theme.typographyElements.buttonPrimary = {
   lineHeight: 1.45,
   fontSize: 18,
   [theme.breakpoints.up('lg')]: {
-    fontSize: 20
-  }
-}; // ** Client Library Defined **
-
+    fontSize: 20,
+  },
+};
+// ** Client Library Defined **
 theme.typographyElements.buttonSecondary = {
   color: theme.palette.primary.main,
   fontFamily: theme.typographyValues.fontFamily,
   fontStyle: theme.typographyValues.fontStyle,
   fontWeight: theme.typographyValues.fontWeight,
   fontSize: 18,
-  lineHeight: 1.45
-}; // ** Client Library Defined **
-
+  lineHeight: 1.45,
+};
+// ** Client Library Defined **
 theme.typographyElements.linkPrimary = {
   color: theme.secondaryPalette.colorVariables.DARKER_BLUE,
   fontFamily: theme.typographyValues.fontFamily,
@@ -161,9 +174,10 @@ theme.typographyElements.linkPrimary = {
   fontSize: 16,
   lineHeight: 1.45,
   [theme.breakpoints.up('lg')]: {
-    fontSize: 18
-  }
+    fontSize: 18,
+  },
 };
+
 theme.typographyElements.linkSecondary = {
   color: theme.secondaryPalette.colorVariables.DARKER_BLUE,
   fontFamily: theme.typographyValues.fontFamily,
@@ -172,15 +186,10 @@ theme.typographyElements.linkSecondary = {
   fontSize: 16,
   lineHeight: 1.45,
   [theme.breakpoints.up('lg')]: {
-    fontSize: 18
-  }
+    fontSize: 18,
+  },
 };
 
-function AAAThemeProvider(_ref) {
-  let {
-    children
-  } = _ref;
-  return _react.default.createElement(_styles.ThemeProvider, {
-    theme: theme
-  }, children);
+export default function ACEThemeProvider({ children }: { children: any }) {
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }

@@ -3,8 +3,10 @@
 
 import React from 'react';
 import { render } from 'react-dom';
+	// Assets
+import phoneImage from './Images/phone.svg';
 import {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Button,
   BaseInput,
   Link as TextLink,
@@ -36,8 +38,8 @@ const overrideDefaultStepperStyles = () => {
 
 const App = () => {
   return (
-    <AAAPrimaryTheme>
-      <h1>AAA Component Library</h1>
+    <ACEPrimaryTheme>
+      <h1>ACE Component Library</h1>
       <Button color="primary">Here lies a button</Button>
       <br />
       <br />
@@ -46,6 +48,9 @@ const App = () => {
       </Button>
       <Button id="lie-secondary-button" color="secondary">
         Here lies a secondary button
+      </Button>
+      <Button id="button-with-icon-left" color="primary" leftIcon={phoneImage}>
+        Submit application form 
       </Button>
       <br />
       <br />
@@ -108,7 +113,7 @@ const App = () => {
         onIncrease={() => {}}
         onDecrease={() => {}}
       />
-    </AAAPrimaryTheme>
+    </ACEPrimaryTheme>
   );
 };
 // eslint-disable-next-line no-undef

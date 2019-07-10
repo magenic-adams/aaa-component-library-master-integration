@@ -5,7 +5,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import '../src/css/helpers.css';
 
 // Components
-import { AAAPrimaryTheme, BaseInput, NumericInput } from '../src/lib/package/components';
+import { ACEPrimaryTheme, BaseInput, NumericInput } from '../src/lib/package/components';
 
 import ElementContainer from '../src/lib/internal/ElementContainer/ElementContainer';
 
@@ -15,7 +15,7 @@ stories
   .addDecorator(withKnobs)
   .add('Input', () => {
     return (
-      <AAAPrimaryTheme>
+      <ACEPrimaryTheme>
         <div className="u-center u-max-width--1024">
           <img className="u-width--full" src="https://www.dropbox.com/s/z1pbb8angqpq4mq/00inputheader.png?dl=1" alt="rules"/>
         </div>
@@ -105,6 +105,6 @@ stories
         <div className="u-center u-max-width--1024">
           <img className="u-width--full" src="https://www.dropbox.com/s/lzva5wt44nutsmv/04behaviors.png?dl=1" alt="rules"/>
         </div>
-      </AAAPrimaryTheme>
+      </ACEPrimaryTheme>
     );
   });

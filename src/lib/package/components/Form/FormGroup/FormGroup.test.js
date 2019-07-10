@@ -4,15 +4,15 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 // Components
-import AAAPrimaryTheme from '../../AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEPrimaryTheme from '../../ACEPrimaryTheme/ACEPrimaryTheme';
 import FormGroup from './FormGroup';
 import BaseInput from '../../Input/BaseInput/BaseInput';
 
 function createFormGroupWithTheme(props) {
   return mount(
-      <AAAPrimaryTheme>
+      <ACEPrimaryTheme>
         <FormGroup {...props}/>
-      </AAAPrimaryTheme>
+      </ACEPrimaryTheme>
   );
 }
 

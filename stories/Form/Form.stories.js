@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 
 // Components
 import {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Button,
   ButtonGroup,
   Form,
@@ -56,7 +56,7 @@ function handleFormValueSubmission(vals) {
 const stories = storiesOf('Molecules|Form', module);
 stories.add('basic form', () => {
   return (
-    <AAAPrimaryTheme>
+    <ACEPrimaryTheme>
       <div className="u-background--gray">
         <Paper className="u-padding--50">
           <Form
@@ -163,6 +163,6 @@ stories.add('basic form', () => {
           />
         </Paper>
       </div>
-    </AAAPrimaryTheme>
+    </ACEPrimaryTheme>
   );
 });

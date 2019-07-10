@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import MUIFormControl from '@material-ui/core/FormControl';
 
 // Material UI Components
-import AAAPrimaryTheme from '../AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEPrimaryTheme from '../ACEPrimaryTheme/ACEPrimaryTheme';
 import NumericalStepper from './NumericalStepper';
 import { overrideInputWrapper } from './NumericalStepperStyles';
 import NumericInput from '../Input/NumericInput/NumericInput';
@@ -16,13 +16,13 @@ import Label from '../Label/Label';
 import FormFieldMeta from '../Form/FormFieldMeta/FormFieldMeta';
 
 // constants
-import { AAA_COLOR_MAIN_BLUE } from '../../constants/colors';
+import { ACE_COLOR_MAIN_BLUE } from '../../constants/colors';
 
 const createNumericalStepper = props => {
   return mount(
-    <AAAPrimaryTheme>
+    <ACEPrimaryTheme>
       <NumericalStepper {...props} />
-    </AAAPrimaryTheme>
+    </ACEPrimaryTheme>
   );
 };
 const onDecreaseSpy = sinon.spy();
@@ -167,12 +167,12 @@ describe('Style Overrides', () => {
       };
     };
     customizedWrapper = mount(
-      <AAAPrimaryTheme>
+      <ACEPrimaryTheme>
         <NumericalStepper
           overrides={overrideDefaultStepperLabelStyles()}
           {...customizedWrapperProps()}
         />
-      </AAAPrimaryTheme>
+      </ACEPrimaryTheme>
     );
   });
   afterEach(() => {

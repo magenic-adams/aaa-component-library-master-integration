@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
 // Components
-import { AAAPrimaryTheme, Subheadline, Subtitle } from '../src/lib/package/components';
+import { ACEPrimaryTheme, Subheadline, Subtitle } from '../src/lib/package/components';
 
 // Internal
 import ToggleButtonGroupContainer from '../src/lib/internal/ToggleButtonGroupContainer/ToggleButtonGroupContainer';
@@ -16,7 +16,7 @@ const options = [{ id: 1, text: 'Yes' }, { id: 2, text: 'No' }];
 
 stories.add('Usage and States', () => {
   return (
-    <AAAPrimaryTheme>
+    <ACEPrimaryTheme>
       <div>
         <div className="u-padding--50">
           <StoryIntroduction elementName="ToggleButtonGroup"/>
@@ -69,6 +69,6 @@ stories.add('Usage and States', () => {
           />
         </ElementContainer>
       </div>
-    </AAAPrimaryTheme>
+    </ACEPrimaryTheme>
   );
 });

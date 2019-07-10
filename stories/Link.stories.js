@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs } from '@storybook/addon-knobs';
 
 // Components
-import { AAAPrimaryTheme, Link as TextLink } from '../src/lib/package/components';
+import { ACEPrimaryTheme, Link as TextLink } from '../src/lib/package/components';
 
 // Internal
 // Internal
@@ -21,7 +21,7 @@ stories
   .addDecorator(withKnobs)
   
   .add('text link', () => (
-    <AAAPrimaryTheme>
+    <ACEPrimaryTheme>
       <StoryLayoutContainer>
         <StoryIntroduction
           elementName="Link"
@@ -88,6 +88,6 @@ stories
         </div>
       </ElementContainer>
 
-    </AAAPrimaryTheme>
+    </ACEPrimaryTheme>
   )
 );

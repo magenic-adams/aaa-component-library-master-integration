@@ -12,17 +12,17 @@ import sinon from 'sinon';
 
 // Constants
 import {
-  AAA_COLOR_MAIN_DISABLED,
-  AAA_COLOR_MAIN_BLUE,
-  AAA_COLOR_MAIN_WHITE,
-  AAA_COLOR_TRANSPARENT,
+  ACE_COLOR_MAIN_DISABLED,
+  ACE_COLOR_MAIN_BLUE,
+  ACE_COLOR_MAIN_WHITE,
+  ACE_COLOR_TRANSPARENT,
 } from '../../constants/colors';
 
 // Test Utilities
 import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 
 // Components
-import AAAPrimaryTheme from '../AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEPrimaryTheme from '../ACEPrimaryTheme/ACEPrimaryTheme';
 import Button from './Button';
 
 function getFakeProps(overrides) {
@@ -34,9 +34,9 @@ function getFakeProps(overrides) {
 
 function createButtonWithTheme(children, props = getFakeProps) {
   const ThemeButton = mount(
-    <AAAPrimaryTheme>
+    <ACEPrimaryTheme>
       <Button {...props}>{children}</Button>
-    </AAAPrimaryTheme>
+    </ACEPrimaryTheme>
   );
   
   return ThemeButton;
@@ -109,20 +109,20 @@ describe('Button States', () => {
     const props = getFakeProps({ color: 'primary' });
     const PrimaryButtonWrapper = createButtonWithTheme('Here lies a primary button', props);
 
-    it('has text color of AAA_COLOR_MAIN_WHITE', () => {
+    it('has text color of ACE_COLOR_MAIN_WHITE', () => {
       const backgroundStyle = getDOMNodeComputedStyle(PrimaryButtonWrapper.getDOMNode(), 'color');
-      expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_WHITE);
+      expect(backgroundStyle).to.equal(ACE_COLOR_MAIN_WHITE);
     });
 
-    it('has a background color of AAA_COLOR_MAIN_BLUE', () => {
+    it('has a background color of ACE_COLOR_MAIN_BLUE', () => {
       const backgroundStyle = getDOMNodeComputedStyle(PrimaryButtonWrapper.getDOMNode(), 'background');
-      expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_BLUE);
+      expect(backgroundStyle).to.equal(ACE_COLOR_MAIN_BLUE);
     });
 
-    it('has a background color of AAA_COLOR_MAIN_DISABLED when disabled', () => {
+    it('has a background color of ACE_COLOR_MAIN_DISABLED when disabled', () => {
       const PrimaryDisabledButtonWrapper = createButtonWithTheme('Here lies a disabled button', getFakeProps({ disabled: true }));
       const backgroundStyle = getDOMNodeComputedStyle(PrimaryDisabledButtonWrapper.getDOMNode(), 'background');
-      expect(backgroundStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
+      expect(backgroundStyle).to.equal(ACE_COLOR_MAIN_DISABLED);
     });
     
   });
@@ -131,20 +131,20 @@ describe('Button States', () => {
     const props = getFakeProps({ color: 'secondary' });
     const ButtonWrapper = createButtonWithTheme('Here lies a secondary button', props);
 
-    it('has a background color of AAA_COLOR_TRANSPARENT', () => {
+    it('has a background color of ACE_COLOR_TRANSPARENT', () => {
       const backgroundStyle = getDOMNodeComputedStyle(ButtonWrapper.getDOMNode(), 'background');
-      expect(backgroundStyle).to.equal(AAA_COLOR_TRANSPARENT);
+      expect(backgroundStyle).to.equal(ACE_COLOR_TRANSPARENT);
     });
 
-    it('has a border color of AAA_COLOR_MAIN_BLUE', () => {
+    it('has a border color of ACE_COLOR_MAIN_BLUE', () => {
       const borderColorStyle = getDOMNodeComputedStyle(ButtonWrapper.getDOMNode(), 'border-top-color');
-      expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_BLUE);
+      expect(borderColorStyle).to.equal(ACE_COLOR_MAIN_BLUE);
     });
 
-    it('has a border color of AAA_COLOR_MAIN_DISABLED when disabled', () => {
+    it('has a border color of ACE_COLOR_MAIN_DISABLED when disabled', () => {
       const SecondaryDisabledButtonWrapper = createButtonWithTheme('Here lies a disabled button', getFakeProps({ color: 'secondary', disabled: true }));
       const borderColorStyle = getDOMNodeComputedStyle(SecondaryDisabledButtonWrapper.getDOMNode(), 'border-top-color');
-      expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
+      expect(borderColorStyle).to.equal(ACE_COLOR_MAIN_DISABLED);
     });
   });
 });

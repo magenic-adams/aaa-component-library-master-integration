@@ -61,11 +61,11 @@ const styleClasses = (0, _styles.makeStyles)({
       fontSize: '16px'
     },
     '& svg': {
-      display: "".concat(_cssConstants.AAA_CSS_INLINE),
+      display: "".concat(_cssConstants.ACE_CSS_INLINE),
       fontSize: 20,
       marginLeft: 8,
       marginRight: 8,
-      verticalAlign: "".concat(_cssConstants.AAA_CSS_MIDDLE)
+      verticalAlign: "".concat(_cssConstants.ACE_CSS_MIDDLE)
     }
   }
 });

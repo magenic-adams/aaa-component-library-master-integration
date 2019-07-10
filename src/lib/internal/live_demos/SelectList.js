@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   SelectList,
 } from '../../package/components';
 
@@ -30,20 +30,20 @@ export const demo = `class SelectListDemo extends React.Component {
   render(){
     return (
       <div>
-        <AAAPrimaryTheme>
+        <ACEPrimaryTheme>
           <SelectList
             type="primary"
             items={SelectListDemo.items()}
             onSelect={this.handleSelection}
           />
-        </AAAPrimaryTheme>
+        </ACEPrimaryTheme>
       </div>
     );
   }
 }`;
 
 export const scope = {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   SelectList,
   action,
 };

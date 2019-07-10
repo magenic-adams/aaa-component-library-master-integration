@@ -1,5 +1,5 @@
 import {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Button,
   ButtonGroup,
   Form,
@@ -35,7 +35,7 @@ export const demo = `class FormDemo extends React.Component {
   render(){
     return (
       <div>
-        <AAAPrimaryTheme>
+        <ACEPrimaryTheme>
           <Form
             validations={FormDemo.validations()}
             onSubmit={FormDemo.handleFormValueSubmission}
@@ -114,14 +114,14 @@ export const demo = `class FormDemo extends React.Component {
             }
           }
         />
-        </AAAPrimaryTheme>
+        </ACEPrimaryTheme>
       </div>
     );
   }
 }`;
 
 export const scope = {
-  AAAPrimaryTheme,
+  ACEPrimaryTheme,
   Button,
   ButtonGroup,
   Form,

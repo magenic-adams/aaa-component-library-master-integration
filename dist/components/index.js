@@ -3,10 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "AAAPrimaryTheme", {
+Object.defineProperty(exports, "ACEPrimaryTheme", {
   enumerable: true,
   get: function get() {
-    return _AAAPrimaryTheme.default;
+    return _ACEPrimaryTheme.default;
   }
 });
 Object.defineProperty(exports, "Button", {
@@ -43,6 +43,12 @@ Object.defineProperty(exports, "Link", {
   enumerable: true,
   get: function get() {
     return _Link.default;
+  }
+});
+Object.defineProperty(exports, "Tooltip", {
+  enumerable: true,
+  get: function get() {
+    return _Tooltip.default;
   }
 });
 Object.defineProperty(exports, "ToggleButtonGroup", {
@@ -142,7 +148,7 @@ Object.defineProperty(exports, "AddIcon", {
   }
 });
 
-var _AAAPrimaryTheme = _interopRequireDefault(require("./AAAPrimaryTheme/AAAPrimaryTheme"));
+var _ACEPrimaryTheme = _interopRequireDefault(require("./ACEPrimaryTheme/ACEPrimaryTheme"));
 
 var _Button = _interopRequireDefault(require("./Button/Button"));
 
@@ -155,6 +161,8 @@ var _BaseInput = _interopRequireDefault(require("./Input/BaseInput/BaseInput"));
 var _Label = _interopRequireDefault(require("./Label/Label"));
 
 var _Link = _interopRequireDefault(require("./Link/Link"));
+
+var _Tooltip = _interopRequireDefault(require("./Tooltip/Tooltip"));
 
 var _ToggleButtonGroup = _interopRequireDefault(require("./ToggleButtonGroup/ToggleButtonGroup"));
 

@@ -1,16 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Atomic|Button all buttons 1`] = `ReactWrapper {}`;
-
-exports[`Storyshots Atomic|Button dynamic button 1`] = `ReactWrapper {}`;
-
 exports[`Storyshots Atomic|Button primary and secondary 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Atomic|Input Input 1`] = `ReactWrapper {}`;
-
-exports[`Storyshots Atomic|Input input 1`] = `ReactWrapper {}`;
-
-exports[`Storyshots Atomic|Input states 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Atomic|Link text link 1`] = `ReactWrapper {}`;
 
@@ -24,9 +16,7 @@ exports[`Storyshots Molecules|Form basic form + code demo 1`] = `ReactWrapper {}
 
 exports[`Storyshots Molecules|Form basic form 1`] = `ReactWrapper {}`;
 
-exports[`Storyshots Molecules|Form form radio group 1`] = `ReactWrapper {}`;
-
-exports[`Storyshots Molecules|Radio Group Radio group 1`] = `ReactWrapper {}`;
+exports[`Storyshots Molecules|Link tooltip 1`] = `ReactWrapper {}`;
 
 exports[`Storyshots Molecules|Radio Group Usage and States 1`] = `ReactWrapper {}`;
 

@@ -11,7 +11,13 @@ var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
 
 var _styles = require("@material-ui/styles");
 
+var _core = require("@material-ui/core");
+
+var _lodash = require("lodash");
+
 var _clsx = _interopRequireDefault(require("clsx"));
+
+var _SvgIcon = _interopRequireDefault(require("../SvgIcon/SvgIcon"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19,7 +25,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-;
 const defaultProps = {
   color: 'primary',
   className: '',
@@ -29,8 +34,8 @@ const defaultProps = {
   href: '',
   type: 'button'
 };
-
-const styleClasses = theme => {
+const buttonOverridesDefault = {};
+const styleClasses = (0, _core.makeStyles)(theme => {
   return {
     root: {
       display: 'block',
@@ -54,7 +59,11 @@ const styleClasses = theme => {
     label: {
       lineHeight: '48px',
       height: '100%',
-      fontSize: 18
+      fontSize: 18,
+      [theme.breakpoints.down('sm')]: {
+        fontSize: 16,
+        fontWeight: 700
+      }
     },
     containedPrimary: _objectSpread({}, theme.typographyElements.buttonPrimary, {
       background: theme.palette.primary.main,
@@ -66,10 +75,15 @@ const styleClasses = theme => {
         color: theme.secondaryPalette.colorVariables.WHITE
       }
     }),
-    containedSecondary: _objectSpread({}, theme.typographyElements.buttonSecondary, {
+    containedSecondary: props => _objectSpread({}, theme.typographyElements.buttonSecondary, {
+      color: (0, _lodash.get)(props, 'activeColor', theme.palette.primary.main),
       border: '1px solid',
       borderColor: theme.palette.primary.main,
-      background: theme.secondaryPalette.colorVariables.TRANSPARENT,
+      background: (0, _lodash.get)(props, 'background', theme.secondaryPalette.colorVariables.TRANSPARENT),
+      [theme.breakpoints.down('sm')]: {
+        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
+        color: theme.palette.primary.main
+      },
       '&:active,&:hover': {
         background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
       },
@@ -77,7 +91,8 @@ const styleClasses = theme => {
         background: theme.secondaryPalette.colorVariables.TRANSPARENT,
         borderColor: theme.secondaryPalette.disabled.main
       },
-      fontWeight: theme.typographyValues.fontWeight
+      fontWeight: theme.typographyValues.fontWeight,
+      borderRightStyle: (0, _lodash.get)(props, 'borderRightStyle', 'solid')
     }),
     fadeUp: {
       transform: 'translateY(-8px)'
@@ -116,13 +131,12 @@ const styleClasses = theme => {
       }
     }
   };
-};
+});
 
-const Button = (_ref) => {
-  let {
+const Button = props => {
+  const {
     children,
     className,
-    classes,
     color,
     disabled,
     fadeUp,
@@ -131,8 +145,11 @@ const Button = (_ref) => {
     id,
     type,
     onClick,
-    isIconButton
-  } = _ref;
+    isIconButton,
+    leftIcon,
+    overrides = buttonOverridesDefault
+  } = props;
+  const classes = styleClasses(overrides);
   return _react.default.createElement(_Button.default, {
     className: (0, _clsx.default)('Button', {
       [classes.fadeUp]: fadeUp,
@@ -153,14 +170,15 @@ const Button = (_ref) => {
     ref: forwardedRef,
     type: type,
     onClick: onClick
-  }, children);
+  }, leftIcon && _react.default.createElement(_SvgIcon.default, {
+    className: (0, _clsx.default)('leftIcon'),
+    id: "button-icon",
+    svgIcon: leftIcon
+  }), children);
 };
 
 Button.defaultProps = defaultProps;
 
-var _default = (0, _styles.withStyles)(styleClasses, {
-  index: 0,
-  withTheme: true
-})(Button);
+var _default = (0, _styles.withTheme)(Button);
 
 exports.default = _default;

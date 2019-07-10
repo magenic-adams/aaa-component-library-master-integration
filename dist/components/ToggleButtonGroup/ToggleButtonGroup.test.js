@@ -9,7 +9,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEThemeProvider from '../ACEPrimaryTheme/ACEPrimaryTheme';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import ToggleButtonGroup from './ToggleButtonGroup';
 
@@ -19,10 +19,9 @@ import Button from '../Button/Button';
 
 // Constants
 import {
-  AAA_COLOR_TRANSPARENT,
-  AAA_COLOR_MAIN_BLUE,
-  AAA_COLOR_MAIN_DISABLED,
-  AAA_COLOR_MAIN_WHITE,
+  ACE_COLOR_MAIN_BLUE,
+  ACE_COLOR_MAIN_DISABLED,
+  ACE_COLOR_MAIN_WHITE,
 } from '../../constants/colors';
 
 function getFakeProps(overrides) {
@@ -35,9 +34,9 @@ function getFakeProps(overrides) {
 
 function createToggleButtonWithTheme(props) {
   return mount(
-    <AAAThemeProvider theme={props.theme}>
+    <ACEThemeProvider theme={props.theme}>
       <ToggleButtonGroup {...props} />
-    </AAAThemeProvider>
+    </ACEThemeProvider>
   );
 }
 
@@ -160,16 +159,16 @@ describe('ToggleButtonGroup', () => {
     });
 
     it('has 18px label', () => {
-      const label = ToggleButtonWrapper.find('.MuiButton-label')
-        .at(0)
-        .getDOMNode();
+      const label = ToggleButtonWrapper.find(
+        'button[data-quid="ToggleButton-2"]'
+      ).getDOMNode();
       const heightStyle = getDOMNodeComputedStyle(label, 'font-size');
       expect(heightStyle).to.equal('18px');
     });
   });
 
   describe('button states', () => {
-    it('has a background color of AAA_COLOR_TRANSPARENT', () => {
+    it('has a background color of ACE_COLOR_MAIN_BLUE', () => {
       const backgroundStyle = getDOMNodeComputedStyle(
         ToggleButtonWrapper.find(Button)
           .at(0)
@@ -177,27 +176,27 @@ describe('ToggleButtonGroup', () => {
         'background'
       );
 
-      expect(backgroundStyle).to.equal(AAA_COLOR_TRANSPARENT);
+      expect(backgroundStyle).to.equal(ACE_COLOR_MAIN_BLUE);
     });
 
-    it('has a border color of AAA_COLOR_MAIN_BLUE', () => {
+    it('has a border color of ACE_COLOR_MAIN_BLUE', () => {
       const borderColorStyle = getDOMNodeComputedStyle(
         ToggleButtonWrapper.find(Button)
           .at(0)
           .getDOMNode(),
         'border-top-color'
       );
-      expect(borderColorStyle).to.equal(AAA_COLOR_MAIN_BLUE);
+      expect(borderColorStyle).to.equal(ACE_COLOR_MAIN_BLUE);
     });
 
-    it('has text color of AAA_COLOR_MAIN_WHITE', () => {
+    it('has text color of ACE_COLOR_MAIN_WHITE', () => {
       const textColor = getDOMNodeComputedStyle(
         ToggleButtonWrapper.find(Button)
           .at(0)
           .getDOMNode(),
         'color'
       );
-      expect(textColor).to.equal(AAA_COLOR_MAIN_WHITE);
+      expect(textColor).to.equal(ACE_COLOR_MAIN_WHITE);
     });
 
     it('should set button to active when has matched value in options', () => {
@@ -211,7 +210,7 @@ describe('ToggleButtonGroup', () => {
       expect(rightButton.props().className).to.not.contains('active');
     });
 
-    it('should set toggle buttons color AAA_COLOR_MAIN_DISABLED when disabled', () => {
+    it('should set toggle buttons color ACE_COLOR_MAIN_DISABLED when disabled', () => {
       props = getFakeProps({ disabled: true });
       ToggleButtonWrapper = createToggleButtonWithTheme(props);
 
@@ -228,8 +227,8 @@ describe('ToggleButtonGroup', () => {
         'border-top-color'
       );
 
-      expect(leftButtonBorderColorStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
-      expect(rightButtonBorderColorStyle).to.equal(AAA_COLOR_MAIN_DISABLED);
+      expect(leftButtonBorderColorStyle).to.equal(ACE_COLOR_MAIN_DISABLED);
+      expect(rightButtonBorderColorStyle).to.equal(ACE_COLOR_MAIN_DISABLED);
     });
   });
 });

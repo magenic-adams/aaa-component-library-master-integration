@@ -1,16 +1,25 @@
 import React from 'react';
 import MUIButton from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/styles';
+import { withTheme } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core';
+import { get } from 'lodash';
 import cx from 'clsx';
+
+import SvgIcon from '../SvgIcon/SvgIcon';
 
 // Types
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
+export interface ButtonStylesOverride {
+  borderRightStyle?: string | undefined;
+  activeColor?: string | undefined;
+  background?: string | undefined;
+}
 
 interface RequiredProps {
-  children: string | any,
-  id: string,
-  onClick: (evt:React.SyntheticEvent) => void
-};
+  children: string | any;
+  id: string;
+  onClick: (evt: React.SyntheticEvent) => void;
+}
 
 interface OptionalProps {
   classes?: any, // MUI Decorator
@@ -21,27 +30,24 @@ interface OptionalProps {
   forwardedRef?: React.RefObject<any>,
   isIconButton?: boolean,
   href?: string,
+  leftIcon?: any,
   type?: 'button' | 'submit',
+  overrides?: ButtonStylesOverride;
 }
 
-const defaultProps:OptionalProps = {
+const defaultProps: OptionalProps = {
   color: 'primary',
   className: '',
   disabled: false,
   fadeUp: false,
   isIconButton: false,
   href: '',
-  type: 'button',
+  type: 'button'
 };
 
-const styleClasses = (theme:Theme):{
-    root: any,
-    label: any,
-    containedPrimary: any,
-    containedSecondary: any,
-    fadeUp: any,
-    iconButton: any,
-  } => {
+const buttonOverridesDefault: ButtonStylesOverride = {};
+
+const styleClasses = makeStyles<Theme, ButtonStylesOverride>(theme => {
   return {
     root: {
       display: 'block',
@@ -56,44 +62,58 @@ const styleClasses = (theme:Theme):{
       transform: 'translateY(0)',
       width: '100%',
       [theme.breakpoints.up('md')]: {
-        width: 314,
+        width: 314
       },
       '&:disabled': {
-        cursor: 'not-allowed',
-      },
+        cursor: 'not-allowed'
+      }
     },
     label: {
       lineHeight: '48px',
       height: '100%',
       fontSize: 18,
+      [theme.breakpoints.down('sm')]: {
+        fontSize: 16,
+        fontWeight: 700
+      }
     },
     containedPrimary: {
       ...theme.typographyElements.buttonPrimary,
       background: theme.palette.primary.main,
       '&:active,&:hover': {
-        background: theme.palette.primary.dark,
+        background: theme.palette.primary.dark
       },
       '&:disabled': {
         background: theme.secondaryPalette.disabled.main,
-        color: theme.secondaryPalette.colorVariables.WHITE,
-      },
+        color: theme.secondaryPalette.colorVariables.WHITE
+      }
     },
-    containedSecondary: {
+    containedSecondary: (props: ButtonStylesOverride) => ({
       ...theme.typographyElements.buttonSecondary,
+      color: get(props, 'activeColor', theme.palette.primary.main),
       border: '1px solid',
       borderColor: theme.palette.primary.main,
-      background: theme.secondaryPalette.colorVariables.TRANSPARENT,
-      '&:active,&:hover': {
+      background: get(
+        props,
+        'background',
+        theme.secondaryPalette.colorVariables.TRANSPARENT
+      ),
+      [theme.breakpoints.down('sm')]: {
         background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
+        color: theme.palette.primary.main
+      },
+      '&:active,&:hover': {
+        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
       },
       '&:disabled': {
         background: theme.secondaryPalette.colorVariables.TRANSPARENT,
-        borderColor: theme.secondaryPalette.disabled.main,
+        borderColor: theme.secondaryPalette.disabled.main
       },
       fontWeight: theme.typographyValues.fontWeight,
-    },
+      borderRightStyle: get(props, 'borderRightStyle', 'solid')
+    }),
     fadeUp: {
-      transform: 'translateY(-8px)',
+      transform: 'translateY(-8px)'
     },
     iconButton: {
       display: 'inline-block',
@@ -105,53 +125,62 @@ const styleClasses = (theme:Theme):{
       backgroundColor: `${theme.secondaryPalette.colorVariables.WHITE}`,
       '&:active,&:hover': {
         borderWidth: 1,
-        backgroundColor: `${theme.secondaryPalette.colorVariables.SECONDARY_HOVER}`,
+        backgroundColor: `${
+          theme.secondaryPalette.colorVariables.SECONDARY_HOVER
+        }`,
         borderColor: `${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
         '& svg': {
-          color: `${theme.palette.primary.main}`,
-        },
+          color: `${theme.palette.primary.main}`
+        }
       },
       '&:disabled': {
         background: `${theme.secondaryPalette.disabled.main}`,
         border: `none`,
         '&:hover': {
-          backgroundColor: `${theme.secondaryPalette.disabled.main}`,
+          backgroundColor: `${theme.secondaryPalette.disabled.main}`
         },
         '& svg': {
-          color: `${theme.secondaryPalette.colorVariables.GRAY}`,
-        },
+          color: `${theme.secondaryPalette.colorVariables.GRAY}`
+        }
       },
       '&:nth-child(n+1)': {
-        marginRight: 8,
+        marginRight: 8
       },
       '&:nth-child(n+2)': {
-        marginLeft: 8,
-      },
-    },
+        marginLeft: 8
+      }
+    }
   };
-};
+});
 
-const Button:React.FunctionComponent<RequiredProps & OptionalProps> = ({
-  children,
-  className,
-  classes,
-  color,
-  disabled,
-  fadeUp,
-  forwardedRef,
-  href,
-  id,
-  type,
-  onClick,
-  isIconButton,
-}) => {
+const Button: React.FunctionComponent<
+  RequiredProps & OptionalProps
+> = props => {
+  const {
+    children,
+    className,
+    color,
+    disabled,
+    fadeUp,
+    forwardedRef,
+    href,
+    id,
+    type,
+    onClick,
+    isIconButton,
+    leftIcon,
+    overrides = buttonOverridesDefault
+  } = props;
+
+  const classes = styleClasses(overrides);
+
   return (
     <MUIButton
       className={cx(
         'Button',
         {
           [classes.fadeUp]: fadeUp,
-          [classes.iconButton]: isIconButton,
+          [classes.iconButton]: isIconButton
         },
         className
       )}
@@ -159,7 +188,7 @@ const Button:React.FunctionComponent<RequiredProps & OptionalProps> = ({
         root: classes.root,
         containedPrimary: classes.containedPrimary,
         containedSecondary: classes.containedSecondary,
-        label: classes.label,
+        label: classes.label
       }}
       disabled={disabled}
       disableRipple
@@ -171,6 +200,7 @@ const Button:React.FunctionComponent<RequiredProps & OptionalProps> = ({
       type={type}
       onClick={onClick}
     >
+      {leftIcon && <SvgIcon className={cx('leftIcon')} id='button-icon' svgIcon={leftIcon}/>}
       {children}
     </MUIButton>
   );
@@ -178,4 +208,4 @@ const Button:React.FunctionComponent<RequiredProps & OptionalProps> = ({
 
 Button.defaultProps = defaultProps;
 
-export default withStyles(styleClasses, { index: 0, withTheme: true })(Button);
+export default withTheme(Button);

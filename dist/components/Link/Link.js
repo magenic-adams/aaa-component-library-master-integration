@@ -56,6 +56,7 @@ const Link = (_ref) => {
     className,
     classes,
     color,
+    component,
     href,
     id,
     onBlur,
@@ -66,6 +67,7 @@ const Link = (_ref) => {
   return _react.default.createElement(_core.Link, {
     className: className,
     color: color,
+    component: component,
     id: id,
     href: href,
     onBlur: onBlur,

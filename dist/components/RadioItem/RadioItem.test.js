@@ -10,7 +10,7 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import { Form } from 'react-final-form';
-import AAAThemeProvider from '../AAAPrimaryTheme/AAAPrimaryTheme';
+import ACEThemeProvider from '../ACEPrimaryTheme/ACEPrimaryTheme';
 import RadioItem from './RadioItem';
 
 // Test Utilities
@@ -18,11 +18,11 @@ import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 
 // Constants
 import {
-  AAA_COLOR_MAIN_BLACK,
-  AAA_COLOR_MAIN_WHITE,
-  AAA_COLOR_MAIN_DARKER_BLUE,
-  AAA_COLOR_SECONDARY_HOVER,
-  AAA_COLOR_MAIN_DISABLED,
+  ACE_COLOR_MAIN_BLACK,
+  ACE_COLOR_MAIN_WHITE,
+  ACE_COLOR_MAIN_DARKER_BLUE,
+  ACE_COLOR_SECONDARY_HOVER,
+  ACE_COLOR_MAIN_DISABLED,
 } from '../../constants/colors';
 
 function getFakeProps(overrides) {
@@ -36,12 +36,12 @@ function getFakeProps(overrides) {
 
 function createRadioItemWithTheme(props) {
   return mount(
-    <AAAThemeProvider theme={props.theme}>
+    <ACEThemeProvider theme={props.theme}>
       <Form
         onSubmit={() => jest.fn(v => v)}
         render={() => <RadioItem {...props} />}
       />
-    </AAAThemeProvider>
+    </ACEThemeProvider>
   );
 }
 
@@ -168,7 +168,7 @@ describe('RadioItem', () => {
       expect(borderRadius).to.equal('4px');
     });
 
-    it('should have 1px inset AAA_COLOR_MAIN_BLACK box-shadow', () => {
+    it('should have 1px inset ACE_COLOR_MAIN_BLACK box-shadow', () => {
       radioItemWrapper = createRadioItemWithTheme(props);
       radioItemNode = radioItemWrapper.getDOMNode();
       const boxShadowStyle = getDOMNodeComputedStyle(
@@ -176,13 +176,13 @@ describe('RadioItem', () => {
         'box-shadow'
       );
       expect(boxShadowStyle).to.equal(
-        `inset 0 0 0 1px ${AAA_COLOR_MAIN_BLACK}`
+        `inset 0 0 0 1px ${ACE_COLOR_MAIN_BLACK}`
       );
     });
 
-    it('has background of AAA_COLOR_MAIN_WHITE', () => {
+    it('has background of ACE_COLOR_MAIN_WHITE', () => {
       const background = getDOMNodeComputedStyle(radioItemNode, 'background');
-      expect(background).to.equal(AAA_COLOR_MAIN_WHITE);
+      expect(background).to.equal(ACE_COLOR_MAIN_WHITE);
     });
 
     it('has 16px label', () => {
@@ -196,7 +196,7 @@ describe('RadioItem', () => {
 
     describe('radio item states', () => {
       describe('selected', () => {
-        it('should have 2px inset AAA_COLOR_MAIN_DARKER_BLUE box-shadow', () => {
+        it('should have 2px inset ACE_COLOR_MAIN_DARKER_BLUE box-shadow', () => {
           props = getFakeProps({ checked: true });
           radioItemWrapper = createRadioItemWithTheme(props);
           radioItemNode = radioItemWrapper.getDOMNode();
@@ -205,11 +205,11 @@ describe('RadioItem', () => {
             'box-shadow'
           );
           expect(boxShadowStyle).to.equal(
-            `inset 0 0 0 2px ${AAA_COLOR_MAIN_DARKER_BLUE}`
+            `inset 0 0 0 2px ${ACE_COLOR_MAIN_DARKER_BLUE}`
           );
         });
 
-        it('has background color of AAA_COLOR_SECONDARY_HOVER', () => {
+        it('has background color of ACE_COLOR_SECONDARY_HOVER', () => {
           props = getFakeProps({ checked: true });
           radioItemWrapper = createRadioItemWithTheme(props);
           radioItemNode = radioItemWrapper.getDOMNode();
@@ -218,7 +218,7 @@ describe('RadioItem', () => {
             radioItemNode,
             'background'
           );
-          expect(background).to.equal(AAA_COLOR_SECONDARY_HOVER);
+          expect(background).to.equal(ACE_COLOR_SECONDARY_HOVER);
         });
 
         it('has font size of 500px', () => {
@@ -235,7 +235,7 @@ describe('RadioItem', () => {
       });
 
       describe('disabled', () => {
-        it('has box shadow of inset 0 0 0 1px AAA_COLOR_MAIN_DISABLED', () => {
+        it('has box shadow of inset 0 0 0 1px ACE_COLOR_MAIN_DISABLED', () => {
           props = getFakeProps({ disabled: true });
           radioItemWrapper = createRadioItemWithTheme(props);
           radioItemNode = radioItemWrapper.getDOMNode();
@@ -245,7 +245,7 @@ describe('RadioItem', () => {
             'box-shadow'
           );
           expect(boxShadow).to.equal(
-            `inset 0 0 0 1px ${AAA_COLOR_MAIN_DISABLED}`
+            `inset 0 0 0 1px ${ACE_COLOR_MAIN_DISABLED}`
           );
         });
 
