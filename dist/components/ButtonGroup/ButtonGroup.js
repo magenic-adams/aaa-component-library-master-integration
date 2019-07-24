@@ -15,11 +15,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 ;
 ;
-const defaultProps = {
+var defaultProps = {
   className: ''
 };
 
-const styleClasses = theme => ({
+var styleClasses = theme => ({
   root: {
     width: '100%',
     marginTop: 24,
@@ -33,8 +33,8 @@ const styleClasses = theme => ({
   }
 });
 
-const ButtonGroup = (_ref) => {
-  let {
+var ButtonGroup = (_ref) => {
+  var {
     children,
     classes,
     className

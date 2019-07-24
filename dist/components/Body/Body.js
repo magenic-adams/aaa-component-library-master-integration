@@ -13,12 +13,12 @@ var _clsx = _interopRequireDefault(require("clsx"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const defaultProps = {
+var defaultProps = {
   className: '',
   secondary: false
 }; // Component styles manipulated entirely by theme
 
-const styleClasses = theme => {
+var styleClasses = theme => {
   return {
     root: {
       color: theme.typographyValues.color,
@@ -30,8 +30,8 @@ const styleClasses = theme => {
   };
 };
 
-const Body = (_ref) => {
-  let {
+var Body = (_ref) => {
+  var {
     children,
     className,
     classes,

@@ -21,11 +21,13 @@ var _SvgIcon = _interopRequireDefault(require("../SvgIcon/SvgIcon"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const defaultProps = {
+var defaultProps = {
   color: 'primary',
   className: '',
   disabled: false,
@@ -34,8 +36,8 @@ const defaultProps = {
   href: '',
   type: 'button'
 };
-const buttonOverridesDefault = {};
-const styleClasses = (0, _core.makeStyles)(theme => {
+var buttonOverridesDefault = {};
+var styleClasses = (0, _core.makeStyles)(theme => {
   return {
     root: {
       display: 'block',
@@ -48,10 +50,7 @@ const styleClasses = (0, _core.makeStyles)(theme => {
       marginTop: 0,
       transition: '300ms transform ease-in-out',
       transform: 'translateY(0)',
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: 314
-      },
+      width: 314,
       '&:disabled': {
         cursor: 'not-allowed'
       }
@@ -60,6 +59,7 @@ const styleClasses = (0, _core.makeStyles)(theme => {
       lineHeight: '48px',
       height: '100%',
       fontSize: 18,
+      '-webkit-font-smoothing': 'antialiased',
       [theme.breakpoints.down('sm')]: {
         fontSize: 16,
         fontWeight: 700
@@ -68,7 +68,8 @@ const styleClasses = (0, _core.makeStyles)(theme => {
     containedPrimary: _objectSpread({}, theme.typographyElements.buttonPrimary, {
       background: theme.palette.primary.main,
       '&:active,&:hover': {
-        background: theme.palette.primary.dark
+        background: theme.palette.primary.dark,
+        boxShadow: 'unset'
       },
       '&:disabled': {
         background: theme.secondaryPalette.disabled.main,
@@ -85,7 +86,8 @@ const styleClasses = (0, _core.makeStyles)(theme => {
         color: theme.palette.primary.main
       },
       '&:active,&:hover': {
-        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
+        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
+        boxShadow: 'unset'
       },
       '&:disabled': {
         background: theme.secondaryPalette.colorVariables.TRANSPARENT,
@@ -104,23 +106,23 @@ const styleClasses = (0, _core.makeStyles)(theme => {
       height: 48,
       border: "1px solid ".concat(theme.secondaryPalette.colorVariables.GRAY),
       borderRadius: 4,
-      backgroundColor: "".concat(theme.secondaryPalette.colorVariables.WHITE),
+      backgroundColor: theme.secondaryPalette.colorVariables.WHITE,
       '&:active,&:hover': {
         borderWidth: 1,
-        backgroundColor: "".concat(theme.secondaryPalette.colorVariables.SECONDARY_HOVER),
-        borderColor: "".concat(theme.secondaryPalette.colorVariables.DARKER_BLUE),
+        backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
+        borderColor: theme.secondaryPalette.colorVariables.DARKER_BLUE,
         '& svg': {
-          color: "".concat(theme.palette.primary.main)
+          color: theme.palette.primary.main
         }
       },
       '&:disabled': {
-        background: "".concat(theme.secondaryPalette.disabled.main),
+        background: theme.secondaryPalette.disabled.main,
         border: "none",
         '&:hover': {
-          backgroundColor: "".concat(theme.secondaryPalette.disabled.main)
+          backgroundColor: theme.secondaryPalette.disabled.main
         },
         '& svg': {
-          color: "".concat(theme.secondaryPalette.colorVariables.GRAY)
+          color: theme.secondaryPalette.colorVariables.GRAY
         }
       },
       '&:nth-child(n+1)': {
@@ -133,8 +135,8 @@ const styleClasses = (0, _core.makeStyles)(theme => {
   };
 });
 
-const Button = props => {
-  const {
+var Button = props => {
+  var {
     children,
     className,
     color,
@@ -149,7 +151,7 @@ const Button = props => {
     leftIcon,
     overrides = buttonOverridesDefault
   } = props;
-  const classes = styleClasses(overrides);
+  var classes = styleClasses(overrides);
   return _react.default.createElement(_Button.default, {
     className: (0, _clsx.default)('Button', {
       [classes.fadeUp]: fadeUp,

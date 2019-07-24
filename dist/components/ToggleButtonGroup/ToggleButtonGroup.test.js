@@ -21,12 +21,14 @@ import Button from '../Button/Button';
 import {
   ACE_COLOR_MAIN_BLUE,
   ACE_COLOR_MAIN_DISABLED,
-  ACE_COLOR_MAIN_WHITE,
 } from '../../constants/colors';
 
 function getFakeProps(overrides) {
   return {
-    options: [{ id: 1, text: 'Yes' }, { id: 2, text: 'No' }],
+    options: [
+      { id: 0, value: 'Y', text: 'Yes' },
+      { id: 1, value: 'N', text: 'No' },
+    ],
     onSelect: jest.fn(v => v),
     ...overrides,
   };
@@ -64,7 +66,7 @@ describe('ToggleButtonGroup', () => {
 
     it('rendered text should match passed options text', () => {
       props = getFakeProps({
-        options: [{ id: 1, text: 'Yes !!!' }, { id: 2, text: 'No !!!' }],
+        options: [{ id: 0, text: 'Yes !!!' }, { id: 1, text: 'No !!!' }],
       });
       ToggleButtonWrapper = createToggleButtonWithTheme(props);
       buttonGroup = ToggleButtonWrapper.find(ButtonGroup).get(0);
@@ -143,7 +145,7 @@ describe('ToggleButtonGroup', () => {
       leftButton.simulate('click');
 
       expect(spy.calledOnce).to.equal(true);
-      expect(spy.getCall(0).args[0]).to.deep.equal({ id: 1, text: 'Yes' });
+      expect(spy.getCall(0).args[0]).to.deep.equal(props.options[0]);
     });
   });
 
@@ -160,7 +162,7 @@ describe('ToggleButtonGroup', () => {
 
     it('has 18px label', () => {
       const label = ToggleButtonWrapper.find(
-        'button[data-quid="ToggleButton-2"]'
+        'button[data-quid="ToggleButton-1"]'
       ).getDOMNode();
       const heightStyle = getDOMNodeComputedStyle(label, 'font-size');
       expect(heightStyle).to.equal('18px');
@@ -168,7 +170,7 @@ describe('ToggleButtonGroup', () => {
   });
 
   describe('button states', () => {
-    it('has a background color of ACE_COLOR_MAIN_BLUE', () => {
+    it('has a background color of transparent', () => {
       const backgroundStyle = getDOMNodeComputedStyle(
         ToggleButtonWrapper.find(Button)
           .at(0)
@@ -176,7 +178,7 @@ describe('ToggleButtonGroup', () => {
         'background'
       );
 
-      expect(backgroundStyle).to.equal(ACE_COLOR_MAIN_BLUE);
+      expect(backgroundStyle).to.equal('transparent');
     });
 
     it('has a border color of ACE_COLOR_MAIN_BLUE', () => {
@@ -189,18 +191,18 @@ describe('ToggleButtonGroup', () => {
       expect(borderColorStyle).to.equal(ACE_COLOR_MAIN_BLUE);
     });
 
-    it('has text color of ACE_COLOR_MAIN_WHITE', () => {
+    it('has text color of ACE_COLOR_MAIN_BLUE', () => {
       const textColor = getDOMNodeComputedStyle(
         ToggleButtonWrapper.find(Button)
           .at(0)
           .getDOMNode(),
         'color'
       );
-      expect(textColor).to.equal(ACE_COLOR_MAIN_WHITE);
+      expect(textColor).to.equal(ACE_COLOR_MAIN_BLUE);
     });
 
     it('should set button to active when has matched value in options', () => {
-      props = getFakeProps({ value: 1 });
+      props = getFakeProps({ value: 'Y' });
       ToggleButtonWrapper = createToggleButtonWithTheme(props);
 
       const leftButton = ToggleButtonWrapper.find(Button).at(0);

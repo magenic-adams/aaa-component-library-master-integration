@@ -17,13 +17,12 @@ import {
 
 interface option {
   id: string | number;
-  text: string;
   value: string | number;
+  text: string;
 }
 
 interface RequiredProps {
   id: string | number;
-  children: any;
   options: option[];
   onSelect: (option: option) => void;
 }
@@ -59,35 +58,26 @@ const styleClasses = (
     [theme.breakpoints.down('sm')]: {
       '& .Button': {
         width: '50%',
-        '&:hover': {
-          background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
-        },
       },
     },
   },
   left: {
     borderTopRightRadius: '0px',
     borderBottomRightRadius: '0px',
+    borderRight: 'none',
   },
   right: {
     borderTopLeftRadius: '0px',
     borderBottomLeftRadius: '0px',
   },
   active: {
+    background: theme.palette.primary.main,
+    color: theme.secondaryPalette.colorVariables.WHITE,
     '&:hover': {
       background: theme.palette.primary.dark,
     },
   },
 });
-
-const leftButtonOverrides: ButtonStylesOverride = {
-  borderRightStyle: 'none',
-  activeColor: ACE_COLOR_MAIN_BLUE,
-};
-
-const rightButtonOverrides: ButtonStylesOverride = {
-  activeColor: ACE_COLOR_MAIN_BLUE,
-};
 
 /**
  * Propagates value selected to parent callback
@@ -95,22 +85,7 @@ const rightButtonOverrides: ButtonStylesOverride = {
  * @param  {Function} onSelect
  * @return {void}
  */
-function handleClick(
-  position: string,
-  opt: option,
-  onSelect: (opt: option) => void
-) {
-  if (position === 'left') {
-    leftButtonOverrides.activeColor = ACE_COLOR_MAIN_WHITE;
-    leftButtonOverrides.background = ACE_COLOR_MAIN_BLUE;
-    rightButtonOverrides.activeColor = ACE_COLOR_MAIN_BLUE;
-    rightButtonOverrides.background = ACE_COLOR_TRANSPARENT;
-  } else {
-    leftButtonOverrides.activeColor = ACE_COLOR_MAIN_BLUE;
-    leftButtonOverrides.background = ACE_COLOR_TRANSPARENT;
-    rightButtonOverrides.activeColor = ACE_COLOR_MAIN_WHITE;
-    rightButtonOverrides.background = ACE_COLOR_MAIN_BLUE;
-  }
+function handleClick(opt: option, onSelect: (opt: option) => void) {
   onSelect(opt);
 }
 
@@ -120,7 +95,10 @@ function handleClick(
  * @return {Boolean} isOptionsKeyPresent?
  */
 function isOptionsKeysPresent(options: option[]) {
-  return options.every(op => op.id && op.text);
+  return options.every(op => 
+    op.hasOwnProperty('id') && 
+    op.hasOwnProperty('text')
+  );
 }
 
 /**
@@ -132,12 +110,12 @@ function isOptionsKeysPresent(options: option[]) {
  */
 function getActiveClass(
   value: string | number | undefined,
-  id: string | number,
+  itemValue: string | number,
   classes: { active: string }
 ): string {
   let activeClass = '';
   const { active } = classes;
-  if (value === id) {
+  if (value === itemValue) {
     activeClass = `${active}`;
   }
   return activeClass;
@@ -173,7 +151,7 @@ const ToggleButtonGroup: React.FunctionComponent<
         <ButtonGroup className={cx(classes.root, className)}>
           <Button
             className={cx(
-              `${getActiveClass(value, options[0].id, classes)} ${
+              `${getActiveClass(value, options[0].value, classes)} ${
                 classes.left
               }`,
               className
@@ -181,14 +159,13 @@ const ToggleButtonGroup: React.FunctionComponent<
             color="secondary"
             id={`ToggleButton-${options[0].id}`}
             disabled={disabled}
-            onClick={() => handleClick('left', options[0], onSelect)}
-            overrides={leftButtonOverrides}
+            onClick={() => handleClick(options[0], onSelect)}
           >
             {options[0].text}
           </Button>
           <Button
             className={cx(
-              `${getActiveClass(value, options[1].id, classes)} ${
+              `${getActiveClass(value, options[1].value, classes)} ${
                 classes.right
               }`,
               className
@@ -196,8 +173,7 @@ const ToggleButtonGroup: React.FunctionComponent<
             color="secondary"
             id={`ToggleButton-${options[1].id}`}
             disabled={disabled}
-            onClick={() => handleClick('right', options[1], onSelect)}
-            overrides={rightButtonOverrides}
+            onClick={() => handleClick(options[1], onSelect)}
           >
             {options[1].text}
           </Button>

@@ -24,6 +24,7 @@ import {
 function getFakeProps(overrides) {
   return {
     items: [
+      { id: 0, value: 0, display: 'Wonder MAN' },
       { id: 1, value: 1, display: 'Iron Man' },
       { id: 2, value: 2, display: 'Captain A' },
     ],
@@ -58,9 +59,9 @@ describe('SelectList', () => {
   });
 
   describe('base styles', () => {
-    it('has width of 341px', () => {
+    it('has width of 534px', () => {
       const widthStyle = getDOMNodeComputedStyle(listNode, 'width');
-      expect(widthStyle).to.equal('341px');
+      expect(widthStyle).to.equal('534px');
     });
 
     it('has border of 2px', () => {
@@ -154,21 +155,21 @@ describe('SelectList', () => {
       });
       expect(() => {
         createSelectListWithTheme(props);
-      }).to.throw('Invariant failed: items is empty');
+      }).to.throw('Invariant failed: items are empty');
 
       props = getFakeProps({
         items: null,
       });
       expect(() => {
         createSelectListWithTheme(props);
-      }).to.throw('Invariant failed: items is empty');
+      }).to.throw('Invariant failed: items are empty');
 
       props = getFakeProps({
         items: undefined,
       });
       expect(() => {
         createSelectListWithTheme(props);
-      }).to.throw('Invariant failed: items is empty');
+      }).to.throw('Invariant failed: items are empty');
 
       props = getFakeProps({
         items: [{}],
@@ -179,20 +180,16 @@ describe('SelectList', () => {
         'Invariant failed: Invalid object keys are present. Keys should contain id, value and display',
       );
     });
-  });
 
-  describe('event handlers', () => {
-    it('selectListWrapper call it\'s click event handler', () => {
-      selectListWrapper
-        .find('li')
-        .at(0)
-        .simulate('click');
+    describe('event handlers', () => {
+      it('selectListWrapper call it\'s click event handler', () => {
+        selectListWrapper
+          .find('li')
+          .at(0)
+          .simulate('click');
 
-      expect(spy.calledOnce).to.equal(true);
-      expect(spy.getCall(0).args[0]).to.deep.equal({
-        id: 1,
-        value: 1,
-        display: 'Iron Man',
+        expect(spy.calledOnce).to.equal(true);
+        expect(spy.getCall(0).args[0]).to.be.equal(props.items[0]);
       });
     });
   });

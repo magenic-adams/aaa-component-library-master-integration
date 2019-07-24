@@ -16,6 +16,8 @@ import {
   FormInput,
   FormNumericInput,
   FormNumericalStepper,
+  FormToggleButtonGroup,
+  BulletList,
 } from '../../src/lib/package/components';
 
 const VALIDATIONS = {
@@ -47,7 +49,15 @@ const VALIDATIONS = {
   stepper: {
     required: 'Stepper value is required',
   },
+  answers: {
+    required: '',
+  },
 };
+
+const answers = [
+  { id: 1, value: 'Y', text: 'Yes' },
+  { id: 2, value: 'N', text: 'No' },
+];
 
 function handleFormValueSubmission(vals) {
   action(vals);
@@ -68,6 +78,13 @@ stories.add('basic form', () => {
             }) => {
               return (
                 <form onSubmit={handleSubmit}>
+                  <FormGroup>
+                    <BulletList
+                      id="lblAnswers"
+                      list={['I am single', 'I am above 30 yrs old']}
+                    />
+                    <FormToggleButtonGroup id="answers" options={answers} />
+                  </FormGroup>
                   <FormGroup>
                     <FormInput
                       id="disabledInitial"
@@ -144,7 +161,7 @@ stories.add('basic form', () => {
                   <FormGroup>
                     <FormNumericalStepper
                       id="stepper"
-                      labelText="Stepper Label"
+                      labelName="Stepper Label"
                       type="text"
                     />
                   </FormGroup>

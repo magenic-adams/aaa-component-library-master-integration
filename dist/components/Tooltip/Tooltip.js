@@ -9,29 +9,28 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _styles = require("@material-ui/styles");
 
-var _clsx = _interopRequireDefault(require("clsx"));
-
-var _TooltipStyles = _interopRequireDefault(require("./TooltipStyles"));
+var _Clear = _interopRequireDefault(require("@material-ui/icons/Clear"));
 
 var _core = require("@material-ui/core");
 
-var _Clear = _interopRequireDefault(require("@material-ui/icons/Clear"));
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _TooltipStyles = _interopRequireDefault(require("./TooltipStyles"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 // Styles
-// MaterialUI components
 ;
 ;
-const DefaultProps = {
+var DefaultProps = {
   id: '1',
   open: false
 };
 
 function Tooltip(props) {
-  const {
+  var {
     children,
     className,
     classes,
@@ -42,7 +41,7 @@ function Tooltip(props) {
     title
   } = props;
 
-  const [openInternal, setOpen] = _react.default.useState(open);
+  var [openInternal, setOpen] = _react.default.useState(open);
 
   function handleTooltipClose() {
     setOpen(false);

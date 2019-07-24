@@ -23,7 +23,7 @@ import { getDOMNodeComputedStyle } from '../../../../../../test/DOM';
 
 // Constants
 import {
-  ACE_COLOR_MAIN_DISABLED,
+  ACE_COLOR_MAIN_LIGHT_GRAYISH_BLUE,
   ACE_COLOR_MAIN_ERROR,
   ACE_COLOR_MAIN_GRAY,
   ACE_COLOR_MAIN_WHITE,
@@ -211,9 +211,9 @@ describe('Input', () => {
         expect(DisabledInputWrapper.find(`input#${props.id}`).get(0).props.disabled).to.equal(true);
       });
 
-      it ('should have ACE_COLOR_MAIN_DISABLED background-color', () => {
+      it ('should have ACE_COLOR_MAIN_LIGHT_GRAYISH_BLUE background-color', () => {
         const backgroundColorStyle = getDOMNodeComputedStyle(DisabledMUIInputNode, 'background-color');
-        expect(backgroundColorStyle).to.equal(ACE_COLOR_MAIN_DISABLED);
+        expect(backgroundColorStyle).to.equal(ACE_COLOR_MAIN_LIGHT_GRAYISH_BLUE);
       });
 
       it ('should have initial box-shadow property', () => {

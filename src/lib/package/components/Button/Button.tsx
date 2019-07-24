@@ -2,13 +2,12 @@ import React from 'react';
 import MUIButton from '@material-ui/core/Button';
 import { withTheme } from '@material-ui/styles';
 import { makeStyles } from '@material-ui/core';
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { get } from 'lodash';
 import cx from 'clsx';
 
 import SvgIcon from '../SvgIcon/SvgIcon';
 
-// Types
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
 export interface ButtonStylesOverride {
   borderRightStyle?: string | undefined;
   activeColor?: string | undefined;
@@ -42,7 +41,7 @@ const defaultProps: OptionalProps = {
   fadeUp: false,
   isIconButton: false,
   href: '',
-  type: 'button'
+  type: 'button',
 };
 
 const buttonOverridesDefault: ButtonStylesOverride = {};
@@ -60,33 +59,32 @@ const styleClasses = makeStyles<Theme, ButtonStylesOverride>(theme => {
       marginTop: 0,
       transition: '300ms transform ease-in-out',
       transform: 'translateY(0)',
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: 314
-      },
+      width: 314,
       '&:disabled': {
-        cursor: 'not-allowed'
-      }
+        cursor: 'not-allowed',
+      },
     },
     label: {
       lineHeight: '48px',
       height: '100%',
       fontSize: 18,
+      '-webkit-font-smoothing': 'antialiased',
       [theme.breakpoints.down('sm')]: {
         fontSize: 16,
-        fontWeight: 700
-      }
+        fontWeight: 700,
+      },
     },
     containedPrimary: {
       ...theme.typographyElements.buttonPrimary,
       background: theme.palette.primary.main,
       '&:active,&:hover': {
-        background: theme.palette.primary.dark
+        background: theme.palette.primary.dark,
+        boxShadow: 'unset',
       },
       '&:disabled': {
         background: theme.secondaryPalette.disabled.main,
-        color: theme.secondaryPalette.colorVariables.WHITE
-      }
+        color: theme.secondaryPalette.colorVariables.WHITE,
+      },
     },
     containedSecondary: (props: ButtonStylesOverride) => ({
       ...theme.typographyElements.buttonSecondary,
@@ -96,24 +94,25 @@ const styleClasses = makeStyles<Theme, ButtonStylesOverride>(theme => {
       background: get(
         props,
         'background',
-        theme.secondaryPalette.colorVariables.TRANSPARENT
+        theme.secondaryPalette.colorVariables.TRANSPARENT,
       ),
       [theme.breakpoints.down('sm')]: {
         background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
-        color: theme.palette.primary.main
+        color: theme.palette.primary.main,
       },
       '&:active,&:hover': {
-        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
+        background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
+        boxShadow: 'unset',
       },
       '&:disabled': {
         background: theme.secondaryPalette.colorVariables.TRANSPARENT,
-        borderColor: theme.secondaryPalette.disabled.main
+        borderColor: theme.secondaryPalette.disabled.main,
       },
       fontWeight: theme.typographyValues.fontWeight,
-      borderRightStyle: get(props, 'borderRightStyle', 'solid')
+      borderRightStyle: get(props, 'borderRightStyle', 'solid'),
     }),
     fadeUp: {
-      transform: 'translateY(-8px)'
+      transform: 'translateY(-8px)',
     },
     iconButton: {
       display: 'inline-block',
@@ -122,34 +121,32 @@ const styleClasses = makeStyles<Theme, ButtonStylesOverride>(theme => {
       height: 48,
       border: `1px solid ${theme.secondaryPalette.colorVariables.GRAY}`,
       borderRadius: 4,
-      backgroundColor: `${theme.secondaryPalette.colorVariables.WHITE}`,
+      backgroundColor: theme.secondaryPalette.colorVariables.WHITE,
       '&:active,&:hover': {
         borderWidth: 1,
-        backgroundColor: `${
-          theme.secondaryPalette.colorVariables.SECONDARY_HOVER
-        }`,
-        borderColor: `${theme.secondaryPalette.colorVariables.DARKER_BLUE}`,
+        backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
+        borderColor: theme.secondaryPalette.colorVariables.DARKER_BLUE,
         '& svg': {
-          color: `${theme.palette.primary.main}`
-        }
+          color: theme.palette.primary.main,
+        },
       },
       '&:disabled': {
-        background: `${theme.secondaryPalette.disabled.main}`,
+        background: theme.secondaryPalette.disabled.main,
         border: `none`,
         '&:hover': {
-          backgroundColor: `${theme.secondaryPalette.disabled.main}`
+          backgroundColor: theme.secondaryPalette.disabled.main,
         },
         '& svg': {
-          color: `${theme.secondaryPalette.colorVariables.GRAY}`
-        }
+          color: theme.secondaryPalette.colorVariables.GRAY,
+        },
       },
       '&:nth-child(n+1)': {
-        marginRight: 8
+        marginRight: 8,
       },
       '&:nth-child(n+2)': {
-        marginLeft: 8
-      }
-    }
+        marginLeft: 8,
+      },
+    },
   };
 });
 
@@ -169,7 +166,7 @@ const Button: React.FunctionComponent<
     onClick,
     isIconButton,
     leftIcon,
-    overrides = buttonOverridesDefault
+    overrides = buttonOverridesDefault,
   } = props;
 
   const classes = styleClasses(overrides);
@@ -180,7 +177,7 @@ const Button: React.FunctionComponent<
         'Button',
         {
           [classes.fadeUp]: fadeUp,
-          [classes.iconButton]: isIconButton
+          [classes.iconButton]: isIconButton,
         },
         className
       )}
@@ -188,7 +185,7 @@ const Button: React.FunctionComponent<
         root: classes.root,
         containedPrimary: classes.containedPrimary,
         containedSecondary: classes.containedSecondary,
-        label: classes.label
+        label: classes.label,
       }}
       disabled={disabled}
       disableRipple

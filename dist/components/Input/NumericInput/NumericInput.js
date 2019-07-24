@@ -27,7 +27,7 @@ class NumericInput extends _react.default.Component {
   }
 
   determineInputComponent() {
-    const {
+    var {
       mask
     } = this.props;
 
@@ -41,12 +41,12 @@ class NumericInput extends _react.default.Component {
   }
 
   renderTextMaskCustomComponent(otherProps) {
-    const {
+    var {
       forwardedRef
     } = otherProps,
-          other = _objectWithoutProperties(otherProps, ["forwardedRef"]);
+        other = _objectWithoutProperties(otherProps, ["forwardedRef"]);
 
-    const {
+    var {
       mask
     } = this.props;
     return _react.default.createElement(_reactTextMask.default, _extends({
@@ -58,7 +58,7 @@ class NumericInput extends _react.default.Component {
   }
 
   render() {
-    const {
+    var {
       error,
       id,
       name,

@@ -7,8 +7,8 @@ import { render } from 'react-dom';
 import phoneImage from './Images/phone.svg';
 import {
   ACEPrimaryTheme,
-  Button,
   BaseInput,
+  Button,
   Link as TextLink,
   SelectList,
 } from './lib/package/components';
@@ -30,9 +30,7 @@ const items = [
 
 const overrideDefaultStepperStyles = () => {
   return {
-    label: {
-      color: '#9ACD32', // yellow,
-    },
+    labelColor: '#9ACD32', // yellowgreen,
   };
 };
 
@@ -40,75 +38,75 @@ const App = () => {
   return (
     <ACEPrimaryTheme>
       <h1>ACE Component Library</h1>
-      <Button color="primary">Here lies a button</Button>
+      <Button color='primary'>Here lies a button</Button>
       <br />
       <br />
-      <Button id="lie-button" color="primary">
+      <Button id='lie-button' color='primary'>
         Here lies a button
       </Button>
-      <Button id="lie-secondary-button" color="secondary">
+      <Button id='lie-secondary-button' color='secondary'>
         Here lies a secondary button
       </Button>
-      <Button id="button-with-icon-left" color="primary" leftIcon={phoneImage}>
+      <Button id='button-with-icon-left' color='primary' leftIcon={phoneImage}>
         Submit application form 
       </Button>
-      <br />
-      <br />
+      <br/>
+      <br/>
       <BaseInput
         disabled
-        id="disabledId"
-        name="disabledName"
-        type="text"
+        id='disabledId'
+        name='disabledName'
+        type='text'
         onChange={() => {}}
-        helperText="Disabled"
-        labelName="Disabled Label"
-        value="Disabled"
+        helperText='Disabled'
+        labelName='Disabled Label'
+        value='Disabled'
         onClear={() => {}}
       />
       <br />
       <BaseInput
-        id="enabledId"
-        name="enabledName"
-        labelName="Enabled Label"
-        type="text"
+        id='enabledId'
+        name='enabledName'
+        labelName='Enabled Label'
+        type='text'
         onChange={() => {}}
-        value="Enabled"
+        value='Enabled'
         onClear={() => {}}
       />
       <br />
       <br />
       <BaseInput
-        id="errorId"
-        name="errorName"
-        type="text"
+        id='errorId'
+        name='errorName'
+        type='text'
         onChange={() => {}}
-        helperText="Error"
-        labelName="Error Label"
-        error="This is an error"
-        value="Error"
+        helperText='Error'
+        labelName='Error Label'
+        error='This is an error'
+        value='Error'
       />
       <br />
       <br />
-      <TextLink color="primary" onClick={() => {}}>
+      <TextLink color='primary' onClick={() => {}}>
         Primary enabled Link
       </TextLink>
       <br />
       <br />
-      <TextLink color="secondary" target='_blank' onClick={() => {}}>
+      <TextLink color='secondary' target='_blank' onClick={() => {}}>
         Secondary enabled Link
       </TextLink>
       <SelectList
-        type="primary"
+        type='primary'
         items={items}
         onSelect={selectedOption => handleSelectItem(selectedOption)}
       />
       <br />
       <br />
       <NumericalStepper
-        id="3"
+        id='3'
         overrides={overrideDefaultStepperStyles()}
-        labelText="Numerical stepper with style overrides"
-        helperText="This is a helper message"
+        labelText='Numerical stepper with style overrides'
+        helperText='This is a helper message'
         mask={[/\d/, /\d/]}
         onIncrease={() => {}}
         onDecrease={() => {}}

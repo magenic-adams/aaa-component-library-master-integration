@@ -30,7 +30,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // Material UI components
 // Components
 ;
-const defaultProps = {
+var defaultProps = {
   autoFocus: false,
   className: '',
   formControlClass: '',
@@ -49,7 +49,7 @@ const defaultProps = {
   onFocus: () => {}
 };
 
-const styleClasses = theme => {
+var styleClasses = theme => {
   return {
     root: {
       padding: '0 12px',
@@ -70,7 +70,7 @@ const styleClasses = theme => {
       }
     },
     disabled: {
-      background: theme.secondaryPalette.disabled.main,
+      background: theme.secondaryPalette.colorVariables.LIGHT_GRAYISH_BLUE,
       boxShadow: 'initial',
       '&:hover': {
         boxShadow: 'none'
@@ -124,8 +124,8 @@ const styleClasses = theme => {
   };
 };
 
-const BaseInput = (_ref) => {
-  let {
+var BaseInput = (_ref) => {
+  var {
     autoFocus,
     classes,
     className,
@@ -171,18 +171,21 @@ const BaseInput = (_ref) => {
       [classes.centerText]: centerText
     }),
     disableUnderline: true,
-    endAdornment: onClear && value && _react.default.createElement(_InputAdornment.default, {
+    endAdornment: !disabled && onClear && value && _react.default.createElement(_InputAdornment.default, {
       className: classes.inputAdornment,
-      position: "end"
+      position: "end",
+      tabIndex: -1
     }, _react.default.createElement(_IconButton.default, {
       disableRipple: true,
       "aria-label": "Clear text",
       onClick: onClear,
       disabled: disabled,
       color: "inherit",
-      className: classes.iconButton
+      className: classes.iconButton,
+      tabIndex: -1
     }, _react.default.createElement(_Clear.default, {
-      className: classes.iconStyle
+      className: classes.iconStyle,
+      tabIndex: -1
     }))),
     id: id,
     inputProps: {

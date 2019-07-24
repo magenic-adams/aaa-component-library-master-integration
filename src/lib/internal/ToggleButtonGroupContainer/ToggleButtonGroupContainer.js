@@ -1,12 +1,7 @@
 import React from 'react';
 import { ToggleButtonGroup } from '../../package/components';
 
-function ToggleButtonGroupContainer({
-  disabled,
-  options,
-  value,
-  onSelect,
-}) {
+function ToggleButtonGroupContainer({ disabled, options, value, onSelect }) {
   const [option, setOption] = React.useState(value);
 
   const handleOptions = selectedOption => {
@@ -17,7 +12,7 @@ function ToggleButtonGroupContainer({
   return (
     <ToggleButtonGroup
       options={options}
-      value={option && option.id}
+      value={option && option.value}
       disabled={disabled}
       onSelect={selectedOption => handleOptions(selectedOption)}
     />

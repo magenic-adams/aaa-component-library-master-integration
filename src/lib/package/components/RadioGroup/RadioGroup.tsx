@@ -5,45 +5,37 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 // Components
 import Label from '../Label/Label';
-import RadioItem from '../RadioItem/RadioItem';
 import SelectList from '../SelectList/SelectList';
 
 // Types
+import { RadioItem } from '..';
 import SelectItem from '../../types/SelectItem';
 
 interface RequiredProps {
   id: string;
   items: SelectItem[];
-  onSelect: (item: SelectItem) => void;
+  selectedValues: string[] | number[];
+  onChange: (item: SelectItem) => void;
 }
 
 interface OptionalProps {
   classes?: any; // MUI Decorator
   className?: string;
+  initialValue?: string | number;
   instructionLabel?: string;
-  /**
-   * Used to set checked props in radio item for single-select radio buttons
-   */
-  selectedId: string | number;
-  /**
-   * Used to set checked props in radio item for multi-select radio buttons
-   */
-  selectedIds?: string[] | number[];
   /**
    * Used to disable specific radio items by value
    */
-  disabledIds?: string[] | number[];
+  disabledValues?: string[] | number[];
   disableAll?: boolean;
-  type?: string;
+  multiSelect?: boolean;
 }
 
 const defaultProps: OptionalProps = {
-  type: '',
+  multiSelect: false,
   instructionLabel: '',
-  selectedId: '',
-  selectedIds: [],
   disableAll: false,
-  disabledIds: [],
+  disabledValues: [],
 };
 
 const styleClasses = (theme: Theme): { root: any } => ({
@@ -61,6 +53,11 @@ const styleClasses = (theme: Theme): { root: any } => ({
       [theme.breakpoints.up('md')]: {
         width: 534,
       },
+    },
+    '& li > span ': {
+      // This is a workaround to disable the ripple button effect on the component.
+      // Currently, the MenuItem component don't have exposed prop to disable ripple effect.
+      width: 0,
     },
   },
   [theme.breakpoints.up('md')]: {
@@ -81,32 +78,25 @@ function isInArray(ids: string[] | number[] | undefined, id: string | number) {
 }
 
 function isSelected(
-  type: string | undefined,
-  id: string | number,
-  selectedId: string | number | undefined,
-  selectedIds: string[] | number[] | undefined
+  value: string | number,
+  selectedValues: string[] | number[] | undefined
 ) {
-  if (type === 'multi-select') {
-    return isInArray(selectedIds, id);
-  }
-  return id === selectedId;
+  return isInArray(selectedValues, value);
 }
 
 function constructDisplayItems(
   id: string,
-  type: string | undefined,
   items: SelectItem[],
-  selectedId: string | number | undefined,
-  selectedIds: string[] | number[] | undefined,
   disableAll: boolean | undefined,
-  disabledIds: string[] | number[] | undefined,
-  onSelect: (item: SelectItem) => void
+  disabledValues: string[] | number[] | undefined,
+  selectedValues: string[] | number[],
+  onChange: (item: SelectItem) => void
 ): any {
   return (
     Array.isArray(items) &&
     items.map(item => {
-      const checked = isSelected(type, item.id, selectedId, selectedIds);
-      const disabled = !!disableAll || isInArray(disabledIds, item.id);
+      const checked = isSelected(item.value, selectedValues);
+      const disabled = !!disableAll || isInArray(disabledValues, item.value);
 
       return {
         ...item,
@@ -114,12 +104,10 @@ function constructDisplayItems(
         display: (
           <RadioItem
             name={id}
-            item={item}
             checked={checked}
+            item={item}
             disabled={disabled}
-            onSelect={() =>
-              typeof onSelect === 'function' ? onSelect(item) : null
-            }
+            onChange={onChange}
           />
         ),
       };
@@ -130,24 +118,20 @@ function constructDisplayItems(
 const RadioGroup: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   classes,
   disableAll,
-  disabledIds,
+  disabledValues,
   id,
   items,
   instructionLabel,
-  selectedId,
-  selectedIds,
-  type,
-  onSelect,
+  selectedValues,
+  onChange,
 }) => {
   const newItems = constructDisplayItems(
     id,
-    type,
     items,
-    selectedId,
-    selectedIds,
     disableAll,
-    disabledIds,
-    onSelect
+    disabledValues,
+    selectedValues,
+    onChange
   );
 
   return (
@@ -160,7 +144,7 @@ const RadioGroup: React.FunctionComponent<RequiredProps & OptionalProps> = ({
       <SelectList
         className={cx('RadioGroup', classes.root)}
         items={newItems}
-        onSelect={() => onSelect}
+        onSelect={() => onChange}
       />
     </Fragment>
   );

@@ -42,18 +42,18 @@ class FormNumericInput extends _react.default.Component {
 
 
   handleFormFieldChange(_ref) {
-    let {
+    var {
       input
     } = _ref;
     return evt => {
-      const {
+      var {
         formState
       } = this.props;
-      const {
+      var {
         name,
         onChange
       } = input;
-      const {
+      var {
         mutators: {
           setFieldTouched
         }
@@ -72,18 +72,18 @@ class FormNumericInput extends _react.default.Component {
 
 
   handleFieldClear(_ref2, inputRef) {
-    let {
+    var {
       input
     } = _ref2;
     return () => {
-      const {
+      var {
         formState
       } = this.props;
-      const {
+      var {
         name,
         onChange
       } = input;
-      const {
+      var {
         mutators: {
           setFieldTouched
         }
@@ -106,10 +106,10 @@ class FormNumericInput extends _react.default.Component {
 
 
   renderFieldComponent(fieldProps) {
-    const {
+    var {
       forwardedRef
     } = this.props;
-    const {
+    var {
       meta
     } = fieldProps;
     return _react.default.createElement(_NumericInput.default, _extends({}, fieldProps.input, {
@@ -121,7 +121,7 @@ class FormNumericInput extends _react.default.Component {
   }
 
   render() {
-    const {
+    var {
       id
     } = this.props;
     return _react.default.createElement(_reactFinalForm.Field, {

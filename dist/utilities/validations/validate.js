@@ -15,7 +15,7 @@ var _defaultError = _interopRequireDefault(require("./defaultError"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const Validations = {
+var Validations = {
   /**
    * "alpha" checks if a value matches the alpha regex
    * @param  {string} value - field value
@@ -187,11 +187,11 @@ const Validations = {
    * @return {boolean} isValid?
    */
   is_file_type(value, type) {
-    const ext = value.substr(value.lastIndexOf('.') + 1);
-    const typeArray = type.split(',');
-    let inArray = false;
-    let i = 0;
-    const len = typeArray.length;
+    var ext = value.substr(value.lastIndexOf('.') + 1);
+    var typeArray = type.split(',');
+    var inArray = false;
+    var i = 0;
+    var len = typeArray.length;
 
     for (i; i < len; i += 1) {
       if (ext === typeArray[i]) inArray = true;
@@ -226,7 +226,7 @@ const Validations = {
    * @return {boolean} isValid?
    */
   matches(value, key, formVals) {
-    const matchValue = formVals[key];
+    var matchValue = formVals[key];
     return value === matchValue;
   },
 
@@ -247,8 +247,8 @@ const Validations = {
    * @return {boolean} isValid?
    */
   max_date(value, dateParam) {
-    const formValueDate = new Date(value);
-    const validationDate = new Date(dateParam);
+    var formValueDate = new Date(value);
+    var validationDate = new Date(dateParam);
 
     if (Number.isNaN(formValueDate.getTime()) || Number.isNaN(validationDate.getTime())) {
       // one of the dates is not valid, => not valid
@@ -279,8 +279,8 @@ const Validations = {
    * @return {boolean} isValid?
    */
   min_date(value, dateParam) {
-    const formValueDate = new Date(value);
-    const validationDate = new Date(dateParam);
+    var formValueDate = new Date(value);
+    var validationDate = new Date(dateParam);
 
     if (Number.isNaN(formValueDate.getTime()) || Number.isNaN(validationDate.getTime())) {
       // one of the dates is not valid, => not valid
@@ -332,13 +332,13 @@ const Validations = {
     // accept only digits, dashes or spaces
     if (!_regex.default.numericDashRegex.test(value)) return false; // The Luhn Algorithm.
 
-    let nCheck = 0;
-    let nDigit = 0;
-    let bEven = false;
-    const strippedField = value.replace(/\D/g, '');
+    var nCheck = 0;
+    var nDigit = 0;
+    var bEven = false;
+    var strippedField = value.replace(/\D/g, '');
 
-    for (let n = strippedField.length - 1; n >= 0; n -= 1) {
-      const cDigit = strippedField.charAt(n);
+    for (var n = strippedField.length - 1; n >= 0; n -= 1) {
+      var cDigit = strippedField.charAt(n);
       nDigit = parseInt(cDigit, 10);
 
       if (bEven) {
@@ -359,7 +359,7 @@ const Validations = {
    * @return {boolean} isValid?
    */
   valid_date(value) {
-    const time = new Date(value).getTime();
+    var time = new Date(value).getTime();
     return !Number.isNaN(time);
   },
 
@@ -389,13 +389,13 @@ const Validations = {
    * @return {boolean}
    */
   is_unique() {
-    let value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-    let param = arguments.length > 1 ? arguments[1] : undefined;
-    let formVals = arguments.length > 2 ? arguments[2] : undefined;
-    const checkVal = value.toLowerCase();
-    const allVals = (0, _values.default)(formVals); // There should not be more than 1.
+    var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    var param = arguments.length > 1 ? arguments[1] : undefined;
+    var formVals = arguments.length > 2 ? arguments[2] : undefined;
+    var checkVal = value.toLowerCase();
+    var allVals = (0, _values.default)(formVals); // There should not be more than 1.
 
-    const matches = allVals.filter(v => v.toLowerCase() === checkVal);
+    var matches = allVals.filter(v => v.toLowerCase() === checkVal);
     return matches.length === 1;
   },
 
@@ -426,12 +426,12 @@ const Validations = {
       return true;
     }
 
-    let isValid = true; // Assume validity
+    var isValid = true; // Assume validity
 
-    let rule = ruleKey;
-    let param = null;
+    var rule = ruleKey;
+    var param = null;
 
-    const parts = _regex.default.ruleRegex.exec(rule);
+    var parts = _regex.default.ruleRegex.exec(rule);
 
     if (parts) {
       // If the rule has a parameter, i.e. matches[param], split it out
@@ -453,15 +453,15 @@ const Validations = {
    * @return {object{[key:string]: message:string}}
    */
   validateForm(formVals, validations) {
-    const fieldValidations = Object.keys(validations);
-    const validationObj = fieldValidations.map(field => {
-      let validity; // Our object to return
+    var fieldValidations = Object.keys(validations);
+    var validationObj = fieldValidations.map(field => {
+      var validity; // Our object to return
 
-      const validationsToTest = Object.keys(validations[field]); // Loop over each validation tied to a specific field
+      var validationsToTest = Object.keys(validations[field]); // Loop over each validation tied to a specific field
 
       validationsToTest.forEach(rule => {
         // key is the rule
-        const hasPassedUniqueValidation = Validations.validateFieldValue(formVals[field], rule, formVals); // If we haven't passed, construct the validation object with this validation
+        var hasPassedUniqueValidation = Validations.validateFieldValue(formVals[field], rule, formVals); // If we haven't passed, construct the validation object with this validation
 
         if (!hasPassedUniqueValidation) {
           if (validity !== undefined) {
@@ -478,11 +478,11 @@ const Validations = {
       };
     }) // Turn the array back into the highest priority message for each field
     .reduce((accum, fieldValidation) => {
-      const fieldName = Object.keys(fieldValidation)[0];
-      let firstErrorMessage; // Some sort of error is present, let's surface an error for the first
+      var fieldName = Object.keys(fieldValidation)[0];
+      var firstErrorMessage; // Some sort of error is present, let's surface an error for the first
 
       if (fieldValidation[fieldName]) {
-        const firstErrorRuleKey = Object.keys(fieldValidation[fieldName])[0];
+        var firstErrorRuleKey = Object.keys(fieldValidation[fieldName])[0];
         firstErrorMessage = Validations.generateErrorMessage(fieldValidation[fieldName], firstErrorRuleKey);
       }
 

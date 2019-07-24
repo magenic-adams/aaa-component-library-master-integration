@@ -1,13 +1,11 @@
 import React, { Fragment } from 'react';
 import { withStyles } from '@material-ui/styles';
+import MUIClear from '@material-ui/icons/Clear';
+import { Tooltip as MUITooltip, Fade, ClickAwayListener  } from '@material-ui/core';
 import cx from 'clsx';
 
 // Styles
 import styleClasses from './TooltipStyles';
-
-// MaterialUI components
-import { Tooltip as MUITooltip, Fade, ClickAwayListener  } from '@material-ui/core';
-import MUIClear from '@material-ui/icons/Clear';
  
 interface RequiredProps {
     children: any,

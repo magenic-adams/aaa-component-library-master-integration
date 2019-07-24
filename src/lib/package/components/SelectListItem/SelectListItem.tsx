@@ -2,7 +2,7 @@ import React from 'react';
 import invariant from 'tiny-invariant';
 import { withStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
-import ListItem from '@material-ui/core/ListItem';
+import MenuItem from '@material-ui/core/MenuItem';
 
 // Types
 import SelectItem from '../../types/SelectItem';
@@ -14,15 +14,25 @@ interface RequiredProps {
 
 interface OptionalProps {
   classes?: any;
+  className?: string;
+  value?: string | number;
+  disabled?: boolean;
+  tabIndex: number;
 }
 
+const defaultProps: OptionalProps = {
+  className: '',
+  disabled: false,
+  tabIndex: 0,
+  value: '',
+};
+
 const styleClasses = (
-  theme: Theme
+  theme: Theme,
 ): {
   // CSS Classes
   root: any;
   gutters: any;
-  divider: any;
 } => ({
   root: {
     height: 48,
@@ -32,24 +42,19 @@ const styleClasses = (
     fontStretch: 'normal',
     lineHeight: 1.5,
     fontFamily: theme.typography.fontFamily,
+    borderBottom: `1px solid ${theme.palette.primary.main}`,
     [theme.breakpoints.between('xs', 'sm')]: {
       fontSize: 16,
     },
-    '&.Mui-selected, &.Mui-selected:hover': {
-      backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
+    '& .MuiTouchRipple-root': {
+      visibility: 'hidden',
     },
-    '&:hover': {
+    '&.Mui-selected,&.Mui-selected:hover,&.Mui-focusVisible,&:focus,&:hover': {
       backgroundColor: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
     },
   },
   gutters: {
     padding: '0 13px 0 13px',
-  },
-  divider: {
-    borderBottom: `1px solid ${theme.palette.primary.main}`,
-    '&:last-child': {
-      borderBottom: 'none',
-    },
   },
 });
 
@@ -67,25 +72,29 @@ function checkValidity(item: {
 
 const SelectListItem: React.FunctionComponent<
   RequiredProps & OptionalProps
-> = ({ classes, item, onSelect }) => {
+> = ({ classes, className, disabled, item, onSelect, ...rest }) => {
   checkValidity(item);
-
-  const { display, id, value } = item;
-  const { divider, gutters, root } = classes;
+  const { id, value, display } = item;
+  const { gutters, root } = classes;
 
   return (
-    <ListItem
+    <MenuItem
+      className={className}
+      classes={{ root, gutters }}
       data-quid={`SelectListItem-${id}`}
-      value={value}
-      classes={{ root, divider, gutters }}
+      disabled={disabled}
       divider
       onClick={() => onSelect(item)}
+      {...rest}
+      value={value}
     >
       {display}
-    </ListItem>
+    </MenuItem>
   );
 };
 
+SelectListItem.defaultProps = defaultProps;
+
 export default withStyles(styleClasses, { index: 0, withTheme: true })(
-  SelectListItem
+  SelectListItem,
 );

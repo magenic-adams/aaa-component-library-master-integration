@@ -19,18 +19,15 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-;
-;
 /**
  * FormInput is a  <Field> Wrapper around <BaseInput />
- * FormInput's responsibility is to 
+ * FormInput's responsibility is to
  * 1. map ReactFinalForm's exposed "fieldProps" to <BaseInput>'s props
  * 2. Have logic to determine when an error is shown
- * 
+ *
  * By exposing the form's state via HOC, we are able to tap into custom mutators and other form state
  * defined on our top-level <Form> component and plucked from context
  */
-
 class FormInput extends _react.default.Component {
   constructor(props) {
     super(props);
@@ -49,7 +46,7 @@ class FormInput extends _react.default.Component {
 
 
   getInputRef() {
-    const {
+    var {
       forwardedRef
     } = this.props;
     return forwardedRef || this.inputRef;
@@ -62,18 +59,18 @@ class FormInput extends _react.default.Component {
 
 
   handleFormFieldChange(_ref) {
-    let {
+    var {
       input
     } = _ref;
     return evt => {
-      const {
+      var {
         formState
       } = this.props;
-      const {
+      var {
         name,
         onChange
       } = input;
-      const {
+      var {
         mutators: {
           setFieldTouched
         }
@@ -91,18 +88,18 @@ class FormInput extends _react.default.Component {
 
 
   handleFieldClear(_ref2, ref) {
-    let {
+    var {
       input
     } = _ref2;
     return () => {
-      const {
+      var {
         formState
       } = this.props;
-      const {
+      var {
         name,
         onChange
       } = input;
-      const {
+      var {
         mutators: {
           setFieldTouched
         }
@@ -125,8 +122,8 @@ class FormInput extends _react.default.Component {
 
 
   renderFieldComponent(fieldProps) {
-    const ref = this.getInputRef();
-    const {
+    var ref = this.getInputRef();
+    var {
       meta
     } = fieldProps;
     return _react.default.createElement(_BaseInput.default, _extends({}, fieldProps.input, {
@@ -138,14 +135,15 @@ class FormInput extends _react.default.Component {
   }
 
   render() {
-    const {
+    var {
       id,
       initialValue
     } = this.props;
     return _react.default.createElement(_reactFinalForm.Field, {
       name: id,
       initialValue: initialValue,
-      component: this.renderFieldComponent
+      component: this.renderFieldComponent,
+      parse: val => val == null ? '' : val
     });
   }
 

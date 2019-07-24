@@ -11,8 +11,8 @@ var _reactInlinesvg = _interopRequireDefault(require("react-inlinesvg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const SvgIcon = (_ref) => {
-  let {
+var SvgIcon = (_ref) => {
+  var {
     className,
     id,
     svgIcon

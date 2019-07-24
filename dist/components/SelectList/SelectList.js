@@ -17,13 +17,14 @@ var _SelectListItem = _interopRequireDefault(require("../SelectListItem/SelectLi
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const defaultProps = {
-  className: ''
+var defaultProps = {
+  className: '',
+  disabled: false
 };
 
-const styleClasses = theme => ({
+var styleClasses = theme => ({
   root: {
-    width: 341,
+    width: 534,
     background: theme.secondaryPalette.colorVariables.WHITE,
     border: "2px solid ".concat(theme.palette.primary.main),
     borderRadius: 4,
@@ -45,12 +46,12 @@ const styleClasses = theme => ({
 });
 
 function areItemKeysPresent(items) {
-  return items.every(item => item.id && item.value && item.display);
+  return items.every(item => item.hasOwnProperty('id') && item.hasOwnProperty('value') && item.hasOwnProperty('display'));
 }
 
 function checkValidity(items) {
   if (!Array.isArray(items) || items.length === 0) {
-    (0, _tinyInvariant.default)(false, 'items is empty');
+    (0, _tinyInvariant.default)(false, 'items are empty');
   }
 
   if (!areItemKeysPresent(items)) {
@@ -58,21 +59,25 @@ function checkValidity(items) {
   }
 }
 
-const SelectList = (_ref) => {
-  let {
+var SelectList = (_ref) => {
+  var {
     classes,
     className,
+    disabled,
     items,
-    onSelect: _onSelect
+    onSelect
   } = _ref;
   checkValidity(items);
   return _react.default.createElement("div", {
     className: (0, _clsx.default)(classes.root, className)
-  }, items.map(item => {
+  }, items.map((item, index) => {
     return item.display && _react.default.createElement(_SelectListItem.default, {
       key: item.id,
+      value: item.value,
       item: item,
-      onSelect: () => _onSelect(item)
+      onSelect: onSelect,
+      tabIndex: index,
+      disabled: disabled
     });
   }));
 };

@@ -96,7 +96,7 @@ const styleClasses = (theme:Theme): {
       },
     },
     disabled: {
-      background: theme.secondaryPalette.disabled.main,
+      background: theme.secondaryPalette.colorVariables.LIGHT_GRAYISH_BLUE,
       boxShadow: 'initial',
       '&:hover': {
         boxShadow: 'none',
@@ -207,10 +207,11 @@ const BaseInput:React.FunctionComponent<RequiredProps & OptionalProps> = ({
         )}
         disableUnderline
         endAdornment={
-          onClear && value && (
+          !disabled && onClear && value && (
             <MUIInputAdornment
               className={classes.inputAdornment}
               position="end"
+              tabIndex={-1}
             >
               <MUIIconButton
                 disableRipple
@@ -219,8 +220,9 @@ const BaseInput:React.FunctionComponent<RequiredProps & OptionalProps> = ({
                 disabled={disabled}
                 color="inherit"
                 className={classes.iconButton}
+                tabIndex={-1}
               >
-                <MUIClear className={classes.iconStyle} />
+                <MUIClear className={classes.iconStyle} tabIndex={-1}/>
               </MUIIconButton>
             </MUIInputAdornment>
           )

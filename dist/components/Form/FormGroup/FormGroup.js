@@ -16,19 +16,19 @@ var _FormGroup = _interopRequireDefault(require("@material-ui/core/FormGroup"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Components
-const styleClasses = () => ({
+var styleClasses = () => ({
   root: {
     marginTop: 16,
     marginBottom: 16
   }
 });
 
-const defaultProps = {
+var defaultProps = {
   className: ''
 };
 
-const FormGroup = (_ref) => {
-  let {
+var FormGroup = (_ref) => {
+  var {
     children,
     classes,
     className

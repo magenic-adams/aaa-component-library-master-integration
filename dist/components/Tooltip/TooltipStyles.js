@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 // Types
-const styleClasses = theme => ({
+var styleClasses = theme => ({
   tooltip: {
     backgroundColor: theme.secondaryPalette.colorVariables.WHITE,
     pointerEvents: 'all',

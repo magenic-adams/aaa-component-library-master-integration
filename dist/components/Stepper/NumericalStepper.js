@@ -23,14 +23,15 @@ var _Button = _interopRequireDefault(require("../Button/Button"));
 
 var _NumericInput = _interopRequireDefault(require("../Input/NumericInput/NumericInput"));
 
-var _NumericalStepperStyles = require("./NumericalStepperStyles");
+var _NumericalStepperStyles = _interopRequireDefault(require("./NumericalStepperStyles"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* eslint-disable import/no-extraneous-dependencies */
 // Material UI Components
 // Components
-const defaultProps = {
+var stepperOverridesDefault = {};
+var defaultProps = {
   classes: {},
   disabled: false,
   labelText: '',
@@ -39,8 +40,8 @@ const defaultProps = {
   value: 1
 };
 
-const NumericalStepper = props => {
-  const {
+var NumericalStepper = props => {
+  var {
     disabled,
     disableWarning,
     error,
@@ -53,9 +54,10 @@ const NumericalStepper = props => {
     onDecrease,
     onBlur,
     onChange,
-    value
+    value,
+    overrides = stepperOverridesDefault
   } = props;
-  const classes = (0, _NumericalStepperStyles.styleClasses)(props);
+  var classes = (0, _NumericalStepperStyles.default)(overrides);
   return _react.default.createElement(_FormControl.default, {
     id: id,
     disabled: disabled,
@@ -63,7 +65,7 @@ const NumericalStepper = props => {
       root: classes.root
     }
   }, _react.default.createElement(_Label.default, {
-    overrides: (0, _NumericalStepperStyles.overrideStepperLabel)(props),
+    overrides: overrides,
     id: "NumericalStepperLabel-".concat(id),
     disabled: false,
     error: error,

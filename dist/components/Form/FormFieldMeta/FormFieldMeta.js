@@ -16,13 +16,13 @@ var _styles = require("@material-ui/core/styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 ;
-const defaultProps = {
+var defaultProps = {
   error: '',
   helperText: '',
   disableWarning: false
 };
 
-const styleClasses = theme => {
+var styleClasses = theme => {
   return {
     root: {
       minHeight: 26
@@ -60,8 +60,8 @@ const styleClasses = theme => {
   };
 };
 
-const FormFieldMeta = (_ref) => {
-  let {
+var FormFieldMeta = (_ref) => {
+  var {
     error,
     disableWarning,
     classes,

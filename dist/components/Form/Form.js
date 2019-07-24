@@ -26,20 +26,20 @@ class FormDecorator extends _react.default.Component {
    * @return {Boolean}
    */
   static allRequiredFieldsHaveBeenVisitedOrHaveValues(_ref) {
-    let {
+    var {
       formRenderProps,
       validations
     } = _ref;
-    const {
+    var {
       values,
       visited
     } = formRenderProps;
-    const validationFields = Object.keys(validations);
-    const requiredFields = validationFields.filter(fieldKey => {
+    var validationFields = Object.keys(validations);
+    var requiredFields = validationFields.filter(fieldKey => {
       return Object.prototype.hasOwnProperty.call(validations[fieldKey], 'required');
     });
     return requiredFields.every(fieldKey => {
-      return !!values[fieldKey] || !!visited[fieldKey];
+      return !!values.hasOwnProperty(fieldKey) || !!visited.hasOwnProperty(fieldKey);
     });
   }
   /**
@@ -51,7 +51,7 @@ class FormDecorator extends _react.default.Component {
 
 
   static decorateFormRenderProps(_ref2) {
-    let {
+    var {
       formRenderProps,
       validations
     } = _ref2;
@@ -64,7 +64,7 @@ class FormDecorator extends _react.default.Component {
   }
 
   static handleValidate(_ref3) {
-    let {
+    var {
       validations
     } = _ref3;
     return values => {
@@ -90,7 +90,7 @@ class FormDecorator extends _react.default.Component {
   render() {
     // This component acts as mainly a pass through to react-final-form,
     // but we augment functionality and encapsulate required form behaviors
-    const {
+    var {
       render,
       validations,
       onSubmit

@@ -18,18 +18,18 @@ import { getDOMNodeComputedStyle } from '../../../../../test/DOM';
 
 // Constants
 import {
-  ACE_COLOR_MAIN_BLACK,
+  ACE_COLOR_MAIN_GRAY,
   ACE_COLOR_MAIN_WHITE,
   ACE_COLOR_MAIN_DARKER_BLUE,
-  ACE_COLOR_SECONDARY_HOVER,
   ACE_COLOR_MAIN_DISABLED,
+  ACE_COLOR_TRANSPARENT,
 } from '../../constants/colors';
 
 function getFakeProps(overrides) {
   return {
     name: 'radioGroup',
     item: { id: 1, value: 1, display: 'Hey' },
-    onSelect: jest.fn(v => v),
+    onChange: jest.fn(v => v),
     ...overrides,
   };
 }
@@ -53,7 +53,7 @@ describe('RadioItem', () => {
 
   beforeEach(() => {
     spy = sinon.spy();
-    props = getFakeProps({ onSelect: spy });
+    props = getFakeProps({ onChange: spy });
     radioItemWrapper = createRadioItemWithTheme(props);
     radioItemNode = radioItemWrapper.getDOMNode();
   });
@@ -129,11 +129,7 @@ describe('RadioItem', () => {
         .at(0)
         .simulate('change');
       expect(spy.calledOnce).to.equal(true);
-      expect(spy.getCall(0).args[0]).to.deep.equal({
-        id: 1,
-        value: 1,
-        display: 'Hey',
-      });
+      expect(spy.getCall(0).args[0]).to.be.equal(props.item);
     });
 
     it('does NOT call it\'s change event handler when it is disabled', () => {
@@ -168,16 +164,14 @@ describe('RadioItem', () => {
       expect(borderRadius).to.equal('4px');
     });
 
-    it('should have 1px inset ACE_COLOR_MAIN_BLACK box-shadow', () => {
+    it('should have 1px inset ACE_COLOR_MAIN_GRAY box-shadow', () => {
       radioItemWrapper = createRadioItemWithTheme(props);
       radioItemNode = radioItemWrapper.getDOMNode();
       const boxShadowStyle = getDOMNodeComputedStyle(
         radioItemNode,
         'box-shadow'
       );
-      expect(boxShadowStyle).to.equal(
-        `inset 0 0 0 1px ${ACE_COLOR_MAIN_BLACK}`
-      );
+      expect(boxShadowStyle).to.equal(`inset 0 0 0 1px ${ACE_COLOR_MAIN_GRAY}`);
     });
 
     it('has background of ACE_COLOR_MAIN_WHITE', () => {
@@ -209,7 +203,7 @@ describe('RadioItem', () => {
           );
         });
 
-        it('has background color of ACE_COLOR_SECONDARY_HOVER', () => {
+        it('has background color of ACE_COLOR_TRANSPARENT', () => {
           props = getFakeProps({ checked: true });
           radioItemWrapper = createRadioItemWithTheme(props);
           radioItemNode = radioItemWrapper.getDOMNode();
@@ -218,7 +212,7 @@ describe('RadioItem', () => {
             radioItemNode,
             'background'
           );
-          expect(background).to.equal(ACE_COLOR_SECONDARY_HOVER);
+          expect(background).to.equal(ACE_COLOR_TRANSPARENT);
         });
 
         it('has font size of 500px', () => {

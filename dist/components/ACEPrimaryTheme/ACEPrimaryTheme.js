@@ -18,7 +18,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // https://next.material-ui.com/customization/themes
 // Augmented themea definition
 // Colors
-const theme = (0, _createStyleTheme.default)({
+var theme = (0, _createStyleTheme.default)({
   breakpoints: {
     values: {
       xs: 0,
@@ -51,6 +51,8 @@ const theme = (0, _createStyleTheme.default)({
       ERROR_HOVER: _colors.ACE_COLOR_MAIN_ERROR_HOVER,
       TRANSPARENT: _colors.ACE_COLOR_TRANSPARENT,
       DARKER_BLUE: _colors.ACE_COLOR_MAIN_DARKER_BLUE,
+      DARK_GRAYISH_BLUE: _colors.ACE_COLOR_MAIN_DARK_GRAYISH_BLUE,
+      LIGHT_GRAYISH_BLUE: _colors.ACE_COLOR_MAIN_LIGHT_GRAYISH_BLUE,
       VERY_DARK_BLUE: _colors.ACE_COLOR_MAIN_VERY_DARK_BLUE,
       GRAY: _colors.ACE_COLOR_MAIN_GRAY,
       VERY_LIGHT_GRAY: _colors.ACE_COLOR_MAIN_VERY_LIGHT_GRAY,
@@ -178,7 +180,7 @@ theme.typographyElements.linkSecondary = {
 };
 
 function ACEThemeProvider(_ref) {
-  let {
+  var {
     children
   } = _ref;
   return _react.default.createElement(_styles.ThemeProvider, {

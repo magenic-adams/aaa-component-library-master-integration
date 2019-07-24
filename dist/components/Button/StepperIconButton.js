@@ -13,8 +13,8 @@ var _Button = _interopRequireDefault(require("./Button"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const IconButton = props => {
-  const {
+var IconButton = props => {
+  var {
     classes,
     children,
     disabled,

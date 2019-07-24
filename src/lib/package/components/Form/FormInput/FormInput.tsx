@@ -6,32 +6,32 @@ import withFormState from '../withFormState';
 import BaseInput from '../../Input/BaseInput/BaseInput';
 
 interface RequiredProps {
-  id: string,
-};
+  id: string;
+}
 
 interface OptionalProps {
-  initialValue?: string | number,
-  formState?: any, // Decorator
-  forwardedRef?: React.RefObject<any>,
-};
+  initialValue?: string | number;
+  formState?: any; // Decorator
+  forwardedRef?: React.RefObject<any>;
+}
 
 /**
  * FormInput is a  <Field> Wrapper around <BaseInput />
- * FormInput's responsibility is to 
+ * FormInput's responsibility is to
  * 1. map ReactFinalForm's exposed "fieldProps" to <BaseInput>'s props
  * 2. Have logic to determine when an error is shown
- * 
+ *
  * By exposing the form's state via HOC, we are able to tap into custom mutators and other form state
  * defined on our top-level <Form> component and plucked from context
  */
 class FormInput extends React.Component<RequiredProps & OptionalProps> {
-  inputRef:React.RefObject<any> = React.createRef();
+  inputRef: React.RefObject<any> = React.createRef();
 
-  static defaultProps:OptionalProps = {
+  static defaultProps: OptionalProps = {
     initialValue: '',
-  }
+  };
 
-  constructor(props:RequiredProps & OptionalProps){
+  constructor(props: RequiredProps & OptionalProps) {
     super(props);
     this.getInputRef = this.getInputRef.bind(this);
     this.handleFormFieldChange = this.handleFormFieldChange.bind(this);
@@ -43,7 +43,7 @@ class FormInput extends React.Component<RequiredProps & OptionalProps> {
    * Receives the ref for the underlying input
    * @return {React.RefObject<any>}
    */
-  getInputRef(){
+  getInputRef() {
     const { forwardedRef } = this.props;
     return forwardedRef || this.inputRef;
   }
@@ -53,18 +53,21 @@ class FormInput extends React.Component<RequiredProps & OptionalProps> {
    * @param  {Object} options.input - fieldProps.input
    * @return {Function} decoratored onChange
    */
-  handleFormFieldChange(
-    { input }:{input: {name: string, onChange: (evt:React.SyntheticEvent) => void}},
-   ):(evt:React.SyntheticEvent) => void {
-    return (evt) => {
+  handleFormFieldChange({
+    input,
+  }: {
+    input: { name: string; onChange: (evt: React.SyntheticEvent) => void };
+  }): (evt: React.SyntheticEvent) => void {
+    return evt => {
       const { formState } = this.props;
       const { name, onChange } = input;
-      const { mutators: { setFieldTouched }} = formState;
+      const {
+        mutators: { setFieldTouched },
+      } = formState;
       setFieldTouched(name, false);
       onChange(evt);
     };
   }
-
 
   /**
    * Handles clearing of input value
@@ -73,17 +76,19 @@ class FormInput extends React.Component<RequiredProps & OptionalProps> {
    * @return {Function} onClear handler
    */
   handleFieldClear(
-    { input }:{input: {name: string, onChange: (val:string) => void}},
-    ref: React.RefObject<any>,
-  ){
+    { input }: { input: { name: string; onChange: (val: string) => void } },
+    ref: React.RefObject<any>
+  ) {
     return () => {
       const { formState } = this.props;
       const { name, onChange } = input;
-      const { mutators: { setFieldTouched }} = formState;
+      const {
+        mutators: { setFieldTouched },
+      } = formState;
 
       setFieldTouched(name, false);
       onChange('');
-      if (ref && ref.current){
+      if (ref && ref.current) {
         ref.current.focus();
       }
     };
@@ -96,10 +101,10 @@ class FormInput extends React.Component<RequiredProps & OptionalProps> {
    * @param  {Object} fieldProps - react final form field props
    * @return {React.Component}
    */
-  renderFieldComponent(fieldProps:any){
+  renderFieldComponent(fieldProps: any) {
     const ref = this.getInputRef();
     const { meta } = fieldProps;
-    
+
     return (
       <BaseInput
         {...fieldProps.input}
@@ -112,13 +117,14 @@ class FormInput extends React.Component<RequiredProps & OptionalProps> {
     );
   }
 
-  render(){
+  render() {
     const { id, initialValue } = this.props;
     return (
       <Field
         name={id}
         initialValue={initialValue}
         component={this.renderFieldComponent}
+        parse={val => (val == null ? '' : val)}
       />
     );
   }

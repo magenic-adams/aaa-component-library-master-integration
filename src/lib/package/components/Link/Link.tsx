@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles'; // listed as a dependency
+import { withStyles } from '@material-ui/styles'; 
 
 // Types
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
@@ -8,7 +8,7 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { Link as MuiLink } from '@material-ui/core';
 
 // Utilities
-import noop from '../../utilities/noop'; // used the Link instead of the button
+import noop from '../../utilities/noop';
 
 
 interface RequiredProps {

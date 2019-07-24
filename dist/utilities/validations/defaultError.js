@@ -9,12 +9,12 @@ var _regex = _interopRequireDefault(require("./regex"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const dynamicErrors = {
+var dynamicErrors = {
   at_least: param => "This amount must be at least ".concat(param),
   at_most: param => "This amount must be less than or equal to ".concat(param)
 }; // TODO: create generic errors for non-param cases
 
-const staticErrors = {
+var staticErrors = {
   at_least: 'This field has minimum validation error',
   at_most: 'This field has maxiumum validation error'
 };
@@ -25,13 +25,13 @@ const staticErrors = {
  */
 
 function generateDefaultErrorRule(ruleKey) {
-  const parts = _regex.default.ruleRegex.exec(ruleKey);
+  var parts = _regex.default.ruleRegex.exec(ruleKey);
 
   if (parts) {
-    const [, rule, param] = parts;
+    var [, _rule, _param] = parts;
 
-    if (dynamicErrors[rule]) {
-      return dynamicErrors[rule](param);
+    if (dynamicErrors[_rule]) {
+      return dynamicErrors[_rule](_param);
     }
   }
 

@@ -13,7 +13,7 @@ import Label from '../Label/Label';
 import StepperButton from '../Button/Button';
 import NumericInput from '../Input/NumericInput/NumericInput';
 
-import { overrideStepperLabel, styleClasses } from './NumericalStepperStyles';
+import styleClasses, { StepperStylesOverride } from './NumericalStepperStyles';
 
 interface RequiredProps {
   id: string;
@@ -33,7 +33,10 @@ interface OptionalProps {
   labelText?: string | React.ReactElement | React.ReactHTMLElement<any>;
   mask?: RegExp[];
   value?: number;
+  overrides?: StepperStylesOverride;
 }
+
+const stepperOverridesDefault: StepperStylesOverride = {};
 
 const defaultProps: OptionalProps = {
   classes: {},
@@ -61,9 +64,11 @@ const NumericalStepper: React.FunctionComponent<
     onBlur,
     onChange,
     value,
+    overrides = stepperOverridesDefault,
   } = props;
 
-  const classes = styleClasses(props);
+  const classes = styleClasses(overrides);
+
   return (
     <MUIFormControl
       id={id}
@@ -71,7 +76,7 @@ const NumericalStepper: React.FunctionComponent<
       classes={{ root: classes.root }}
     >
       <Label
-        overrides={overrideStepperLabel(props)}
+        overrides={overrides}
         id={`NumericalStepperLabel-${id}`}
         disabled={false}
         error={error}

@@ -36,7 +36,7 @@ class FormDecorator extends React.Component<RequiredProps> {
     });
 
     return requiredFields.every(fieldKey => {
-      return !!values[fieldKey] || !!visited[fieldKey];
+      return !!values.hasOwnProperty(fieldKey) || !!visited.hasOwnProperty(fieldKey);
     });
   }
 

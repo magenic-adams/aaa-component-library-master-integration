@@ -30,7 +30,7 @@ function createSelectListItemWithTheme(props) {
   return mount(
     <ACEThemeProvider theme={props.theme}>
       <SelectListItem {...props} />
-    </ACEThemeProvider>,
+    </ACEThemeProvider>
   );
 }
 
@@ -67,7 +67,7 @@ describe('SelectListItem', () => {
         listItemTextWrapper
           .find('li')
           .at(0)
-          .getDOMNode().dataset.quid,
+          .getDOMNode().dataset.quid
       ).to.equal(`SelectListItem-${props.item.id}`);
     });
 
@@ -76,7 +76,7 @@ describe('SelectListItem', () => {
         listItemTextWrapper
           .find('li')
           .at(0)
-          .getDOMNode().value,
+          .getDOMNode().value
       ).to.equal(props.item.value);
     });
 
@@ -87,7 +87,7 @@ describe('SelectListItem', () => {
       expect(() => {
         createSelectListItemWithTheme(props);
       }).to.throw(
-        'Invariant failed: You have not passed an item for rendering.',
+        'Invariant failed: You have not passed an item for rendering.'
       );
 
       props = getFakeProps({
@@ -96,7 +96,7 @@ describe('SelectListItem', () => {
       expect(() => {
         createSelectListItemWithTheme(props);
       }).to.throw(
-        'Invariant failed: You have not passed an item for rendering.',
+        'Invariant failed: You have not passed an item for rendering.'
       );
 
       props = getFakeProps({
@@ -105,7 +105,7 @@ describe('SelectListItem', () => {
       expect(() => {
         createSelectListItemWithTheme(props);
       }).to.throw(
-        'Invariant failed: You have not passed an item for rendering.',
+        'Invariant failed: You have not passed an item for rendering.'
       );
 
       props = getFakeProps({
@@ -118,9 +118,8 @@ describe('SelectListItem', () => {
   });
 
   describe('event handlers', () => {
-    it('listItemTextWrapper call it\'s click event handler', () => {
+    it("listItemTextWrapper call it's click event handler", () => {
       listItemTextWrapper.simulate('click');
-
       expect(spy.calledOnce).to.equal(true);
       expect(spy.getCall(0).args[0]).to.deep.equal({
         id: 1,
@@ -139,7 +138,7 @@ describe('SelectListItem', () => {
     it('has a transparent background', () => {
       const borderColorStyle = getDOMNodeComputedStyle(
         listItemTextWrapper.getDOMNode(),
-        'background',
+        'background'
       );
       expect(borderColorStyle).to.equal(ACE_COLOR_TRANSPARENT);
     });

@@ -32,11 +32,11 @@ class FormNumericalStepper extends _react.default.Component {
   static handleDecrease(fieldRenderProps) {
     return () => {
       if (!(fieldRenderProps.input.value <= 0)) {
-        const {
+        var {
           value,
           onChange
         } = fieldRenderProps.input;
-        const newValue = Number.isNaN(parseInt(value, 10)) ? 1 : parseInt(value, 10) - 1;
+        var newValue = Number.isNaN(parseInt(value, 10)) ? 1 : parseInt(value, 10) - 1;
         onChange(newValue);
       }
     };
@@ -44,18 +44,18 @@ class FormNumericalStepper extends _react.default.Component {
 
   static handleIncrease(fieldRenderProps) {
     return () => {
-      const {
+      var {
         value,
         onChange
       } = fieldRenderProps.input;
-      const newValue = Number.isNaN(parseInt(value, 10)) ? 1 : parseInt(value, 10) + 1;
+      var newValue = Number.isNaN(parseInt(value, 10)) ? 1 : parseInt(value, 10) + 1;
       onChange(newValue);
     };
   }
 
   static handleBlur(fieldRenderProps) {
     return () => {
-      const {
+      var {
         value,
         onChange
       } = fieldRenderProps.input;
@@ -68,10 +68,10 @@ class FormNumericalStepper extends _react.default.Component {
 
     _defineProperty(this, "renderFieldComponent", fieldRenderProps => {
       // const ref = this.getInputRef();
-      const {
+      var {
         meta
       } = fieldRenderProps;
-      const {
+      var {
         id
       } = this.props;
       return _react.default.createElement(_NumericalStepper.default, _extends({
@@ -90,18 +90,18 @@ class FormNumericalStepper extends _react.default.Component {
   }
 
   handleFormFieldChange(_ref) {
-    let {
+    var {
       input
     } = _ref;
     return evt => {
-      const {
+      var {
         formState
       } = this.props;
-      const {
+      var {
         name,
         onChange
       } = input;
-      const {
+      var {
         mutators: {
           setFieldTouched
         }
@@ -120,7 +120,7 @@ class FormNumericalStepper extends _react.default.Component {
 
 
   render() {
-    const {
+    var {
       id
     } = this.props;
     return _react.default.createElement(_reactFinalForm.Field, {

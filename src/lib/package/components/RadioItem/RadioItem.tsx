@@ -7,7 +7,6 @@ import { withStyles } from '@material-ui/styles';
 import MUIRadio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-// import { Field } from 'react-final-form';
 import { Theme } from '@material-ui/core';
 
 // Types
@@ -16,7 +15,7 @@ import SelectItem from '../../types/SelectItem';
 interface RequiredProps {
   name: string;
   item: SelectItem;
-  onSelect: (item: SelectItem) => void;
+  onChange: (item: SelectItem) => void;
 }
 
 interface OptionalProps {
@@ -24,12 +23,17 @@ interface OptionalProps {
   className?: string;
   checked?: boolean;
   disabled?: boolean;
+  selectedValues?: any[];
+  onBlur?: (evt: React.SyntheticEvent) => void;
+  onFocus?: (evt: React.SyntheticEvent) => void;
 }
 
 const defaultProps: OptionalProps = {
   className: '',
   checked: false,
   disabled: false,
+  onBlur: () => {},
+  onFocus: () => {},
 };
 
 const styleClasses = (
@@ -41,14 +45,18 @@ const styleClasses = (
     borderRadius: 4,
     border: 0,
     background: theme.secondaryPalette.colorVariables.WHITE,
-    boxShadow: `inset 0 0 0 1px ${theme.secondaryPalette.colorVariables.BLACK}`,
-    margin: '0px 0px 8px 0px',
+    boxShadow: `inset 0 0 0 1px ${theme.secondaryPalette.colorVariables.GRAY}`,
+    marginLeft: 0,
+    marginRight: 0,
     '&:hover': {
       background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
     },
     '&.Mui-disabled, &.Mui-disabled:hover': {
       boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.disabled.main}`,
       background: 'none',
+    },
+    '& svg': {
+      margin: 2.5,
     },
     [theme.breakpoints.up('md')]: {
       width: 534,
@@ -62,8 +70,13 @@ const styleClasses = (
     boxShadow: `inset 0 0 0 2px ${
       theme.secondaryPalette.colorVariables.DARKER_BLUE
     }`,
+    [theme.breakpoints.down('sm')]: {
+      boxShadow: `inset 0 0 0 1px ${
+        theme.secondaryPalette.colorVariables.DARKER_BLUE
+      }`,
+    },
     fontWeight: 500,
-    background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
+    background: theme.secondaryPalette.colorVariables.TRANSPARENT,
     '&.Mui-disabled, &.Mui-disabled:hover': {
       boxShadow: `inset 0 0 0 2px ${theme.secondaryPalette.disabled.main}`,
       background: 'none',
@@ -89,28 +102,15 @@ function checkValidity(item: SelectItem) {
   }
 }
 
-const Radio = (props: any) => {
-  const { itemId, checked, disabled, value, onChange }: any = { ...props };
-  return (
-    <MUIRadio
-      key={itemId}
-      name={itemId}
-      checked={checked}
-      value={value}
-      disabled={disabled}
-      color="primary"
-      onChange={onChange}
-    />
-  );
-};
-
 const RadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   classes,
   checked,
   disabled,
   item,
   name,
-  onSelect,
+  onChange,
+  onBlur,
+  onFocus,
 }) => {
   checkValidity(item);
 
@@ -126,15 +126,16 @@ const RadioItem: React.FunctionComponent<RequiredProps & OptionalProps> = ({
           label: classes.label,
         }}
         control={
-          <Radio
-            itemId={item.id}
+          <MUIRadio
+            key={item.id}
             name={name}
-            type="radio"
             checked={checked}
             disabled={disabled}
             color="primary"
             value={item.value}
-            onChange={() => onSelect(item)}
+            onChange={() => onChange(item)}
+            onBlur={onBlur}
+            onFocus={onFocus}
           />
         }
         label={item.display}

@@ -19,31 +19,34 @@ var _FormControlLabel = _interopRequireDefault(require("@material-ui/core/FormCo
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-const defaultProps = {
+// Material UI
+var defaultProps = {
   className: '',
   checked: false,
-  disabled: false
+  disabled: false,
+  onBlur: () => {},
+  onFocus: () => {}
 };
 
-const styleClasses = theme => ({
+var styleClasses = theme => ({
   root: {
     width: 534,
     height: 48,
     borderRadius: 4,
     border: 0,
     background: theme.secondaryPalette.colorVariables.WHITE,
-    boxShadow: "inset 0 0 0 1px ".concat(theme.secondaryPalette.colorVariables.BLACK),
-    margin: '0px 0px 8px 0px',
+    boxShadow: "inset 0 0 0 1px ".concat(theme.secondaryPalette.colorVariables.GRAY),
+    marginLeft: 0,
+    marginRight: 0,
     '&:hover': {
       background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
     },
     '&.Mui-disabled, &.Mui-disabled:hover': {
       boxShadow: "inset 0 0 0 2px ".concat(theme.secondaryPalette.disabled.main),
       background: 'none'
+    },
+    '& svg': {
+      margin: 2.5
     },
     [theme.breakpoints.up('md')]: {
       width: 534
@@ -55,8 +58,11 @@ const styleClasses = theme => ({
   selected: {
     border: 0,
     boxShadow: "inset 0 0 0 2px ".concat(theme.secondaryPalette.colorVariables.DARKER_BLUE),
+    [theme.breakpoints.down('sm')]: {
+      boxShadow: "inset 0 0 0 1px ".concat(theme.secondaryPalette.colorVariables.DARKER_BLUE)
+    },
     fontWeight: 500,
-    background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER,
+    background: theme.secondaryPalette.colorVariables.TRANSPARENT,
     '&.Mui-disabled, &.Mui-disabled:hover': {
       boxShadow: "inset 0 0 0 2px ".concat(theme.secondaryPalette.disabled.main),
       background: 'none'
@@ -83,34 +89,16 @@ function checkValidity(item) {
   }
 }
 
-const Radio = props => {
-  const {
-    itemId,
-    checked,
-    disabled,
-    value,
-    onChange
-  } = _objectSpread({}, props);
-
-  return _react.default.createElement(_Radio.default, {
-    key: itemId,
-    name: itemId,
-    checked: checked,
-    value: value,
-    disabled: disabled,
-    color: "primary",
-    onChange: onChange
-  });
-};
-
-const RadioItem = (_ref) => {
-  let {
+var RadioItem = (_ref) => {
+  var {
     classes,
     checked,
     disabled,
     item,
     name,
-    onSelect
+    onChange: _onChange,
+    onBlur,
+    onFocus
   } = _ref;
   checkValidity(item);
   return !!item && _react.default.createElement(_FormControlLabel.default, {
@@ -122,15 +110,16 @@ const RadioItem = (_ref) => {
     classes: {
       label: classes.label
     },
-    control: _react.default.createElement(Radio, {
-      itemId: item.id,
+    control: _react.default.createElement(_Radio.default, {
+      key: item.id,
       name: name,
-      type: "radio",
       checked: checked,
       disabled: disabled,
       color: "primary",
       value: item.value,
-      onChange: () => onSelect(item)
+      onChange: () => _onChange(item),
+      onBlur: onBlur,
+      onFocus: onFocus
     }),
     label: item.display
   });

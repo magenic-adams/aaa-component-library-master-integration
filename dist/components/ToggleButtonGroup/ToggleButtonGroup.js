@@ -17,20 +17,18 @@ var _Button = _interopRequireDefault(require("../Button/Button"));
 
 var _ButtonGroup = _interopRequireDefault(require("../ButtonGroup/ButtonGroup"));
 
-var _colors = require("../../constants/colors");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 // Material UI Components
-const defaultProps = {
+var defaultProps = {
   className: '',
   disabled: false,
   value: ''
 };
 
-const styleClasses = theme => ({
+var styleClasses = theme => ({
   root: {
     display: 'flex',
     '& .Button': {
@@ -39,35 +37,27 @@ const styleClasses = theme => ({
     },
     [theme.breakpoints.down('sm')]: {
       '& .Button': {
-        width: '50%',
-        '&:hover': {
-          background: theme.secondaryPalette.colorVariables.SECONDARY_HOVER
-        }
+        width: '50%'
       }
     }
   },
   left: {
     borderTopRightRadius: '0px',
-    borderBottomRightRadius: '0px'
+    borderBottomRightRadius: '0px',
+    borderRight: 'none'
   },
   right: {
     borderTopLeftRadius: '0px',
     borderBottomLeftRadius: '0px'
   },
   active: {
+    background: theme.palette.primary.main,
+    color: theme.secondaryPalette.colorVariables.WHITE,
     '&:hover': {
       background: theme.palette.primary.dark
     }
   }
 });
-
-const leftButtonOverrides = {
-  borderRightStyle: 'none',
-  activeColor: _colors.ACE_COLOR_MAIN_BLUE
-};
-const rightButtonOverrides = {
-  activeColor: _colors.ACE_COLOR_MAIN_BLUE
-};
 /**
  * Propagates value selected to parent callback
  * @param  {String|Number} option - value passed
@@ -75,19 +65,8 @@ const rightButtonOverrides = {
  * @return {void}
  */
 
-function handleClick(position, opt, onSelect) {
-  if (position === 'left') {
-    leftButtonOverrides.activeColor = _colors.ACE_COLOR_MAIN_WHITE;
-    leftButtonOverrides.background = _colors.ACE_COLOR_MAIN_BLUE;
-    rightButtonOverrides.activeColor = _colors.ACE_COLOR_MAIN_BLUE;
-    rightButtonOverrides.background = _colors.ACE_COLOR_TRANSPARENT;
-  } else {
-    leftButtonOverrides.activeColor = _colors.ACE_COLOR_MAIN_BLUE;
-    leftButtonOverrides.background = _colors.ACE_COLOR_TRANSPARENT;
-    rightButtonOverrides.activeColor = _colors.ACE_COLOR_MAIN_WHITE;
-    rightButtonOverrides.background = _colors.ACE_COLOR_MAIN_BLUE;
-  }
 
+function handleClick(opt, onSelect) {
   onSelect(opt);
 }
 /**
@@ -98,7 +77,7 @@ function handleClick(position, opt, onSelect) {
 
 
 function isOptionsKeysPresent(options) {
-  return options.every(op => op.id && op.text);
+  return options.every(op => op.hasOwnProperty('id') && op.hasOwnProperty('text'));
 }
 /**
  * Returns the active CSS class if active
@@ -109,13 +88,13 @@ function isOptionsKeysPresent(options) {
  */
 
 
-function getActiveClass(value, id, classes) {
-  let activeClass = '';
-  const {
+function getActiveClass(value, itemValue, classes) {
+  var activeClass = '';
+  var {
     active
   } = classes;
 
-  if (value === id) {
+  if (value === itemValue) {
     activeClass = "".concat(active);
   }
 
@@ -140,8 +119,8 @@ function areOptionsValid(options) {
   return true;
 }
 
-const ToggleButtonGroup = (_ref) => {
-  let {
+var ToggleButtonGroup = (_ref) => {
+  var {
     classes,
     className,
     disabled,
@@ -152,19 +131,17 @@ const ToggleButtonGroup = (_ref) => {
   return _react.default.createElement(_react.Fragment, null, areOptionsValid(options) ? _react.default.createElement(_ButtonGroup.default, {
     className: (0, _clsx.default)(classes.root, className)
   }, _react.default.createElement(_Button.default, {
-    className: (0, _clsx.default)("".concat(getActiveClass(value, options[0].id, classes), " ").concat(classes.left), className),
+    className: (0, _clsx.default)("".concat(getActiveClass(value, options[0].value, classes), " ").concat(classes.left), className),
     color: "secondary",
     id: "ToggleButton-".concat(options[0].id),
     disabled: disabled,
-    onClick: () => handleClick('left', options[0], onSelect),
-    overrides: leftButtonOverrides
+    onClick: () => handleClick(options[0], onSelect)
   }, options[0].text), _react.default.createElement(_Button.default, {
-    className: (0, _clsx.default)("".concat(getActiveClass(value, options[1].id, classes), " ").concat(classes.right), className),
+    className: (0, _clsx.default)("".concat(getActiveClass(value, options[1].value, classes), " ").concat(classes.right), className),
     color: "secondary",
     id: "ToggleButton-".concat(options[1].id),
     disabled: disabled,
-    onClick: () => handleClick('right', options[1], onSelect),
-    overrides: rightButtonOverrides
+    onClick: () => handleClick(options[1], onSelect)
   }, options[1].text)) : null);
 };
 

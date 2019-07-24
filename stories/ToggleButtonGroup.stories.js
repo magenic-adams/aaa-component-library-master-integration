@@ -4,7 +4,11 @@ import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
 // Components
-import { ACEPrimaryTheme, Subheadline, Subtitle } from '../src/lib/package/components';
+import {
+  ACEPrimaryTheme,
+  Subheadline,
+  Subtitle,
+} from '../src/lib/package/components';
 
 // Internal
 import ToggleButtonGroupContainer from '../src/lib/internal/ToggleButtonGroupContainer/ToggleButtonGroupContainer';
@@ -12,14 +16,17 @@ import ElementContainer from '../src/lib/internal/ElementContainer/ElementContai
 import StoryIntroduction from '../src/lib/internal/StoryIntroduction/StoryIntroduction';
 
 const stories = storiesOf('Molecules|ToggleButtonGroup', module);
-const options = [{ id: 1, text: 'Yes' }, { id: 2, text: 'No' }];
+const options = [
+  { id: 1, value: 'Y', text: 'Yes' },
+  { id: 2, value: 'N', text: 'No' },
+];
 
 stories.add('Usage and States', () => {
   return (
     <ACEPrimaryTheme>
       <div>
         <div className="u-padding--50">
-          <StoryIntroduction elementName="ToggleButtonGroup"/>
+          <StoryIntroduction elementName="ToggleButtonGroup" />
         </div>
         <div className="u-padding--50">
           <Subtitle>Usage</Subtitle>

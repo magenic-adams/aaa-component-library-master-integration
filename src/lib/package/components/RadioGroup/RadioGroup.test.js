@@ -20,7 +20,7 @@ function getFakeProps(overrides) {
       { id: 1, value: 1, display: 'Iron Man' },
       { id: 2, value: 2, display: 'Captain A' },
     ],
-    onSelect: jest.fn(v => v),
+    onChange: jest.fn(v => v),
     ...overrides,
   };
 }
@@ -43,7 +43,7 @@ describe('RadioGroup', () => {
 
   beforeEach(() => {
     spy = sinon.spy();
-    props = getFakeProps({ onSelect: spy });
+    props = getFakeProps({ onChange: spy });
     radioGroupWrapper = createRadioGroupWithTheme(props);
   });
 
@@ -94,12 +94,12 @@ describe('RadioGroup', () => {
       props = getFakeProps({ items: undefined });
       expect(() => {
         createRadioGroupWithTheme(props);
-      }).to.throw('Invariant failed: items is empty');
+      }).to.throw('Invariant failed: items are empty');
 
       props = getFakeProps({ items: null });
       expect(() => {
         createRadioGroupWithTheme(props);
-      }).to.throw('Invariant failed: items is empty');
+      }).to.throw('Invariant failed: items are empty');
     });
   });
 
@@ -111,112 +111,14 @@ describe('RadioGroup', () => {
         .simulate('change');
 
       expect(spy.calledOnce).to.equal(true);
-      expect(spy.getCall(0).args[0]).to.deep.equal({
-        id: 2,
-        value: 2,
-        display: 'Captain A',
-      });
-    });
-  });
-
-  describe('selection', () => {
-    describe('single-select', () => {
-      it('sets radio item className to checked if selectedId matches to item id', () => {
-        const selectedId = 1;
-        props = getFakeProps({ selectedId });
-        radioGroupWrapper = createRadioGroupWithTheme(props);
-
-        expect(
-          radioGroupWrapper
-            .find(`label[data-quid="RadioItem-${selectedId}"]`)
-            .find('span')
-            .at(0)
-            .getDOMNode().className
-        ).to.contains('checked');
-      });
-
-      it('does NOT set radio item className to checked if selectedId don\'t match to item id', () => {
-        let selectedId = [1, 2];
-        props = getFakeProps({ selectedId });
-        radioGroupWrapper = createRadioGroupWithTheme(props);
-        let listItems = radioGroupWrapper.find('label');
-
-        listItems.forEach(item => {
-          expect(
-            item
-              .find('span')
-              .at(0)
-              .getDOMNode().className
-          ).to.not.contains('checked');
-        });
-
-        selectedId = null;
-        props = getFakeProps({ selectedId });
-        radioGroupWrapper = createRadioGroupWithTheme(props);
-        listItems = radioGroupWrapper.find('label');
-
-        listItems.forEach(item => {
-          expect(
-            item
-              .find('span')
-              .at(0)
-              .getDOMNode().className
-          ).to.not.contains('checked');
-        });
-      });
-    });
-
-    describe('multi-select', () => {
-      it('can set multiple radio item className to checked if selectedIds match to item id', () => {
-        const selectedIds = [1, 2];
-        props = getFakeProps({ type: 'multi-select', selectedIds });
-        radioGroupWrapper = createRadioGroupWithTheme(props);
-        const listItems = radioGroupWrapper.find('label');
-
-        listItems.forEach(item => {
-          expect(
-            item
-              .find('span')
-              .at(0)
-              .getDOMNode().className
-          ).to.contains('checked');
-        });
-      });
-
-      it('does NOT set radio item className to checked if selectedIds don\'t match to item id', () => {
-        let selectedIds = 1;
-        props = getFakeProps({ type: 'multi-select', selectedIds });
-        let listItems = radioGroupWrapper.find('label');
-
-        listItems.forEach(item => {
-          expect(
-            item
-              .find('span')
-              .at(0)
-              .getDOMNode().className
-          ).to.not.contains('checked');
-        });
-
-        selectedIds = null;
-        props = getFakeProps({ type: 'multi-select', selectedIds });
-        listItems = radioGroupWrapper.find('label');
-
-        listItems.forEach(item => {
-          expect(
-            item
-              .find('span')
-              .at(0)
-              .getDOMNode().className
-          ).to.not.contains('checked');
-        });
-      });
+      expect(spy.getCall(0).args[0]).to.be.equal(props.items[1]);
     });
   });
 
   describe('disabled radioGroup', () => {
     it('can disable selected radio item', () => {
-      const disabledIds = [1];
-      props = getFakeProps({ disabledIds });
+      const disabledValues = [1];
+      props = getFakeProps({ disabledValues });
       radioGroupWrapper = createRadioGroupWithTheme(props);
 
       expect(

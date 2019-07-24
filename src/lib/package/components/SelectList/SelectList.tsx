@@ -4,28 +4,24 @@ import { withStyles } from '@material-ui/styles';
 import cx from 'clsx';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import SelectListItem from '../SelectListItem/SelectListItem';
-
-interface selectItem {
-  id: string | number;
-  value: string | number;
-  display: string | number;
-  selected?: boolean;
-  disabled?: boolean;
-}
+// Types
+import SelectItem from '../../types/SelectItem';
 
 interface RequiredProps {
-  items: selectItem[];
-  onSelect: (item: selectItem) => void;
+  items: SelectItem[];
+  onSelect: (item: SelectItem) => void;
 }
 
 interface OptionalProps {
   classes?: any; // MUI Decorator
   className?: string;
   name?: string;
+  disabled?: boolean;
 }
 
 const defaultProps: OptionalProps = {
   className: '',
+  disabled: false
 };
 
 const styleClasses = (
@@ -35,14 +31,14 @@ const styleClasses = (
   root: any;
 } => ({
   root: {
-    width: 341,
+    width: 534,
     background: theme.secondaryPalette.colorVariables.WHITE,
     border: `2px solid ${theme.palette.primary.main}`,
     borderRadius: 4,
     padding: '0px',
     boxShadow: `0 2px 8px 0 ${theme.secondaryPalette.colorVariables.GRAY}`,
     '& span': {
-      fontFamily: theme.typographyValues.fontFamily,
+      fontFamily: theme.typographyValues.fontFamily
     },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
@@ -50,19 +46,23 @@ const styleClasses = (
       boxShadow: 'none',
       borderRadius: 0,
       '& span': {
-        fontSize: 16,
-      },
-    },
-  },
+        fontSize: 16
+      }
+    }
+  }
 });
 
-function areItemKeysPresent(items: selectItem[]) {
-  return items.every(item => item.id && item.value && item.display);
+function areItemKeysPresent(items: SelectItem[]) {
+  return items.every(item => 
+    item.hasOwnProperty('id') && 
+    item.hasOwnProperty('value') && 
+    item.hasOwnProperty('display')
+    );
 }
 
-function checkValidity(items: selectItem[]) {
+function checkValidity(items: SelectItem[]) {
   if (!Array.isArray(items) || items.length === 0) {
-    invariant(false, 'items is empty');
+    invariant(false, 'items are empty');
   }
 
   if (!areItemKeysPresent(items)) {
@@ -76,20 +76,24 @@ function checkValidity(items: selectItem[]) {
 const SelectList: React.FunctionComponent<RequiredProps & OptionalProps> = ({
   classes,
   className,
+  disabled,
   items,
-  onSelect,
+  onSelect
 }) => {
   checkValidity(items);
 
   return (
     <div className={cx(classes.root, className)}>
-      {items.map(item => {
+      {items.map((item, index) => {
         return (
           item.display && (
             <SelectListItem
               key={item.id}
+              value={item.value}
               item={item}
-              onSelect={() => onSelect(item)}
+              onSelect={onSelect}
+              tabIndex={index}
+              disabled={disabled}
             />
           )
         );

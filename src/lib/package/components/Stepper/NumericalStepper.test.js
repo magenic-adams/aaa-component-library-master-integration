@@ -7,16 +7,12 @@ import MUIFormControl from '@material-ui/core/FormControl';
 // Material UI Components
 import ACEPrimaryTheme from '../ACEPrimaryTheme/ACEPrimaryTheme';
 import NumericalStepper from './NumericalStepper';
-import { overrideInputWrapper } from './NumericalStepperStyles';
 import NumericInput from '../Input/NumericInput/NumericInput';
 
 // Components
 import Button from '../Button/Button';
 import Label from '../Label/Label';
 import FormFieldMeta from '../Form/FormFieldMeta/FormFieldMeta';
-
-// constants
-import { ACE_COLOR_MAIN_BLUE } from '../../constants/colors';
 
 const createNumericalStepper = props => {
   return mount(
@@ -148,12 +144,10 @@ describe('Numerical Stepper', () => {
 describe('Style Overrides', () => {
   let customizedWrapper;
   beforeEach(() => {
-    const overrideDefaultStepperLabelStyles = () => {
-      return {
-        label: {
-          color: '#9ACD32',
-        },
-      };
+    const overrideDefaultStepperLabelStyles = {
+      stepperInputWidth: '78',
+      labelColor: 'green',
+      marginTop: 8,
     };
     const customizedWrapperProps = () => {
       return {
@@ -169,7 +163,7 @@ describe('Style Overrides', () => {
     customizedWrapper = mount(
       <ACEPrimaryTheme>
         <NumericalStepper
-          overrides={overrideDefaultStepperLabelStyles()}
+          overrides={overrideDefaultStepperLabelStyles}
           {...customizedWrapperProps()}
         />
       </ACEPrimaryTheme>
@@ -185,12 +179,11 @@ describe('Style Overrides', () => {
       .find('#NumericalStepperLabel-1')
       .first();
 
-    const styles = labelNode.props().overrides.label;
+    const styles = labelNode.props().overrides;
 
-    expect(styles.color).to.equal('#9ACD32');
+    expect(styles.labelColor).to.equal('green');
     expect(styles.marginTop).to.equal(8);
-    expect(styles.fontSize).to.equal(16);
-    expect(styles['@media (min-width:768px)'].fontSize).to.equal(18);
+    expect(styles.stepperInputWidth).to.equal('78');
   });
 
   it('renders correct overrides for stepper decrease button', () => {
